@@ -5,10 +5,9 @@
 <title>qwq | Hexo</title>
 <link rel="icon" href="/avatar.jpg" type="image/jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
+<link rel="stylesheet" href="/css/style.css">
+<meta name="generator" content="Hexo 8.1.1"></head>
 <body>
-
-<canvas id="particle-canvas"></canvas>
 
 <header class="terminal-nav">
     <a href="/" class="nav-logo">QAQ</a>
@@ -19,27 +18,31 @@
         <a href="#world" class="nav-item"><span class="nav-en">WORLD</span><span class="nav-cn">归档</span></a>
         <a href="#media" class="nav-item"><span class="nav-en">MEDIA</span><span class="nav-cn">标签</span></a>
     </nav>
-    </header>
+</header>
 
 <aside class="sidebar">
-    <div class="avatar-box"><img src="/avatar.jpg" alt="Avatar"></div>
-    <h2 class="sidebar-title">COLDICEH</h2>
-    <p class="sidebar-subtitle">Dr.抢不到音律退坑了#8809</p>
-    
-    <div class="sidebar-search">
-        <div class="search-box">
-            <input type="text" id="local-search-input" placeholder="// SEARCH DATABASE...">
+    <div class="sidebar-content" style="position: relative; z-index: 2; width: 100%; height: 100%;">
+        <div class="avatar-box"><img src="/avatar.jpg" alt="Avatar"></div>
+        <h2 class="sidebar-title">COLDICEH</h2>
+        <p class="sidebar-subtitle">Dr.抢不到音律退坑了#8809</p>
+        
+        <div class="sidebar-search">
+            <div class="search-box">
+                <input type="text" id="local-search-input" placeholder="// SEARCH DATABASE...">
+            </div>
+        </div>
+        
+        <div class="sidebar-links">
+            <div style="color: var(--ak-blue); font-weight: bold; margin-bottom: 10px; border-left: 3px solid var(--ak-blue); padding-left: 10px;">常用链接</div>
+            <a href="#">我的随笔</a>
+            <a href="#">我的评论</a>
+            <a href="#">我的参与</a>
+            <a href="#">最新评论</a>
+            <a href="#">我的标签</a>
         </div>
     </div>
     
-    <div style="margin-top: 20px;" class="sidebar-links">
-        <div style="color: var(--ak-blue); font-weight: bold; margin-bottom: 10px; border-left: 3px solid var(--ak-blue); padding-left: 10px;">常用链接</div>
-        <a href="#">我的随笔</a>
-        <a href="#">我的评论</a>
-        <a href="#">我的参与</a>
-        <a href="#">最新评论</a>
-        <a href="#">我的标签</a>
-    </div>
+    <canvas id="particle-canvas"></canvas>
 </aside>
 
 <main class="main-content">
@@ -52,7 +55,8 @@
         <p>$a+b&#x3D;c,1+1&#x3D;3\asasd$</p>
 
     </div>
-</article> </main>
+</article>
+</main>
 
 <div class="fab-container" id="fabContainer">
     <div class="fab-menu">
@@ -78,13 +82,14 @@
     
     <ul class="mp-playlist" id="mpPlaylistUI">
         </ul>
-</div> </div>
+</div> 
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     console.log("PRTS: System Booting...");
 
-    // ================= 1. UI 中枢系统 =================
+    // ================= 1. UI 中枢系统 (FAB 控制) =================
     const fabContainer = document.getElementById('fabContainer');
     const btnMain = document.getElementById('btnMain');
     const musicPanel = document.getElementById('musicPanel');
@@ -93,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btnMain.addEventListener('click', () => {
             fabContainer.classList.toggle('open');
             btnMain.style.transform = fabContainer.classList.contains('open') ? 'rotate(45deg)' : 'rotate(0)';
+            
             if(!fabContainer.classList.contains('open') && musicPanel){
                 musicPanel.classList.remove('active');
             }
@@ -101,21 +107,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const btnTheme = document.getElementById('btnTheme');
     let currentTheme = 'dark';
-    function setTheme(theme) { currentTheme = theme; document.body.setAttribute('data-theme', theme); }
-    function autoTheme() { const hour = new Date().getHours(); setTheme((hour >= 6 && hour < 18) ? 'light' : 'dark'); }
+    function setTheme(theme) { 
+        currentTheme = theme; 
+        document.body.setAttribute('data-theme', theme); 
+    }
+    function autoTheme() { 
+        const hour = new Date().getHours();
+        setTheme((hour >= 6 && hour < 18) ? 'light' : 'dark'); 
+    }
     autoTheme();
     if(btnTheme) btnTheme.addEventListener('click', () => { setTheme(currentTheme === 'dark' ? 'light' : 'dark'); });
 
     // ================= 2. 音乐通讯终端 =================
-    // 【修复】：去除了容易引发引擎崩溃的 EJS 标签，直接使用绝对路径
     const playlist = [
         { name: "01. 生命流「熠曲丰碑」-2025音律联觉ver.", src: "/music/生命流「熠曲丰碑」-2025音律联觉.mp3" },
         { name: "02. 櫂", src: "/music/ヨルシカ - 櫂.mp3" },
         { name: "03. ヰ世界の宝石譚", src: "/music/ヰ世界の宝石譚.mp3" },
         { name: "04. KAWAIIめたもる交響曲", src: "/music/KAWAIIめたもる交響曲.mp3" }
     ];
-
-
     let currentTrackIndex = 0;
     const audio = new Audio();
     const btnMusic = document.getElementById('btnMusic');
@@ -124,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if(btnMusic && musicPanel) {
         btnMusic.addEventListener('click', () => { musicPanel.classList.toggle('active'); });
-
+        
         if (mpPlaylistUI) {
             playlist.forEach((track, index) => {
                 let li = document.createElement('li');
@@ -166,7 +175,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if(mpPlayPause) mpPlayPause.addEventListener('click', () => togglePlay());
-
         document.getElementById('mpPrev').addEventListener('click', () => { let newIndex = currentTrackIndex - 1; if (newIndex < 0) newIndex = playlist.length - 1; loadTrack(newIndex, true); });
         document.getElementById('mpNext').addEventListener('click', () => { let newIndex = currentTrackIndex + 1; if (newIndex >= playlist.length) newIndex = 0; loadTrack(newIndex, true); });
         audio.addEventListener('ended', () => { document.getElementById('mpNext').click(); });
@@ -174,8 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const mpProgressBar = document.getElementById('mpProgressBar');
         const mpTimeCurrent = document.getElementById('mpTimeCurrent');
         const mpTimeTotal = document.getElementById('mpTimeTotal');
-
-        // 【修复】：重写了时间格式化逻辑，彻底消灭了代码里的 "<" 符号，防止被误认为 HTML
+        
         function formatTime(seconds) {
             if (isNaN(seconds)) return "00:00";
             const m = Math.floor(seconds / 60);
@@ -187,13 +194,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if(mpTimeTotal) mpTimeTotal.textContent = formatTime(audio.duration);
             if(mpProgressBar) mpProgressBar.max = audio.duration;
         });
-
+        
         let isDragging = false;
         audio.addEventListener('timeupdate', () => {
             if(mpTimeCurrent) mpTimeCurrent.textContent = formatTime(audio.currentTime);
             if (!isDragging && mpProgressBar) mpProgressBar.value = audio.currentTime;
         });
-
+        
         if(mpProgressBar) {
             mpProgressBar.addEventListener('mousedown', () => isDragging = true);
             mpProgressBar.addEventListener('mouseup', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
@@ -204,56 +211,102 @@ document.addEventListener('DOMContentLoaded', () => {
         loadTrack(0, false);
     }
 
-    // ================= 3. 背景粒子系统 =================
+    // ================= 3. 背景粒子系统 (修复定位与发光色) =================
     const canvas = document.getElementById('particle-canvas');
     if(canvas) {
         const ctx = canvas.getContext('2d');
         let particles = [];
         const mouse = { x: null, y: null, radius: 50 };
 
-        function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        initCanvas(); window.addEventListener('resize', initCanvas);
+        const sidebar = canvas.closest('.sidebar');
+        
+        function initCanvas() { 
+            if(sidebar) {
+                canvas.width = sidebar.clientWidth;
+                canvas.height = sidebar.clientHeight; 
+            }
+        }
+        initCanvas(); 
+        window.addEventListener('resize', initCanvas);
 
         const logoImg = new Image();
-        // 【修复】：去除 EJS，直接指向根目录下的 logo
         logoImg.src = '/logo.png';
         logoImg.onload = function() {
-            const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d');
-            const size = 200; tempCanvas.width = size; tempCanvas.height = size;
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            const size = 200; 
+            tempCanvas.width = size; 
+            tempCanvas.height = size;
             tempCtx.drawImage(logoImg, 0, 0, size, size);
             const imageData = tempCtx.getImageData(0, 0, size, size).data;
+            
+            const scale = 1.5; 
+            const scaledSize = size * scale;
+            const gap = 40; 
+
+            const offsetX = sidebar ? (sidebar.clientWidth - scaledSize) / 2 : 40;
+            const offsetY = sidebar ? (sidebar.clientHeight - scaledSize - gap) : window.innerHeight - scaledSize - gap;
+
             for (let y = 0; y < size; y += 2) {
                 for (let x = 0; x < size; x += 2) {
                     if (imageData[((y * size + x) * 4) + 3] > 128) {
-                        particles.push(new Particle(x * 2.5 + (canvas.width / 2 - 100), y * 2.5 + (canvas.height / 2 - 250)));
+                        particles.push(new Particle(x * scale + offsetX, y * scale + offsetY));
                     }
                 }
             }
             animate();
-            console.log("PRTS: Particles Online.");
+            console.log("PRTS: Particles Online. Visuals Restored.");
         };
 
         class Particle {
-            constructor(x, y) { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.baseX = x; this.baseY = y; this.density = (Math.random() * 30) + 1; }
+            constructor(x, y) { 
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height; 
+                this.baseX = x; 
+                this.baseY = y; 
+                this.density = (Math.random() * 30) + 1;
+            }
             draw() {
-                ctx.fillStyle = document.body.getAttribute('data-theme') === 'light' ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.6)';
-                ctx.beginPath(); ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2); ctx.fill();
+                // 🌟 核心修复：强制使用 PRTS 青蓝色，不再受黑白主题影响而隐形
+                ctx.fillStyle = '#00c3ff';
+                ctx.beginPath(); 
+                ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2); 
+                ctx.fill();
             }
             update() {
-                let dx = mouse.x - this.x, dy = mouse.y - this.y, distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < mouse.radius) {
-                    let force = (mouse.radius - distance) / mouse.radius;
-                    this.x -= (dx / distance) * force * this.density * 0.8; this.y -= (dy / distance) * force * this.density * 0.8;
+                let rect = canvas.getBoundingClientRect();
+                let mouseX = mouse.x ? mouse.x - rect.left : null;
+                let mouseY = mouse.y ? mouse.y - rect.top : null;
+
+                if (mouseX !== null && mouseY !== null) {
+                    let dx = mouseX - this.x;
+                    let dy = mouseY - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        let force = (mouse.radius - distance) / mouse.radius;
+                        this.x -= (dx / distance) * force * this.density * 0.8;
+                        this.y -= (dy / distance) * force * this.density * 0.8;
+                    } else {
+                        this.x += (this.baseX - this.x) * 0.12;
+                        this.y += (this.baseY - this.y) * 0.12;
+                    }
                 } else {
-                    this.x += (this.baseX - this.x) * 0.12; this.y += (this.baseY - this.y) * 0.12;
+                    this.x += (this.baseX - this.x) * 0.12;
+                    this.y += (this.baseY - this.y) * 0.12;
                 }
             }
         }
 
-        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
-        window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
+        function animate() { 
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); }); 
+            requestAnimationFrame(animate); 
+        }
+        
+        window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
         window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
     }
 });
-</script> </body>
+</script> 
+</body>
 </html>

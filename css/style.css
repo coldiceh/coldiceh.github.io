@@ -8,6 +8,12 @@
   --panel: rgba(26, 26, 28, 0.8);
   --ak-blue: #00c3ff;
   --nav-hover: rgba(0, 195, 255, 0.15);
+  
+  /* 侧边栏与 Logo 粒子控制枢纽 */
+  --sidebar-width: 380px;       
+  --logo-gap: 40px;             
+  --logo-scale: 1.5;            
+  --logo-original-size: 200px;  
 }
 
 [data-theme='light'] {
@@ -15,11 +21,8 @@
   --panel: rgba(255, 255, 255, 0.8); --ak-blue: #0078d7; --nav-hover: rgba(0, 120, 215, 0.1);
 }
 
-/* 将背景色交给 html 根节点，让 body 变透明，防止盖住 -1 层级的粒子 */
-html {
-  background: var(--bg);
-}
-
+/* ================= 🌟 环境感知动态背景系统 ================= */
+html { background: var(--bg); }
 body {
   background: transparent;
   color: var(--text);
@@ -29,12 +32,30 @@ body {
   overflow-x: hidden;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -999; /* 保证背景绝不阻挡任何点击 */
+  pointer-events: none;
+  transition: background-image 0.8s ease, opacity 0.8s ease; 
+}
+
+body[data-theme="light"]::before {
+  background: url('/1600px-Background_omatsuri_light.jpg') center/cover no-repeat fixed;
+  opacity: 0.25; 
+}
+body[data-theme="dark"]::before {
+  background: url('/Background_omatsuri_conflict.jpg') center/cover no-repeat fixed;
+  opacity: 0.25; 
+}
+
 h1, h2, h3, h4, h5, h6, .nav-en, .sidebar-subtitle, .mp-header, .ak-read-more {
   font-family: 'Orbitron', sans-serif; font-weight: 700; letter-spacing: 1px;
 }
-
-/* --- 粒子画布 --- */
-#particle-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
 
 /* --- 顶部导航栏 --- */
 .terminal-nav {
@@ -52,12 +73,34 @@ h1, h2, h3, h4, h5, h6, .nav-en, .sidebar-subtitle, .mp-header, .ak-read-more {
 .nav-item::after { content: ''; position: absolute; bottom: 10px; left: 0; width: 100%; height: 2px; background: var(--ak-blue); transform: scaleX(0); transition: transform 0.3s ease; }
 .nav-item:hover::after, .nav-item.active::after { transform: scaleX(1); }
 
-/* --- 左侧边栏 --- */
+/* --- 🌟 左侧边栏 (修复遮挡逻辑) --- */
 .sidebar {
-  position: fixed; left: 20px; top: 100px; width: 260px;
-  background: var(--panel); padding: 30px 20px; border: 1px solid rgba(128,128,128,0.2);
+  position: fixed; left: 20px; top: 100px; 
+  width: var(--sidebar-width); 
+  background: var(--panel); 
+  border: 1px solid rgba(128,128,128,0.2);
   z-index: 10; backdrop-filter: blur(10px); box-sizing: border-box; border-radius: 4px;
+  
+  padding-top: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: calc((var(--logo-original-size) * var(--logo-scale)) + var(--logo-gap));
+  
+  display: flex; flex-direction: column; 
+  overflow: hidden; /* 保证粒子不会越界 */
 }
+
+/* 🌟 粒子画布强制底层化 */
+#particle-canvas { 
+  position: absolute; 
+  bottom: 0; 
+  left: 0; 
+  width: 100% !important; 
+  height: 100% !important; 
+  z-index: 0; /* 沉底，让上面 layout.ejs 中的 sidebar-content 盖住 */
+  pointer-events: none; 
+}
+
 .avatar-box { width: 80px; height: 80px; background: var(--ak-blue); clip-path: polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%); margin: 0 auto 20px auto; }
 .avatar-box img { width: 100%; height: 100%; object-fit: cover; }
 .sidebar-title { text-align: center; font-size: 20px; margin-bottom: 5px; }
@@ -69,54 +112,27 @@ h1, h2, h3, h4, h5, h6, .nav-en, .sidebar-subtitle, .mp-header, .ak-read-more {
 .sidebar-links a:hover { background: var(--nav-hover); border-left-color: var(--ak-blue); color: var(--ak-blue); }
 
 /* --- 主内容区 --- */
-.main-content { margin-left: 310px; padding: 100px 40px 40px 40px; max-width: 900px; }
+.main-content { margin-left: calc(var(--sidebar-width) + 50px); padding: 100px 40px 40px 40px; max-width: 900px; }
 .archive-title { color: var(--ak-blue); border-bottom: 1px solid var(--ak-blue); padding-bottom: 10px; margin-bottom: 30px; }
-
-/* --- 🌟 深度还原：高仿真文章卡片 (Yue_plus 风格) --- */
-.ak-card {
-  background: var(--panel);
-  border: 1px solid rgba(128,128,128,0.2);
-  margin-bottom: 40px;
-  position: relative;
-}
-/* 顶部元数据栏 */
-.ak-card-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 10px 20px;
-  font-family: 'Orbitron', sans-serif; font-size: 12px; color: var(--text-muted);
-}
-/* 青色主标题块 */
-.ak-card-title {
-  background: var(--ak-blue);
-  padding: 15px 20px; margin: 0;
-  font-size: 22px; letter-spacing: 0px;
-}
+.ak-card { background: var(--panel); border: 1px solid rgba(128,128,128,0.2); margin-bottom: 40px; position: relative; }
+.ak-card-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; font-family: 'Orbitron', sans-serif; font-size: 12px; color: var(--text-muted); }
+.ak-card-title { background: var(--ak-blue); padding: 15px 20px; margin: 0; font-size: 22px; letter-spacing: 0px; }
 .ak-card-title a { color: #000; text-decoration: none; display: block; }
 .ak-card-title a:hover { opacity: 0.8; }
-/* 正文摘要 */
 .ak-card-excerpt { padding: 20px; color: var(--text-muted); line-height: 1.8; font-size: 14px; }
-/* 底部 READ MORE 按钮栏 */
 .ak-card-footer { display: flex; justify-content: flex-end; padding: 0 20px 20px 20px; }
-.ak-read-more {
-  background: var(--ak-blue); color: #000;
-  padding: 6px 20px; font-size: 12px; font-weight: bold; text-decoration: none;
-  clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
-  transition: all 0.2s;
-}
+.ak-read-more { background: var(--ak-blue); color: #000; padding: 6px 20px; font-size: 12px; font-weight: bold; text-decoration: none; clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%); transition: all 0.2s; }
 .ak-read-more:hover { transform: scale(1.05); background: #fff; color: var(--ak-blue); }
-
-/* --- 详情页 --- */
 .post-detail { background: var(--panel); padding: 50px 40px; border-radius: 4px; border: 1px solid rgba(128,128,128,0.2); border-top: 4px solid var(--ak-blue); }
 .post-detail-title { color: var(--text); font-size: 32px; margin-top: 0; margin-bottom: 15px; }
 .post-meta { color: var(--text-muted); font-size: 12px; margin-bottom: 40px; border-bottom: 1px solid rgba(128,128,128,0.2); padding-bottom: 15px; }
 .post-content { line-height: 1.8; color: var(--text); font-size: 16px; }
 .post-content p { margin-bottom: 1.5em; }
 .post-content pre { background: rgba(0,0,0,0.5); padding: 20px; border-radius: 4px; border: 1px solid rgba(128,128,128,0.2); overflow-x: auto; margin: 1.5em 0; }
-.MathJax_Display { margin: 1.5em 0 !important; }
 
-/* --- 🔧 修复：右下角悬浮控制枢纽 --- */
-.fab-container { position: fixed; bottom: 40px; right: 40px; z-index: 999; display: flex; flex-direction: column-reverse; align-items: flex-end; gap: 15px; }
-.fab-btn { width: 50px; height: 50px; border-radius: 50%; background: var(--panel); border: 2px solid var(--text-muted); color: var(--text); display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: all 0.3s ease; font-family: 'Orbitron', sans-serif; font-size: 20px; }
+/* --- 🌟 悬浮工具与音乐面板 --- */
+.fab-container { position: fixed; bottom: 40px; right: 40px; z-index: 9999; display: flex; flex-direction: column-reverse; align-items: flex-end; gap: 15px; }
+.fab-btn { width: 50px; height: 50px; border-radius: 50%; background: var(--panel); border: 2px solid var(--text-muted); color: var(--text); display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: all 0.3s ease; font-family: 'Orbitron', sans-serif; font-size: 20px; pointer-events: auto; }
 .fab-main { width: 60px; height: 60px; border-color: var(--ak-blue); color: var(--ak-blue); font-size: 24px; background: var(--bg); }
 .fab-main:hover { background: var(--ak-blue); color: var(--bg); transform: scale(1.1); }
 .fab-menu { display: flex; flex-direction: column-reverse; gap: 15px; opacity: 0; pointer-events: none; transform: translateY(20px); transition: all 0.3s ease; }
@@ -124,7 +140,6 @@ h1, h2, h3, h4, h5, h6, .nav-en, .sidebar-subtitle, .mp-header, .ak-read-more {
 .fab-btn.sub { width: 45px; height: 45px; font-size: 16px; margin-right: 7px; }
 .fab-btn.sub:hover { border-color: var(--ak-blue); color: var(--ak-blue); }
 
-/* --- 🔧 修复：音乐控制面板 UI --- */
 .music-panel { position: absolute; bottom: 60px; right: 60px; width: 300px; background: var(--panel); border: 1px solid var(--ak-blue); border-radius: 4px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(10px); opacity: 0; pointer-events: none; transform: translateX(20px); transition: all 0.3s ease; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%); }
 .music-panel.active { opacity: 1; pointer-events: auto; transform: translateX(0); }
 .mp-header { font-size: 12px; color: var(--ak-blue); border-bottom: 1px solid rgba(128,128,128,0.2); padding-bottom: 5px; margin-bottom: 15px; }

@@ -5,10 +5,9 @@
 <title>CF1470F | Hexo</title>
 <link rel="icon" href="/avatar.jpg" type="image/jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
+<link rel="stylesheet" href="/css/style.css">
+<meta name="generator" content="Hexo 8.1.1"></head>
 <body>
-
-<canvas id="particle-canvas"></canvas>
 
 <header class="terminal-nav">
     <a href="/" class="nav-logo">QAQ</a>
@@ -19,27 +18,31 @@
         <a href="#world" class="nav-item"><span class="nav-en">WORLD</span><span class="nav-cn">归档</span></a>
         <a href="#media" class="nav-item"><span class="nav-en">MEDIA</span><span class="nav-cn">标签</span></a>
     </nav>
-    </header>
+</header>
 
 <aside class="sidebar">
-    <div class="avatar-box"><img src="/avatar.jpg" alt="Avatar"></div>
-    <h2 class="sidebar-title">COLDICEH</h2>
-    <p class="sidebar-subtitle">Dr.抢不到音律退坑了#8809</p>
-    
-    <div class="sidebar-search">
-        <div class="search-box">
-            <input type="text" id="local-search-input" placeholder="// SEARCH DATABASE...">
+    <div class="sidebar-content" style="position: relative; z-index: 2; width: 100%; height: 100%;">
+        <div class="avatar-box"><img src="/avatar.jpg" alt="Avatar"></div>
+        <h2 class="sidebar-title">COLDICEH</h2>
+        <p class="sidebar-subtitle">Dr.抢不到音律退坑了#8809</p>
+        
+        <div class="sidebar-search">
+            <div class="search-box">
+                <input type="text" id="local-search-input" placeholder="// SEARCH DATABASE...">
+            </div>
+        </div>
+        
+        <div class="sidebar-links">
+            <div style="color: var(--ak-blue); font-weight: bold; margin-bottom: 10px; border-left: 3px solid var(--ak-blue); padding-left: 10px;">常用链接</div>
+            <a href="#">我的随笔</a>
+            <a href="#">我的评论</a>
+            <a href="#">我的参与</a>
+            <a href="#">最新评论</a>
+            <a href="#">我的标签</a>
         </div>
     </div>
     
-    <div style="margin-top: 20px;" class="sidebar-links">
-        <div style="color: var(--ak-blue); font-weight: bold; margin-bottom: 10px; border-left: 3px solid var(--ak-blue); padding-left: 10px;">常用链接</div>
-        <a href="#">我的随笔</a>
-        <a href="#">我的评论</a>
-        <a href="#">我的参与</a>
-        <a href="#">最新评论</a>
-        <a href="#">我的标签</a>
-    </div>
+    <canvas id="particle-canvas"></canvas>
 </aside>
 
 <main class="main-content">
@@ -68,7 +71,8 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> R(i,a,b) for(int i=(a),i##E=(b);i&lt;=i##E;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> L(i,a,b) for(int i=(b),i##E=(a);i&gt;=i##E;i--)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">222222</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> ans,v[N];</span><br><span class="line">pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt;p[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">calc1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">sort</span>(p<span class="number">+1</span>,p+n<span class="number">+1</span>);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">+5</span>) v[i]=<span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> mny=p[<span class="number">1</span>].second,mxy=p[<span class="number">1</span>].second;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">2</span>,n) </span><br><span class="line">	&#123;</span><br><span class="line">		mny=<span class="built_in">min</span>(mny,p[i].second);</span><br><span class="line">		mxy=<span class="built_in">max</span>(mxy,p[i].second);</span><br><span class="line">		v[i]=<span class="number">1ll</span>*(p[i].first-p[<span class="number">1</span>].first)*(mxy-mny);</span><br><span class="line">	&#125;</span><br><span class="line">	mny=p[n].second,mxy=p[n].second;</span><br><span class="line">	<span class="built_in">L</span>(i,<span class="number">1</span>,n<span class="number">-1</span>) </span><br><span class="line">	&#123;</span><br><span class="line">		mny=<span class="built_in">min</span>(mny,p[i].second);</span><br><span class="line">		mxy=<span class="built_in">max</span>(mxy,p[i].second);</span><br><span class="line">		v[i<span class="number">-1</span>]+=<span class="number">1ll</span>*(p[n].first-p[i].first)*(mxy-mny);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n) ans=<span class="built_in">min</span>(ans,v[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> Ld[N],Lu[N],Rd[N],Ru[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">class</span> Callable&gt;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solveofcalc2</span><span class="params">(<span class="type">int</span> L,<span class="type">int</span> R,<span class="type">int</span> l,<span class="type">int</span> r,Callable cc)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	<span class="type">long</span> <span class="type">long</span> mn=<span class="number">3e18</span>;</span><br><span class="line">	<span class="type">int</span> mnp=<span class="number">0</span>;</span><br><span class="line">	<span class="built_in">R</span>(i,L,R) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">long</span> <span class="type">long</span> tp=<span class="built_in">cc</span>(i,mid);</span><br><span class="line">		<span class="keyword">if</span>(tp&lt;mn) mn=tp,mnp=i;</span><br><span class="line">	&#125;</span><br><span class="line">	v[mid]=mn;</span><br><span class="line">	<span class="keyword">if</span>(l!=r) <span class="built_in">solveofcalc2</span>(mnp,R,l,mid,cc),<span class="built_in">solveofcalc2</span>(L,mnp,mid<span class="number">+1</span>,r,cc);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">calc2</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">sort</span>(p<span class="number">+1</span>,p+n<span class="number">+1</span>);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">+5</span>) v[i]=<span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> mny=<span class="number">1e9</span>,mnyp=<span class="number">0</span>,mxy=<span class="number">-1e9</span>,mxyp=<span class="number">0</span>,mxx=<span class="number">-1e9</span>,mnx=<span class="number">1e9</span>;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(p[i].second&lt;=mny) mny=p[i].second,mnyp=i;</span><br><span class="line">		<span class="keyword">if</span>(p[i].second&gt;=mxy) mxy=p[i].second,mxyp=i;</span><br><span class="line">		mxx=<span class="built_in">max</span>(mxx,p[i].first);</span><br><span class="line">		mnx=<span class="built_in">min</span>(mnx,p[i].first);</span><br><span class="line">	&#125;</span><br><span class="line">	Ld[<span class="number">0</span>]=<span class="number">1e9</span>,Lu[<span class="number">0</span>]=<span class="number">-1e9</span>;</span><br><span class="line">	Rd[n<span class="number">+1</span>]=<span class="number">1e9</span>,Ru[n<span class="number">+1</span>]=<span class="number">-1e9</span>;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n) Ld[i]=<span class="built_in">min</span>(Ld[i<span class="number">-1</span>],p[i].second),Lu[i]=<span class="built_in">max</span>(Lu[i<span class="number">-1</span>],p[i].second);</span><br><span class="line">	<span class="built_in">L</span>(i,<span class="number">1</span>,n) Rd[i]=<span class="built_in">min</span>(Rd[i<span class="number">+1</span>],p[i].second),Ru[i]=<span class="built_in">max</span>(Ru[i<span class="number">+1</span>],p[i].second);</span><br><span class="line">	<span class="keyword">if</span>(mnyp&gt;mxyp) <span class="built_in">swap</span>(mnyp,mxyp);</span><br><span class="line">	<span class="keyword">auto</span> cc=[&amp;](<span class="type">int</span> x,<span class="type">int</span> y)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(x==<span class="number">1</span>&amp;&amp;y==n) <span class="keyword">return</span> <span class="number">1ll</span>*(p[y].first-p[x].first)*(mxy-mny);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1ll</span>*(p[y].first-p[x].first)*(mxy-mny)<span class="number">+1ll</span>*(<span class="built_in">max</span>(Ru[y<span class="number">+1</span>],Lu[x<span class="number">-1</span>])-<span class="built_in">min</span>(Rd[y<span class="number">+1</span>],Ld[x<span class="number">-1</span>]))*(mxx-mnx);</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="built_in">solveofcalc2</span>(<span class="number">1</span>,mnyp,mxyp,n,cc);</span><br><span class="line">	<span class="built_in">R</span>(i,mxyp,n) ans=<span class="built_in">min</span>(ans,v[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> L1[N],L2[N],L3[N],L4[N];</span><br><span class="line"><span class="type">int</span> q[N];</span><br><span class="line">pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt;pq[N];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">bool</span> <span class="title">cmp</span><span class="params">(pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt;x,pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt;y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!x.second&amp;&amp;!y.second) <span class="keyword">return</span> x.first&lt;y.first;</span><br><span class="line">	<span class="keyword">if</span>((!x.second)^(!y.second)) <span class="keyword">return</span> !x.second;</span><br><span class="line">	<span class="keyword">if</span>(!x.first&amp;&amp;!y.first) <span class="keyword">return</span> x.second&lt;y.second;</span><br><span class="line">	<span class="keyword">if</span>(<span class="number">1ll</span>*x.first*y.second!=<span class="number">1ll</span>*y.first*x.second) <span class="keyword">return</span> <span class="number">1ll</span>*x.first*y.second&gt;<span class="number">1ll</span>*y.first*x.second;</span><br><span class="line">	<span class="keyword">return</span> x.first&lt;y.first;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">long</span> <span class="type">long</span> <span class="title">calc</span><span class="params">(pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt;x,pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt;y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1ll</span>*x.first*y.first<span class="number">+1ll</span>*x.second*y.second;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">segt</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> rt[N&lt;&lt;<span class="number">2</span>],nd;</span><br><span class="line">	<span class="type">int</span> ls[<span class="number">5555555</span>],rs[<span class="number">5555555</span>];</span><br><span class="line">	pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; t[<span class="number">5555555</span>];</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">build</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		rt[x]=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(l==r) <span class="keyword">return</span>;</span><br><span class="line">		<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="built_in">build</span>(l,mid,x&lt;&lt;<span class="number">1</span>);</span><br><span class="line">		<span class="built_in">build</span>(mid<span class="number">+1</span>,r,x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>);</span><br><span class="line">	&#125;	</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">(<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">R</span>(i,<span class="number">0</span>,nd) ls[i]=rs[i]=<span class="number">0</span>,t[i]=<span class="built_in">pair</span>&lt;<span class="type">int</span>,<span class="type">int</span>&gt;(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">		nd=<span class="number">0</span>;</span><br><span class="line">		<span class="built_in">build</span>(<span class="number">1</span>,n,<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r,pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; v,<span class="type">int</span> &amp;x)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!x) </span><br><span class="line">		&#123;</span><br><span class="line">			x=++nd;</span><br><span class="line">			t[x]=v;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">calc</span>(t[x],pq[mid])&gt;<span class="built_in">calc</span>(v,pq[mid])) <span class="built_in">swap</span>(t[x],v);</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">calc</span>(t[x],pq[l])&gt;<span class="built_in">calc</span>(v,pq[l])) <span class="built_in">insert</span>(l,mid,v,ls[x]);</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">calc</span>(t[x],pq[r])&gt;<span class="built_in">calc</span>(v,pq[r])) <span class="built_in">insert</span>(mid<span class="number">+1</span>,r,v,rs[x]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r,pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; v,<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">insert</span>(<span class="number">1</span>,n,v,rt[x]);</span><br><span class="line">		<span class="keyword">if</span>(l==r) <span class="keyword">return</span>;</span><br><span class="line">		<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(p&lt;=mid) <span class="built_in">insert</span>(p,l,mid,v,x&lt;&lt;<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">insert</span>(p,mid<span class="number">+1</span>,r,v,x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">query</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(!x) <span class="keyword">return</span>;</span><br><span class="line">		ans=<span class="built_in">min</span>(ans,<span class="built_in">calc</span>(t[x],pq[p]));</span><br><span class="line">		<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(p&lt;=mid) <span class="built_in">query</span>(p,l,mid,ls[x]);</span><br><span class="line">		<span class="keyword">if</span>(mid&lt;p) <span class="built_in">query</span>(p,mid<span class="number">+1</span>,r,rs[x]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">query</span><span class="params">(<span class="type">int</span> L,<span class="type">int</span> R,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x,<span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(L&lt;=l&amp;&amp;r&lt;=R) <span class="keyword">return</span> <span class="built_in">query</span>(k,<span class="number">1</span>,n,rt[x]);</span><br><span class="line">		<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(L&lt;=mid) <span class="built_in">query</span>(L,R,l,mid,x&lt;&lt;<span class="number">1</span>,k);</span><br><span class="line">		<span class="keyword">if</span>(mid&lt;R) <span class="built_in">query</span>(L,R,mid<span class="number">+1</span>,r,x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,k);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;st;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">calc3</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> Mny=<span class="number">1e9</span>,Mxy=<span class="number">-1e9</span>;</span><br><span class="line">	<span class="built_in">sort</span>(p<span class="number">+1</span>,p+n<span class="number">+1</span>);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n) Mny=<span class="built_in">min</span>(Mny,p[i].second),Mxy=<span class="built_in">max</span>(Mxy,p[i].second);</span><br><span class="line">	<span class="type">int</span> mny=Mxy,mxy=Mny;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n) L1[i]=p[i].first-p[<span class="number">1</span>].first,L2[i]=mxy-Mny,mxy=<span class="built_in">max</span>(mxy,p[i].second);</span><br><span class="line">	<span class="built_in">L</span>(i,<span class="number">1</span>,n) L3[i]=p[n].first-p[i].first,L4[i]=Mxy-mny,mny=<span class="built_in">min</span>(mny,p[i].second);</span><br><span class="line">	q[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n) q[i]=L2[i];</span><br><span class="line">	<span class="built_in">sort</span>(q<span class="number">+1</span>,q+n<span class="number">+1</span>);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n) pq[i]=(L1[i]+L4[i]?<span class="built_in">pair</span>&lt;<span class="type">int</span>,<span class="type">int</span>&gt;(L1[i],L4[i]):<span class="built_in">pair</span>&lt;<span class="type">int</span>,<span class="type">int</span>&gt;(<span class="number">1</span>,<span class="number">1</span>));</span><br><span class="line">	<span class="built_in">sort</span>(pq<span class="number">+1</span>,pq+n<span class="number">+1</span>,cmp);</span><br><span class="line">	st.<span class="built_in">init</span>(n);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> p=<span class="built_in">lower_bound</span>(q<span class="number">+1</span>,q+n<span class="number">+1</span>,L2[i])-q;</span><br><span class="line">		st.<span class="built_in">insert</span>(p,<span class="number">1</span>,n,<span class="built_in">pair</span>&lt;<span class="type">int</span>,<span class="type">int</span>&gt;(L2[i],L3[i]),<span class="number">1</span>);</span><br><span class="line">		p=<span class="built_in">lower_bound</span>(q<span class="number">+1</span>,q+n<span class="number">+1</span>,Mxy-Mny-L4[i])-q;</span><br><span class="line">		<span class="keyword">if</span>(L1[i]||L4[i])</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> pp=<span class="built_in">lower_bound</span>(pq<span class="number">+1</span>,pq+n<span class="number">+1</span>,<span class="built_in">pair</span>&lt;<span class="type">int</span>,<span class="type">int</span>&gt;(L1[i],L4[i]),cmp)-pq;</span><br><span class="line">			<span class="keyword">if</span>(p!=n<span class="number">+1</span>) st.<span class="built_in">query</span>(p,n,<span class="number">1</span>,n,<span class="number">1</span>,pp);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ans=<span class="number">1e18</span>;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n) cin&gt;&gt;p[i].first&gt;&gt;p[i].second;</span><br><span class="line">	<span class="built_in">calc1</span>();</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n) <span class="built_in">swap</span>(p[i].first,p[i].second);</span><br><span class="line">	<span class="built_in">calc1</span>();</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n) <span class="built_in">swap</span>(p[i].first,p[i].second);</span><br><span class="line">	<span class="built_in">calc2</span>();</span><br><span class="line">	<span class="built_in">calc3</span>();</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n) p[i].second=<span class="number">1e9</span>-p[i].second;</span><br><span class="line">	<span class="built_in">calc3</span>();</span><br><span class="line">	cout&lt;&lt;ans&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="literal">NULL</span>);</span><br><span class="line">	<span class="type">int</span> _;</span><br><span class="line">	cin&gt;&gt;_;</span><br><span class="line">	<span class="keyword">while</span>(_--) <span class="built_in">solve</span>();</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
     </div>
-</article> </main>
+</article>
+</main>
 
 <div class="fab-container" id="fabContainer">
     <div class="fab-menu">
@@ -94,13 +98,14 @@
     
     <ul class="mp-playlist" id="mpPlaylistUI">
         </ul>
-</div> </div>
+</div> 
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     console.log("PRTS: System Booting...");
 
-    // ================= 1. UI 中枢系统 =================
+    // ================= 1. UI 中枢系统 (FAB 控制) =================
     const fabContainer = document.getElementById('fabContainer');
     const btnMain = document.getElementById('btnMain');
     const musicPanel = document.getElementById('musicPanel');
@@ -109,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btnMain.addEventListener('click', () => {
             fabContainer.classList.toggle('open');
             btnMain.style.transform = fabContainer.classList.contains('open') ? 'rotate(45deg)' : 'rotate(0)';
+            
             if(!fabContainer.classList.contains('open') && musicPanel){
                 musicPanel.classList.remove('active');
             }
@@ -117,21 +123,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const btnTheme = document.getElementById('btnTheme');
     let currentTheme = 'dark';
-    function setTheme(theme) { currentTheme = theme; document.body.setAttribute('data-theme', theme); }
-    function autoTheme() { const hour = new Date().getHours(); setTheme((hour >= 6 && hour < 18) ? 'light' : 'dark'); }
+    function setTheme(theme) { 
+        currentTheme = theme; 
+        document.body.setAttribute('data-theme', theme); 
+    }
+    function autoTheme() { 
+        const hour = new Date().getHours();
+        setTheme((hour >= 6 && hour < 18) ? 'light' : 'dark'); 
+    }
     autoTheme();
     if(btnTheme) btnTheme.addEventListener('click', () => { setTheme(currentTheme === 'dark' ? 'light' : 'dark'); });
 
     // ================= 2. 音乐通讯终端 =================
-    // 【修复】：去除了容易引发引擎崩溃的 EJS 标签，直接使用绝对路径
     const playlist = [
         { name: "01. 生命流「熠曲丰碑」-2025音律联觉ver.", src: "/music/生命流「熠曲丰碑」-2025音律联觉.mp3" },
         { name: "02. 櫂", src: "/music/ヨルシカ - 櫂.mp3" },
         { name: "03. ヰ世界の宝石譚", src: "/music/ヰ世界の宝石譚.mp3" },
         { name: "04. KAWAIIめたもる交響曲", src: "/music/KAWAIIめたもる交響曲.mp3" }
     ];
-
-
     let currentTrackIndex = 0;
     const audio = new Audio();
     const btnMusic = document.getElementById('btnMusic');
@@ -140,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if(btnMusic && musicPanel) {
         btnMusic.addEventListener('click', () => { musicPanel.classList.toggle('active'); });
-
+        
         if (mpPlaylistUI) {
             playlist.forEach((track, index) => {
                 let li = document.createElement('li');
@@ -182,7 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if(mpPlayPause) mpPlayPause.addEventListener('click', () => togglePlay());
-
         document.getElementById('mpPrev').addEventListener('click', () => { let newIndex = currentTrackIndex - 1; if (newIndex < 0) newIndex = playlist.length - 1; loadTrack(newIndex, true); });
         document.getElementById('mpNext').addEventListener('click', () => { let newIndex = currentTrackIndex + 1; if (newIndex >= playlist.length) newIndex = 0; loadTrack(newIndex, true); });
         audio.addEventListener('ended', () => { document.getElementById('mpNext').click(); });
@@ -190,8 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const mpProgressBar = document.getElementById('mpProgressBar');
         const mpTimeCurrent = document.getElementById('mpTimeCurrent');
         const mpTimeTotal = document.getElementById('mpTimeTotal');
-
-        // 【修复】：重写了时间格式化逻辑，彻底消灭了代码里的 "<" 符号，防止被误认为 HTML
+        
         function formatTime(seconds) {
             if (isNaN(seconds)) return "00:00";
             const m = Math.floor(seconds / 60);
@@ -203,13 +210,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if(mpTimeTotal) mpTimeTotal.textContent = formatTime(audio.duration);
             if(mpProgressBar) mpProgressBar.max = audio.duration;
         });
-
+        
         let isDragging = false;
         audio.addEventListener('timeupdate', () => {
             if(mpTimeCurrent) mpTimeCurrent.textContent = formatTime(audio.currentTime);
             if (!isDragging && mpProgressBar) mpProgressBar.value = audio.currentTime;
         });
-
+        
         if(mpProgressBar) {
             mpProgressBar.addEventListener('mousedown', () => isDragging = true);
             mpProgressBar.addEventListener('mouseup', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
@@ -220,56 +227,102 @@ document.addEventListener('DOMContentLoaded', () => {
         loadTrack(0, false);
     }
 
-    // ================= 3. 背景粒子系统 =================
+    // ================= 3. 背景粒子系统 (修复定位与发光色) =================
     const canvas = document.getElementById('particle-canvas');
     if(canvas) {
         const ctx = canvas.getContext('2d');
         let particles = [];
         const mouse = { x: null, y: null, radius: 50 };
 
-        function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        initCanvas(); window.addEventListener('resize', initCanvas);
+        const sidebar = canvas.closest('.sidebar');
+        
+        function initCanvas() { 
+            if(sidebar) {
+                canvas.width = sidebar.clientWidth;
+                canvas.height = sidebar.clientHeight; 
+            }
+        }
+        initCanvas(); 
+        window.addEventListener('resize', initCanvas);
 
         const logoImg = new Image();
-        // 【修复】：去除 EJS，直接指向根目录下的 logo
         logoImg.src = '/logo.png';
         logoImg.onload = function() {
-            const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d');
-            const size = 200; tempCanvas.width = size; tempCanvas.height = size;
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            const size = 200; 
+            tempCanvas.width = size; 
+            tempCanvas.height = size;
             tempCtx.drawImage(logoImg, 0, 0, size, size);
             const imageData = tempCtx.getImageData(0, 0, size, size).data;
+            
+            const scale = 1.5; 
+            const scaledSize = size * scale;
+            const gap = 40; 
+
+            const offsetX = sidebar ? (sidebar.clientWidth - scaledSize) / 2 : 40;
+            const offsetY = sidebar ? (sidebar.clientHeight - scaledSize - gap) : window.innerHeight - scaledSize - gap;
+
             for (let y = 0; y < size; y += 2) {
                 for (let x = 0; x < size; x += 2) {
                     if (imageData[((y * size + x) * 4) + 3] > 128) {
-                        particles.push(new Particle(x * 2.5 + (canvas.width / 2 - 100), y * 2.5 + (canvas.height / 2 - 250)));
+                        particles.push(new Particle(x * scale + offsetX, y * scale + offsetY));
                     }
                 }
             }
             animate();
-            console.log("PRTS: Particles Online.");
+            console.log("PRTS: Particles Online. Visuals Restored.");
         };
 
         class Particle {
-            constructor(x, y) { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.baseX = x; this.baseY = y; this.density = (Math.random() * 30) + 1; }
+            constructor(x, y) { 
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height; 
+                this.baseX = x; 
+                this.baseY = y; 
+                this.density = (Math.random() * 30) + 1;
+            }
             draw() {
-                ctx.fillStyle = document.body.getAttribute('data-theme') === 'light' ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.6)';
-                ctx.beginPath(); ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2); ctx.fill();
+                // 🌟 核心修复：强制使用 PRTS 青蓝色，不再受黑白主题影响而隐形
+                ctx.fillStyle = '#00c3ff';
+                ctx.beginPath(); 
+                ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2); 
+                ctx.fill();
             }
             update() {
-                let dx = mouse.x - this.x, dy = mouse.y - this.y, distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < mouse.radius) {
-                    let force = (mouse.radius - distance) / mouse.radius;
-                    this.x -= (dx / distance) * force * this.density * 0.8; this.y -= (dy / distance) * force * this.density * 0.8;
+                let rect = canvas.getBoundingClientRect();
+                let mouseX = mouse.x ? mouse.x - rect.left : null;
+                let mouseY = mouse.y ? mouse.y - rect.top : null;
+
+                if (mouseX !== null && mouseY !== null) {
+                    let dx = mouseX - this.x;
+                    let dy = mouseY - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        let force = (mouse.radius - distance) / mouse.radius;
+                        this.x -= (dx / distance) * force * this.density * 0.8;
+                        this.y -= (dy / distance) * force * this.density * 0.8;
+                    } else {
+                        this.x += (this.baseX - this.x) * 0.12;
+                        this.y += (this.baseY - this.y) * 0.12;
+                    }
                 } else {
-                    this.x += (this.baseX - this.x) * 0.12; this.y += (this.baseY - this.y) * 0.12;
+                    this.x += (this.baseX - this.x) * 0.12;
+                    this.y += (this.baseY - this.y) * 0.12;
                 }
             }
         }
 
-        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
-        window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
+        function animate() { 
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); }); 
+            requestAnimationFrame(animate); 
+        }
+        
+        window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
         window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
     }
 });
-</script> </body>
+</script> 
+</body>
 </html>

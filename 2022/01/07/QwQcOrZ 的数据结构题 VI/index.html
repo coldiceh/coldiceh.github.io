@@ -5,10 +5,9 @@
 <title>QwQcOrZ 的数据结构题 VI | Hexo</title>
 <link rel="icon" href="/avatar.jpg" type="image/jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
+<link rel="stylesheet" href="/css/style.css">
+<meta name="generator" content="Hexo 8.1.1"></head>
 <body>
-
-<canvas id="particle-canvas"></canvas>
 
 <header class="terminal-nav">
     <a href="/" class="nav-logo">QAQ</a>
@@ -19,27 +18,31 @@
         <a href="#world" class="nav-item"><span class="nav-en">WORLD</span><span class="nav-cn">归档</span></a>
         <a href="#media" class="nav-item"><span class="nav-en">MEDIA</span><span class="nav-cn">标签</span></a>
     </nav>
-    </header>
+</header>
 
 <aside class="sidebar">
-    <div class="avatar-box"><img src="/avatar.jpg" alt="Avatar"></div>
-    <h2 class="sidebar-title">COLDICEH</h2>
-    <p class="sidebar-subtitle">Dr.抢不到音律退坑了#8809</p>
-    
-    <div class="sidebar-search">
-        <div class="search-box">
-            <input type="text" id="local-search-input" placeholder="// SEARCH DATABASE...">
+    <div class="sidebar-content" style="position: relative; z-index: 2; width: 100%; height: 100%;">
+        <div class="avatar-box"><img src="/avatar.jpg" alt="Avatar"></div>
+        <h2 class="sidebar-title">COLDICEH</h2>
+        <p class="sidebar-subtitle">Dr.抢不到音律退坑了#8809</p>
+        
+        <div class="sidebar-search">
+            <div class="search-box">
+                <input type="text" id="local-search-input" placeholder="// SEARCH DATABASE...">
+            </div>
+        </div>
+        
+        <div class="sidebar-links">
+            <div style="color: var(--ak-blue); font-weight: bold; margin-bottom: 10px; border-left: 3px solid var(--ak-blue); padding-left: 10px;">常用链接</div>
+            <a href="#">我的随笔</a>
+            <a href="#">我的评论</a>
+            <a href="#">我的参与</a>
+            <a href="#">最新评论</a>
+            <a href="#">我的标签</a>
         </div>
     </div>
     
-    <div style="margin-top: 20px;" class="sidebar-links">
-        <div style="color: var(--ak-blue); font-weight: bold; margin-bottom: 10px; border-left: 3px solid var(--ak-blue); padding-left: 10px;">常用链接</div>
-        <a href="#">我的随笔</a>
-        <a href="#">我的评论</a>
-        <a href="#">我的参与</a>
-        <a href="#">最新评论</a>
-        <a href="#">我的标签</a>
-    </div>
+    <canvas id="particle-canvas"></canvas>
 </aside>
 
 <main class="main-content">
@@ -74,7 +77,8 @@
 <p>这些显然都是已经维护了的东西。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ld long double</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> tset puts(<span class="string">&quot;qwq&quot;</span>);</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> test puts(<span class="string">&quot;QAQ&quot;</span>);</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> pb(a) push_back(a)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> pii pair<span class="string">&lt;int,int&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> mkp make_pair</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> fi first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> se second</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ull unsigned long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> R(i,a,b) for(int i=(a),i##E=(b);i&lt;=i##E;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> L(i,a,b) for(int i=(b),i##E=(a);i&gt;=i##E;i--)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> clr(f,n) memset(f,0,sizeof(int)*(n))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> cpy(f,g,n) memcpy(f,g,sizeof(int)*(n))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> Swap(x,y) (x^=y^=x^=y)</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="type">bool</span> <span class="title">ckmax</span><span class="params">(T &amp;x, T y)</span> </span>&#123; <span class="keyword">return</span> x&lt;y?x=y,<span class="literal">true</span>:<span class="literal">false</span>;&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="type">bool</span> <span class="title">ckmin</span><span class="params">(T &amp;x, T y)</span> </span>&#123; <span class="keyword">return</span> x&gt;y?x=y,<span class="literal">true</span>:<span class="literal">false</span>;&#125;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="comment">//const ll inf=0x7f7f7f7f7f7f7f3f;</span></span><br><span class="line"><span class="type">const</span> ll inf=(<span class="number">1ll</span>&lt;&lt;<span class="number">60</span>);</span><br><span class="line"><span class="comment">//const int inf=0x7f7f7f7f;</span></span><br><span class="line"><span class="comment">//const int mod=1e9+7;</span></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> Pi=<span class="built_in">acos</span>(<span class="number">-1</span>);</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> mod=<span class="number">1e9</span><span class="number">+7</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">double</span> eps=<span class="number">1e-6</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">fpow</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b=mod<span class="number">-2</span>,<span class="type">int</span> p=mod)</span></span>&#123;<span class="type">int</span> res=<span class="number">1</span>;a%=mod;<span class="keyword">while</span>(b)&#123;<span class="keyword">if</span>(b&amp;<span class="number">1</span>)res=res*a%p;a=a*a%p;b&gt;&gt;=<span class="number">1</span>;&#125;<span class="keyword">return</span> res;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">char</span> c=<span class="built_in">getchar</span>();ll x=<span class="number">0</span>;<span class="type">bool</span> f=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(;!<span class="built_in">isdigit</span>(c);c=<span class="built_in">getchar</span>())f^=!(c^<span class="number">45</span>);</span><br><span class="line">    <span class="keyword">for</span>(;<span class="built_in">isdigit</span>(c);c=<span class="built_in">getchar</span>())x=(x&lt;&lt;<span class="number">1</span>)+(x&lt;&lt;<span class="number">3</span>)+(c^<span class="number">48</span>);</span><br><span class="line">    <span class="keyword">if</span>(f)x=-x;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">write</span><span class="params">(ll x)</span></span>&#123;<span class="keyword">if</span> (x&lt;<span class="number">0</span>)&#123;<span class="built_in">putchar</span>(<span class="string">&#x27;-&#x27;</span>);<span class="built_in">write</span>(-x);<span class="keyword">return</span>;&#125;<span class="keyword">if</span> (x&gt;=<span class="number">10</span>) <span class="built_in">write</span>(x/<span class="number">10</span>);<span class="built_in">putchar</span>(x%<span class="number">10</span>+<span class="string">&#x27;0&#x27;</span>);&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">writesp</span><span class="params">(ll x)</span></span>&#123;<span class="built_in">write</span>(x),<span class="built_in">putchar</span>(<span class="string">&#x27; &#x27;</span>);&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">writeln</span><span class="params">(ll x)</span></span>&#123;<span class="built_in">write</span>(x);<span class="built_in">putchar</span>(<span class="string">&#x27;\n&#x27;</span>);&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();</span></span><br><span class="line"><span class="comment">mt19937 rand_num(seed);  </span></span><br><span class="line"><span class="comment">uniform_int_distribution&lt;long long&gt; dist(0, 10000000);  // ¸ø¶¨·¶Î§</span></span><br><span class="line"><span class="comment">printf(&quot;%lld &quot;,dist(rand_num));</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">2e5</span><span class="number">+10</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> inv2=<span class="number">500000004</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> inv6=<span class="number">166666668</span>;</span><br><span class="line"><span class="type">int</span> a[N],n,m;</span><br><span class="line"><span class="type">int</span> l_n[N&lt;&lt;<span class="number">2</span>];</span><br><span class="line"><span class="type">int</span> sm[N&lt;&lt;<span class="number">2</span>],s_m[N&lt;&lt;<span class="number">2</span>],sqr[N&lt;&lt;<span class="number">2</span>];</span><br><span class="line"><span class="type">int</span> lak[N&lt;&lt;<span class="number">2</span>],las[N&lt;&lt;<span class="number">2</span>];</span><br><span class="line"><span class="type">int</span> sf1[N],sf2[N];<span class="comment">//</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">get_SUM</span><span class="params">(<span class="type">int</span> s,<span class="type">int</span> k,<span class="type">int</span> len)</span> </span>&#123;<span class="keyword">return</span> (len*s*s%mod<span class="number">+2</span>*sf1[len<span class="number">-1</span>]*k%mod*s%mod+sf2[len<span class="number">-1</span>]*k*k%mod)%mod;&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">push_up</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	sm[x]=(sm[x&lt;&lt;<span class="number">1</span>]+sm[x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>])%mod;</span><br><span class="line">	sqr[x]=(sqr[x&lt;&lt;<span class="number">1</span>]+sqr[x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>])%mod;</span><br><span class="line">	s_m[x]=(s_m[x&lt;&lt;<span class="number">1</span>]+l_n[x&lt;&lt;<span class="number">1</span>]*sm[x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>]%mod+s_m[x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>])%mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">upd</span><span class="params">(<span class="type">int</span> s,<span class="type">int</span> k,<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	sqr[x]=(sqr[x]+(s*sm[x]+(s_m[x]-sm[x]+mod)%mod*k)%mod*<span class="number">2</span>%mod+l_n[x]*s%mod*s%mod+(l_n[x]<span class="number">-1</span>)*s%mod*k%mod+(l_n[x]<span class="number">-1</span>)*(l_n[x]<span class="number">-1</span>)%mod*s%mod*k%mod+sf2[l_n[x]<span class="number">-1</span>]*k%mod*k%mod)%mod;</span><br><span class="line">	sm[x]=(sm[x]+(s*<span class="number">2</span>+(l_n[x]<span class="number">-1</span>)*k%mod)*l_n[x]%mod*inv2)%mod;</span><br><span class="line">	s_m[x]=(s_m[x]+s*sf1[l_n[x]]%mod+(sf2[l_n[x]]-sf1[l_n[x]]+mod)%mod*k%mod)%mod;</span><br><span class="line">	lak[x]=(lak[x]+k)%mod;</span><br><span class="line">	las[x]=(las[x]+s)%mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">push_down</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(las[x]||lak[x])</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">upd</span>(las[x],lak[x],x&lt;&lt;<span class="number">1</span>);</span><br><span class="line">		las[x]=(las[x]+l_n[x&lt;&lt;<span class="number">1</span>]*lak[x])%mod;</span><br><span class="line">		<span class="built_in">upd</span>(las[x],lak[x],x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>);</span><br><span class="line">		las[x]=lak[x]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">build</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	l_n[x]=r-l<span class="number">+1</span>;</span><br><span class="line">	<span class="keyword">if</span>(l==r) </span><br><span class="line">	&#123;</span><br><span class="line">		sm[x]=a[l];</span><br><span class="line">		s_m[x]=a[l];</span><br><span class="line">		sqr[x]=a[l]*a[l]%mod;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	<span class="built_in">build</span>(l,mid,x&lt;&lt;<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">build</span>(mid<span class="number">+1</span>,r,x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">push_up</span>(x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">modify</span><span class="params">(<span class="type">int</span> L,<span class="type">int</span> R,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x,<span class="type">int</span> s,<span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(L&lt;=l&amp;&amp;r&lt;=R)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">upd</span>(((s+(l-L)*k)%mod+mod)%mod,(k%mod+mod)%mod,x);</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">push_down</span>(x);</span><br><span class="line">	<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(L&lt;=mid) <span class="built_in">modify</span>(L,R,l,mid,x&lt;&lt;<span class="number">1</span>,s,k);</span><br><span class="line">	<span class="keyword">if</span>(mid&lt;R) <span class="built_in">modify</span>(L,R,mid<span class="number">+1</span>,r,x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,s,k);</span><br><span class="line">	<span class="built_in">push_up</span>(x);</span><br><span class="line">&#125;	</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> L,<span class="type">int</span> R,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(L&lt;=l&amp;&amp;r&lt;=R) <span class="keyword">return</span> sqr[x];</span><br><span class="line">	<span class="built_in">push_down</span>(x);</span><br><span class="line">	<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>,ret=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(L&lt;=mid) ret=(ret+(<span class="built_in">query</span>(L,R,l,mid,x&lt;&lt;<span class="number">1</span>)%mod+mod)%mod)%mod;</span><br><span class="line">	<span class="keyword">if</span>(mid&lt;R) ret=(ret+(<span class="built_in">query</span>(L,R,mid<span class="number">+1</span>,r,x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>)%mod+mod)%mod)%mod;</span><br><span class="line">	ret%=mod,ret+=mod,ret%=mod;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">freopen</span>(<span class="string">&quot;T4.in&quot;</span>,<span class="string">&quot;r&quot;</span>,stdin);</span><br><span class="line">	<span class="built_in">freopen</span>(<span class="string">&quot;T4.out&quot;</span>,<span class="string">&quot;w&quot;</span>,stdout);</span><br><span class="line">	n=<span class="built_in">read</span>(),m=<span class="built_in">read</span>();</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n) sf1[i]=(sf1[i<span class="number">-1</span>]+i)%mod,sf2[i]=(sf2[i<span class="number">-1</span>]<span class="number">+1ll</span>*i*i)%mod;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n) a[i]=(<span class="built_in">read</span>()%mod+mod)%mod;</span><br><span class="line">	<span class="type">int</span> opt,l,r,k,s;</span><br><span class="line">	<span class="built_in">build</span>(<span class="number">1</span>,n,<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">while</span>(m--)</span><br><span class="line">	&#123;</span><br><span class="line">		opt=<span class="built_in">read</span>(),l=<span class="built_in">read</span>(),r=<span class="built_in">read</span>();</span><br><span class="line">		<span class="keyword">if</span>(!opt) s=<span class="built_in">read</span>(),k=<span class="built_in">read</span>(),<span class="built_in">modify</span>(l,r,<span class="number">1</span>,n,<span class="number">1</span>,s,k);	</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">writeln</span>(<span class="built_in">query</span>(l,r,<span class="number">1</span>,n,<span class="number">1</span>));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
-</article> </main>
+</article>
+</main>
 
 <div class="fab-container" id="fabContainer">
     <div class="fab-menu">
@@ -100,13 +104,14 @@
     
     <ul class="mp-playlist" id="mpPlaylistUI">
         </ul>
-</div> </div>
+</div> 
+</div>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     console.log("PRTS: System Booting...");
 
-    // ================= 1. UI 中枢系统 =================
+    // ================= 1. UI 中枢系统 (FAB 控制) =================
     const fabContainer = document.getElementById('fabContainer');
     const btnMain = document.getElementById('btnMain');
     const musicPanel = document.getElementById('musicPanel');
@@ -115,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btnMain.addEventListener('click', () => {
             fabContainer.classList.toggle('open');
             btnMain.style.transform = fabContainer.classList.contains('open') ? 'rotate(45deg)' : 'rotate(0)';
+            
             if(!fabContainer.classList.contains('open') && musicPanel){
                 musicPanel.classList.remove('active');
             }
@@ -123,21 +129,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const btnTheme = document.getElementById('btnTheme');
     let currentTheme = 'dark';
-    function setTheme(theme) { currentTheme = theme; document.body.setAttribute('data-theme', theme); }
-    function autoTheme() { const hour = new Date().getHours(); setTheme((hour >= 6 && hour < 18) ? 'light' : 'dark'); }
+    function setTheme(theme) { 
+        currentTheme = theme; 
+        document.body.setAttribute('data-theme', theme); 
+    }
+    function autoTheme() { 
+        const hour = new Date().getHours();
+        setTheme((hour >= 6 && hour < 18) ? 'light' : 'dark'); 
+    }
     autoTheme();
     if(btnTheme) btnTheme.addEventListener('click', () => { setTheme(currentTheme === 'dark' ? 'light' : 'dark'); });
 
     // ================= 2. 音乐通讯终端 =================
-    // 【修复】：去除了容易引发引擎崩溃的 EJS 标签，直接使用绝对路径
     const playlist = [
         { name: "01. 生命流「熠曲丰碑」-2025音律联觉ver.", src: "/music/生命流「熠曲丰碑」-2025音律联觉.mp3" },
         { name: "02. 櫂", src: "/music/ヨルシカ - 櫂.mp3" },
         { name: "03. ヰ世界の宝石譚", src: "/music/ヰ世界の宝石譚.mp3" },
         { name: "04. KAWAIIめたもる交響曲", src: "/music/KAWAIIめたもる交響曲.mp3" }
     ];
-
-
     let currentTrackIndex = 0;
     const audio = new Audio();
     const btnMusic = document.getElementById('btnMusic');
@@ -146,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if(btnMusic && musicPanel) {
         btnMusic.addEventListener('click', () => { musicPanel.classList.toggle('active'); });
-
+        
         if (mpPlaylistUI) {
             playlist.forEach((track, index) => {
                 let li = document.createElement('li');
@@ -188,7 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if(mpPlayPause) mpPlayPause.addEventListener('click', () => togglePlay());
-
         document.getElementById('mpPrev').addEventListener('click', () => { let newIndex = currentTrackIndex - 1; if (newIndex < 0) newIndex = playlist.length - 1; loadTrack(newIndex, true); });
         document.getElementById('mpNext').addEventListener('click', () => { let newIndex = currentTrackIndex + 1; if (newIndex >= playlist.length) newIndex = 0; loadTrack(newIndex, true); });
         audio.addEventListener('ended', () => { document.getElementById('mpNext').click(); });
@@ -196,8 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const mpProgressBar = document.getElementById('mpProgressBar');
         const mpTimeCurrent = document.getElementById('mpTimeCurrent');
         const mpTimeTotal = document.getElementById('mpTimeTotal');
-
-        // 【修复】：重写了时间格式化逻辑，彻底消灭了代码里的 "<" 符号，防止被误认为 HTML
+        
         function formatTime(seconds) {
             if (isNaN(seconds)) return "00:00";
             const m = Math.floor(seconds / 60);
@@ -209,13 +216,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if(mpTimeTotal) mpTimeTotal.textContent = formatTime(audio.duration);
             if(mpProgressBar) mpProgressBar.max = audio.duration;
         });
-
+        
         let isDragging = false;
         audio.addEventListener('timeupdate', () => {
             if(mpTimeCurrent) mpTimeCurrent.textContent = formatTime(audio.currentTime);
             if (!isDragging && mpProgressBar) mpProgressBar.value = audio.currentTime;
         });
-
+        
         if(mpProgressBar) {
             mpProgressBar.addEventListener('mousedown', () => isDragging = true);
             mpProgressBar.addEventListener('mouseup', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
@@ -226,56 +233,102 @@ document.addEventListener('DOMContentLoaded', () => {
         loadTrack(0, false);
     }
 
-    // ================= 3. 背景粒子系统 =================
+    // ================= 3. 背景粒子系统 (修复定位与发光色) =================
     const canvas = document.getElementById('particle-canvas');
     if(canvas) {
         const ctx = canvas.getContext('2d');
         let particles = [];
         const mouse = { x: null, y: null, radius: 50 };
 
-        function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        initCanvas(); window.addEventListener('resize', initCanvas);
+        const sidebar = canvas.closest('.sidebar');
+        
+        function initCanvas() { 
+            if(sidebar) {
+                canvas.width = sidebar.clientWidth;
+                canvas.height = sidebar.clientHeight; 
+            }
+        }
+        initCanvas(); 
+        window.addEventListener('resize', initCanvas);
 
         const logoImg = new Image();
-        // 【修复】：去除 EJS，直接指向根目录下的 logo
         logoImg.src = '/logo.png';
         logoImg.onload = function() {
-            const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d');
-            const size = 200; tempCanvas.width = size; tempCanvas.height = size;
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            const size = 200; 
+            tempCanvas.width = size; 
+            tempCanvas.height = size;
             tempCtx.drawImage(logoImg, 0, 0, size, size);
             const imageData = tempCtx.getImageData(0, 0, size, size).data;
+            
+            const scale = 1.5; 
+            const scaledSize = size * scale;
+            const gap = 40; 
+
+            const offsetX = sidebar ? (sidebar.clientWidth - scaledSize) / 2 : 40;
+            const offsetY = sidebar ? (sidebar.clientHeight - scaledSize - gap) : window.innerHeight - scaledSize - gap;
+
             for (let y = 0; y < size; y += 2) {
                 for (let x = 0; x < size; x += 2) {
                     if (imageData[((y * size + x) * 4) + 3] > 128) {
-                        particles.push(new Particle(x * 2.5 + (canvas.width / 2 - 100), y * 2.5 + (canvas.height / 2 - 250)));
+                        particles.push(new Particle(x * scale + offsetX, y * scale + offsetY));
                     }
                 }
             }
             animate();
-            console.log("PRTS: Particles Online.");
+            console.log("PRTS: Particles Online. Visuals Restored.");
         };
 
         class Particle {
-            constructor(x, y) { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.baseX = x; this.baseY = y; this.density = (Math.random() * 30) + 1; }
+            constructor(x, y) { 
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height; 
+                this.baseX = x; 
+                this.baseY = y; 
+                this.density = (Math.random() * 30) + 1;
+            }
             draw() {
-                ctx.fillStyle = document.body.getAttribute('data-theme') === 'light' ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.6)';
-                ctx.beginPath(); ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2); ctx.fill();
+                // 🌟 核心修复：强制使用 PRTS 青蓝色，不再受黑白主题影响而隐形
+                ctx.fillStyle = '#00c3ff';
+                ctx.beginPath(); 
+                ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2); 
+                ctx.fill();
             }
             update() {
-                let dx = mouse.x - this.x, dy = mouse.y - this.y, distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < mouse.radius) {
-                    let force = (mouse.radius - distance) / mouse.radius;
-                    this.x -= (dx / distance) * force * this.density * 0.8; this.y -= (dy / distance) * force * this.density * 0.8;
+                let rect = canvas.getBoundingClientRect();
+                let mouseX = mouse.x ? mouse.x - rect.left : null;
+                let mouseY = mouse.y ? mouse.y - rect.top : null;
+
+                if (mouseX !== null && mouseY !== null) {
+                    let dx = mouseX - this.x;
+                    let dy = mouseY - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        let force = (mouse.radius - distance) / mouse.radius;
+                        this.x -= (dx / distance) * force * this.density * 0.8;
+                        this.y -= (dy / distance) * force * this.density * 0.8;
+                    } else {
+                        this.x += (this.baseX - this.x) * 0.12;
+                        this.y += (this.baseY - this.y) * 0.12;
+                    }
                 } else {
-                    this.x += (this.baseX - this.x) * 0.12; this.y += (this.baseY - this.y) * 0.12;
+                    this.x += (this.baseX - this.x) * 0.12;
+                    this.y += (this.baseY - this.y) * 0.12;
                 }
             }
         }
 
-        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
-        window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
+        function animate() { 
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); }); 
+            requestAnimationFrame(animate); 
+        }
+        
+        window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
         window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
     }
 });
-</script> </body>
+</script> 
+</body>
 </html>
