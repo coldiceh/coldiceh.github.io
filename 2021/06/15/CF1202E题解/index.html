@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<title>CF1202E题解 | Hexo</title>
+<link rel="icon" href="/avatar.jpg" type="image/jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+
+<canvas id="particle-canvas"></canvas>
+
+<header class="terminal-nav">
+    <a href="/" class="nav-logo">QAQ</a>
+    <nav class="nav-menu">
+        <a href="/" class="nav-item active"><span class="nav-en">INDEX</span><span class="nav-cn">首页</span></a>
+        <a href="#info" class="nav-item"><span class="nav-en">INFORMATION</span><span class="nav-cn">情报</span></a>
+        <a href="#operator" class="nav-item"><span class="nav-en">OPERATOR</span><span class="nav-cn">随笔</span></a>
+        <a href="#world" class="nav-item"><span class="nav-en">WORLD</span><span class="nav-cn">归档</span></a>
+        <a href="#media" class="nav-item"><span class="nav-en">MEDIA</span><span class="nav-cn">标签</span></a>
+    </nav>
+    </header>
+
+<aside class="sidebar">
+    <div class="avatar-box"><img src="/avatar.jpg" alt="Avatar"></div>
+    <h2 class="sidebar-title">COLDICEH</h2>
+    <p class="sidebar-subtitle">Dr.抢不到音律退坑了#8809</p>
+    
+    <div class="sidebar-search">
+        <div class="search-box">
+            <input type="text" id="local-search-input" placeholder="// SEARCH DATABASE...">
+        </div>
+    </div>
+    
+    <div style="margin-top: 20px;" class="sidebar-links">
+        <div style="color: var(--ak-blue); font-weight: bold; margin-bottom: 10px; border-left: 3px solid var(--ak-blue); padding-left: 10px;">常用链接</div>
+        <a href="#">我的随笔</a>
+        <a href="#">我的评论</a>
+        <a href="#">我的参与</a>
+        <a href="#">最新评论</a>
+        <a href="#">我的标签</a>
+    </div>
+</aside>
+
+<main class="main-content">
+    <article class="post-detail">
+    <h1 class="post-detail-title">CF1202E题解</h1>
+    <div class="post-meta">
+        DATE: 2021-06-15
+    </div>
+    <div class="post-content">
+        <p>由于直接计算每一对$s_i+s_j$的出现次数并不好做，考虑枚举它们分割的位置（$s_i$结束$s_j$开始处）来计算总数。</p>
+<p>因此任何在分割处结束的$s_i$都可以与从这里开始的$s_j$配对。</p>
+<p>所以说我们只需要对每一个后缀计算从这里开始的字符串$s_i$的数量，以及对每一个前缀计算从这里结束的字符串$s_i$的数量。计算前缀可以通过反转$t$和所有的$s_i$转化为计算后缀。</p>
+<p>所以我们需要对于每个位置$pos$计算从$pos$开始或结束的字符串个数。个人的做法是SAM，但官方题解有一种有趣的根号分治做法。</p>
+<p>先确定一个阙值$MAG$。然后将字符串分为长或短两类：若$|s_i|\leq MAG$就当做短的，否则当做长的。显然不会有超过$\frac{\sum|s_i|}{MAG}$个长字符串。对于这些长字符串可以用Z函数或者前缀函数找到它的所有出现。这部分的时间复杂度为$O(\frac{\sum |s_i|}{MAG}+\sum |s_i|)$。</p>
+<p>然后对于短的字符串考虑直接建一棵Trie。这棵Trie将会有$O\left(\sum |s_i| \right)$个点，但是最大深度为$MAG$。所以可以对于每个$pos$向下移动遍历Trie，同时计算出现次数，这只使用了$s[pos\ldots (pos+MAG)]$这部分子串。所以这部分的时间复杂度为$O(|t|\cdot MAG)$。</p>
+<p>所以当$MAG&#x3D;\sqrt{\sum |s_i|}$时，总时间复杂度为$O\left(\sum |s_i|+|t|\sqrt{\sum |s_i|} \right)$。这没有使用任何字符串数据结构。</p>
+<p>然后讲一下线性时间复杂度的SAM做法。</p>
+<p>对于$t$和$\operatorname{reverse}(t)$建出SAM，然后对于每个$s_i$和$\operatorname{reverse}(s_i)$在SAM上跑一遍，并对于它的结束位置的整个子树打个标记。最后直接计算每个位置存在的字符串数量就可以得到答案。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">string str;</span><br><span class="line"><span class="type">int</span> t[<span class="number">222222</span>];</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n,lent;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">SAM</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">node</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> len,nxt,son[<span class="number">26</span>];</span><br><span class="line">    &#125;a[<span class="number">444444</span>];</span><br><span class="line">    <span class="type">int</span> ans[<span class="number">444444</span>],edp[<span class="number">444444</span>],cnt[<span class="number">444444</span>];</span><br><span class="line">    <span class="type">int</span> lst,tn;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt;e[<span class="number">444444</span>];</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">init_SAM</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        tn=lst=<span class="number">1</span>; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">extend_SAM</span><span class="params">(<span class="type">int</span> c)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> cur=++tn,p=lst;</span><br><span class="line">        a[cur].len=a[p].len<span class="number">+1</span>;edp[cur]=a[p].len;</span><br><span class="line">        <span class="keyword">for</span>(;p&amp;&amp;!a[p].son[c];p=a[p].nxt) a[p].son[c]=cur;</span><br><span class="line">        <span class="keyword">if</span>(!p) a[cur].nxt=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> v=a[p].son[c];</span><br><span class="line">            <span class="keyword">if</span>(a[v].len==a[p].len<span class="number">+1</span>) a[cur].nxt=v;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="type">int</span> x=++tn;a[x]=a[v];</span><br><span class="line">                a[x].len=a[p].len<span class="number">+1</span>;edp[x]=<span class="number">-1</span>;</span><br><span class="line">                <span class="keyword">for</span>(;p&amp;&amp;a[p].son[c]==v;p=a[p].nxt)a[p].son[c]=x;</span><br><span class="line">                a[cur].nxt=a[v].nxt=x;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line">        lst=cur;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">(<span class="type">const</span> string &amp;s)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">int</span> p=<span class="number">1</span>,len=(<span class="type">int</span>)s.<span class="built_in">size</span>(),x;</span><br><span class="line">        <span class="built_in">R</span>(i,<span class="number">0</span>,len<span class="number">-1</span>) </span><br><span class="line">        &#123;</span><br><span class="line">            x=s[i]-<span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">            <span class="keyword">if</span>(!a[p].son[x]) <span class="keyword">return</span>;</span><br><span class="line">            p=a[p].son[x];</span><br><span class="line">        &#125;</span><br><span class="line">        ++cnt[p];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(~edp[u]) ans[edp[u]]=cnt[u];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> v:e[u]) cnt[v]+=cnt[u],<span class="built_in">dfs</span>(v);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">mian</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">R</span>(i,<span class="number">2</span>,tn) e[a[i].nxt].<span class="built_in">pb</span>(i);</span><br><span class="line">        <span class="built_in">dfs</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;SAM1,SAM2;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="literal">nullptr</span>);</span><br><span class="line">    SAM<span class="number">1.</span><span class="built_in">init_SAM</span>(),SAM<span class="number">2.</span><span class="built_in">init_SAM</span>();</span><br><span class="line">    cin&gt;&gt;str&gt;&gt;n;lent=str.<span class="built_in">size</span>();</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">0</span>,lent<span class="number">-1</span>) t[i]=str[i]-<span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">0</span>,lent<span class="number">-1</span>) SAM<span class="number">1.</span><span class="built_in">extend_SAM</span>(t[i]);</span><br><span class="line">    <span class="built_in">L</span>(i,<span class="number">0</span>,lent<span class="number">-1</span>) SAM<span class="number">2.</span><span class="built_in">extend_SAM</span>(t[i]);    </span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,n)</span><br><span class="line">    &#123;</span><br><span class="line">        cin&gt;&gt;str;</span><br><span class="line">        SAM<span class="number">1.</span><span class="built_in">solve</span>(str);</span><br><span class="line">        <span class="built_in">reverse</span>(str.<span class="built_in">begin</span>(),str.<span class="built_in">end</span>());</span><br><span class="line">        SAM<span class="number">2.</span><span class="built_in">solve</span>(str);</span><br><span class="line">    &#125;</span><br><span class="line">    SAM<span class="number">1.</span><span class="built_in">mian</span>();</span><br><span class="line">    SAM<span class="number">2.</span><span class="built_in">mian</span>();</span><br><span class="line">    ll ans=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">0</span>,lent<span class="number">-2</span>) ans+=<span class="number">1ll</span>*SAM<span class="number">1.</span>ans[i]*SAM<span class="number">2.</span>ans[lent-i<span class="number">-2</span>];</span><br><span class="line">    cout&lt;&lt;ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img2020.cnblogs.com/blog/2423011/202106/2423011-20210616151120321-513636263.jpg" alt="image"></p>
+
+    </div>
+</article> </main>
+
+<div class="fab-container" id="fabContainer">
+    <div class="fab-menu">
+        <div class="fab-btn sub" id="btnTheme" title="切换环境感知">◐</div>
+        <div class="fab-btn sub" id="btnMusic" title="音频终端">♫</div>
+    </div>
+    <div class="fab-btn fab-main" id="btnMain">⧉</div>
+    <div class="music-panel" id="musicPanel">
+    <div class="mp-header">AUDIO TERMINAL //</div>
+    <div class="mp-title" id="mpTitle">选择曲目...</div>
+    
+    <div class="mp-progress-container">
+        <span id="mpTimeCurrent">00:00</span>
+        <input type="range" class="mp-progress-bar" id="mpProgressBar" value="0" min="0" max="100">
+        <span id="mpTimeTotal">00:00</span>
+    </div>
+    
+    <div class="mp-controls">
+        <button class="mp-btn" id="mpPrev">⏮</button>
+        <button class="mp-btn play-btn" id="mpPlayPause">▶</button>
+        <button class="mp-btn" id="mpNext">⏭</button>
+    </div>
+    
+    <ul class="mp-playlist" id="mpPlaylistUI">
+        </ul>
+</div> </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("PRTS: System Booting...");
+
+    // ================= 1. UI 中枢系统 =================
+    const fabContainer = document.getElementById('fabContainer');
+    const btnMain = document.getElementById('btnMain');
+    const musicPanel = document.getElementById('musicPanel');
+
+    if (btnMain && fabContainer) {
+        btnMain.addEventListener('click', () => {
+            fabContainer.classList.toggle('open');
+            btnMain.style.transform = fabContainer.classList.contains('open') ? 'rotate(45deg)' : 'rotate(0)';
+            if(!fabContainer.classList.contains('open') && musicPanel){
+                musicPanel.classList.remove('active');
+            }
+        });
+    }
+
+    const btnTheme = document.getElementById('btnTheme');
+    let currentTheme = 'dark';
+    function setTheme(theme) { currentTheme = theme; document.body.setAttribute('data-theme', theme); }
+    function autoTheme() { const hour = new Date().getHours(); setTheme((hour >= 6 && hour < 18) ? 'light' : 'dark'); }
+    autoTheme();
+    if(btnTheme) btnTheme.addEventListener('click', () => { setTheme(currentTheme === 'dark' ? 'light' : 'dark'); });
+
+    // ================= 2. 音乐通讯终端 =================
+    // 【修复】：去除了容易引发引擎崩溃的 EJS 标签，直接使用绝对路径
+    const playlist = [
+        { name: "01. 生命流「熠曲丰碑」-2025音律联觉ver.", src: "/music/生命流「熠曲丰碑」-2025音律联觉.mp3" },
+        { name: "02. 櫂", src: "/music/ヨルシカ - 櫂.mp3" },
+        { name: "03. ヰ世界の宝石譚", src: "/music/ヰ世界の宝石譚.mp3" },
+        { name: "04. KAWAIIめたもる交響曲", src: "/music/KAWAIIめたもる交響曲.mp3" }
+    ];
+
+
+    let currentTrackIndex = 0;
+    const audio = new Audio();
+    const btnMusic = document.getElementById('btnMusic');
+    const mpPlayPause = document.getElementById('mpPlayPause');
+    const mpPlaylistUI = document.getElementById('mpPlaylistUI');
+
+    if(btnMusic && musicPanel) {
+        btnMusic.addEventListener('click', () => { musicPanel.classList.toggle('active'); });
+
+        if (mpPlaylistUI) {
+            playlist.forEach((track, index) => {
+                let li = document.createElement('li');
+                li.textContent = track.name;
+                li.onclick = () => loadTrack(index, true);
+                mpPlaylistUI.appendChild(li);
+            });
+        }
+
+        function loadTrack(index, autoPlay = false) {
+            if(playlist.length === 0) return;
+            currentTrackIndex = index;
+            audio.src = playlist[index].src;
+            document.getElementById('mpTitle').textContent = playlist[index].name;
+
+            if(mpPlaylistUI) {
+                const items = mpPlaylistUI.querySelectorAll('li');
+                items.forEach(item => item.classList.remove('playing'));
+                if(items[index]) items[index].classList.add('playing');
+            }
+            if (autoPlay) togglePlay(true);
+        }
+
+        function togglePlay(forcePlay = false) {
+            if (audio.paused || forcePlay) {
+                audio.play().then(() => {
+                    if(mpPlayPause) mpPlayPause.textContent = "⏸";
+                    btnMusic.classList.add('btn-playing');
+                }).catch(e => {
+                    console.warn("PRTS: 等待音频源响应...");
+                    if(mpPlayPause) mpPlayPause.textContent = "▶";
+                    btnMusic.classList.remove('btn-playing');
+                });
+            } else {
+                audio.pause();
+                if(mpPlayPause) mpPlayPause.textContent = "▶";
+                btnMusic.classList.remove('btn-playing');
+            }
+        }
+
+        if(mpPlayPause) mpPlayPause.addEventListener('click', () => togglePlay());
+
+        document.getElementById('mpPrev').addEventListener('click', () => { let newIndex = currentTrackIndex - 1; if (newIndex < 0) newIndex = playlist.length - 1; loadTrack(newIndex, true); });
+        document.getElementById('mpNext').addEventListener('click', () => { let newIndex = currentTrackIndex + 1; if (newIndex >= playlist.length) newIndex = 0; loadTrack(newIndex, true); });
+        audio.addEventListener('ended', () => { document.getElementById('mpNext').click(); });
+
+        const mpProgressBar = document.getElementById('mpProgressBar');
+        const mpTimeCurrent = document.getElementById('mpTimeCurrent');
+        const mpTimeTotal = document.getElementById('mpTimeTotal');
+
+        // 【修复】：重写了时间格式化逻辑，彻底消灭了代码里的 "<" 符号，防止被误认为 HTML
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "00:00";
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60);
+            return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        }
+
+        audio.addEventListener('loadedmetadata', () => {
+            if(mpTimeTotal) mpTimeTotal.textContent = formatTime(audio.duration);
+            if(mpProgressBar) mpProgressBar.max = audio.duration;
+        });
+
+        let isDragging = false;
+        audio.addEventListener('timeupdate', () => {
+            if(mpTimeCurrent) mpTimeCurrent.textContent = formatTime(audio.currentTime);
+            if (!isDragging && mpProgressBar) mpProgressBar.value = audio.currentTime;
+        });
+
+        if(mpProgressBar) {
+            mpProgressBar.addEventListener('mousedown', () => isDragging = true);
+            mpProgressBar.addEventListener('mouseup', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+            mpProgressBar.addEventListener('touchstart', () => isDragging = true);
+            mpProgressBar.addEventListener('touchend', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+        }
+
+        loadTrack(0, false);
+    }
+
+    // ================= 3. 背景粒子系统 =================
+    const canvas = document.getElementById('particle-canvas');
+    if(canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const mouse = { x: null, y: null, radius: 50 };
+
+        function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        initCanvas(); window.addEventListener('resize', initCanvas);
+
+        const logoImg = new Image();
+        // 【修复】：去除 EJS，直接指向根目录下的 logo
+        logoImg.src = '/logo.png';
+        logoImg.onload = function() {
+            const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d');
+            const size = 200; tempCanvas.width = size; tempCanvas.height = size;
+            tempCtx.drawImage(logoImg, 0, 0, size, size);
+            const imageData = tempCtx.getImageData(0, 0, size, size).data;
+            for (let y = 0; y < size; y += 2) {
+                for (let x = 0; x < size; x += 2) {
+                    if (imageData[((y * size + x) * 4) + 3] > 128) {
+                        particles.push(new Particle(x * 2.5 + (canvas.width / 2 - 100), y * 2.5 + (canvas.height / 2 - 250)));
+                    }
+                }
+            }
+            animate();
+            console.log("PRTS: Particles Online.");
+        };
+
+        class Particle {
+            constructor(x, y) { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.baseX = x; this.baseY = y; this.density = (Math.random() * 30) + 1; }
+            draw() {
+                ctx.fillStyle = document.body.getAttribute('data-theme') === 'light' ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.6)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2); ctx.fill();
+            }
+            update() {
+                let dx = mouse.x - this.x, dy = mouse.y - this.y, distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouse.radius) {
+                    let force = (mouse.radius - distance) / mouse.radius;
+                    this.x -= (dx / distance) * force * this.density * 0.8; this.y -= (dy / distance) * force * this.density * 0.8;
+                } else {
+                    this.x += (this.baseX - this.x) * 0.12; this.y += (this.baseY - this.y) * 0.12;
+                }
+            }
+        }
+
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
+        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+    }
+});
+</script> </body>
+</html>

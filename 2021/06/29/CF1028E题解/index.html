@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<title>Hexo</title>
+<title>CF1028E题解 | Hexo</title>
 <link rel="icon" href="/avatar.jpg" type="image/jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
@@ -43,226 +43,31 @@
 </aside>
 
 <main class="main-content">
-    <h2 class="archive-title">// DATA ARCHIVE</h2>
-<div class="post-list">
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/%E5%AF%B9%E6%9F%90%E6%A0%A1%E9%83%A8%E5%88%86%E5%9B%9E%E5%BF%86/">对某校部分回忆</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                这辈子和你校最牛学科以及OI赛事都没有任何关系了，干脆来随便写点对你校印象深的事。
-事先声明：本人重度抑郁，重度焦虑，有自残以及伤害他人倾向。
-大概是21年1月来的你校？前几天的感受大概就是你校明明1...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/%E5%AF%B9%E6%9F%90%E6%A0%A1%E9%83%A8%E5%88%86%E5%9B%9E%E5%BF%86/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                有人问我为什么不去机房，为什么不去NOIP，那我好像也只能回答个这个：
+    <article class="post-detail">
+    <h1 class="post-detail-title">CF1028E题解</h1>
+    <div class="post-meta">
+        DATE: 2021-06-29
+    </div>
+    <div class="post-content">
+        <p>首先考虑$\forall i,b_i&#x3D;M(1\leq i\leq n)$这种特殊的情况，显然当且仅当$M&#x3D;0$时有解，证明可以考虑因为是一个环，所以总会存在一个$a_{i\bmod n}&#x3D;kM,a_{(i \bmod n)+1}&#x3D;M(1\leq i &lt; n)$此时$b_i&#x3D;0$。</p>
+<p>令$M&#x3D;\max\limits_{i&#x3D;1}^n b_i$，然后找到一个下标$i(1\leq i\leq n)$满足$b_{(i-1) \bmod n}&lt;M$且$b_{i\bmod n}&#x3D;M$（这里认为$b_0&#x3D;b_n$）。假设这个下标是$n$，如果不是可以则通过平移数组平移到$n$。</p>
+<p>然后考虑构造$a$数组：</p>
+<p>$$</p>
+<p>a_i&#x3D;\begin{cases} \sum_\limits{j&#x3D;i}^{n-1}b_j+2b_n &amp; i&lt;n \ b_n  &amp; i&#x3D;n \end{cases}</p>
+<p>$$</p>
+<p>这样的$a$数组满足所有条件。因为：</p>
+<ul>
+<li>$a_n&lt;a_1$</li>
+<li>$a_i-a_{i+1}&#x3D;b_i(i&lt;n)$</li>
+<li>$b_{i}&lt;a_{i+1}(i&lt;n-1)$因为$b_n$是最大的数，且$b_n&gt;0$</li>
+<li>$b_{n-1}&lt;b_n&#x3D;M$</li>
+<li>$b_n&lt;a_1$因为$b_n&lt;2b_n$</li>
+</ul>
+<p>以及，如果数组中除了$1$都是$0$，那么$b_n$前面的系数$2$并没有什么作用，因为此时$a_n \bmod a_1&#x3D;0$。以及事实上可以用$b_n+10^{10}$代替$2b_n$，显然此时构造方法仍然成立。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> a[<span class="number">155555</span>],b[<span class="number">155555</span>];</span><br><span class="line"><span class="type">int</span> mxv,mxp=<span class="number">-1</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">tp</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!x) <span class="keyword">return</span> n;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n=<span class="built_in">read</span>();</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,n) a[i]=b[i]=<span class="built_in">read</span>();a[<span class="number">0</span>]=b[<span class="number">0</span>]=b[n];</span><br><span class="line">    mxv=*<span class="built_in">max_element</span>(b<span class="number">+1</span>,b+n<span class="number">+1</span>);</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,n) <span class="keyword">if</span>(b[i]==mxv&amp;&amp;b[i<span class="number">-1</span>]^mxv) &#123;mxp=i;<span class="keyword">break</span>;&#125;</span><br><span class="line">    <span class="keyword">if</span>(!~mxp)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!mxv) </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">&quot;YES&quot;</span>);</span><br><span class="line">            <span class="built_in">R</span>(i,<span class="number">1</span>,n) <span class="built_in">writesp</span>(<span class="number">1</span>);<span class="built_in">puts</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">&quot;NO&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    a[<span class="built_in">tp</span>((mxp<span class="number">-1</span>+n)%n)]+=mxv;</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,n<span class="number">-1</span>) a[<span class="built_in">tp</span>((mxp-i+n)%n)]+=a[<span class="built_in">tp</span>((mxp-i<span class="number">+1</span>+n)%n)];</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;YES&quot;</span>);</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,n) <span class="built_in">writesp</span>(a[i]);<span class="built_in">puts</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-————————————————————————————————————————————————
-花对钱似乎非常敏感。
-大概是...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1704G/">CF1704G</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                令 $A_i&#x3D;a_i+2a_{i-1}+a_{i-2},B_i&#x3D;b_i-2b_{i-1}+b_{i-2}$，然后可以发现对于任意位置 $i$ 进行操作，除了 $A_{i}$ 将会变...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1704G/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1470F/">CF1470F</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                显然只会存在 $3$ 种本质不同的方式选择两个矩形。
-
-两个矩形不相交。
-
-这种情况可以直接遍历所有平行 $x&#x2F;y$ 轴的分割线，使选取的两个矩形分别在分割线的两边。分别找出极值点直接计算即...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1470F/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1081H/">CF1081H</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                一个显然错误的想法是分别计算 $A,B$ 本质不同的回文串个数，然后将两者相乘，这将会多次计算一个字符串。
-因此要思考的问题是，为什么会计算多次？
-为了解决这个问题，将用到下面数个引理，如果只是想解决...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1081H/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-08-03</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/08/03/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%A4%BE%E7%BE%A4%E8%AE%A8%E8%AE%BA/">记一次社群讨论</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/08/03/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%A4%BE%E7%BE%A4%E8%AE%A8%E8%AE%BA/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-05-24</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/05/24/l/">l</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-不过这改变不了阿丽娜半路被捅死了（笑）
-感觉群友们APIO玩得好开心。
-...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/05/24/l/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-05-13</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/05/13/CF1423C%20Du%C5%A1an's%20Railway/">CF1423C Dušan&#39;s Railway</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                反正可以直接当 $k&#x3D;3$ 去做，然后考虑直接去构造。
-首先任意给树找一个根，然后将整棵树拆成几个大小为 $\sqrt n$ 的子树，将所有这些子树的根 $u$ 塞到一个点集 $a$ ，然后...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/05/13/CF1423C%20Du%C5%A1an's%20Railway/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-04-30</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/04/30/CF1375I%20Cubic%20Lattice/">CF1375I Cubic Lattice</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                简要题意：
-定义三维空间中的一个 lattice 是满足下列条件的三维整点的集合：
-$$L&#x3D;{u\cdot \overrightarrow{r_1}+v\cdot \overrightarr...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/04/30/CF1375I%20Cubic%20Lattice/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-04-25</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/04/25/-/">?</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-下午水群的时候看到的，群友：
-
-总之有点想笑（）
-没记错的话这个梗是海贼王的来着。
-
-然后晚上又看到了个这个，其实个人觉得这从某种意义上也是”天龙人“的表现吧（）
-挺久以前大概也是作业题全写完，大概...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/04/25/-/">READ MORE +</a>
-            </div>
-        </article>
-    
-</div> </main>
+    </div>
+</article> </main>
 
 <div class="fab-container" id="fabContainer">
     <div class="fab-menu">

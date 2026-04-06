@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<title>概率与期望 | Hexo</title>
+<link rel="icon" href="/avatar.jpg" type="image/jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+
+<canvas id="particle-canvas"></canvas>
+
+<header class="terminal-nav">
+    <a href="/" class="nav-logo">QAQ</a>
+    <nav class="nav-menu">
+        <a href="/" class="nav-item active"><span class="nav-en">INDEX</span><span class="nav-cn">首页</span></a>
+        <a href="#info" class="nav-item"><span class="nav-en">INFORMATION</span><span class="nav-cn">情报</span></a>
+        <a href="#operator" class="nav-item"><span class="nav-en">OPERATOR</span><span class="nav-cn">随笔</span></a>
+        <a href="#world" class="nav-item"><span class="nav-en">WORLD</span><span class="nav-cn">归档</span></a>
+        <a href="#media" class="nav-item"><span class="nav-en">MEDIA</span><span class="nav-cn">标签</span></a>
+    </nav>
+    </header>
+
+<aside class="sidebar">
+    <div class="avatar-box"><img src="/avatar.jpg" alt="Avatar"></div>
+    <h2 class="sidebar-title">COLDICEH</h2>
+    <p class="sidebar-subtitle">Dr.抢不到音律退坑了#8809</p>
+    
+    <div class="sidebar-search">
+        <div class="search-box">
+            <input type="text" id="local-search-input" placeholder="// SEARCH DATABASE...">
+        </div>
+    </div>
+    
+    <div style="margin-top: 20px;" class="sidebar-links">
+        <div style="color: var(--ak-blue); font-weight: bold; margin-bottom: 10px; border-left: 3px solid var(--ak-blue); padding-left: 10px;">常用链接</div>
+        <a href="#">我的随笔</a>
+        <a href="#">我的评论</a>
+        <a href="#">我的参与</a>
+        <a href="#">最新评论</a>
+        <a href="#">我的标签</a>
+    </div>
+</aside>
+
+<main class="main-content">
+    <article class="post-detail">
+    <h1 class="post-detail-title">概率与期望</h1>
+    <div class="post-meta">
+        DATE: 2021-07-23
+    </div>
+    <div class="post-content">
+        <h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>概率，就是某个随机事件出现的可能性大小。</p>
+<p>若$X$是一个离散型的随机变量，可能值为$x_1,x_2,\cdots $，对应的概率分别为$p_1,p_2,\cdots $，那么它的期望值为<br>$$<br>E(x)&#x3D;\sum\limits_{i}&#x3D;x_ip_i<br>$$</p>
+<h2 id="期望的线性性"><a href="#期望的线性性" class="headerlink" title="期望的线性性"></a>期望的线性性</h2><p>$$<br>\begin{alignat}{2}<br>E(X+Y)&amp;&#x3D;E(X)+E(Y)\<br>E(aX)&amp;&#x3D;aE(X)<br>\end{alignat}<br>$$</p>
+<p>由此可以得到：<br>$$<br>\begin{alignat}{2}<br>E(aX+bY)&amp;&#x3D;aE(X)+bE(Y)\<br>E(aX+bY+cZ+\ldots )&amp;&#x3D;aE(X)+bE(y)+cE(z)+\ldots<br>\end{alignat}<br>$$</p>
+<h2 id="期望的另一个结论"><a href="#期望的另一个结论" class="headerlink" title="期望的另一个结论"></a>期望的另一个结论</h2><p>当随机变量$X$和$Y$独立时，$E(XY)&#x3D;E(X)E(Y)$。</p>
+<h2 id="一些题目"><a href="#一些题目" class="headerlink" title="一些题目"></a>一些题目</h2><h3 id="Game-on-tree"><a href="#Game-on-tree" class="headerlink" title="Game on tree"></a>Game on tree</h3><h4 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h4><p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/280/problem/C">https://codeforces.com/contest/280/problem/C</a></p>
+<h4 id="sol"><a href="#sol" class="headerlink" title="sol"></a>sol</h4><p>考虑对于一个点$i$来说，如果它有$1$的贡献，当且仅当它在所有祖先被选之前选了，概率是$\frac{1}{dep_i}$，所以一个点贡献的期望也是$\frac{1}{dep_i}$。</p>
+<p>由期望的线性性可知，答案就是所有点贡献的期望的和，即所有点的$\frac{1}{dep_i}$的和。</p>
+<h3 id="Forest-game"><a href="#Forest-game" class="headerlink" title="Forest game"></a>Forest game</h3><h4 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h4><p><a target="_blank" rel="noopener" href="https://codeforces.ml/gym/101234/problem/D">https://codeforces.ml/gym/101234/problem/D</a></p>
+<p>给定一棵$n$个节点的树，然后每次进行以下操作直到没有点</p>
+<p>随机均匀地选择一个节点，然后将答案加上这个节点所在树的大小，最后删除这个点。</p>
+<h4 id="sol-1"><a href="#sol-1" class="headerlink" title="sol"></a>sol</h4><p>考虑删除$u$点时如果$v$点对其有$1$的贡献当且仅当$u$是$u$到$v$路径上第一个被删除的点，概率为$\frac{1}{dist(u,v)+1}$。</p>
+<p>所以答案即对于每一对$(u,v)$，都统计一遍贡献即可，即：<br>$$<br>\sum_{u}\sum_v \frac{1}{dist(u,v)+1}<br>$$<br>考虑点分治+FFT计算出每种长度的路径出现了多少次，然后算一下答案即可。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CP</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">double</span> x,y;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="title">CP</span><span class="params">(<span class="type">double</span> X=<span class="number">0</span>,<span class="type">double</span> Y=<span class="number">0</span>)</span>:x(X),y(Y)&#123;</span>&#125;</span><br><span class="line">    <span class="keyword">inline</span> CP <span class="keyword">operator</span> +(<span class="type">const</span> CP &amp;A)<span class="type">const</span>&#123;<span class="keyword">return</span> <span class="built_in">CP</span>(x+A.x,y+A.y);&#125;</span><br><span class="line">    <span class="keyword">inline</span> CP <span class="keyword">operator</span> -(<span class="type">const</span> CP &amp;A)<span class="type">const</span>&#123;<span class="keyword">return</span> <span class="built_in">CP</span>(x-A.x,y-A.y);&#125;</span><br><span class="line">    <span class="keyword">inline</span> CP <span class="keyword">operator</span> *(<span class="type">const</span> CP &amp;A)<span class="type">const</span>&#123;<span class="keyword">return</span> <span class="built_in">CP</span>(x*A.x-y*A.y,x*A.y+y*A.x);&#125;</span><br><span class="line">    <span class="keyword">inline</span> CP <span class="keyword">operator</span> /(<span class="type">const</span> CP &amp;A)<span class="type">const</span>&#123;<span class="type">double</span> tt=A.x*A.x-A.y*A.y;<span class="keyword">return</span> <span class="built_in">CP</span>((x*A.x+y*A.y)/tt,(y*A.x-x*A.y)/tt);&#125;</span><br><span class="line">&#125;f[<span class="number">888888</span>];</span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> tr[<span class="number">888888</span>],tf;</span><br><span class="line"><span class="type">int</span> inv[<span class="number">111111</span>],Finv[<span class="number">111111</span>],F[<span class="number">111111</span>];</span><br><span class="line">vector&lt;<span class="type">int</span>&gt;e[<span class="number">111111</span>];</span><br><span class="line"><span class="type">int</span> siz[<span class="number">111111</span>],vis[<span class="number">111111</span>];</span><br><span class="line"><span class="type">int</span> fa[<span class="number">111111</span>];</span><br><span class="line"><span class="type">int</span> Mx_s[<span class="number">111111</span>];</span><br><span class="line"><span class="type">int</span> sub[<span class="number">111111</span>];</span><br><span class="line"><span class="type">int</span> allmxl,mxl;</span><br><span class="line"><span class="type">int</span> rt,alt;</span><br><span class="line"><span class="type">int</span> ans;</span><br><span class="line"> </span><br><span class="line">vector&lt;<span class="type">int</span>&gt;all,cnt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> &amp;x,<span class="type">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    x+=y;x&gt;=mod?x-=mod:<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">dec</span><span class="params">(<span class="type">int</span> &amp;x,<span class="type">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    x-=y;x&lt;<span class="number">0</span>?x+=mod:<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">tpre</span><span class="params">(<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(tf==n) <span class="keyword">return</span>;tf=n;</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) tr[i]=(tr[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)?n&gt;&gt;<span class="number">1</span>:<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">void FFT(CP *f,int rev,int n)</span></span><br><span class="line"><span class="comment">&#123;    </span></span><br><span class="line"><span class="comment">    tpre(n);</span></span><br><span class="line"><span class="comment">    R(i,0,n-1) if(i&lt;tr[i]) swap(f[i],f[tr[i]]);</span></span><br><span class="line"><span class="comment">    for(int p=2;p&lt;=n;p&lt;&lt;=1)</span></span><br><span class="line"><span class="comment">    &#123;</span></span><br><span class="line"><span class="comment">        int len=p&gt;&gt;1;</span></span><br><span class="line"><span class="comment">        CP tG(cos(2*Pi/p),sin(2*Pi/p));</span></span><br><span class="line"><span class="comment">        if(!rev) tG.y*=-1;</span></span><br><span class="line"><span class="comment">        for(int k=0;k&lt;n;k+=p)</span></span><br><span class="line"><span class="comment">        &#123;</span></span><br><span class="line"><span class="comment">            CP buf(1,0);</span></span><br><span class="line"><span class="comment">            for(int l=k;l&lt;k+len;l++)</span></span><br><span class="line"><span class="comment">            &#123;</span></span><br><span class="line"><span class="comment">                CP tt=buf*f[len+l];</span></span><br><span class="line"><span class="comment">                f[len+l]=f[l]-tt;</span></span><br><span class="line"><span class="comment">                f[l]=f[l]+tt;</span></span><br><span class="line"><span class="comment">                buf=buf*tG;</span></span><br><span class="line"><span class="comment">            &#125;</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    if(!rev) </span></span><br><span class="line"><span class="comment">    &#123;</span></span><br><span class="line"><span class="comment">        R(i,0,(n-1)) f[i].x=f[i].x/n/2.0,f[i].y=f[i].y/n/2.0;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">FFT</span><span class="params">(CP *f,<span class="type">int</span> rev,<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">tpre</span>(n);</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) <span class="keyword">if</span>(i&lt;tr[i]) <span class="built_in">swap</span>(f[i],f[tr[i]]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> p=<span class="number">2</span>;p&lt;=n;p&lt;&lt;=<span class="number">1</span>) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> len=p&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="function">CP <span class="title">tG</span><span class="params">(cos(<span class="number">2</span>*Pi/p),sin(<span class="number">2</span>*Pi/p))</span></span>;</span><br><span class="line">        <span class="keyword">if</span>(!rev) tG.y*=<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>;k&lt;n;k+=p) </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="function">CP <span class="title">buf</span><span class="params">(<span class="number">1</span>,<span class="number">0</span>)</span></span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> l=k;l&lt;k+len;l++)</span><br><span class="line">            &#123;</span><br><span class="line">                CP tt=buf*f[len+l];</span><br><span class="line">                f[l+len]=f[l]-tt;</span><br><span class="line">                f[l]=f[l]+tt;</span><br><span class="line">                buf=buf*tG;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!rev) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">R</span>(i,<span class="number">0</span>,(n<span class="number">-1</span>)) f[i].x=f[i].x/n,f[i].y=f[i].y/n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">solve</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp;v,<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> m=<span class="number">1</span>;    </span><br><span class="line">    <span class="keyword">for</span>(;m&lt;=n;m&lt;&lt;=<span class="number">1</span>);m&lt;&lt;=<span class="number">1</span>;</span><br><span class="line">    <span class="comment">//printf(&quot;m:%lld n:%lld\n&quot;,m,n);</span></span><br><span class="line">    <span class="comment">//for(int x:v) printf(&quot;x:%lld &quot;,x);</span></span><br><span class="line">    <span class="comment">//puts(&quot;&quot;);</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">0</span>,m) f[i]=<span class="built_in">CP</span>(<span class="number">0.0</span>,<span class="number">0.0</span>); </span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">0</span>,n) f[i].x=(<span class="type">double</span>)v[i];</span><br><span class="line">    <span class="built_in">FFT</span>(f,<span class="number">1</span>,m);</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">0</span>,m<span class="number">-1</span>) f[i]=f[i]*f[i];</span><br><span class="line">    <span class="built_in">FFT</span>(f,<span class="number">0</span>,m);</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    puts(&quot;f:&quot;);</span></span><br><span class="line"><span class="comment">    R(i,0,n&lt;&lt;1) printf(&quot;x:%.8lf:&quot;,f[i].x);</span></span><br><span class="line"><span class="comment">    puts(&quot;&quot;); </span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,n) f[i&lt;&lt;<span class="number">1</span>].x-=(<span class="type">double</span>)v[i];</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">0</span>,n&lt;&lt;<span class="number">1</span>) v[i]=(<span class="type">int</span>)(f[i].x<span class="number">+0.4999999</span>);</span><br><span class="line">    <span class="type">int</span> ret=<span class="number">0</span>;</span><br><span class="line">    <span class="comment">//R(i,0,n&lt;&lt;1) printf(&quot;i:%lld v[i]:%lld inv[i]:%lld\n&quot;,i,v[i],inv[i+1]);</span></span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">0</span>,n&lt;&lt;<span class="number">1</span>) <span class="built_in">add</span>(ret,v[i]*inv[i<span class="number">+1</span>]%mod);</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs3</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> f,<span class="type">int</span> d)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">ckmax</span>(mxl,d);</span><br><span class="line">    <span class="keyword">if</span>(d==(<span class="type">int</span>)cnt.<span class="built_in">size</span>()) cnt.<span class="built_in">pb</span>(<span class="number">1</span>);<span class="keyword">else</span> ++cnt[d];<span class="comment">//qwq</span></span><br><span class="line">    <span class="keyword">if</span>(d==(<span class="type">int</span>)all.<span class="built_in">size</span>()) all.<span class="built_in">pb</span>(<span class="number">1</span>);<span class="keyword">else</span> ++all[d];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> v:e[u])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(vis[v]||v==f) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="built_in">dfs3</span>(v,u,d<span class="number">+1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs2</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> f)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    sub[u]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> v:e[u])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(vis[v]||v==f) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="built_in">dfs2</span>(v,u);</span><br><span class="line">        sub[u]+=sub[v];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs1</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> f)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Mx_s[u]=<span class="number">0</span>,siz[u]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> v:e[u])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(vis[v]||v==f) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="built_in">dfs1</span>(v,u);</span><br><span class="line">        siz[u]+=siz[v];</span><br><span class="line">        <span class="built_in">ckmax</span>(Mx_s[u],siz[v]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">ckmax</span>(Mx_s[u],alt-siz[u]);</span><br><span class="line">    rt=(Mx_s[u]&lt;Mx_s[rt]||(Mx_s[u]==Mx_s[rt]&amp;&amp;u&lt;rt))?u:rt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs0</span><span class="params">(<span class="type">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">dfs2</span>(u,<span class="number">0</span>);</span><br><span class="line">    Mx_s[rt=<span class="number">0</span>]=inf;</span><br><span class="line">    alt=sub[u];</span><br><span class="line">    <span class="built_in">dfs1</span>(u,<span class="number">0</span>);</span><br><span class="line">    <span class="comment">//printf(&quot;%lld %lld %lld\n&quot;,Mx_s[1],Mx_s[2],Mx_s[3]);</span></span><br><span class="line">    <span class="comment">//printf(&quot;rt:%lld\n&quot;,rt);</span></span><br><span class="line">    vis[rt]=<span class="number">1</span>;</span><br><span class="line">    u=rt;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> v:e[u]) <span class="keyword">if</span>(!vis[v]) <span class="built_in">dfs0</span>(v);</span><br><span class="line">    all.<span class="built_in">clear</span>();</span><br><span class="line">    allmxl=<span class="number">0</span>,all.<span class="built_in">pb</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> v:e[u]) <span class="keyword">if</span>(!vis[v])</span><br><span class="line">    &#123;</span><br><span class="line">        cnt.<span class="built_in">clear</span>();</span><br><span class="line">        mxl=<span class="number">0</span>;cnt.<span class="built_in">pb</span>(<span class="number">0</span>);</span><br><span class="line">        <span class="built_in">dfs3</span>(v,u,<span class="number">1</span>);</span><br><span class="line">        <span class="comment">//printf(&quot;mxl:%lld\n&quot;,mxl);</span></span><br><span class="line">        cnt.<span class="built_in">resize</span>(cnt.<span class="built_in">size</span>()&lt;&lt;<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">dec</span>(ans,<span class="built_in">solve</span>(cnt,mxl)%mod);</span><br><span class="line">        <span class="built_in">ckmax</span>(allmxl,mxl);</span><br><span class="line">    &#125;</span><br><span class="line">    all.<span class="built_in">resize</span>(all.<span class="built_in">size</span>()&lt;&lt;<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">add</span>(ans,<span class="built_in">solve</span>(all,allmxl)%mod);</span><br><span class="line">    vis[u]=<span class="number">0</span>;</span><br><span class="line">    <span class="comment">//printf(&quot;rt:%lld\n&quot;,u);</span></span><br><span class="line">&#125;   </span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n=<span class="built_in">read</span>();</span><br><span class="line">    inv[<span class="number">1</span>]=Finv[<span class="number">0</span>]=F[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">2</span>,n<span class="number">+5</span>) inv[i]=(mod-mod/i)*inv[mod%i]%mod;</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,n<span class="number">+5</span>) F[i]=F[i<span class="number">-1</span>]*i%mod,Finv[i]=Finv[i<span class="number">-1</span>]*inv[i]%mod;</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">2</span>,n) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">static</span> <span class="type">int</span> u,v;</span><br><span class="line">        u=<span class="built_in">read</span>(),v=<span class="built_in">read</span>();</span><br><span class="line">        e[u].<span class="built_in">pb</span>(v),e[v].<span class="built_in">pb</span>(u);</span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="built_in">dfs0</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="comment">//printf(&quot;ans:%lld\n&quot;,ans);</span></span><br><span class="line">    ans=(ans%mod+mod)%mod;</span><br><span class="line">    <span class="built_in">writeln</span>(<span class="number">1ll</span>*ans*F[n]%mod);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="条件概率"><a href="#条件概率" class="headerlink" title="条件概率"></a>条件概率</h2><p>令$P(A\mid B)$表示在$B$事件发生的条件下，$A$事件发生的概率，其中$A,B$并不是互相独立的。、</p>
+<p>然后有<br>$$<br>P(A\mid B)&#x3D;	\frac{P(AB)}{P(B)}<br>$$<br>以及贝叶斯公式：<br>$$<br>P(A\mid B)&#x3D;\frac{P(B\mid A)P(A)}{P(B)}<br>$$</p>
+<h3 id="「CTSC2017」游戏"><a href="#「CTSC2017」游戏" class="headerlink" title="「CTSC2017」游戏"></a>「CTSC2017」游戏</h3><h4 id="sol-2"><a href="#sol-2" class="headerlink" title="sol"></a>sol</h4><p>注意到一个位置的决策只和前面第一个已知的结果和后面第一个已知的结果有关，所以考虑已知的结果点分成的一段一段的左闭右开的区间$[i,j)$。答案其实就是所有区间的贡献加起来。</p>
+<p>考虑$P_{i,j}(x,y)$表示当第$i$局输赢状态为$x$，第$j$局输赢状态为$y$的概率，$E_{i,j}(x,y)$表示当第$i$局输赢状态为$x$，第$j$局输赢状态为$y$，在此条件下，$[i,j]$中期望赢的场数。</p>
+<p>设$pro[i][j][k]$为第$i-1$轮输赢状态是$j$，转到第$i$轮输赢状态是$k$的概率。考虑如何合并两个区间$[i,pos],[pos+1,j]$的$P$和$E$。</p>
+<p>首先有：$P(A\mid B)&#x3D;\frac{P(AB)}{P(B)}$，然后可以推出：$E(A\mid B)&#x3D;\frac{E(AB)}{P(B)}$。<br>$$<br>\begin{alignat}{2}<br>P_{i,j}(x,y)&amp;&#x3D;\sum_z\sum_wP_{i,pos}(x,z)\times P_{pos,j}(w,y)\times pro[pos+1][z][w]\<br>E_{i,j}(x,y)&amp;&#x3D;\frac{\sum_z \sum_w\left(P_{i,pos}(x,z)\times P_{pos+1,j}(w,y)\times pro[pos+1][z][w] \right)\times \left(E_{i,pos}(x,z)+E_{pos+1}{j}(w,y) \right) }{P_{i,j}(x,y)}<br>\end{alignat}<br>$$<br>考虑能合并那就用线段数维护这个东西。对于修改已知的东西的问题，维护一个<code>set</code>，每次修改我们把这个位置的前驱，后继找出来，加一加减一减就行了。</p>
+<h2 id="方差相关"><a href="#方差相关" class="headerlink" title="方差相关"></a>方差相关</h2><p>$$<br>\begin{alignat}{2}<br>Var(X)&amp;&#x3D;\frac{1}{n}\sum_{i&#x3D;1}^n \left(x_i-\overline{x} \right)^2\<br>&amp;&#x3D;\frac{1}{n}\sum_{i&#x3D;1}^n x_i^2-2\overline{x}\cdot x_i+\overline{x}^2\<br>&amp;&#x3D;\frac{\sum_{i&#x3D;1}^n x_i^2}{n}-2\overline x^2+\overline x^2\<br>&amp;&#x3D;\frac{\sum_{i&#x3D;1}^n x_i^2}{n}-\overline x^2\<br>&amp;&#x3D;E(X^2)-E(X)^2<br>\end{alignat}<br>$$</p>
+<h4 id="矩形覆盖"><a href="#矩形覆盖" class="headerlink" title="矩形覆盖"></a>矩形覆盖</h4><p>给定一个大小为$n\times m$的矩形，某一些格子上有物品，共有$k$个物品，现在等概率选一个子矩形，求子矩形内物品个数的方差。</p>
+<p>$n,m\le 10^9,k\le 10^5$。</p>
+<p>考虑$Var(X)&#x3D;E(X^2)-E(X)^2$，分别求$E(X)$和$E(X^2)$即可。</p>
+<p>$E(X)$较为好求，即统计每一个点的贡献即可。对于每一个点，统计有多少矩形包含这个点，假设这个点坐标为$(x,y)$，那么就有$x\times (n-x+1)\times y\times (m-y+1)$个矩形。</p>
+<p>求$E(X^2)$可以考虑对于每一对点，统计包含它们的矩形个数，考虑分类讨论它们是左上右下还是右上左下的关系（比如如果是左上右下那么矩形端点就一定在左上点的左上边，右下点的右下边。比如两个点坐标是$(x,y),(z,w)$，那么矩形的个数就是$x\times (n-w+1)\times z\times (m-y+1)$），把$x,y$本身的贡献算出来，$z,w$本身贡献提出来，从左往右扫描线，用数据结构维护$x\times (m-y+1)$的和，然后扫到一个点就在数据结构上求一个后缀和即可， 离散化+BIT二维数点即可，实现起来有一些细节，比如同行或同列的情况。</p>
+<h4 id="逃跑"><a href="#逃跑" class="headerlink" title="逃跑"></a>逃跑</h4><p><a target="_blank" rel="noopener" href="https://uoj.ac/problem/211">https://uoj.ac/problem/211</a></p>
+<p>还是考虑怎么求$E(X)$和$R(X^2)$。设$f(i,j,k)$表示第$i$秒第一次到达$(j,k)$的概率，根据期望的线性性，答案就是所有$f(i,j,k)$的和。设$g(i,j,k)$表示第$i$秒到达$(j,k)$的概率，$g$可以较为容易的求出。</p>
+<p>考虑对于一个点$(x,y)$，设：<br>$$<br>\begin{alignat}{2}<br>F(x)&amp;&#x3D;\sum_{i&#x3D;0}^{\infty} f(i,x,y)\cdot x^i\<br>G(x)&amp;&#x3D;\sum_{i&#x3D;0}^{\infty} g(i,x,y)\cdot x^i\<br>H(x)&amp;&#x3D;\sum_{i&#x3D;0}^{\infty} g(i,0,0)\cdot x^i\<br>\end{alignat}<br>$$<br>那么有<br>$$<br>\begin{alignat}{2}<br>G(x)&amp;&#x3D;F(x)H(x)\<br>F(x)&amp;&#x3D;\frac{G(x)}{H(x)}<br>\end{alignat}<br>$$<br>于是$f$可以在$\mathcal O(n^4)$的时间复杂度内求得。</p>
+<p>接着考虑$E(X^2)$怎么求，$E(X^2)&#x3D;E(2C(X,2))+E(X)$，只要求$E(C(X,2))$即可。考虑对于每一对节点算贡献。</p>
+<p>设$h(i,j,k)$表示第$i$秒第一次走到了$(a,b)$，之前已经经过了$(a-j,b-k)$对于所有不同的$(a,b)$的概率之和，答案就是所有$h(i,j,k)$加起来。考虑$h$怎么求。<br>$$<br>h(i,j,k)&#x3D;\sum_{t&lt;i,a,b} f(t,a,b)f(i-t,j,k)-\sum_{t&lt;i,a,b}h(t,-j,-k)f(i-t,j,k)<br>$$<br>后面是减去先经过$(a,b)$再经过$(a-j,b-k)$的情况。</p>
+<p>总时间复杂度$\mathcal O(n^4)$。</p>
+<h2 id="概率生成函数（PGF）"><a href="#概率生成函数（PGF）" class="headerlink" title="概率生成函数（PGF）"></a>概率生成函数（PGF）</h2><p>对于任意取值在非负整数集上的离散随机变量$X$，它的概率生成函数为：<br>$$<br>F(z)&#x3D;\sum_{i&#x3D;0}^{\infty} P(X&#x3D;i)\cdot z^i<br>$$</p>
+<h4 id="一些性质"><a href="#一些性质" class="headerlink" title="一些性质"></a>一些性质</h4><p>$$<br>\begin{alignat}{2}<br>F(1)&amp;&#x3D;1\<br>E(X)&amp;&#x3D;F’(1)\<br>E(X^{\underline k})&amp;&#x3D;F^{(k)}(1)\<br>E(X^k)&amp;&#x3D;\sum_{i&#x3D;0}^k {k\brace i }E(x^{\underline i})&amp;&#x3D;\sum_{i&#x3D;0}^k{k\brace i}F^{(i)}(1)<br>\end{alignat}<br>$$</p>
+<ol>
+<li>$F(1)$就是求所有项系数之和，概率和一定为$1$。</li>
+<li>期望就是对$F$求导之后在$1$处的取值。假如次数是$k$，系数就乘了$k$，所以求导一下再求和就是期望。</li>
+<li>同理</li>
+<li>斯特林展开，展开成下降幂的期望。</li>
+</ol>
+<h4 id="CTSC2006-歌唱王国"><a href="#CTSC2006-歌唱王国" class="headerlink" title="[CTSC2006] 歌唱王国"></a>[CTSC2006] 歌唱王国</h4><p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4548">https://www.luogu.com.cn/problem/P4548</a></p>
+<p>设$A$为酋长的名字，设$A$的长度为$L$。令$a_i$表示$A_{1,\ldots ,i}$是否是$A$的一个 border 。设$f_i$表示结束时长度是$i$的概率，$g_i$表示长度为$i$时还没有结束的概率。令他们的普通生成函数为$F(x),G(x)$。</p>
+<p>那么由$f_i&#x3D;g_{i-1}-g_i,f_0&#x3D;0$，得到$F(x)&#x3D;xG(x)-G(x)+1$。</p>
+<p>（还有一种理解方法就是$F+G&#x3D;xG+1$，表示在没结束的情况下再加上一个数，有可能结束也有可能没有结束，+1表示最初的状态。）</p>
+<p>考虑给一个未完成的序列加上$A$之后一定已经结束了，但是有可能在未加上$L$个字母前就已经结束了，考虑这样的情况填的数一定满足是$A$的一个 border ，可以推出$\left(\frac{x}{m} \right)^L G(x)&#x3D;\sum\limits_{i&#x3D;1}^L a_i\left(\frac{x}{m} \right)^{L-i}F(x)$。</p>
+<p>因为结束位置都不一样所以不会算重。</p>
+<p>然后对第一个式子求导得到：<br>$$<br>F’(x)&#x3D;(x-1)G’(x)+G(x)<br>$$<br>然后答案就是<br>$$<br>ans&#x3D;F’(1)&#x3D;(1-1)G’(1)+G(1)&#x3D;G(1)<br>$$<br>将$x&#x3D;1$代入下面那个式子，得到：<br>$$<br>\left(\frac{1}{m} \right)^LG(1)&#x3D;\sum_{i&#x3D;1}^L a_i\left(\frac{1}{m} \right)^{L-i}F(1)<br>$$<br>而$F(1)&#x3D;1$，所以$G(1)&#x3D;\sum_{i&#x3D;1}^L a_i \cdot m^i$</p>
+<h4 id="Dice"><a href="#Dice" class="headerlink" title="Dice"></a>Dice</h4><p>有一个$m$面的骰子，求扔连续$n$次相同就结束的期望步数和扔连续$n$次结果不同就结束的期望步数。</p>
+<p>$n,m\le 10^6$</p>
+<p>同上</p>
+<p>对于第一问：<br>$$<br>\begin{alignat}{2}<br>F(x)+G(x)&amp;&#x3D;xG(x)+1\<br>\left(\frac{x}{m}\right)^{n-1}G(x)&amp;&#x3D;\sum_{i&#x3D;1}^n \left(\frac{x}{m} \right)^{n-i}F(x)<br>\end{alignat}<br>$$<br>解得：<br>$$<br>F’(1)&#x3D;\frac{m^n-1}{m-1}<br>$$<br>对于第二问：<br>$$<br>\begin{alignat}{2}<br>F(x)+G(x)&amp;&#x3D;xG(x)+1\<br>\left(\frac{x}{m} \right)^n\frac{m!}{(m-n)!}G(x)&amp;&#x3D;\sum_{i&#x3D;1}^n\left(\frac{x}{m} \right)^{n-i}\frac{(m-i)!}{(m-n)!}F(x)<br>\end{alignat}<br>$$<br>解得：<br>$$<br>F’(1)&#x3D;\sum_{i&#x3D;1}^n m^i\frac{(m-i)!}{m!}<br>$$</p>
+<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><p>给定一个$n$面的骰子，$n$是偶数，每次随机扔，有一个计数器，如果扔出是奇数，则计数器清零，如果扔出是偶数，则计数器$+1$，并且是$n$的时候就停止，求停止时计数器的期望值。</p>
+<p>还是设$f_i$表示计数器为$i$时结束的概率，$g_i$表示计数器为$i$时没有结束的概率，则有：<br>$$<br>\begin{alignat}{2}<br>F(x)+G(x)&amp;&#x3D;\frac{x}{2}G(x)+\frac{G(1)}{2}+1\<br>F(x)&amp;&#x3D;\frac{x}{n}G(x)<br>\end{alignat}<br>$$<br>具体第一个式子是在没有结束的情况下扔一次，就分为两种情况，一种是扔到奇数，一种是扔到偶数。左边就是又可能结束也有可能没有结束，右边就是有$\frac{1}{2}$的概率计数器$+1$，有$\frac{1}{2}$的概率计数器变成$0$（$\frac{G(1)}{2}$，$G(1)$表示所有情况的和。这里表示不管之前计数器是多少，都有$\frac{1}{2}$的概率清零。），$+1$是初始情况。	</p>
+<p>第二个式子表示只要扔到一个$n$就结束了。</p>
+<p>可以解出<br>$$<br>F’(1)&#x3D;\frac{2n}{n+2}<br>$$<br>具体先把$x&#x3D;1$代入第二个式子，因为$F(1)&#x3D;1$，所以$G(1)&#x3D;n$。然后将$G(1)&#x3D;n$代入第一个式子，再把$G$都用$F$表示，就可以解出$F$。</p>
+<h3 id="杂题"><a href="#杂题" class="headerlink" title="杂题"></a>杂题</h3><h4 id="Expected-Square-Beauty"><a href="#Expected-Square-Beauty" class="headerlink" title="Expected Square Beauty"></a>Expected Square Beauty</h4><p><a target="_blank" rel="noopener" href="https://codeforces.ml/contest/1187/problem/F">https://codeforces.ml/contest/1187/problem/F</a></p>
+<p>考虑在每段的开头记录贡献，只要它和前面的数不同，它就是某一段的开头。由于要求$E(X^2)$所以我们要对每一对数算一下贡献，考虑大部分对的概率都是独立的，可以分开来算，只有两个相同的位置和相邻的位置的贡献不是独立的，考虑相同的位置比较好算，相邻的位置直接容斥即可，即假设相邻的三个位置分别为$x,x+1,x+2$，贡献则是$1-P(a[x]&#x3D;a[x+1])-P(a[x+1]&#x3D;a[x+2])+P(a[x]&#x3D;a[x+1]&#x3D;a[x+2])$。</p>
+<h4 id="English-Restaurant"><a href="#English-Restaurant" class="headerlink" title="English Restaurant"></a>English Restaurant</h4><p><a target="_blank" rel="noopener" href="https://codeforces.com/gym/101623/problem/E">https://codeforces.com/gym/101623/problem/E</a></p>
+<p>考虑将座位按从小到大排序，在最后加入 t 个容量为 inf 的桌子，表示离开。然后最终一定是占用了一些区间的桌子，且每个区间互相独立。考虑先预处理出选到每个区间的概率和期望坐的人数，这个可以直接区间 DP，转移的时候枚举最后被坐的桌子即可。</p>
+<p>接着就直接顺序 DP，设$dp_{i,j}$表示前$i$个桌子，第$i$个桌子是某段的结尾，当前共选了$j$个桌子的情况，转移时直接前缀和优化即可。</p>
+<p>考虑在 DP 时可以维护当前状态的出现概率$p$，对于当前状态的每一种取值$x_i$，有$p_i$的概率，再维护一个$e$表示对于当前状态的所有$p[i]\cdot x[i]$的和。这样两个类别$x,y$通过加法合并时，结果为$(x.p+y.p,x.e+y.e$)，通过乘法合并时，结果为$(x.p\cdot y.p,x.e\cdot y.p+y.e\cdot x.p)$。当一个状态$x$以$p$的概率，权值加上$y$，转移到其他状态时，直接将被转移的状态加上 $(x.p\cdot p,e\cdot p+y\cdot x.p\cdot p)$ 即可。</p>
+<p>时间复杂度 $\mathcal O((n+t)^3)$。</p>
+
+    </div>
+</article> </main>
+
+<div class="fab-container" id="fabContainer">
+    <div class="fab-menu">
+        <div class="fab-btn sub" id="btnTheme" title="切换环境感知">◐</div>
+        <div class="fab-btn sub" id="btnMusic" title="音频终端">♫</div>
+    </div>
+    <div class="fab-btn fab-main" id="btnMain">⧉</div>
+    <div class="music-panel" id="musicPanel">
+    <div class="mp-header">AUDIO TERMINAL //</div>
+    <div class="mp-title" id="mpTitle">选择曲目...</div>
+    
+    <div class="mp-progress-container">
+        <span id="mpTimeCurrent">00:00</span>
+        <input type="range" class="mp-progress-bar" id="mpProgressBar" value="0" min="0" max="100">
+        <span id="mpTimeTotal">00:00</span>
+    </div>
+    
+    <div class="mp-controls">
+        <button class="mp-btn" id="mpPrev">⏮</button>
+        <button class="mp-btn play-btn" id="mpPlayPause">▶</button>
+        <button class="mp-btn" id="mpNext">⏭</button>
+    </div>
+    
+    <ul class="mp-playlist" id="mpPlaylistUI">
+        </ul>
+</div> </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("PRTS: System Booting...");
+
+    // ================= 1. UI 中枢系统 =================
+    const fabContainer = document.getElementById('fabContainer');
+    const btnMain = document.getElementById('btnMain');
+    const musicPanel = document.getElementById('musicPanel');
+
+    if (btnMain && fabContainer) {
+        btnMain.addEventListener('click', () => {
+            fabContainer.classList.toggle('open');
+            btnMain.style.transform = fabContainer.classList.contains('open') ? 'rotate(45deg)' : 'rotate(0)';
+            if(!fabContainer.classList.contains('open') && musicPanel){
+                musicPanel.classList.remove('active');
+            }
+        });
+    }
+
+    const btnTheme = document.getElementById('btnTheme');
+    let currentTheme = 'dark';
+    function setTheme(theme) { currentTheme = theme; document.body.setAttribute('data-theme', theme); }
+    function autoTheme() { const hour = new Date().getHours(); setTheme((hour >= 6 && hour < 18) ? 'light' : 'dark'); }
+    autoTheme();
+    if(btnTheme) btnTheme.addEventListener('click', () => { setTheme(currentTheme === 'dark' ? 'light' : 'dark'); });
+
+    // ================= 2. 音乐通讯终端 =================
+    // 【修复】：去除了容易引发引擎崩溃的 EJS 标签，直接使用绝对路径
+    const playlist = [
+        { name: "01. 生命流「熠曲丰碑」-2025音律联觉ver.", src: "/music/生命流「熠曲丰碑」-2025音律联觉.mp3" },
+        { name: "02. 櫂", src: "/music/ヨルシカ - 櫂.mp3" },
+        { name: "03. ヰ世界の宝石譚", src: "/music/ヰ世界の宝石譚.mp3" },
+        { name: "04. KAWAIIめたもる交響曲", src: "/music/KAWAIIめたもる交響曲.mp3" }
+    ];
+
+
+    let currentTrackIndex = 0;
+    const audio = new Audio();
+    const btnMusic = document.getElementById('btnMusic');
+    const mpPlayPause = document.getElementById('mpPlayPause');
+    const mpPlaylistUI = document.getElementById('mpPlaylistUI');
+
+    if(btnMusic && musicPanel) {
+        btnMusic.addEventListener('click', () => { musicPanel.classList.toggle('active'); });
+
+        if (mpPlaylistUI) {
+            playlist.forEach((track, index) => {
+                let li = document.createElement('li');
+                li.textContent = track.name;
+                li.onclick = () => loadTrack(index, true);
+                mpPlaylistUI.appendChild(li);
+            });
+        }
+
+        function loadTrack(index, autoPlay = false) {
+            if(playlist.length === 0) return;
+            currentTrackIndex = index;
+            audio.src = playlist[index].src;
+            document.getElementById('mpTitle').textContent = playlist[index].name;
+
+            if(mpPlaylistUI) {
+                const items = mpPlaylistUI.querySelectorAll('li');
+                items.forEach(item => item.classList.remove('playing'));
+                if(items[index]) items[index].classList.add('playing');
+            }
+            if (autoPlay) togglePlay(true);
+        }
+
+        function togglePlay(forcePlay = false) {
+            if (audio.paused || forcePlay) {
+                audio.play().then(() => {
+                    if(mpPlayPause) mpPlayPause.textContent = "⏸";
+                    btnMusic.classList.add('btn-playing');
+                }).catch(e => {
+                    console.warn("PRTS: 等待音频源响应...");
+                    if(mpPlayPause) mpPlayPause.textContent = "▶";
+                    btnMusic.classList.remove('btn-playing');
+                });
+            } else {
+                audio.pause();
+                if(mpPlayPause) mpPlayPause.textContent = "▶";
+                btnMusic.classList.remove('btn-playing');
+            }
+        }
+
+        if(mpPlayPause) mpPlayPause.addEventListener('click', () => togglePlay());
+
+        document.getElementById('mpPrev').addEventListener('click', () => { let newIndex = currentTrackIndex - 1; if (newIndex < 0) newIndex = playlist.length - 1; loadTrack(newIndex, true); });
+        document.getElementById('mpNext').addEventListener('click', () => { let newIndex = currentTrackIndex + 1; if (newIndex >= playlist.length) newIndex = 0; loadTrack(newIndex, true); });
+        audio.addEventListener('ended', () => { document.getElementById('mpNext').click(); });
+
+        const mpProgressBar = document.getElementById('mpProgressBar');
+        const mpTimeCurrent = document.getElementById('mpTimeCurrent');
+        const mpTimeTotal = document.getElementById('mpTimeTotal');
+
+        // 【修复】：重写了时间格式化逻辑，彻底消灭了代码里的 "<" 符号，防止被误认为 HTML
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "00:00";
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60);
+            return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        }
+
+        audio.addEventListener('loadedmetadata', () => {
+            if(mpTimeTotal) mpTimeTotal.textContent = formatTime(audio.duration);
+            if(mpProgressBar) mpProgressBar.max = audio.duration;
+        });
+
+        let isDragging = false;
+        audio.addEventListener('timeupdate', () => {
+            if(mpTimeCurrent) mpTimeCurrent.textContent = formatTime(audio.currentTime);
+            if (!isDragging && mpProgressBar) mpProgressBar.value = audio.currentTime;
+        });
+
+        if(mpProgressBar) {
+            mpProgressBar.addEventListener('mousedown', () => isDragging = true);
+            mpProgressBar.addEventListener('mouseup', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+            mpProgressBar.addEventListener('touchstart', () => isDragging = true);
+            mpProgressBar.addEventListener('touchend', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+        }
+
+        loadTrack(0, false);
+    }
+
+    // ================= 3. 背景粒子系统 =================
+    const canvas = document.getElementById('particle-canvas');
+    if(canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const mouse = { x: null, y: null, radius: 50 };
+
+        function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        initCanvas(); window.addEventListener('resize', initCanvas);
+
+        const logoImg = new Image();
+        // 【修复】：去除 EJS，直接指向根目录下的 logo
+        logoImg.src = '/logo.png';
+        logoImg.onload = function() {
+            const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d');
+            const size = 200; tempCanvas.width = size; tempCanvas.height = size;
+            tempCtx.drawImage(logoImg, 0, 0, size, size);
+            const imageData = tempCtx.getImageData(0, 0, size, size).data;
+            for (let y = 0; y < size; y += 2) {
+                for (let x = 0; x < size; x += 2) {
+                    if (imageData[((y * size + x) * 4) + 3] > 128) {
+                        particles.push(new Particle(x * 2.5 + (canvas.width / 2 - 100), y * 2.5 + (canvas.height / 2 - 250)));
+                    }
+                }
+            }
+            animate();
+            console.log("PRTS: Particles Online.");
+        };
+
+        class Particle {
+            constructor(x, y) { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.baseX = x; this.baseY = y; this.density = (Math.random() * 30) + 1; }
+            draw() {
+                ctx.fillStyle = document.body.getAttribute('data-theme') === 'light' ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.6)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2); ctx.fill();
+            }
+            update() {
+                let dx = mouse.x - this.x, dy = mouse.y - this.y, distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouse.radius) {
+                    let force = (mouse.radius - distance) / mouse.radius;
+                    this.x -= (dx / distance) * force * this.density * 0.8; this.y -= (dy / distance) * force * this.density * 0.8;
+                } else {
+                    this.x += (this.baseX - this.x) * 0.12; this.y += (this.baseY - this.y) * 0.12;
+                }
+            }
+        }
+
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
+        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+    }
+});
+</script> </body>
+</html>

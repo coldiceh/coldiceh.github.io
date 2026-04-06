@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<title>Hexo</title>
+<title>一道生成函数题目 | Hexo</title>
 <link rel="icon" href="/avatar.jpg" type="image/jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
@@ -43,226 +43,113 @@
 </aside>
 
 <main class="main-content">
-    <h2 class="archive-title">// DATA ARCHIVE</h2>
-<div class="post-list">
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/%E5%AF%B9%E6%9F%90%E6%A0%A1%E9%83%A8%E5%88%86%E5%9B%9E%E5%BF%86/">对某校部分回忆</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                这辈子和你校最牛学科以及OI赛事都没有任何关系了，干脆来随便写点对你校印象深的事。
-事先声明：本人重度抑郁，重度焦虑，有自残以及伤害他人倾向。
-大概是21年1月来的你校？前几天的感受大概就是你校明明1...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/%E5%AF%B9%E6%9F%90%E6%A0%A1%E9%83%A8%E5%88%86%E5%9B%9E%E5%BF%86/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                有人问我为什么不去机房，为什么不去NOIP，那我好像也只能回答个这个：
+    <article class="post-detail">
+    <h1 class="post-detail-title">一道生成函数题目</h1>
+    <div class="post-meta">
+        DATE: 2021-06-20
+    </div>
+    <div class="post-content">
+        <p>对于集合$S$，定义$w(S)&#x3D;\prod\limits_{x\in S} x$。</p>
+<p>定义$F(n,k)&#x3D;\sum\limits_{S\subseteq [n],|S|&#x3D;k} w(S), (0\leq k\leq n)$</p>
+<p>给定质数$p$，对于$\forall i \in [0,p)$，求存在多少个$k\in [0,n]$，满足$F(n,k) \equiv i \pmod p$</p>
+<p>$n\leq 10^{18},p\leq 2\times 10^5$。</p>
+<p>令$F(n,k)$的生成函数为$F_n&#x3D;\sum\limits_{k&#x3D;0}^{\infty}F(n,k) x^k$</p>
+<p>然后考虑$F(n,k)$怎么转移：$F(n,k)&#x3D;F(n-1,k)+n\cdot F(n-1,k-1)$（加入第$n$个数，选或不选）</p>
+<p>所以<br>$$<br>F_n&#x3D;\sum_{k&#x3D;0}^{\infty} F(n-1,k) x^k+n \sum_{k&#x3D;0}^{\infty} F(n-1,k-1)x^k<br>$$<br>左边那个是$F_{n-1}$，而右边为$nF_{n-1}\cdot x$</p>
+<p>所以$F_n&#x3D;F_{n-1} (nx+1)$</p>
+<p>然后代下去$F_n&#x3D;\prod\limits_{i&#x3D;1}^n (ix+1)$</p>
+<p>然后现在要写出它的各项系数</p>
+<p>比如写成$\sum\limits_{i&#x3D;0}^n a_i x^i$</p>
+<p>然后$\forall 0\leq t &lt;p$求有多少个$a_i\equiv t \pmod p$</p>
+<p>然后翻转一下系数：<br>$$<br>F_n^R (x) &#x3D;x^n\cdot F_n(\frac{1}{x})&#x3D;x^n \prod_{i&#x3D;1}^n (\frac{i}{x}<br>+1)&#x3D;\prod _{i&#x3D;1}^n (x+i)<br>$$<br>那么我们现在只需要求这个东西各项系数在$\pmod p$意义下的分布。</p>
+<p>然后由于$n\leq 10^{18},p\leq 2\times 10^5$</p>
+<p>然后需要用到一个性质：<br>$$<br>\prod _{i&#x3D;1}^{p-1} (x+i) \equiv x^{p-1}-1 \pmod p<br>$$<br>由于费马小定理：$a^{p-1}\equiv 1 \pmod p; \forall a$</p>
+<p>所以说右边的解就是$1\sim p$。</p>
+<p>即<br>$$<br>(x-1) (x-2) \cdots (x-(p-1))\equiv x^{p-1}-1 \pmod p<br>$$<br>（因为在模意义下，$-1$和$+(p-1)$等价，$-2$和$+(p-2)$等价）</p>
+<p>所以说左右这两个东西相等。</p>
+<p>因为只要要求系数$\bmod p$，所以就是求<br>$$<br>\prod_{i&#x3D;1}^n (x+i\bmod p)<br>$$<br>由于每$p$个就是一个循环。</p>
+<p>所以假设$n&#x3D;ap+b$</p>
+<p>所以有<br>$$<br>\prod_{i&#x3D;1}^n (x+i\bmod p)&#x3D;\big(\prod <em>{i&#x3D;0}^{p-1} (x+i)\big)^a \prod</em>{i&#x3D;1}^b (x+i)<br>$$<br>然后利用刚刚的结论<br>$$<br>&#x3D;(x^p-x)^a \prod _{i&#x3D;1}^b (x+i)&#x3D;x^a(x^{p-1}-1)^a \prod _{i&#x3D;1}^b (x+i)<br>$$<br>而这个$x^a$是没有用的，因为这相当于有$n$个数字，将后面的数字平移了段，这个东西显然不会改变最后的结果，因为它始终是在$n$以内平移的。</p>
+<p>然后左边的可以二项式定理展开<br>$$<br>(x^{p-1}-1)^a &#x3D;\sum_{i&#x3D;0}^a (x^{p-1})^i \binom a i (-1)^{a-i}<br>$$<br>然后可以发现$(x^{p-1})^i$其实很稀疏，如$p&#x3D;97$，那么只有$0,96,192,288,384,\ldots$项上有东西。</p>
+<p>因为$\prod\limits_{i&#x3D;1}^b (x+i)$一定是一个$b$次的多项式，而$b&lt;p$。</p>
+<p>这里假设$b&#x3D;90$，$0,96,192\ldots $上的系数为$a_0,a_1,a_2,\ldots ; a_k&#x3D;<a href="x%5E%7Bp-1%7D-1">x^{k(p-1)}</a>^a$</p>
+<p>然后令$G(x)&#x3D;\prod\limits_{i&#x3D;1}^{b} (x+i)$</p>
+<p>然后两个东西卷起来就会长成：</p>
+<p><img src="https://i.loli.net/2021/05/16/qFhBu2Zz8K1g7Wv.png" alt="QQ图片20210516200529.png"></p>
+<p>第一部分是$a_0G$的系数分布，第二部分是$a_1G$的系数分布……然后它们是互不相关的，所以把它们分别计算然后加起来就行了。</p>
+<p>一个例外是当$b&#x3D;p-1$时，这时候会叠起来，因为这是一个$p-1$次多项式，次数从$0$开始就是$0\to p-1$次，但下一项的开始位置正好为$p-1$次，就会叠起来。</p>
+<p>这时候就是<br>$$<br>(x^{p-1}-1)^a \prod_{i&#x3D;1}^{p-1} (x+i)&#x3D;(x^{p-1}-1)^a (x^{p-1}-1)&#x3D;(x^{p-1}-1)^{a+1}<br>$$<br>然后令$b&#x3D;0$就可以正常做了。</p>
+<p>问题就变成求出$a_0,a_1,\ldots,a_k$的系数分布，再求出$G(x)$每一项的系数分布，然后把它们做一个“乘法卷积”的操作。</p>
+<p>就是令$f_t&#x3D;\sum [a_i&#x3D;t],g_t&#x3D;\sum [[x]G(x)&#x3D;t]$</p>
+<p>最后答案</p>
 
-————————————————————————————————————————————————
-花对钱似乎非常敏感。
-大概是...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1704G/">CF1704G</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                令 $A_i&#x3D;a_i+2a_{i-1}+a_{i-2},B_i&#x3D;b_i-2b_{i-1}+b_{i-2}$，然后可以发现对于任意位置 $i$ 进行操作，除了 $A_{i}$ 将会变...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1704G/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1470F/">CF1470F</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                显然只会存在 $3$ 种本质不同的方式选择两个矩形。
+$$
+ans_w= \sum_{i=1}^{p-1} f_i g_{\frac{w}{i}} (w\neq 0)
+$$
 
-两个矩形不相交。
 
-这种情况可以直接遍历所有平行 $x&#x2F;y$ 轴的分割线，使选取的两个矩形分别在分割线的两边。分别找出极值点直接计算即...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1470F/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1081H/">CF1081H</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                一个显然错误的想法是分别计算 $A,B$ 本质不同的回文串个数，然后将两者相乘，这将会多次计算一个字符串。
-因此要思考的问题是，为什么会计算多次？
-为了解决这个问题，将用到下面数个引理，如果只是想解决...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1081H/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-08-03</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/08/03/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%A4%BE%E7%BE%A4%E8%AE%A8%E8%AE%BA/">记一次社群讨论</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/08/03/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%A4%BE%E7%BE%A4%E8%AE%A8%E8%AE%BA/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-05-24</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/05/24/l/">l</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-不过这改变不了阿丽娜半路被捅死了（笑）
-感觉群友们APIO玩得好开心。
-...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/05/24/l/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-05-13</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/05/13/CF1423C%20Du%C5%A1an's%20Railway/">CF1423C Dušan&#39;s Railway</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                反正可以直接当 $k&#x3D;3$ 去做，然后考虑直接去构造。
-首先任意给树找一个根，然后将整棵树拆成几个大小为 $\sqrt n$ 的子树，将所有这些子树的根 $u$ 塞到一个点集 $a$ ，然后...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/05/13/CF1423C%20Du%C5%A1an's%20Railway/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-04-30</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/04/30/CF1375I%20Cubic%20Lattice/">CF1375I Cubic Lattice</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                简要题意：
-定义三维空间中的一个 lattice 是满足下列条件的三维整点的集合：
-$$L&#x3D;{u\cdot \overrightarrow{r_1}+v\cdot \overrightarr...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/04/30/CF1375I%20Cubic%20Lattice/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-04-25</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/04/25/-/">?</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-下午水群的时候看到的，群友：
+<p>注意这里的$\frac{w}{i}$是在$\bmod p$意义下的</p>
+<p>而$ans_0&#x3D;n-\sum\limits_{i&#x3D;1}^{p-1} ans_i$</p>
+<p>然后考虑怎么求$f$和$g$。<br>$$<br>G(x)&#x3D;\prod_{i&#x3D;1}^b (x+i)<br>$$<br>有一种做法是分治，但是有点慢。</p>
+<p>考虑倍增：</p>
+<p>令$F(b,x)&#x3D;\prod\limits_{i&#x3D;1}^b (x+i)$<br>$$<br>F(2n,x)&#x3D; \prod_{i&#x3D;1}^{2n} (x+i)&#x3D;\prod_{i&#x3D;1}^n (x+i) \prod_{i&#x3D;n+1}^{2n} (x+i) &#x3D;F(n,x) F(n,x+n)<br>$$<br>然后$F(n,x)&#x3D;\sum\limits_{i&#x3D;0}^n a_i x^i$<br>$$<br>F(n,x+n)&#x3D;\sum_{i&#x3D;0}^n a_i (x+n)^i&#x3D;\sum_{i&#x3D;0}^n a_i \big(\sum_{j&#x3D;0}^i \binom i j x^j n^{i-j} \big)&#x3D;\sum_{j&#x3D;0} \big(\sum_{i&#x3D;j}^n \binom i j a_i n^{i-j} \big) x^j<br>$$</p>
 
-总之有点想笑（）
-没记错的话这个梗是海贼王的来着。
+$$
+\sum_{j=0} \big(\sum_{i=j}^n  a_i\times i!  \frac{n^{i-j}}{(i-j)!} \big) \frac{x^j}{j!}
+$$
 
-然后晚上又看到了个这个，其实个人觉得这从某种意义上也是”天龙人“的表现吧（）
-挺久以前大概也是作业题全写完，大概...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/04/25/-/">READ MORE +</a>
-            </div>
-        </article>
-    
-</div> </main>
+
+
+<p>然后把$a_ix^i$与</p>
+
+$\frac{n^{j-i}}{(j-i)!}$
+
+<p>做一个卷积。就可以得到第$j$项的系数。</p>
+<p>然后再除以一个$j!$就可以得到$F(n,x+n)$</p>
+<p>然后就得到了$F(2n,x)$</p>
+<p>时间复杂度$O(n\log n)$</p>
+<p>可以看<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P5282">https://www.luogu.com.cn/problem/P5282</a></p>
+<p>然后就是求$(x^{p-1}-1)^a$。假设这个东西乘出来长成$\sum\limits_{i&#x3D;0}^{a} a_i x^{(p-1)i}$因为只会在$p-1$次幂上有值，其他位置上都是$0$，就不管了，所以令$y&#x3D;x^{p-1}$，然后求$(y-1)^a$的系数分布，即。</p>
+<p>先二项式定理展开<br>$$<br>(y-1)^a&#x3D;\sum_{k&#x3D;0}^a \binom a k (-1)^{a-k} y^k<br>$$<br>但由于$a$可能很大，没办法直接卷。</p>
+<p>然后对于这种组合数$a,k$都是很大的数，但是对一个很小的质数$p$取模。</p>
+<p>能想到什么？</p>
+<p>卢卡斯定理。</p>
+<p>把$a$写成$p$进制$a_0,a_1,\ldots,a_m$，同样把$k$写成$p$进制$k_0,k_1,k_2,\ldots,k_m$</p>
+<p>然后就可以写成<br>$$<br>&#x3D;\sum_{k_0&#x3D;0}^{a_0} \sum_{k_1&#x3D;0}^{a_1} \sum_{k_2&#x3D;0}^{a_2} \cdots \sum_{k_m&#x3D;0}^{a_m} \binom {a_0} {k_0} \binom {a_1} {k_2} \cdots \binom {a_m} {k_m} (-1)^{a_0-k_0} (-1)^{a_1-k_1} (-1)^{a_2-k_2}\cdots (-1)^{a_m-k_m} \cdot y^{k_0} y^{k_1 p} y^{k_2 p^2} \cdots y^{k_m p^m}<br>$$<br>然后合并一下<br>$$<br>&#x3D;\big(\sum_{k_0&#x3D;0}^{a_0}\binom {a_0}{k_0} (-1)^{a_0-k_0}y^{k_0} \big) \big(\sum_{k_1&#x3D;0}^{a_1} \binom {a_1}{k_1} (-1)^{a_1-k_1} y^{k_1p} \big)\cdots<br>$$</p>
+<p>$$<br>&#x3D;\sum_{k&#x3D;0}^a \prod_{i&#x3D;0}^m \binom {a_i} {k_i}y^{k_i p^i} (-1)^{(a_i-k_i)}<br>$$</p>
+<p>然后交换两个符号，把$\binom {a_i}{k_i}$拆开</p>
+
+$$
+=\big(a_0!\sum_{k_0=0}^{a_0} \frac{(-1)^{a_0-k_0}}{(a_0-k_0)!}\frac{y^{k_0}}{k_0!} \big)  \big(a_1!\sum_{k_1=0}^{a_1} \frac{(-1)^{a_1-k_1}}{(a_1-k_1)!}\frac{y^{k_1}}{k_1!} \big)\ldots
+$$
+
+
+
+
+
+$$
+=\prod_{i=0}^m a_i! \sum_{k_i}^{a_i} \frac{(-1)^{a_i-k_i}}{(a_i-k_i)! \frac{y^{k_i}}{{k_i}!}}
+$$
+
+
+
+<p>对于每一个$a_i$，都可以用FFT在$O(a_i \log {a_i})$的时间复杂度。</p>
+<p>现在要把他们都乘起来，然后求他们乘起来之后的系数分布。</p>
+<p>比如说令$\alpha_t$表示$a_0$对应的多项式系数中$t$的个数，$\beta_t$表示$a_1$对应的多项式系数中$t$的个数，$\gamma_t$表示$a_2$对应的多项式系数中$t$的个数，$\delta_t$表示$a_3$对应的多项式系数中$t$的个数……</p>
+<p>然后最后总的系数的个数相当于$\alpha_i \beta_j \gamma_k \delta_l \to f_{ijkl \bmod p}$</p>
+<p>然后考虑两个的怎么合：$a_i \beta_j\to f_{ij\bmod p}$</p>
+<p>我们会的FFT是加法，考虑怎么把乘法变成加法——取个$\log$</p>
+<p>然后就变成$\alpha_{\log i} \beta_{\log j} \to f_{\log i+\log j}\bmod (p-1)$。</p>
+<p>因为是质数，所以存在原根。</p>
+<p>对于每一个数直接求出来它的离散对数，然后就可以做这个卷积了。</p>
+<p>时间复杂度$O(p\log p)$</p>
+<p>总时间复杂度$O(p\log p+p\log p+{\log_pn} p\log p)&#x3D;O(p\log p+p\log p+{\log_2n} p)$</p>
+<p>第一个为合并，第二个为倍增</p>
+<p>最终复杂度为$O(p\log n)$</p>
+<p>简化版为$Codechef-LUCASTH$</p>
+
+    </div>
+</article> </main>
 
 <div class="fab-container" id="fabContainer">
     <div class="fab-menu">

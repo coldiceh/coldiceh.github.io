@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<title>杂题3 | Hexo</title>
+<link rel="icon" href="/avatar.jpg" type="image/jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+
+<canvas id="particle-canvas"></canvas>
+
+<header class="terminal-nav">
+    <a href="/" class="nav-logo">QAQ</a>
+    <nav class="nav-menu">
+        <a href="/" class="nav-item active"><span class="nav-en">INDEX</span><span class="nav-cn">首页</span></a>
+        <a href="#info" class="nav-item"><span class="nav-en">INFORMATION</span><span class="nav-cn">情报</span></a>
+        <a href="#operator" class="nav-item"><span class="nav-en">OPERATOR</span><span class="nav-cn">随笔</span></a>
+        <a href="#world" class="nav-item"><span class="nav-en">WORLD</span><span class="nav-cn">归档</span></a>
+        <a href="#media" class="nav-item"><span class="nav-en">MEDIA</span><span class="nav-cn">标签</span></a>
+    </nav>
+    </header>
+
+<aside class="sidebar">
+    <div class="avatar-box"><img src="/avatar.jpg" alt="Avatar"></div>
+    <h2 class="sidebar-title">COLDICEH</h2>
+    <p class="sidebar-subtitle">Dr.抢不到音律退坑了#8809</p>
+    
+    <div class="sidebar-search">
+        <div class="search-box">
+            <input type="text" id="local-search-input" placeholder="// SEARCH DATABASE...">
+        </div>
+    </div>
+    
+    <div style="margin-top: 20px;" class="sidebar-links">
+        <div style="color: var(--ak-blue); font-weight: bold; margin-bottom: 10px; border-left: 3px solid var(--ak-blue); padding-left: 10px;">常用链接</div>
+        <a href="#">我的随笔</a>
+        <a href="#">我的评论</a>
+        <a href="#">我的参与</a>
+        <a href="#">最新评论</a>
+        <a href="#">我的标签</a>
+    </div>
+</aside>
+
+<main class="main-content">
+    <article class="post-detail">
+    <h1 class="post-detail-title">杂题3</h1>
+    <div class="post-meta">
+        DATE: 2021-07-22
+    </div>
+    <div class="post-content">
+        <h3 id="数数题"><a href="#数数题" class="headerlink" title="数数题"></a>数数题</h3><h5 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h5><p>从$0\sim n-1$这些正整数中恰好$k$个互不相同的数，使得它们的和是$n$的倍数。求方案数。</p>
+<p>$k\leq 1000,n\leq 10^9$</p>
+<h4 id="sol"><a href="#sol" class="headerlink" title="sol"></a>sol</h4><p>单位根反演：<br>$$<br>[k\mid n]&#x3D;\frac{1}{k}\sum_{i&#x3D;0}^{k-1}\omega_{k}^{in}<br>$$<br>答案为：<br>$$<br>\begin{aligned}<br>[y^k]\frac{1}{n}\sum_{i&#x3D;0}^{\infty} [x^i]\prod_{j&#x3D;0}^{n-1}(1+x^jy)\sum_{k&#x3D;0}^{n-1}\omega_{n}^{ik}<br>&amp;&#x3D;[y^k]\frac{1}{n}\sum_{k&#x3D;0}^{n-1}\sum_{i&#x3D;0}^{\infty}[x^i]\prod_{j&#x3D;0}^{n-1}\left(1+\left(\omega_{n}^k \right)^jx^jy \right) \<br>&amp;&#x3D;[y^k]\frac{1}{n}\sum_{i&#x3D;0}^{n-1}\prod_{j&#x3D;0}^{n-1}(1+\omega_n^{ij}y)<br>\end{aligned}<br>$$<br>解释：</p>
+<p>先考虑对于每个数字选不选，且由于需要考虑选的个数，考虑使用二元生成函数。乘一个$y$就表示选了一个，乘一个$x$表示加了$1$。对于$0\sim n-1$考虑每一个数字选不选，不选就是$1$，选了就是$x^jy$。$[x^i]$就是选出来的和为$i$，然后用单位根反演判断$i$是不是$n$的倍数。</p>
+<p>而之后因为取$[x^i]$，而后面是$\omega_n^{k^i}$，所以就可以直接把$\omega_n^k$代回去代成$x$，然后再求个和就是后面的东西。（后面的$i$相当于$k$）</p>
+<p>然后令$\gcd(n,i)&#x3D;d$，就可以得到</p>
+
+$$
+[y^k]\frac{1}{n}\sum_{i=0}^{n-1}\left(\prod_{j=0}^{\frac{n}d-1}\left(1+\omega_{\frac{n}{d}}^{\frac{ij}{d}}y \right) \right)^d
+$$
+
+
+<p>考虑到：<br>$$<br>\prod_{i&#x3D;0}^{n-1}\left(x-\omega_n^i \right)&#x3D;x^n-1<br>$$<br>这是因为多项式首项系数相同，且$n$个根都相同。</p>
+<p>而因为上面式子中的$\frac{i}{d}$与$\frac{n}{d}$互质，所以：</p>
+
+$$
+\prod_{i=0}^{n-1}\left(1+\omega_n^i y \right)=\omega_{n}^{\frac{n\cdot(n-1)}{2}} \prod_{i=0}^{n-1}\left(y+\omega_{n}^i \right)
+$$
+
+
+<p>因此对于不同的$n$，上式为$\pm 1\pm y^n$。</p>
+<p>（当$n$是偶数时</p>
+
+$\omega_n^{\frac{n(n-1)}{2}}$
+
+<p>是$-1$，奇数时是$1$。）</p>
+<p>因此原式就会变为：</p>
+
+$$
+[y^k]\frac{1}{n}\sum_{i=0}^{n-1}\left(\pm 1\pm y^{\frac{n-1}{d}} \right)^d=[y^k]\frac{1}{n}\sum_{d\mid n}\left(\pm1\pm y^{\frac{n}{d}} \right)^d \varphi(\frac{n}{d})
+$$
+
+
+<p>我们枚举$\gcd(i,n)&#x3D;d$的值即可，系数是个二项式展开的形式，贡献$\varphi(\frac{n}{d})$次，（首先$k$要是$\frac{n}{d}$的倍数才能产生贡献，然后大概是一个组合数</p>
+
+$\binom{d}{\frac{k}{\frac{n}{d}}}$
+
+<p>然后一个$(-1)^?$的系数）。</p>
+<p>总时间复杂度$\mathcal O(d(n))$。</p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><h4 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h4><p>对于一个字符集$\Sigma$上的字符串$S$和常数$k$，定义删去$S$中的$k$个相邻且相同的字符为一次操作。现字符集的大小$|\Sigma|&#x3D;m$，试求$\Sigma$上能通过$n$次操作得到空串的字符串数量。答案对质数$p$取模。比如字符集$\Sigma&#x3D;{a,b,c }$时且$k&#x3D;2$时，$\texttt{abbcca}$符合上述条件而$\texttt{abbca}$不符合。</p>
+<p>$n,k\le 10^9,1\le m&lt;p&lt;10^5,p$是质数。</p>
+<h4 id="sol-1"><a href="#sol-1" class="headerlink" title="sol"></a>sol</h4><p>首先不难发现，如果给定一个$S$，判断是否能够删完，贪心即可。具体就是每次直接找一个长度为$k$的串然后删掉，这样一定不是更劣的</p>
+<p>考虑如果$S$不能够被拆成$S1+S2$，使得两边分别能够被删完，当且仅当$S$存在一种选法选出最外层的$k$个字符，内部会被划分成若干更小的不能被划分的块，每一块都能被删完且最外层字符和$S$的最外层字符不同。</p>
+<p>证明：如果有一小块最外层字符和$S$相同，那么考虑这一小块内部的划分，把它和$S$结合一下即可划分成$S1+S2$。</p>
+<p><img src="https://files.catbox.moe/c1ebmx.png"></p>
+<p>比如现在$k&#x3D;6$，有一小块最外层字符与$S$相同，那么将这一小段$3\mid 3$切开，可以发现前面和后面都可以恰好删完。因此最外层字符与小块中的字符不能相同。</p>
+<p>否则如果$S$可以被划分成$S1+S2$，首先断点必然在某一块之间，根据之前的贪心策略，这一块必然会有一个前缀可以变成更小的块，这与它“不能被划分”矛盾。</p>
+<p>因此考虑用这个性质来计数：</p>
+<p>考虑令答案的普通生成函数为$F$（常数项为$1$），$G$为不可拆分的（即最外层字符出现位置唯一）方案数，注意这里需要保证$G$的最外层字符和套在它外面的字符不同，则有：<br>$$<br>G&#x3D;(m-1)F^{k-1}x,F&#x3D;\frac{1}{1-G}<br>$$<br>（最外层字符只有$m-1$种选法，因为要保证与在外面的字符不同。因为中间的每一个间隔都是一个$F$，所以就是$F^{k-1}$，$x$是因为多操作了一次。而$F$是任意多个$G$组合。）</p>
+<p>最终的答案是$\frac{1}{1-mF^{k-1}x}$（其实这相当于最终答案里的$G$。因为最后是没有最外面一层字符限制的，所以是乘上$m$而不是$(m-1)$）。因此可以得到方程：</p>
+
+$$
+\begin{alignat}{2}
+\frac{(m-1)x}{(1-G)^{k-1}}&=G\\
+\frac{G(1-G)^{k-1}}{m-1}&=x
+\end{alignat}
+$$
+
+
+<p>因为拉格朗日反演是要$F\left(G(x) \right)&#x3D;x$，然后就想办法将$x$提到一边去。然后再想办法将$F$代进来。</p>
+<p>至于为什么是将$F$代进来而不是将$G$代进去是因为$F$常数项为$1$没有复合逆而$G$常数项为$0$，有复合逆。</p>
+<p>令</p>
+
+$H(x)=\frac{x(1-x)^{k-1}}{m-1}$
+
+<p>，则$H(G)&#x3D;x$，可以使用扩展拉格朗日反演：</p>
+
+$$
+\begin{alignat}{2} 
+[x^n]\frac{1}{1-\frac{m}{m-1}G}&=[x^{n-1}]\frac{1}{n}\cdot \frac{m(m-1)}{(m-1-mx)^2}\cdot\left( \frac{x}{H(x)}\right)^n\\
+&=[x^{n-1}]\frac{1}{n}\cdot \frac{m(m-1)}{(m-1-mx)^2}\cdot \frac{(m-1)^n}{(1-x)^{n(k-1)}} \\
+&=\frac{m(m-1)^{n+1}}{n}\sum_{i=0}^{n-1} (i+1)m^i(m-1)^{2-i} \binom{n(k-1)+n-i-2}{n-i-1}
+\end{alignat}
+$$
+
+
+<p>第二行第三行展开是扩展二项式定理<br>$$<br>\frac{1}{(1-x)^n} [x^i]&#x3D;\binom {n+i-1}{i}<br>$$<br>组合意义是一个表，初始在$(0,0)$，每次往右或往下走一格，求最后走到$(n,i)$的方案数。</p>
+<p>注意$n$可能没有逆元，但是注意到组合数可以拆一下变成：</p>
+<p>拆是$i+1$变成$n-i-1$，然后拿是$n$减去是$n-i-1$的，然后如果是$n$就可以约掉很多（第一行），如果是$n-i-1$就可以和后面组合数的一个阶乘约掉，大概就这样….。这样就没有除法了。<br>$$<br>m(m-1)^{n+1}\sum_{i&#x3D;0}^{n-1}m^i(m-1)^{2-i}\binom{n(k-1)+n-i-2}{n-i-1}-\(k-1)m(m-1)^{n+1}\sum_{i&#x3D;0}^{n-1}m^i(m-1)^{2-i}\binom{n(k-1)+n-i-2}{n-i-2}<br>$$<br>于是大概是要算类似于$\sum\limits_{i&#x3D;0}^n \binom {a+i}{b} c^i$这种东西。</p>
+<p>考虑到由于$p$很小，因此使用 Lucas 定理简化算式。大概类似于数位 dp 的做法。$f(i,0&#x2F;1,0&#x2F;1)$表示当前考虑到第$i$位，之前的位是否是$n$的一段前缀，后面是否需要进位时所有数字的贡献。</p>
+<p>转移可以枚举当前位上的数字是多少，然后算一下贡献即可。复杂度$\mathcal O(p\log_p (nk))$。</p>
+<h3 id="糖果"><a href="#糖果" class="headerlink" title="糖果"></a>糖果</h3><h4 id="题意-2"><a href="#题意-2" class="headerlink" title="题意"></a>题意</h4><p>有$n$个人和$m$种糖果，每种糖果分别有$a_i$个，每个人每种糖果至多吃一个，最多吃$b_i$种糖果。</p>
+<p>有$q$次修改，每次可以把某个$a_i$或者$b_i$加$1$或减$1$，每次修改后问是否存在一种方案使得糖果可以被分完。</p>
+<p>$n,m,q\le 3\times 10^5$</p>
+<h4 id="sol-2"><a href="#sol-2" class="headerlink" title="sol"></a>sol</h4><p>考虑网络流建图，建一个满二分图，然后源点到左边连$a_i$的边，右边到汇点连$b_i$的边，有解当且仅当最大流为$\sum a_i$。</p>
+<p>由于是个满二分图，因此网络流可以快速计算。即考虑最小割必然是左边割若干条边，右边割若干条边，剩下被保留的点需要在中间把边全部割掉。</p>
+<p>即假设源点能到达的左边点集为$S$，右边能到达汇点的点集为$T$，那么割就是：<br>$$<br>\sum_{i\not\in S}a_i+\sum_{i\not\in T}b_i+|S|\cdot |T|<br>$$<br>考虑如果固定$|S|$，那么必然是取最大的$|S|$个$a_i$扔进$S$中，然后如果$b_i$扔进$T$里就会有$|S|$的贡献，不扔进去就是$b_i$的贡献，因此$&lt; |S|$的$b_i$不扔进去，$\ge |S|$的$b_i$扔进$T$里即可。</p>
+<p>对所有$|S|$建线段树维护答案，注意到操作都不会改变相对大小关系（即初始按$a_i,b_i$排序之后大小关系不会改变），因此$a_i++$就对应前缀加，$a_i–$就是前缀减，$b_i++$和$b_i–$分别对应后缀加和后缀减。</p>
+<p>最终询问全局最小值是否等于$\sum a_i$即可（？个人认为是$\le$），复杂度$\mathcal O(n\log n)$。</p>
+<h3 id="普通高中生"><a href="#普通高中生" class="headerlink" title="普通高中生"></a>普通高中生</h3><h4 id="题意-3"><a href="#题意-3" class="headerlink" title="题意"></a>题意</h4><p>使用一个随机数生成器生成序列$a_1,\cdots,a_n$，生成$i$的概率是$\binom M ip^i(1-p)^{M-i}$。</p>
+<p>给定一个多项式$f$在$x&#x3D;0,\cdots ,N$的点值，并且$f$是个不超过$N$次的多项式。</p>
+<p>你需要求出这个随机的方式下，所有满足$0\le b_i\le a_i$的序列$b$，$f(b_1+\ldots +b_n)$的和的期望。</p>
+<p>$N\le 10^5,n,M,p&lt;998244353$。</p>
+<h4 id="sol-3"><a href="#sol-3" class="headerlink" title="sol"></a>sol</h4><p>首先考虑如何快速求出：<br>$$<br>\sum_{i&#x3D;0}^{\infty}P(i)[x^i]Q(i)<br>$$<br>其中$P(i)$表示在$i$处多项式$P$的值,$P$次数不是很多，$Q$是一个简单代数式。</p>
+<p>考虑如果$P$是一个下降幂的形式，比如是一个$k$次下降幂：<br>$$<br>\sum_{i&#x3D;0}^{\infty} i^{\underline k}[x^i]Q(x)<br>$$<br>事实上这个东西就是$Q^{(k)}(1)$。</p>
+<p>因为事实上求了$k$次导之后系数就会变成$a_ix^i\to a_i\cdot i^{\underline k}\cdot x^{i-k}$</p>
+<p>这是一个套路，下降幂多项式最经典的应用。</p>
+<p>设随机一次$a$之后取$b$的概率生成函数为$G(x)$，则答案为：<br>$$<br>\sum_{i&#x3D;0}^{\infty} f(i)[x^i]G^n(x)<br>$$<br>其中$[x^i]G(x)$表示对于所有的$a\ge b$最后随机到$b$概率之和，$n$次方是因为最后取$n$个和为$i$。</p>
+<p>然后是要对$G^n(x)$求$k$阶导，这个东西的组合意义就是有$n$个$G(x)$排成一排，每一次都可以给一个求一次导（当然也可以给一个求多次），所有这样方案数下乘积之和就是它的$k$阶导。</p>
+<p>而事实$G(1),G’(1),\ldots $是比较好求的（这里是要对每一个的$k$求一遍导数）。</p>
+
+$$
+\begin{aligned}
+G^{(k)}(1)&=\sum_{i=k}^{M}i^{\underline k}\sum_{j=i}^M\binom M j(1-p)^{M-j}p^j\\
+&=\frac{1}{k+1}\sum_{j=k}^M \binom M j(1-p)^{M-j}p^j(j+1)^{\underline{k+1}}\\
+&=k!\sum_{j=k}^M\binom M j(1-p)^{M-j}p^j\binom {j+1}{k+1}\\
+&=k!\sum_{j=k}^M\binom M j(1-p)^{M-j}p^j\left(\binom j k+\binom j {k+1} \right)
+\end{aligned}
+$$
+
+
+<p>（</p>
+
+$\sum\limits_{i=k}^j=\frac{(j+1)^{\underline{k+1}}}{k+1}$
+
+<p>）</p>
+<p>下面对$C(j,k)$举例：<br>$$<br>k!\sum_{j&#x3D;k}^{M}\binom M j(1-p)^{M-j}p^j\binom j k&#x3D;k!p^k\binom M k\sum_{j&#x3D;0}^{M-k}\binom{M-k}{j}(1-p)^{M-k-j}p^j&#x3D;k!p^k\binom M k<br>$$<br>于是对$G^n(x)$求$k$阶导就变成了多项式快速幂。<br>$$<br>k!\left(\sum \frac{G^{(i)}(1)}{i!} x^i \right)^n[x^k]&#x3D;\left(G^n(x)\right)^{(k)}(1)<br>$$</p>
+<p>然后把$f$插值成下降幂多项式即可。总复杂度$\mathcal O(n\log n)$。</p>
+<p>具体怎么将点值弄成下降幂形式：<br>$$<br>F(x)&#x3D;\sum_{i&#x3D;0}^n x^{\underline i}\cdot a_i&#x3D;\sum_{i&#x3D;0}^n\binom x i\cdot a_i\cdot i!<br>$$<br>然后二项式反演：<br>$$<br>a_i\cdot i! &#x3D;\sum_{j&#x3D;0}^i\binom i j(-1)^{i-j}\cdot F(j)<br>$$<br>然后就可以$\mathcal O(n\log n)$卷积求出来。<br>$$<br>k!\sum_{j&#x3D;k}^M \binom M j (1-p)^{M-j}p^j\binom j k&#x3D;k!p^k\binom M k\sum_{j&#x3D;0}^{M-k}\binom{M-k} j<br>$$</p>
+<h3 id="（江苏省队集训）卖弱"><a href="#（江苏省队集训）卖弱" class="headerlink" title="（江苏省队集训）卖弱"></a>（江苏省队集训）卖弱</h3><h4 id="题意-4"><a href="#题意-4" class="headerlink" title="题意"></a>题意</h4><p>求有多少$n$个点$n$条边的有向图，每个点的入度出度都是$1$，并且如果$i$到$j$有一条边，必须要满足$j$在$[i-a+1,i+n-a-1]$中。</p>
+<p>$n\le 10^6,a\le 200$</p>
+<p>共$10$组询问。</p>
+<h4 id="sol-4"><a href="#sol-4" class="headerlink" title="sol"></a>sol</h4><p><img src="https://files.catbox.moe/ewxym7.png"></p>
+<p>考虑问题等价于一个$n\times n$的网格，右上角挖掉一个边长为$a$的等腰直角三角形，左下角挖掉一个$(n-a)\cdot (n-a)$的等腰直角三角形。剩下的每行选一个格子，选出的格子不能在同一列的方案数。</p>
+<p>如果右上角没有挖掉这个三角形，答案显然是$a^{n-a}\cdot a!$，考虑容斥右上角里选了多少个格子，这个方案数可以提前 dp 出来。</p>
+<p>即$f(i,j)$表示边长为$i$的等腰三角形里选了$j$个格子的方案数，那么剩下的方案是挖掉若干列后的答案，即$(a-j)^{n-a}(a-j)!$。每次询问就是$\sum\limits_{j&#x3D;0}^a (a-j)^{n-a}(a-j)!\cdot (-1)^j \cdot f(a,j)$。<br>$$<br>f(a,i)&#x3D;f(a-1,i)+f(a-1,i-1)\cdot (a-i+1)<br>$$<br>因此总复杂度$\mathcal O(a^2+n+Ta)$。</p>
+<p>好像集训队论文有更牛的做法。</p>
+<h3 id="（江苏省队集训）可爱"><a href="#（江苏省队集训）可爱" class="headerlink" title="（江苏省队集训）可爱"></a>（江苏省队集训）可爱</h3><h4 id="题意-5"><a href="#题意-5" class="headerlink" title="题意"></a>题意</h4><p>给定一个字符串 S，定义它的两个长度为$m$的子串相似，当且仅当这两个子串中至多有一个字母不同。</p>
+<p>对于每个长度为$m$的子串，求有多少子串和它相似。</p>
+<p>$|S|\le 10^5$</p>
+<h4 id="sol-5"><a href="#sol-5" class="headerlink" title="sol"></a>sol</h4><p>考虑如何判断一个以$i$开头和以$j$开头的子串相似，显然当且仅当$lcp(i,j)+lcs(i+m-1,j+m-1)\ge m-1$。</p>
+<p>由于$lcp(i,j)$相当于$i,j$在后缀树上的$lca$，考虑在后缀树上做启发式合并统计答案。</p>
+<p>即每次合并两个子树$A,B$​，不妨令$size(A)\le size(B)$​，此时$lcp(i,j)$是定值，$lcs(i+m-1,j+m-1)$至少是多少已经知道了。</p>
+<p>建出反串的后缀树，不难发现对于给定$i$，满足$lcs(i,j)\ge k$的$j$一定是一棵子树内的点，因此枚举$A$中的点，$B$中能对它产生贡献的点有两个限制（分别在两个后缀树中的区间限制），因此二维数点即可。</p>
+<p>$A$对$B$的贡献是个矩阵加，二维差分一下一样二维数点。</p>
+<p>复杂度$\mathcal O(n\log^2 n)$</p>
+<h3 id="（江苏省队集训）担心"><a href="#（江苏省队集训）担心" class="headerlink" title="（江苏省队集训）担心"></a>（江苏省队集训）担心</h3><h4 id="题意-6"><a href="#题意-6" class="headerlink" title="题意"></a>题意</h4><p>共有$n$​个人参加比赛，这$n$个人站成一排。比赛采用单挑制，每次等概率选出两个相邻的人进行单挑，胜者保留，败者淘汰。每个人的水平是不同的，第$i$个人的水平是$a_i$。一场单挑如果在水平分别为$a$和$b$的人之间进行，那么前者获胜的概率是$\frac{a}{a+b}$，后者获胜的概率是$\frac{b}{a+b}$，不可能平局。这场比赛最终的胜者是最后剩下的唯一的人，</p>
+<p>求第$k$个人最后获胜的概率。</p>
+<p>$n\le 500$</p>
+<h4 id="sol-6"><a href="#sol-6" class="headerlink" title="sol"></a>sol</h4><p>不难设计一个很简单的区间 dp，即$f(i,j,k)$表示只考虑区间$[i,j]$中的人，$k$最后获胜的概率。</p>
+<p>但是由于左右两边独立，因此显然$f(i,j,k)&#x3D;f(i,k,k)\cdot f(k,j,k)$，因此我们只需要两个状态：$l(i,j)$表示最后$i$胜出的概率，$r(i,j)$表示最后$j$胜出的概率。</p>
+<p>以$l(i,j)$转移为例，必然是把$[i+1,j]$拆分成若干个区间，每个区间中的胜者和$i$比赛。考虑设最后一个区间为$[k,j]$，那么贡献就是：<br>$$<br>l(i,k-1)\cdots \sum_{p&#x3D;k}^j r(k,p)\cdot l(p,j)\cdot \frac{a_i}{a_i+a_p}<br>$$<br>注意到如果初始序列长度为$n$，最后是合并长度为$a$的区间和长度为$n-a$的区间的概率是$\frac{1}{(n-1)!}\binom{n-2}{a-1}(a-1)!(n-a-1)!&#x3D;\frac{1}{n-1}$，因此就可以得到转移方程：<br>$$<br>\begin{aligned}<br>l(i,j)&amp;&#x3D;\frac{1}{j-i}\sum_{k&#x3D;i+1}^j l(i,k-1)\cdot \sum_{p&#x3D;k}^j r(k,p)\cdot l(p,j)\cdot \frac{a_i}{a_i+a_p}\<br>&amp;&#x3D;\frac{1}{j-i}\sum_{p&#x3D;i+1}^j l(p,j)\cdot \frac{a_i}{a_i+a_p}\sum_{k&#x3D;i+1}^p r(k,p)\cdot l(i,k-1)<br>\end{aligned}<br>$$<br>注意后面那个求和只和$i,p$有关，因此在 dp 的时候顺便算一下即可。这也转移就$\mathcal O(n)$了，总复杂度$\mathcal O(n^3)$。</p>
+<h3 id="string"><a href="#string" class="headerlink" title="string"></a>string</h3><h4 id="题意-7"><a href="#题意-7" class="headerlink" title="题意"></a>题意</h4><p>给定一个只包含字母$A,B,C,D$的字符串$T$。</p>
+<p>用串$T$构造出一个新的串$S$的构造方法是进行多次操作，每次从$T$中选出一段连续的子串，加入到$S$的后面。</p>
+<p>显然对于一个串$S$，它的构造方法不止一种，所以定义$S$的构造代价为最少的操作次数。</p>
+<p>求构造一个长度为$n$的串的最大构造代价。</p>
+<p>$n\le 10^{18},|T|\le 10^5$，保证$T$含有所有四个字母。</p>
+<h4 id="sol-7"><a href="#sol-7" class="headerlink" title="sol"></a>sol</h4><p>如果给定一个$S$求最小代价，那肯定是贪心在$T$的$SAM$上匹配。（就每次找后继边，如果没有就代价+1然后回根节点继续往后跑）</p>
+<p>我们考虑令$f(i)$表示代价为$i$时，最短的$S$长度是多少。考虑往它后面接一个子串，则这个子串的开头字母不能是它在$SAM$上的后继边（不然就不满足贪心匹配的要求），于是我们需要额外记一维，即$f(i,j)$表示代价为$i$时，下一个接上的字母必须为$j$，最短的$S$长度。</p>
+<p>于是我们只需要对于每个字母对$(a,b)$，预处理出最短的以$a$开头且下一个开头为$b$且不在$T$中出现的串（其实就是找一条链开头第一条边是$a$，结尾是没有$b$这一条出边的），然后矩阵乘法即可。</p>
+<h3 id="硬币游戏"><a href="#硬币游戏" class="headerlink" title="硬币游戏"></a>硬币游戏</h3><h4 id="题意-8"><a href="#题意-8" class="headerlink" title="题意"></a>题意</h4><p>有$n$堆硬币，每堆恰好有三个硬币，从上到下价值分别为$a_i,b_i,a_i$（即第一个和第三个价值相同）。拿走一个硬币必须先拿走它上面所有硬币。</p>
+<p>对于每个$1\leq k\leq 3\cdot n$，求出恰好拿走$k$个硬币获得的最大价值。</p>
+<p>$n\le 10^7$。</p>
+<h4 id="sol-8"><a href="#sol-8" class="headerlink" title="sol"></a>sol</h4><p>对于每堆硬币，把它拆成$a_i,a_i+b_i$两个硬币，其中选$a_i+b_i$需要耗费$2$的代价。</p>
+<p>于是现在问题就变成了，对于每个$k$求出总代价恰好为$k$的情况下让总代价尽量大。</p>
+<p>考虑把$a_i+b_i$看成$\frac{a_i+b_i)}{2}$，然后从大到小排个序。对于一个$k$，如果选一个前缀能够使得代价和恰好为$k$，那么必然就选这个前缀；否则一定是当前恰好卡到了一个代价为$2$​的上面，此时可以调整一下，即要么删掉前面最小的代价为$1$的，把当前加进来，要么加入后面最大的代价为$1$的。</p>
+<p>因此处理一下前缀最小值和后缀最大值即可，复杂度$\mathcal O(n)$。</p>
+<p>输入可以随机数生成器，排序可以桶排。</p>
+<h3 id="撤回"><a href="#撤回" class="headerlink" title="撤回"></a>撤回</h3><h4 id="题意-9"><a href="#题意-9" class="headerlink" title="题意"></a>题意</h4><p>给定一个字符串$S$，有$Q$组询问，每组询问给定一个字符串$T$和四个正整数$a,b,l,r$求多少个$S[l,r]$中的子串$P$满足$lcp(P,T)\ge a$且$lcs(P,T)\ge b$。</p>
+<p>$|S|,\sum |T|,Q\le 10^5$。</p>
+<h4 id="sol-9"><a href="#sol-9" class="headerlink" title="sol"></a>sol</h4><p>考虑如果询问只有一组，那么可以暴力和 S  ​跑 KMP，就可以知道哪些位置可以作为 P 的开头和结尾，前缀和统计一下即可。</p>
+<p>因此对于一组询问，我们现在 SAM 上跑出 T 的长度为$a$的前缀以及长度为$b$的后缀对应的 SAM 节点，现在需要算一下它们两 right 集合的贡献。（这里先考虑没有限制$l,r$​​的情况）</p>
+<p>暴力：</p>
+<p>将所有出现位置标记一下（红点为长度为$a$的前缀出现的位置，蓝点为长度为$b$​的后缀出现的位置）统计答案就是对于所有的蓝点算出前面有多少个红点，全部加起来即可。</p>
+<p><img src="https://files.catbox.moe/u24ug9.png"></p>
+<p>但如果$a&lt;b$会有这种情况</p>
+<p><img src="https://files.catbox.moe/hlhiy4.png"></p>
+<p>事实上此时也满足$a$在$b$的前面。</p>
+<p>此时可以将串<code>reverse</code>一下，变成$a\ge b$​的情况。</p>
+<p>（但是稍微有点细节问题，在$a&lt;b$时，上述过程可能会统计最后串长$&lt; b$的串。因此我们需要正反建两遍 SAM，如果$a&lt;b$就把询问<code>reverse</code>一下即可。）</p>
+<p>这样就可以直接数了。</p>
+<p>考虑分块维护整个过程，注意到把一块内对应的节点在后缀树上建虚树，就可以得到这一块内所有不同的 right 集，即这块内不同的 right 只有$\mathcal O(sqrt)$个。</p>
+<p>暴力枚举虚树上两个点，然后算它们的贡献相当于树 dp（即暴力分别枚举子集两两匹配算贡献），复杂度是$\mathcal O(sqrt^2)&#x3D;\mathcal O(n)$，因为每对边恰好被枚举一次。</p>
+<p>设$f(a,b)$为$a,b$两个点的贡献，$g(a,b)$为点$a$到$b$的子树的贡献<br>$$<br>\begin{aligned}<br>g(a,b)&amp;&#x3D;\sum_{v\in son_b}g(a,v) \<br>f(a,b)&amp;&#x3D;\sum_{u\in son_a,v\in son_b} f(u,v)+g(a,b)+g(b,a)<br>\end{aligned}<br>$$<br>于是再对于每块记一下 SAM 上每个节点向下走到的第一个虚树节点即可，这样块内的贡献就算好了。</p>
+<p>块之前的贡献非常好算，直接前缀和即可。两侧的零头也直接暴力判即可。</p>
+<p>总复杂度$\mathcal O(n\sqrt n)$</p>
+<h3 id="小学数学"><a href="#小学数学" class="headerlink" title="小学数学"></a>小学数学</h3><h4 id="题意-10"><a href="#题意-10" class="headerlink" title="题意"></a>题意</h4><p>有$n$桶水，第$i$桶里有$i$​升水。你可以把一个桶另一桶的水倒向另一桶，记它们的水量分别为$a,b$，你需要保证$a\ge b$，且倒过之后两桶水会分别变成$a-b,2b$。</p>
+<p>你需要让尽量多的水集中在一个水桶里。</p>
+<p>$n\le 100$。</p>
+<h4 id="sol-10"><a href="#sol-10" class="headerlink" title="sol"></a>sol</h4><p>首先不难发现一定不可能把所有水都集中在一桶里。</p>
+<p>证明的话考虑倒推，设总水量为$b\times 2^a$，其中$b$是奇数，那么每次一定会把一桶除以一半加到另一桶上，因此不难发现所有桶都一定是$b$​的倍数，因此一定有$b&#x3D;1$。</p>
+<p>而总和为$\frac{n(n-1)}{2}$，这在$n&gt;1$时不可能为$2$的幂。</p>
+<p>此外，最后这桶水里必然是偶数，因此：</p>
+<p>若$\frac{n(n+1)}{2}$为奇数，答案至多为$\frac{n(n+1)}{2}-1$。</p>
+<p>若$\frac{n(n+1)}{2}$为偶数，答案至多为$\frac{n(n+1)}{2}-2$。</p>
+<p>这个上界是可以构造的。</p>
+<p>考虑这个操作相当于两桶水都乘$2$​然后对总和取模。</p>
+<p>$2a\bmod (a+b)&#x3D;a-b,2b\bmod (a+b)&#x3D;2 b$</p>
+<p>我们保持$1$​号桶里永远是$1$​，$2$​​号桶里永远是偶数。考虑把一桶水加入前两个桶，我们不断把$1$号操作成$2$，然后把这桶水倒进来，由于前两个桶里的总和永远是奇数，因此一定可以把$1$号桶操作成$1$​（欧拉定理）。<br>$$<br>1,2,3,4,5\to 1,8,1,0,1\to 1,8,2,0,0<br>$$<br>于是后面所有偶数桶都被倒完了，奇数桶都被留下了$1$，把这些$1$​合起来再倒进去即可。<br>$$<br>1,8,2\to 2,7,2\to 4,7 \to 8,3\to 5,6\to 10,1\to 9,2\to 7,4\to 3,8 \to 6,5\to 1,10 \cdots<br>$$<br>不难发现刚好到达刚才叙述的上界。</p>
+<h3 id="收益"><a href="#收益" class="headerlink" title="收益"></a>收益</h3><h4 id="题意-11"><a href="#题意-11" class="headerlink" title="题意"></a>题意</h4><p>给定序列$x_i$​，$Q$​组询问，每组询问给定一个区间$[l,r]$​，你需要找到它的一个自区间$[a,b]$​使得$a&lt;b$​且$\frac{\sum_{i&#x3D;a}^b x_i}{b-a}$​</p>
+<h4 id="sol-11"><a href="#sol-11" class="headerlink" title="sol"></a>sol</h4><p>另一个分治和分块课件里也有（</p>
+<p>考虑转前缀和之后变成给两堆点，在左边一堆里选个$a$，在右边选个$b(a&lt;b)$让这两个点形成的斜率尽量大。</p>
+<p>分块维护凸包，记$f(l,r)$表示$l,r$中的块形成的贡献。计算贡献可以直接从左到右扫一遍，每次询问一个点到凸包的切线，直接二分即可。预处理复杂度为$\mathcal O\left(\frac{n^2}{B}\log n \right)$。</p>
+<p>对于一组询问，整块中的贡献已经算好，接下来只要算零散点到中间凸包的贡献即可，但注意到这部分事实上和预处理算的东西差不多，因此可以直接使用。瓶颈在于算离散点之间的贡献。这部分复杂度为$\mathcal O(QB\log n)$。</p>
+<p>总复杂度$\mathcal O(n\sqrt n \log n)$。</p>
+<h3 id="零一树"><a href="#零一树" class="headerlink" title="零一树"></a>零一树</h3><h4 id="题意-12"><a href="#题意-12" class="headerlink" title="题意"></a>题意</h4><p>有一棵树，大小为$n$，树上每天边都有边权可以是$1$，可以是$0$。现有$m$对$u_i,v_i(u_i\neq v_i,1\le u_i,v_i\le n)$。定义一个准路径长度$p_i$等于$u_i$到$v_i$之间的路径和$\bmod 2$。现在问边权值有多少种方案让$p_i$序列满足非递减（$p_i\le p_{i+1},1\le i&lt;m$）。</p>
+<p>答案对$998244353$取模。</p>
+<p>$n\le 10^5$。</p>
+<h4 id="sol-12"><a href="#sol-12" class="headerlink" title="sol"></a>sol</h4><p>$\mathcal O(n^2)$做法：</p>
+<p>令$d_i$表示$i$到根这条链上路径长度的奇偶性，两个点距离的奇偶性就是$d_i\oplus d_j$。然后枚举$0&#x2F;1$分界点，之后就是有若干类似$d_i\oplus d_j&#x3D;0&#x2F;1$​的限制，然后这就是一个经典的并查集题。</p>
+<p>如果两个点$i,j$​一样，就合并$d_i,d_j$和$d_{i+n},d_{j+n}$，否则就合并$d_{i},d_{j+n}$以及$d_j,d_{i+n}$​。</p>
+<p>假设最后联通块的个数为$k$。</p>
+<p>最后答案就是$2^{\frac{k}{2}-1}$，因为根节点是定点。</p>
+<p>然后现在就需要动态维护这么一张图和连通块个数。</p>
+<p>考虑分治</p>
+<p>每次枚举分界点是在左边还是在右边，如果在左边就先把右边的$1$​全部加上，然后递归左边。否则将左边的$0$​全部加上然后递归右边，然后在长度为$1$​​的区间计算一下答案即可。可撤销并查集维护一下即可。</p>
+<p>注意如果有不合法（即有两个不应该在同一个连通块的点在同一个连通块中）直接<code>return</code>回去即可。</p>
+<p>（</p>
+<p>如果暴力枚举分界点，那么就变成了$2n$​个点的经典并查集问题，方案数是$2^{\frac{连通块个数}{2}-1}$​，减$1$是因为根节点一定是$0$，复杂度$O(n^2 \alpha(n))$。</p>
+<p>考虑分治，每次加入一半的边即可。可撤销并查集维护一下，复杂度$O(n \log^2 n)$。</p>
+<p>）</p>
+<h3 id="最短路（回去看聊天记录有没有原题？，据说POI的）"><a href="#最短路（回去看聊天记录有没有原题？，据说POI的）" class="headerlink" title="最短路（回去看聊天记录有没有原题？，据说POI的）"></a>最短路（回去看聊天记录有没有原题？，据说POI的）</h3><h4 id="题意-13"><a href="#题意-13" class="headerlink" title="题意"></a>题意</h4><p>给定一张$n$个点$m$条边的无向简单连通图，其中每条边都为白色。接下来，对于任意一对点，若在原图中它们之间的最短路为$2$，则在它们之间连一条黑边。现在令每条白边的边权为$a$，每条黑边的边权为$b$，你需要求出在新图中从$1$号点出发到其它所有点的最短路。</p>
+<p>$n,m\le 10^5$</p>
+<h4 id="sol-13"><a href="#sol-13" class="headerlink" title="sol"></a>sol</h4><p>首先，若$2a\le b$，则直接跑最短路即可。</p>
+<p>否则最短路上相邻的三个点一定会被一条黑边替代。因此若$a\le b$，那么每个点的最短路显然是若干个$b$加上至多一个$a$​。$\lfloor\frac{k}{2}\rfloor\cdot b+(k\bmod 2)\cdot a$。</p>
+<p>如果$b&lt;a$，最短路就有可能会把最后那个$a$​替换成$b$（即走的边都是$b$）。因此现在就是算在只有$b$的图上，$1$​号点到所有点的最短路。</p>
+<p>但是$b$边可能有$n^2$条，我们不能暴力把图建出来。考虑如下的过程：</p>
+<ol>
+<li>每次从队列头取出一个点$u$。</li>
+<li>暴力枚举$u$的连边$v$以及$v$的连边$w$，若不存在$(u,w)$的$a$边，则把$w$加入队列中，并删除边$(v,w)$。</li>
+</ol>
+<p>这个过程相当于 bfs，正确性显然。由于三元环最多是$\mathcal O(m\sqrt m)$个，如果不是三元环则必然会删掉一条边，因此总复杂度是$\mathcal O(m\sqrt m)$的。</p>
+<h3 id="匹配"><a href="#匹配" class="headerlink" title="匹配"></a>匹配</h3><h4 id="题意-14"><a href="#题意-14" class="headerlink" title="题意"></a>题意</h4><p>有$n$种糖果，每种糖果恰好有两个。现在这个$2n$个糖果排成一排，但是你分不清这些糖果哪些是同一种了。有如下两个操作：</p>
+<ol>
+<li>往口袋里放一颗糖果</li>
+<li>从口袋里拿出一颗糖果</li>
+</ol>
+<p>每次操作之后你都可以知道当前口袋里有多少种不同的糖果。你需要在$10^6$次操作内给这些糖果两两配对（即找出所有同种的）</p>
+<p>$n\le 43000$。</p>
+<h4 id="sol-14"><a href="#sol-14" class="headerlink" title="sol"></a>sol</h4><p>首先把所有糖果顺次加入一遍，就可以把这$2n$个糖果分成两部分，每部分内恰好$n$个且种类都不同。</p>
+<p>然后考虑分治，每次把第二部分的糖果加入一半，看看第一部分哪些糖果在里面即可，否则在第二部分另外一半，然后就这么递归就行了。注意每次如果完全清空口袋会很浪费，我们手动记一下当前哪些糖果在口袋里，每次操作视为把一半取反，一样能够判断出每个糖果是不是在这一半里。因此操作次数$T(n)&#x3D;2T\left(\frac{n}{2}\right)+\frac{3n}{2}&#x3D;\frac{3n}{2}\cdot \log n&#x3D;2.16\cdot n\ln n$​​。</p>
+<p>这样分治操作次数会略多于$10^6$，但是注意到每次分一半不一定是最优的。具体的，假设每次分成$pn$和$(1-p)\cdot n$两部分，每次操作$pn$这部分，则：<br>$$<br>T(n)&#x3D;T(pn)+T((1-p)n)+(1+p)n<br>$$<br>令$T(n)&#x3D;kn\ln n$，则代入上式可以解得$k&#x3D;-\frac{1+p}{p\ln p+(1-p)\ln (1-p)}$ ，求导后求最值得方程$\ln p-2\cdot \ln (1-p)&#x3D;0$，因此$p&#x3D;\frac{3-\sqrt 5}{2}$时最优，复杂度为$2.08\cdot n\ln n$，可以通过。</p>
+<h3 id="机器人"><a href="#机器人" class="headerlink" title="机器人"></a>机器人</h3><h4 id="题意-15"><a href="#题意-15" class="headerlink" title="题意"></a>题意</h4><p>有一个$n\times m$的网格，有些位置上站了机器人，机器人都有朝向，并且视野范围如下：</p>
+<img src="https://files.catbox.moe/xvp2gr.png" style="zoom:50%;" />
+
+<p>每个机器人可以最多转90度，你需要算出至少转多少个机器人可以使得不存在两个机器人可以互相看见，并给出一组方案。</p>
+<p>$n,m\le 2000$。</p>
+<h4 id="sol-15"><a href="#sol-15" class="headerlink" title="sol"></a>sol</h4><p>先把图旋转45度，就不存在斜线了。考虑两个机器人如果能够互相看见，那么它们一定是左上-右下或者右上-左下的关系，并且我们必须把其中一个旋转90度。</p>
+<p>注意到这两种机器人是独立的，因为如果一个机器人不管往哪边转90度都会碰到另一侧能看见它的机器人，那么另一侧的这两个机器人一定互相可见。因此我们分别独立的处理这两种情况即可。</p>
+<p>考虑如果只有右上-左下的关系，最后一定能找到一条轮廓线（经过若干格子的线）使得朝向右上的机器人都在它或它上方，左下的机器人都在它或它下方，如果一个机器人被旋转了90度就没有限制做一个简单的二维 dp 即可。</p>
+<p>方案就把 dp 结果跑出来，看看哪些机器人是不动的，剩下的机器人优先往一种方向转，如果转不了了就往另一种方向转，这样同种机器人里被旋转的也一定不存在互相看见的。</p>
+<p>时间复杂度$\mathcal O(nm)$。</p>
+<h3 id="鸽子"><a href="#鸽子" class="headerlink" title="鸽子"></a>鸽子</h3><h4 id="题意-16"><a href="#题意-16" class="headerlink" title="题意"></a>题意</h4><p>求有多少个<strong>严格递增</strong>的整数序列$x_i$，满足$x_1&#x3D;2$，且对于任意的$i,j$，都有$x_i^j&lt;(x_j+1)^i$。</p>
+<p>答案对一个质数取模。</p>
+<p>$n\le 10^{10}$。</p>
+<h4 id="sol-16"><a href="#sol-16" class="headerlink" title="sol"></a>sol</h4><p>事实上，如果满足$x_1&#x3D;2$和后面那个条件，序列一定严格递增。</p>
+<p>首先对于每个数字都有$2^i\le x_i&lt;3^i$。</p>
+<p>考虑如果存在$i&lt;j,x_i&#x3D;x_j&#x3D;a$，则</p>
+
+$a^{\frac{1}{i}}<(a+1)^{\frac{1}{j}}\le (a+1)^{\frac{1}{i+1}}$
+
+<p>，即$a&lt;\left(\frac{a+1}{a} \right)^i$，当$a\ge 2^i$时上述不等式显然不成立。</p>
+<p>如果存在$i&lt;j,x_i&gt;x_j$，那么必然有</p>
+
+$x_i^{\frac{1}{i}}\ge x_i^{\frac{1}{j}}\ge (x_j+1)^{\frac{1}{j}}$
+
+<p>，矛盾。因此可以直接将严格递增的条件扔掉。</p>
+<p>这样就很好分析了，记$a$​为</p>
+
+$x_i^{\frac{1}{i}}$
+
+<p>​的最大值，$b$​为</p>
+
+$(x_i+1)^{\frac{1}{i}}$
+
+<p>​的最小值，则必然有$a&lt;b$​。考虑把所有合法的</p>
+
+$x_i^{\frac{1}{i}},(x_i+1)^{\frac{1}{i}}$
+
+<p>​拿出来<code>sort</code>一遍去重，最终相邻的两个元素和合法序列一定一一对应。</p>
+<p>这是因为对于每个$i$，显然只有一个</p>
+
+$\left[x_i^{\frac{1}{i}},(x_i+1)^{\frac{1}{i}} \right]$
+
+<p>会包含最终选出的小区间。</p>
+<p>于是问题就变成了求有多少个不同的</p>
+
+$x_i^{\frac{1}{i}}\in [2,3)$
+
+<p>​。考虑 dp，令$f(i)$​表示第$i$​个会新增多少，主要例如$\sqrt 8&#x3D;\sqrt[4] {64}$：<br>$$<br>\begin{alignat}{2}<br>f(i)&amp;&#x3D;3^i-2^i-\sum_{j\mid i,j&lt;i}f(j)\<br>f(i)&amp;&#x3D;\sum_{j\mid i}\mu\left(\frac{i}{j} \right)(3^j-2^j)<br>\end{alignat}<br>$$<br>最后相当于求$f$的前缀和。<br>$$<br>\sum_{i&#x3D;1}^n \sum_{j\mid i} \mu\left(\frac{i}{j} \right)(3^j-2^j)<br>$$<br>因此杜教筛处$\mu$的前缀和即可。时间复杂度</p>
+
+$\mathcal O(n^{\frac{2}{3}})$
+
+<p>。</p>
+<h3 id="小Q的序列"><a href="#小Q的序列" class="headerlink" title="小Q的序列"></a>小Q的序列</h3><h4 id="题意-17"><a href="#题意-17" class="headerlink" title="题意"></a>题意</h4><p>一个三元组构成的序列，满足：</p>
+<ol>
+<li>$(a_0,b_0,c_0)&#x3D;(2,1,0)$</li>
+<li>$(a_{i+1},b_{i+1},c_{i+1})&#x3D;(a_i^2+b_i^2,(a_i+c_i)b_i,b_i^2+c_i^2)$​</li>
+</ol>
+<p>运算在$\bmod p$意义下进行，不保证$p$是质数。</p>
+<p>$Q$组询问，每次给定$x,y,z,m$，请你输出第$m$项之后$(x,y,z)$的第一次出现位置。如果不存在输出$-1$。</p>
+<p>$Q\le 3000,p\le 10^9,m\le 10^{18}$</p>
+<h4 id="sol-17"><a href="#sol-17" class="headerlink" title="sol"></a>sol</h4><p>首先不难归纳证明$2\cdot b_i+c_i&#x3D;a_i$，这是因为$b^2+2ab+c^2+2bc&#x3D;b^2+2ab+ac&#x3D;a^2+b^2$。</p>
+<p>不妨令$a_i-b_i&#x3D;b_i+c_i&#x3D;x_i$，则现在的数对为$(x_i+b_i,b_i,x_i-b_i)$。</p>
+<p>重新写一下递推式，会发现$b_{i+1}&#x3D;2b_i^2+2(x_i-b_i)b_i&#x3D;2x_ib_i$。<br>$$<br>x_{i+1}-b_{i+1}&#x3D;b_i^2+(x_i-b_i)^2&#x3D;2b_i^2+x_i^2-2x_ib_i<br>$$<br>即$x_{i+1}&#x3D;2b_i^2+x_i^2$。</p>
+<p>于是我们会发现，$x_{i+1}+\sqrt 2b_{i+1}&#x3D;\left(x_i+\sqrt 2 b_i \right)^2,x_{i+1}-\sqrt 2b_{i+1}&#x3D;\left(x_i-\sqrt 2b_i \right)^2$​。</p>
+<p>这类似于线性递推的通项公式，即令$t_i&#x3D;2t_{i-1}+t_{i-2},t_0&#x3D;0,t_1&#x3D;1$，则有：<br>$$<br>b_i&#x3D;\frac{1}{2\sqrt 2}\left(\left(1+\sqrt 2\right)^{2^i}-\left(1-\sqrt 2 \right)^{2^i} \right)&#x3D;t_{2^i}<br>$$</p>
+<p>令$q_i&#x3D;2q_{i-1}+q_{i-2},q_0&#x3D;1,q_1&#x3D;1$，也可以类似得到$x_i&#x3D;q_{2^i}$，且根据首项关系很容易得到$q_i&#x3D;t_i+t_{i-1}$，于是三元组就可以写成</p>
+
+$(t_{2^i+1},t_{2^i},t_{2^{i-1}})$
+
+<p>。</p>
+<p>为考虑求出递推式$t$的循环节，由于可以写成矩阵的幂次，于是可以对矩阵做<code>BSGS</code>。</p>
+<p>为了避免求逆，可以令$M&#x3D;\frac{G^a}{B^b}$，这样在已知$M$的情况下，枚举$b$做矩阵乘法即可，用哈希表判断求出的向量是否存在。由于递推式可逆（即反向计算时不需要逆元），这个递推式一定是纯循环的。</p>
+<p>于是对于每组询问，答案一定是类似于$2^i\equiv x\pmod C$这样的，我们可以用上面的方法求出$x$，然后再求出最小的$k\ge m,2^k\equiv x\pmod C$。</p>
+<p>这可以转化为求最小的非负整数$t$，使得$2^m\cdot 2^t\equiv x\pmod C$，不难发现根据欧拉定理，$t$不会超过$\varphi(C)$​，因此仍然可以<code>BSGS</code>。</p>
+<p>调整块大小可以做到$\mathcal O(\sqrt{QC})$。</p>
+<p>（这个数列类似于斐波那契数列，应该是能够证明循环节与模数同级的）</p>
+<h3 id="图"><a href="#图" class="headerlink" title="图"></a>图</h3><h4 id="题意-18"><a href="#题意-18" class="headerlink" title="题意"></a>题意</h4><p>给定一张$n$个点$m$条边的无向连通图和其中一棵生成树，要求删掉正好两条树边和一些非树边，使得图不连通。求最少删掉几条非树边。保证以$1$号点为生成树的根时，非树边的两端的最近公共祖先是$1$号点。</p>
+<p>$n,m\le 10^5$。</p>
+<h4 id="sol-18"><a href="#sol-18" class="headerlink" title="sol"></a>sol</h4><p>分类讨论一下，如果选的两条边在同一棵子树里，不难发现这两条边一定是连续的祖先-孩子关系（要让连通块与外面非树边连的尽量少），因此答案直接树 dp 就好了。（整个子树和外面连的非树边个数减掉任意一个子树和外面连的非树边个数，然后要让他尽量小）</p>
+<p>如果两条边不在同一棵子树里，考虑贡献是它们俩子树向外的非树边之和减掉它们之间的非树边个数的两倍（$f_{i}+f_j-2\times g_{i,j}$）。我们枚举其中一条边，一个点连出非树边的贡献是一条到根的链$-&#x3D;2$，然后求全局最小值。</p>
+<p>可以树链剖分+线段树合并维护，由于线段树总节点个数是$\mathcal O(n\log^2 n)$，因此复杂度也是两个$\log$的。</p>
+<h3 id="ARC080F"><a href="#ARC080F" class="headerlink" title="ARC080F"></a>ARC080F</h3><h4 id="题意-19"><a href="#题意-19" class="headerlink" title="题意"></a>题意</h4><p>有无穷个硬币，初始有$n$个正面向上，其余均正面向下。</p>
+<p>你每次可以选择一个奇质数$p$，并将连续$p$个硬币都翻转。</p>
+<p>问最小操作次数使得所有硬币均正面向下。</p>
+<p>$n\le 200$。</p>
+<h4 id="sol-19"><a href="#sol-19" class="headerlink" title="sol"></a>sol</h4><p>不妨考虑差分。差分后$1$的数量一定为偶数。</p>
+<p>然后一次操作$[l,r]$会翻转两端$l-1$和$r$。</p>
+<p>现在问题变成两两配对使得操作次数尽量少。</p>
+<p>有三种情况：</p>
+<ol>
+<li>$|i-j|$是奇质数，那么$1$步即可。</li>
+<li>$|i-j|$是偶数，那么$2$步即可。（$2$可以$5-3$，$4$可以$7-3$，$\ge 6$的可以哥德巴赫猜想）</li>
+<li>$|i-j|$是奇非质数，那么$3$步即可。（$1$可以$7-3-3$，然后最小的奇合数是$9$，$\ge 9$的可以拆分成$3+$一个$\ge 6$的偶数，可以哥德巴赫猜想）</li>
+</ol>
+<p>按奇偶变成二分图，希望$1$情况尽量多（跑二分图匹配），剩余每边分别尽量用$2$的情况，最后如果两边没消完就补一次$3$的情况。</p>
+<p>时间复杂度$\mathcal O(n^3)$。</p>
+<h3 id="ARC076F"><a href="#ARC076F" class="headerlink" title="ARC076F"></a>ARC076F</h3><h4 id="题意-20"><a href="#题意-20" class="headerlink" title="题意"></a>题意</h4><p>有$n$个人和$m$条板凳，每个板凳只能坐一个人，第$i$个人可以坐在编号为$[1,l_i]\cup [r_i,m]$的板凳，求最少会有多少个人不能坐下。</p>
+<p>$n,m\le 2\times 10^5,0\le l_i&lt;r_i \le m+1$。</p>
+<h4 id="sol-20"><a href="#sol-20" class="headerlink" title="sol"></a>sol</h4><p>如果只有$l$的限制，那么显然是按照$l$排序之后每次选最小的没有被占据的。</p>
+<p>我们仍然按照$l$排序，每次选最小的没有被占据的，如果没有这样的位置，那么就考虑把之前的一个人“替换”出来，需要被替换出来的人的$r$比当前的$r$小（这样替换出来才有更多的选择空间），如果有多个满足要求显然应该替换$r$最小的出来。</p>
+<p>操作完之后还剩下若干个人，并且此时被占据的位置一定是个前缀，因此按照$r$从大到小排序再贪心即可，此时坐不下的人就没办法了。</p>
+<p>可以使用小根堆维护，时间复杂度$\mathcal O(n\log n)$。</p>
+<p>也可以直接用 Hall 定理。</p>
+<p>假设最后有$k$​个人选不到，那么就说明任选$t$​个人，设他们最大的$l_i$​为$L$​，最小的$r_i$​为$R$​，则需要满足$L+n-R+1+k\ge t$​。</p>
+<p>考虑枚举$l$​，那么就变成在当前的人里选$t$​个使得$n-R-t$​最小，用线段树维护每个$R$​对应的答案，那么加入一个人就相当于区间$-1$​，然后每次询问全局最小值即可。</p>
+<p>时间复杂度$\mathcal O(n\log n)$。</p>
+<h3 id="网格（这题好像也有原题）"><a href="#网格（这题好像也有原题）" class="headerlink" title="网格（这题好像也有原题）"></a>网格（这题好像也有原题）</h3><h4 id="题意-21"><a href="#题意-21" class="headerlink" title="题意"></a>题意</h4><p>$n\times m$的网格，有些格子上有村庄，保证第一行第一列是个村庄。</p>
+<p>你需要在格子的边缘上建篱笆，每个格子的每条边都有一个代价，你需要让篱笆形成一个圈把所有村庄围住。</p>
+<p>注意一条边两侧可以建两个篱笆，但需要付出两倍的代价，如下图：</p>
+<img src="https://files.catbox.moe/p5p0ac.png" style="zoom: 80%;" />
+
+<p>你要让花费的总代价最小（例如上图）</p>
+<p>$n,m\le 400$。</p>
+<h4 id="sol-21"><a href="#sol-21" class="headerlink" title="sol"></a>sol</h4><p>考虑如下的结论：把所有村庄的左上角到整个网络的左上角的最短路全部标记出来，则必然存在一种最优方案使得篱笆包含了全部的这些最短路。</p>
+<p>假设最终答案的区域没有包含所有的最短路，如下图：</p>
+<img src="https://files.catbox.moe/k2wazv.png" style="zoom:80%;" />
+
+<p>显然将黄色区域加进去不会使答案变劣。因此不断这么操作就可以把所有最短路都添加进去。</p>
+<p>于是可以考虑把每个格点分成四个点，如右图，然后最短路经过的边断开（村庄所在的网格四个点删掉），跑一遍最短路即可。</p>
+<img src="https://files.catbox.moe/z7vgem.png" style="zoom:80%;" />
+
+<p>总复杂度$\mathcal O(nm\log {nm} )$。</p>
+<h3 id="Project-Euler690"><a href="#Project-Euler690" class="headerlink" title="Project Euler690"></a>Project Euler690</h3><h4 id="题意-22"><a href="#题意-22" class="headerlink" title="题意"></a>题意</h4><p><a target="_blank" rel="noopener" href="https://pe-cn.github.io/690/">https://pe-cn.github.io/690/</a></p>
+<p>Tom 和 Jerry 在玩躲猫猫游戏。具体的，迷宫可以看成是$n$个点的无向图，每天早上，Tom 可以查看某个点，并且如果 Jerry 碰巧在这个点上，那么 Tom 就赢了。每天晚上，Jerry 必须走到相邻的一个点上。</p>
+<p>求有多少种本质不同的无向图使得 Jerry 无论采用什么策略，Tom 都可以在有限步内必胜。两个无向图本质不同当且仅当不能通过重标号使得它们完全相同。</p>
+<p>答案对$10^9+7$取模。</p>
+<p>$n\le 10^5$​</p>
+<h4 id="sol-22"><a href="#sol-22" class="headerlink" title="sol"></a>sol</h4><p>首先，图有环则必然不可能在有限步内胜利，因此图一定是森林。</p>
+<p>其次，对于树而言，Tom 能抓到 Jerry 当且仅当树上不存在如下图的结构：</p>
+<img src="https://files.catbox.moe/otulmv.png" style="zoom: 67%;" />
+
+<p>这种情况手玩即可证明 Tom 永远不能抓到 Jerry（巨大分类讨论）</p>
+<p>大概原理就是由于每棵子树都足够深，因此 Jerry 有足够多的时间在子树间跑动，Tom 无法把 Jerry限制住。</p>
+<p>接下来证明只要不存在这种结构，则一定会取胜。</p>
+<p>否则的话，树一定是一条主链上挂了若干个深度不超过$2$的子树，考虑证明这种情况一定必胜。</p>
+<p>先考虑一种简单的情况，即一条长度为$n$的链怎么做。</p>
+<p>黑白染色后，询问$1,2,3,\cdots ,n$，不难发现如果 Jerry 初始所在节点和$1$号点颜色一样的话一定会被抓住（因为它时刻和当前询问点距离$\ge 2$，没法跨过询问点）。</p>
+<p>否则我们就知道了 Jerry 所在节点一定和$1$号点不同，计算一下 Jerry 当前所在节点颜色是啥，重新选择一下从$1$开始还是$2$开始即可。</p>
+<p>如果是一条链上挂了一些东西，稍稍改进一下，注意仍然保证链上点询问的奇偶性就可以让 Jerry 不能在链上乱跑。</p>
+<p>考虑对于链上的一个点$a$，设$a$下面挂了若干个点$b_1,b_2,\cdots ,b_k$，我们询问$a,b_1,a,b_2,\cdots ,a,b_k,a$，考虑一下这样会发生什么，如果当前 Jerry 在这棵子树里且颜色和$a$相同，就一定会被抓住，且我们仍然能够保证 Jerry 在这棵子树里且颜色与$a$相同，就一定会被抓住，且我们仍然能够保证 Jerry 如果初始颜色和$1$一样，则不会在这个过程中跨过$a$。</p>
+<p>于是这样步步紧逼 Jerry，就可以达到如果 Jerry 所在点初始颜色和$1$一样就一定会被抓。同理，算一下 Jerry 此时初始颜色是否和$1$号点一样，如果不是就随便操作一次，然后再重新上述过程即可。</p>
+<p>因此只要这样 Jerry 就一定会被抓。</p>
+<p>接下来考虑怎么计数。</p>
+<p>先算出一棵树的答案，如果直径大于$4$，则一定是两边两个长度恰好为$2$的、中间一连串树高不超过$2$的。对于“中间”，生成函数为$M(x)&#x3D;xP(x)$，其中$P(x)$​是整数划分。对于“两边”，生成函数为$E(x)&#x3D;M(x)-\frac{x}{1-x}$，即减掉树高恰好为$1$的。</p>
+<p>因此中间一串就是$S(x)&#x3D;\frac{1}{1-M(x)}$​，由于翻转对称性，答案的生成函数为：<br>$$<br>B(x)&#x3D;\frac{1}{2}\left(E(x)^2S(x)+E(x^2)S(x^2)(1+M(x)) \right)<br>$$<br>如果直径不超过$4$则一定合法，把中心提根，则深度不会超过$2$，因此整数划分一下，注意直径为$3$的时候有两个中心，如果这两个中心长得不一样就会被计算两次，因此要减掉。</p>
+<p>同时如果直径为$2$，那么事实上每个节点都会被提根一次，也要减掉（即减掉根节点只有一棵子树的情况）。</p>
+<p>直径为$3$的需要减掉的情况为：<br>$$<br>\frac{1}{2}\left(\left(\frac{x^2}{1-x} \right)^2-\frac{x^4}{1-x^2} \right)&#x3D;\frac{x^5}{(1-x)^2(1+x)}<br>$$<br>直径为$2$的需要减掉的情况为：<br>$$<br>\frac{x^3}{1-x}<br>$$<br>因此生成函数为：<br>$$<br>A(x)&#x3D;xP(x)-\frac{x^3}{(1-x)^2(1+x)}<br>$$<br>则树的生成函数就是：<br>$$<br>T(x)&#x3D;A(x)+B(x)<br>$$<br>森林的生成函数是树的生成函数的 Euler Transform，即：</p>
+
+$$
+\prod_{i=1}^{\infty}\frac{1}{(1-x^i)^{t_i}}=\exp \sum_{i=1}^{\infty}\sum_{j=1}^{\infty}\frac{t_i x^{ij}}{j}
+$$
+
+
+<p>因此$\exp$即可。复杂度$\mathcal O(n\log n)$。然而模数是$10^9+7$？？？？？</p>
+<h3 id="AGC018F"><a href="#AGC018F" class="headerlink" title="AGC018F"></a>AGC018F</h3><h4 id="题意-23"><a href="#题意-23" class="headerlink" title="题意"></a>题意</h4><p>给定两棵带标号的有根树，你需要给每个点赋权值，使得每棵子树内部的权值和为$1$或$-1$。给出方案或报告无解。</p>
+<p>$n\le 10^5$。</p>
+<h4 id="sol-23"><a href="#sol-23" class="headerlink" title="sol"></a>sol</h4><p>首先可以算出每个点最终权值的奇偶性，如果两棵树中的对应点奇偶性不同，显然无解。</p>
+<p>事实上只要有解，就可以给出一个权值都是$-1,0,1$的方案。</p>
+<p>首先如果一个点要是偶数（即有奇数个儿子），那么直接把它的权值设为$0$.</p>
+<p>否则，它的子树内（不含它自己）必然有偶数个权值是奇数的点。我们把这些点两两配对，使得每个权值为奇数的点的子树中，不存在孤立的权值为奇数的点（即全部两两配对完毕）。</p>
+<p>这是很好构造的，<code>dfs</code>先匹配完子树，然后剩余点两两匹配即可。</p>
+<p>只要能够对于匹配点，一个点取$1$，另一个取$-1$，就可以满足要求了。</p>
+<p>我们把一对匹配点连边，把两棵树对应的图合起来，容易发现这是个二分图（因为不会有相邻的两条边来自于同一棵树）。</p>
+<p>因此直接黑白染色，黑点填$1$，白点填$1$即可。</p>
+<p>复杂度$\mathcal O(n)$。</p>
+<h3 id="AGC027F"><a href="#AGC027F" class="headerlink" title="AGC027F"></a>AGC027F</h3><h4 id="题意-24"><a href="#题意-24" class="headerlink" title="题意"></a>题意</h4><p>给定两棵树 A,B，你每次可以把 A 的某个叶节点接到其它节点上。每个节点最多只能被操作一次。</p>
+<p>问 A 能否操作到 B，如果能输出最小操作次数。</p>
+<p>$n\le 50$</p>
+<h4 id="sol-24"><a href="#sol-24" class="headerlink" title="sol"></a>sol</h4><p>如果 A 到 B 存在某个节点没有被操作过（设为 r），那么两棵树都以 r 为根，不难发现一定是从有根树的叶节点开始做起操作。</p>
+<p>并且由于一个点最多被操作一次，因此一个点被操作当且仅当他在两棵树中的父亲不同。且它的操作时间必然在 A 中它父亲的操作时间之前、B 中父亲的操作时间之后。</p>
+<p>因此连边拓扑排序即可，不难发现只要能拓扑排序出来，必然就是一个合法解。</p>
+<p>如果不存在节点没有被操作过，可以直接暴力枚举第一次操作的叶子以及它操作之后的父亲，这样在之后它就是个不动点（不能被第二次操作了），提根做上述拓扑排序即可。</p>
+<p>总复杂度$\mathcal O(n^3)$。</p>
+
+    </div>
+</article> </main>
+
+<div class="fab-container" id="fabContainer">
+    <div class="fab-menu">
+        <div class="fab-btn sub" id="btnTheme" title="切换环境感知">◐</div>
+        <div class="fab-btn sub" id="btnMusic" title="音频终端">♫</div>
+    </div>
+    <div class="fab-btn fab-main" id="btnMain">⧉</div>
+    <div class="music-panel" id="musicPanel">
+    <div class="mp-header">AUDIO TERMINAL //</div>
+    <div class="mp-title" id="mpTitle">选择曲目...</div>
+    
+    <div class="mp-progress-container">
+        <span id="mpTimeCurrent">00:00</span>
+        <input type="range" class="mp-progress-bar" id="mpProgressBar" value="0" min="0" max="100">
+        <span id="mpTimeTotal">00:00</span>
+    </div>
+    
+    <div class="mp-controls">
+        <button class="mp-btn" id="mpPrev">⏮</button>
+        <button class="mp-btn play-btn" id="mpPlayPause">▶</button>
+        <button class="mp-btn" id="mpNext">⏭</button>
+    </div>
+    
+    <ul class="mp-playlist" id="mpPlaylistUI">
+        </ul>
+</div> </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("PRTS: System Booting...");
+
+    // ================= 1. UI 中枢系统 =================
+    const fabContainer = document.getElementById('fabContainer');
+    const btnMain = document.getElementById('btnMain');
+    const musicPanel = document.getElementById('musicPanel');
+
+    if (btnMain && fabContainer) {
+        btnMain.addEventListener('click', () => {
+            fabContainer.classList.toggle('open');
+            btnMain.style.transform = fabContainer.classList.contains('open') ? 'rotate(45deg)' : 'rotate(0)';
+            if(!fabContainer.classList.contains('open') && musicPanel){
+                musicPanel.classList.remove('active');
+            }
+        });
+    }
+
+    const btnTheme = document.getElementById('btnTheme');
+    let currentTheme = 'dark';
+    function setTheme(theme) { currentTheme = theme; document.body.setAttribute('data-theme', theme); }
+    function autoTheme() { const hour = new Date().getHours(); setTheme((hour >= 6 && hour < 18) ? 'light' : 'dark'); }
+    autoTheme();
+    if(btnTheme) btnTheme.addEventListener('click', () => { setTheme(currentTheme === 'dark' ? 'light' : 'dark'); });
+
+    // ================= 2. 音乐通讯终端 =================
+    // 【修复】：去除了容易引发引擎崩溃的 EJS 标签，直接使用绝对路径
+    const playlist = [
+        { name: "01. 生命流「熠曲丰碑」-2025音律联觉ver.", src: "/music/生命流「熠曲丰碑」-2025音律联觉.mp3" },
+        { name: "02. 櫂", src: "/music/ヨルシカ - 櫂.mp3" },
+        { name: "03. ヰ世界の宝石譚", src: "/music/ヰ世界の宝石譚.mp3" },
+        { name: "04. KAWAIIめたもる交響曲", src: "/music/KAWAIIめたもる交響曲.mp3" }
+    ];
+
+
+    let currentTrackIndex = 0;
+    const audio = new Audio();
+    const btnMusic = document.getElementById('btnMusic');
+    const mpPlayPause = document.getElementById('mpPlayPause');
+    const mpPlaylistUI = document.getElementById('mpPlaylistUI');
+
+    if(btnMusic && musicPanel) {
+        btnMusic.addEventListener('click', () => { musicPanel.classList.toggle('active'); });
+
+        if (mpPlaylistUI) {
+            playlist.forEach((track, index) => {
+                let li = document.createElement('li');
+                li.textContent = track.name;
+                li.onclick = () => loadTrack(index, true);
+                mpPlaylistUI.appendChild(li);
+            });
+        }
+
+        function loadTrack(index, autoPlay = false) {
+            if(playlist.length === 0) return;
+            currentTrackIndex = index;
+            audio.src = playlist[index].src;
+            document.getElementById('mpTitle').textContent = playlist[index].name;
+
+            if(mpPlaylistUI) {
+                const items = mpPlaylistUI.querySelectorAll('li');
+                items.forEach(item => item.classList.remove('playing'));
+                if(items[index]) items[index].classList.add('playing');
+            }
+            if (autoPlay) togglePlay(true);
+        }
+
+        function togglePlay(forcePlay = false) {
+            if (audio.paused || forcePlay) {
+                audio.play().then(() => {
+                    if(mpPlayPause) mpPlayPause.textContent = "⏸";
+                    btnMusic.classList.add('btn-playing');
+                }).catch(e => {
+                    console.warn("PRTS: 等待音频源响应...");
+                    if(mpPlayPause) mpPlayPause.textContent = "▶";
+                    btnMusic.classList.remove('btn-playing');
+                });
+            } else {
+                audio.pause();
+                if(mpPlayPause) mpPlayPause.textContent = "▶";
+                btnMusic.classList.remove('btn-playing');
+            }
+        }
+
+        if(mpPlayPause) mpPlayPause.addEventListener('click', () => togglePlay());
+
+        document.getElementById('mpPrev').addEventListener('click', () => { let newIndex = currentTrackIndex - 1; if (newIndex < 0) newIndex = playlist.length - 1; loadTrack(newIndex, true); });
+        document.getElementById('mpNext').addEventListener('click', () => { let newIndex = currentTrackIndex + 1; if (newIndex >= playlist.length) newIndex = 0; loadTrack(newIndex, true); });
+        audio.addEventListener('ended', () => { document.getElementById('mpNext').click(); });
+
+        const mpProgressBar = document.getElementById('mpProgressBar');
+        const mpTimeCurrent = document.getElementById('mpTimeCurrent');
+        const mpTimeTotal = document.getElementById('mpTimeTotal');
+
+        // 【修复】：重写了时间格式化逻辑，彻底消灭了代码里的 "<" 符号，防止被误认为 HTML
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "00:00";
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60);
+            return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        }
+
+        audio.addEventListener('loadedmetadata', () => {
+            if(mpTimeTotal) mpTimeTotal.textContent = formatTime(audio.duration);
+            if(mpProgressBar) mpProgressBar.max = audio.duration;
+        });
+
+        let isDragging = false;
+        audio.addEventListener('timeupdate', () => {
+            if(mpTimeCurrent) mpTimeCurrent.textContent = formatTime(audio.currentTime);
+            if (!isDragging && mpProgressBar) mpProgressBar.value = audio.currentTime;
+        });
+
+        if(mpProgressBar) {
+            mpProgressBar.addEventListener('mousedown', () => isDragging = true);
+            mpProgressBar.addEventListener('mouseup', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+            mpProgressBar.addEventListener('touchstart', () => isDragging = true);
+            mpProgressBar.addEventListener('touchend', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+        }
+
+        loadTrack(0, false);
+    }
+
+    // ================= 3. 背景粒子系统 =================
+    const canvas = document.getElementById('particle-canvas');
+    if(canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const mouse = { x: null, y: null, radius: 50 };
+
+        function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        initCanvas(); window.addEventListener('resize', initCanvas);
+
+        const logoImg = new Image();
+        // 【修复】：去除 EJS，直接指向根目录下的 logo
+        logoImg.src = '/logo.png';
+        logoImg.onload = function() {
+            const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d');
+            const size = 200; tempCanvas.width = size; tempCanvas.height = size;
+            tempCtx.drawImage(logoImg, 0, 0, size, size);
+            const imageData = tempCtx.getImageData(0, 0, size, size).data;
+            for (let y = 0; y < size; y += 2) {
+                for (let x = 0; x < size; x += 2) {
+                    if (imageData[((y * size + x) * 4) + 3] > 128) {
+                        particles.push(new Particle(x * 2.5 + (canvas.width / 2 - 100), y * 2.5 + (canvas.height / 2 - 250)));
+                    }
+                }
+            }
+            animate();
+            console.log("PRTS: Particles Online.");
+        };
+
+        class Particle {
+            constructor(x, y) { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.baseX = x; this.baseY = y; this.density = (Math.random() * 30) + 1; }
+            draw() {
+                ctx.fillStyle = document.body.getAttribute('data-theme') === 'light' ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.6)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2); ctx.fill();
+            }
+            update() {
+                let dx = mouse.x - this.x, dy = mouse.y - this.y, distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouse.radius) {
+                    let force = (mouse.radius - distance) / mouse.radius;
+                    this.x -= (dx / distance) * force * this.density * 0.8; this.y -= (dy / distance) * force * this.density * 0.8;
+                } else {
+                    this.x += (this.baseX - this.x) * 0.12; this.y += (this.baseY - this.y) * 0.12;
+                }
+            }
+        }
+
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
+        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+    }
+});
+</script> </body>
+</html>

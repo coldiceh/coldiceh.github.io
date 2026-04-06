@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<title>Hexo</title>
+<title>SAM | Hexo</title>
 <link rel="icon" href="/avatar.jpg" type="image/jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
@@ -43,226 +43,115 @@
 </aside>
 
 <main class="main-content">
-    <h2 class="archive-title">// DATA ARCHIVE</h2>
-<div class="post-list">
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/%E5%AF%B9%E6%9F%90%E6%A0%A1%E9%83%A8%E5%88%86%E5%9B%9E%E5%BF%86/">对某校部分回忆</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                这辈子和你校最牛学科以及OI赛事都没有任何关系了，干脆来随便写点对你校印象深的事。
-事先声明：本人重度抑郁，重度焦虑，有自残以及伤害他人倾向。
-大概是21年1月来的你校？前几天的感受大概就是你校明明1...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/%E5%AF%B9%E6%9F%90%E6%A0%A1%E9%83%A8%E5%88%86%E5%9B%9E%E5%BF%86/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                有人问我为什么不去机房，为什么不去NOIP，那我好像也只能回答个这个：
+    <article class="post-detail">
+    <h1 class="post-detail-title">SAM</h1>
+    <div class="post-meta">
+        DATE: 2021-06-15
+    </div>
+    <div class="post-content">
+        <p>其结构包含两部分：有向单词无环图（$\texttt{DAWG}$）以及一棵树（$\texttt{parent}$树）。</p>
+<p>它们的节点集合相同。</p>
+<p>目标：最小化节点集合大小！</p>
+<h3 id="DAWG"><a href="#DAWG" class="headerlink" title="DAWG"></a>DAWG</h3><p>$\texttt{DAWG}$是$\texttt{DAG}$，其中每个<strong>节点</strong>表示一个或多个$\texttt{S}$的子串。特别地，起始节点对应$\varnothing$。</p>
+<p>每条转移边上仅有一个字符。从起始节点出发，沿着转移边移动，则每条<strong>路径</strong>都会唯一对应$\texttt{S}$的一个子串。</p>
+<p>每个节点所代表的字符串是$\texttt{S}$的<strong>某个前缀</strong>的<strong>长度连续的后缀</strong>。设$\texttt u$的长度最小、最大的子串分别为$\min_u$和$\max_v$，$\max_u$在$\texttt S$中出现的位置集合为$end_u$。</p>
+<h4 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h4><p>任意两个节点的 end 集合互不相同。</p>
+<h3 id="parent-树"><a href="#parent-树" class="headerlink" title="parent  树"></a>parent  树</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>定义$\texttt u$的**$\texttt{parent}$指针**指向$\texttt v$,当且仅当$|\min_u|&#x3D;|\max_v|+1$，且$\texttt v$所代表的子串均为$\texttt u$子串的后缀，记作$next_u&#x3D;v$。</p>
+<p>显然，所有节点沿着**$\texttt{parent}$指针<strong>向前走，都会走到$\texttt{DAWG}$的起始节点。因此以</strong>$\texttt{parent}$指针<strong>为边，所有节点组成了一棵树，称为</strong>$\texttt{parent}$树**。</p>
+<h4 id="定理-1"><a href="#定理-1" class="headerlink" title="定理"></a>定理</h4><p>在**$\texttt{parent}$树**中，子节点的$end$集合一定是父亲的真子集，即$end_u \subset end_{next_u}$。</p>
+<h2 id="构建：增量法"><a href="#构建：增量法" class="headerlink" title="构建：增量法"></a>构建：增量法</h2><p>$\texttt{SAM}$的构建使用<strong>增量法</strong>：通过$\texttt S$的$\texttt{SAM}$求出$\texttt{S+c}$的$\texttt{SAM}$。</p>
+<p>设此前表示$\texttt S$的节点为$\texttt p$，$\texttt{parent}$树上从$\texttt p$到起始节点的路径为</p>
+<p>$v_1&#x3D;p,v_2,\cdots,v_k$，则一定存在一个$\texttt i$，使得$v_1$~$v_i$都没有$\texttt c$的转移边：</p>
+<p><img src="https://i.loli.net/2021/03/19/17XPAR8ZK4iMu2v.png" alt="Picture.png"></p>
+<p>若$v_i$有$\texttt c$的转移边，则$v_{i+1}$也必有，故没有$\texttt c$转移边的点是$\texttt v$序列的一个前缀：在这个例子中为$v_1$~$v_2$。</p>
+<p>（注：由于$\max_{v_5}+c$属于白板，$\min_{v_4}+c$属于$d$，且$v_4$是$v_5$的$\texttt{parent}$，所以有$|\max_{v_5}|+1&#x3D;|min_{v_4}|$，所以$d$的$\texttt{parent}$为白板。）</p>
+<p>$v_1$~$v_2$添加$\texttt c$得到的是新串长度连续的后缀，用新节点$\texttt u$表示，则：$\max_u&#x3D;\max_{v_1}+\texttt c,\min_u&#x3D;\min_{v_2}+\texttt c$。</p>
+<p><img src="https://i.loli.net/2021/03/19/vI1wGCMLxWqolU6.png" alt="Pi2cture.png"></p>
+<p>共新增了$\texttt{|S|+1}$的后缀，节点$\texttt u$表示了$\min_u$及更长的后缀，而更短的那些可以由$d$及其后缀链接上的路径上的节点来表示。</p>
+<p>（注：这里$v_1\to v_2,v_3\to v_4,v_5\to v_6$中间实际上可能有很多点,如$v_{1.5},v_{3.4},v_{5.6}$之类的，</p>
+<p>因此$\texttt{DAWG}$的性质已经被满足，接下来考虑$\texttt{parent}$树。</p>
+<p>分三种情况讨论：</p>
+<p>第一种情况</p>
+<ul>
+<li>不存在图中的$v_3$。（即所有的点都没有到$\texttt c$的一个转移边）.</li>
+</ul>
+<p><img src="https://i.loli.net/2021/03/20/H5ymXgSU7Zul8Aq.png" alt="graph.png"></p>
+<p>建一个新节点$\texttt{u}$,代表$\texttt{S+c}$串的所有后缀（最短串为$\texttt c$），既然最短的串只有一个字符那么它的$\texttt{parent}$为只能有$0$个字符的东西，空串由起始节点代表，所以新节点$\texttt u$的$\texttt{parent}$指针应该指向$\texttt{start}$节点。</p>
+<ul>
+<li>当$v_3$存在时，分$\max_d$是否等于$\max_{v_3}+C$两种情况讨论</li>
+</ul>
+<p>（这里黄色代表$\texttt{DAG}$上的，绿色代表$\texttt{parent}$树上的。）</p>
+<p><img src="https://i.loli.net/2021/03/20/2R9qbvweS4z8QTk.png" alt="guidingsat%2L7XCO.png"></p>
+<p>如现在有串$\texttt {S&#x3D;cbabba}$</p>
+<p><img src="https://i.loli.net/2021/03/20/SGUs8qR6czWZFe1.png" alt="L9SW~8XTYCY55SA2(DY20.png"></p>
+<p>此时假设$\texttt x$为绿色这一段，此时新增一个$\texttt b$</p>
 
-————————————————————————————————————————————————
-花对钱似乎非常敏感。
-大概是...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1704G/">CF1704G</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                令 $A_i&#x3D;a_i+2a_{i-1}+a_{i-2},B_i&#x3D;b_i-2b_{i-1}+b_{i-2}$，然后可以发现对于任意位置 $i$ 进行操作，除了 $A_{i}$ 将会变...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1704G/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1470F/">CF1470F</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                显然只会存在 $3$ 种本质不同的方式选择两个矩形。
+$x\to \texttt{bab},\texttt{end={4}}$
 
-两个矩形不相交。
 
-这种情况可以直接遍历所有平行 $x&#x2F;y$ 轴的分割线，使选取的两个矩形分别在分割线的两边。分别找出极值点直接计算即...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1470F/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1081H/">CF1081H</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                一个显然错误的想法是分别计算 $A,B$ 本质不同的回文串个数，然后将两者相乘，这将会多次计算一个字符串。
-因此要思考的问题是，为什么会计算多次？
-为了解决这个问题，将用到下面数个引理，如果只是想解决...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1081H/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-08-03</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/08/03/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%A4%BE%E7%BE%A4%E8%AE%A8%E8%AE%BA/">记一次社群讨论</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/08/03/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%A4%BE%E7%BE%A4%E8%AE%A8%E8%AE%BA/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-05-24</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/05/24/l/">l</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-不过这改变不了阿丽娜半路被捅死了（笑）
-感觉群友们APIO玩得好开心。
-...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/05/24/l/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-05-13</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/05/13/CF1423C%20Du%C5%A1an's%20Railway/">CF1423C Dušan&#39;s Railway</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                反正可以直接当 $k&#x3D;3$ 去做，然后考虑直接去构造。
-首先任意给树找一个根，然后将整棵树拆成几个大小为 $\sqrt n$ 的子树，将所有这些子树的根 $u$ 塞到一个点集 $a$ ，然后...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/05/13/CF1423C%20Du%C5%A1an's%20Railway/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-04-30</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/04/30/CF1375I%20Cubic%20Lattice/">CF1375I Cubic Lattice</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                简要题意：
-定义三维空间中的一个 lattice 是满足下列条件的三维整点的集合：
-$$L&#x3D;{u\cdot \overrightarrow{r_1}+v\cdot \overrightarr...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/04/30/CF1375I%20Cubic%20Lattice/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-04-25</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/04/25/-/">?</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-下午水群的时候看到的，群友：
 
-总之有点想笑（）
-没记错的话这个梗是海贼王的来着。
 
-然后晚上又看到了个这个，其实个人觉得这从某种意义上也是”天龙人“的表现吧（）
-挺久以前大概也是作业题全写完，大概...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/04/25/-/">READ MORE +</a>
-            </div>
-        </article>
-    
-</div> </main>
+
+$v_3 \to \texttt {bab,ab,end={4}}$
+
+
+
+<p>因为这两个集合一样，因此将会被合为一个节点，假设这个节点为$\texttt d$。</p>
+<p>那么这个$x$点$+c$转移到的是$\texttt d$，且$x$点的父亲也是$\texttt d$。</p>
+<p>那么就会变成这个样子,这时候会产生一个问题</p>
+<p><img src="https://i.loli.net/2021/03/20/mPHv9xkfcM7R6Q5.png" alt="wwww55.png"></p>
+<p>考虑新加进来了字符$b$</p>
+<p>那么$v_3$集合的$\texttt{bab,ab}$变了，而</p>
+
+$\texttt{end={4,7}}$
+
+<p>。</p>
+<p>那么此时就要将$x$和$v_3$切开。</p>
+<p>而当$max_d&#x3D;max_{v_3}+C$时，即不存在这样的$x$节点。</p>
+<p>此时情况比较简单因为我们不用拆这个点。</p>
+<p>此时考虑一下$\texttt{u}$和$\texttt{d}$的关系。（猜一下$\texttt u$的父亲是$\texttt d$。）</p>
+<p>证明：</p>
+<p>首先$\texttt d$的所有串是$\texttt u$的后缀，并且需要考虑一下长度是否吻合。（这里猜一下是吻合的。）</p>
+<p>这里稍微推一下：</p>
+<p>$\begin{align} |max_{d}| &amp; &#x3D; |max_{v_3}+1| \ &amp; &#x3D; |min_{v_2}|-1+1 \ &amp; &#x3D; |min_u| -1 \ \end{align}$</p>
+<p>所以$u$的$\texttt{parent}$应指向$d$.</p>
+<p>那么当$\max_d \not&#x3D; \max_{v_3}+C$.</p>
+<p>考虑$d$中的串怎么切。</p>
+<p>假设被分割后的集合为$x+C$和$v_3+C$。（两个集合拼起来为$d$.）</p>
+<p>用$d’$表示$x+C$,用$v$表示$v_3+C$。</p>
+<p>首先$d’$的$\texttt{parent}$指针应该指向$v$，然后$v$的$\texttt{parent}$指向原$v_3$指向的东西。</p>
+<p>对于原来$\texttt{parent}$指向$d$的应该都指向$d’$。（因为$d’$保留了最长串，而$\texttt{parent}$是按照最长串定的）。</p>
+<p>然后$u$的$\texttt{parent}$应该指向$v$。</p>
+<p>关于新建节点。</p>
+<p>在实际操作中，每一个点需要存$\max,\min,end,next$。</p>
+<p>而$\max$直接存长度即可，因为可以从$end$集合取一个$|\max|$的再随便弄一个下来就是$\max$了。</p>
+<p>而$\min$可以不存，因为它一定是$next$的$\max$加上什么东西。</p>
+<p>（因为有$end$集合所以有长度集合就可以知道有什么串）</p>
+<p>$end$与其说是存整个集合一般情况为只存第一个出现（即$end$集合最小的数）。要得到完整的$end$集合直接在$\texttt{parent}$树上所有子树上的拼起来就得到了。所以$end$也只需要存一个数。</p>
+<h3 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h3><p><img src="https://i.loli.net/2021/03/21/fEHABvVmZsCrDdu.png" alt="fff.png"></p>
+<p><img src="https://i.loli.net/2021/03/21/lVsgAQJPwxB5GSU.png" alt="ggg.png"></p>
+<p>空间复杂度是线性的：</p>
+<p>证明：</p>
+<p>节点数肯定是线性的，因为一次新建一个$u$，然后把$d$拆成两个点，所有说每次最多加$2$个点，最后总的节点数一定不到$2$倍的字符串长度。</p>
+<p>$\texttt{parent}$树的边数也一定是线性的，因为$\texttt{parent}$树是一棵树，边数等于点数$-1$。</p>
+<p>接下来考虑$\texttt{DAWG}$，考虑给$\texttt{DAWG}$搞一棵生成树，对于一条非树边$u\to v$，来拼一个字符串，沿着树边走到$u$，再沿着非树边走到$v$，接着随便走，（比如以字典序最小）走到一个终态。我们会经过若干条边，将这些边首尾相连就得到了一个字符串$w$，记作$f(u,v)$。（因为是树，所以沿着树边到$u$是唯一的，$u\to v$是唯一的，接下来每一步以字典序最小走也是唯一的）。</p>
+<p>$f(u,v)&#x3D;w$，$w$一定是$s$的一个后缀，因为走到接受态（接受态经过的所有东西都是后缀）。由于给出$f(u,v)$能求出唯一的$w$，给出$w$不一定能求出$f(u,v)$，所以$|u\to v|\leq |w|&#x3D;|s|$，所以$|u\to v|$的数量是$\leq$串长的，所以非树边的个数是小于串长的，然后树边的个数是线性的，所以最后总的边数也是线性的。</p>
+<p>所以空间复杂度是线性的。（用到的部分）。</p>
+<p>时间复杂度是线性的：</p>
+<p>懒得证了…</p>
+<p>就大概第一个循环考虑</p>
+
+$|\max_{next_{last}}|$
+
+<p>，第二个考虑</p>
+
+$|\min_{next_{last}}|$
+
+<p>。</p>
+<p>然后复杂度可能还有考虑如何复制边的复杂度。</p>
+
+    </div>
+</article> </main>
 
 <div class="fab-container" id="fabContainer">
     <div class="fab-menu">

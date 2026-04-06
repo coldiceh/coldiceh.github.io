@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<title>Hexo</title>
+<title>3道数论 | Hexo</title>
 <link rel="icon" href="/avatar.jpg" type="image/jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
@@ -43,226 +43,41 @@
 </aside>
 
 <main class="main-content">
-    <h2 class="archive-title">// DATA ARCHIVE</h2>
-<div class="post-list">
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/%E5%AF%B9%E6%9F%90%E6%A0%A1%E9%83%A8%E5%88%86%E5%9B%9E%E5%BF%86/">对某校部分回忆</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                这辈子和你校最牛学科以及OI赛事都没有任何关系了，干脆来随便写点对你校印象深的事。
-事先声明：本人重度抑郁，重度焦虑，有自残以及伤害他人倾向。
-大概是21年1月来的你校？前几天的感受大概就是你校明明1...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/%E5%AF%B9%E6%9F%90%E6%A0%A1%E9%83%A8%E5%88%86%E5%9B%9E%E5%BF%86/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                有人问我为什么不去机房，为什么不去NOIP，那我好像也只能回答个这个：
+    <article class="post-detail">
+    <h1 class="post-detail-title">3道数论</h1>
+    <div class="post-meta">
+        DATE: 2021-07-08
+    </div>
+    <div class="post-content">
+        <h3 id="debris"><a href="#debris" class="headerlink" title="debris"></a>debris</h3><h4 id="题意："><a href="#题意：" class="headerlink" title="题意："></a>题意：</h4><p>多组数据</p>
+<p>给定素数$P$，求满足$1\leq n,m\leq P(P-1)$且$n^m\equiv m^n \pmod P$的数对$(n,m)$的个数。</p>
+<p>答案对素数$M$取模。</p>
+<p>$T\leq 100,P\leq 10^{12},M\le 10^9$。</p>
+<h4 id="sol"><a href="#sol" class="headerlink" title="sol"></a>sol</h4><p>可以发现$n,m$两个数一定都是$P$的倍数或者都不是$P$的倍数。</p>
+<p>首先讨论两个数都是$P$的倍数的情况，显然此时共有$(P-1)^2$对数对满足条件。</p>
+<p>然后讨论两个数都不是$P$的倍数的情况，考虑$P(P-1)$这个条件。</p>
+<p>假设有一个原根$g$。<br>$$<br>\begin{cases}<br>n&amp;\equiv g^a \pmod P(0\le a&lt;P-1)\<br>n&amp;\equiv b \pmod {P-1}(0\le b &lt;P-1)<br>\end{cases}<br>$$<br>那么此时$n^m\equiv m^n\pmod P$</p>
+<p>就相当于$ad\equiv bc\pmod {P-1}$</p>
+<p>然后求合法解的数量。</p>
+<p>但是注意$P-1$不一定是素数，考虑怎么解。</p>
+<p>因此$a,b,c,d$不一定与$P-1$互质，但是可以用 CRT 的角度对每个素因子分开来处理，最后乘起来即可。然后就是解决：$ad\equiv bc \pmod{p^k}$解的数量。</p>
+<p>具体可以枚举一下$ad,bc$乘积中两边$p$的幂的次数，如果两边都大于$k$一定是合法的，若$a,b,c,d$都与$p$互质，此时由于$p^k$是一个循环群，那么此时答案就是$\varphi(p)^3$，因为此时$a,b,c$可以任取，$d$就是$a\cdot b\cdot c$的逆。否则大概可以迭代一下去算 。</p>
+<h3 id="子"><a href="#子" class="headerlink" title="子"></a>子</h3><h4 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h4><p>求$x^k\bmod m$（$x$为非负整数）的不同值个数，答案对$10^9+7$取模。<br>$$<br>m&#x3D;\prod_{i&#x3D;1}^{ms} p_i^{a_i}\k&#x3D;\prod_{i&#x3D;1}^{ks} q_i^{b_i}<br>$$<br>$ms,ks\leq 2\times 10^5,p_i,q_i\leq 10^7,1\leq a_i,b_i\leq 10^9$。</p>
+<h4 id="sol-1"><a href="#sol-1" class="headerlink" title="sol"></a>sol</h4><p>根据 CRT ，模不同质数的幂的乘积的结果显然等于模单个质数幂的结果的积，接下来只用考虑单个质数的幂。</p>
+<p>对于奇质数$p$，考虑$x^k\bmod p^a$有多少种不同的结果。先考虑$\gcd(x,p)&#x3D;1$的，它们是整数模$p^a$乘法群的元素，它是一个阶为$\varphi(p^a)&#x3D;p^{a-1}\cdot (p-1)$的循环群，因此$x^k\bmod p^a$有$\frac{\varphi(p^a)}{\gcd(k,\varphi(p^a))}$种可能。如果$\gcd(x,p)&gt;1$，那么设$x&#x3D;p\cdot y,x^k&#x3D;p^k\cdot y^k$，即$x^k \bmod p^a&#x3D;p^k\cdot (y^k\bmod p^{a-k})$。于是可以将$a$减去$k$迭代计算。注意到$a$可能很大，需要加速迭代的过程。可以发现迭代时除了最后一项外，贡献是一个公比为$p^k$的等比级数，因此可以快速计算前面的项的和。</p>
+<p>（关于$\gcd$怎么算：$\gcd(k,\varphi(p^a))&#x3D;\gcd(k,p^{a-1}\cdot(p-1))&#x3D;\gcd(k,p^{a-1})\cdot \gcd(k,p-1)$）</p>
+<p>对于$2^a$也可以类似做。但是注意到当$a&gt;2$时，整数模$2^a$乘法群的分解是一个阶为$2^{a-2}$的循环群与一个$2$阶群的直积，因此当$k$为奇数时$x^k \bmod 2^a$显然取遍所有奇数，否则贡献为</p>
 
-————————————————————————————————————————————————
-花对钱似乎非常敏感。
-大概是...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1704G/">CF1704G</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                令 $A_i&#x3D;a_i+2a_{i-1}+a_{i-2},B_i&#x3D;b_i-2b_{i-1}+b_{i-2}$，然后可以发现对于任意位置 $i$ 进行操作，除了 $A_{i}$ 将会变...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1704G/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1470F/">CF1470F</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                显然只会存在 $3$ 种本质不同的方式选择两个矩形。
+$\frac{2^{a-2}}{\gcd(k,2^{a-2})}$
 
-两个矩形不相交。
+<p>。迭代的过程同样可以用等比级数加速计算。</p>
+<p>算$\gcd$的时候需要分解$p-1$，因为限定了$p\leq 10^7$，可以线性预处理最小因子，不算预处理的复杂度为$O((n+m)\log 10^{9})$。</p>
+<h3 id="小A与两位神仙"><a href="#小A与两位神仙" class="headerlink" title="小A与两位神仙"></a>小A与两位神仙</h3><h4 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h4><p>给一个奇质数的正整数次幂$m$。</p>
+<p>有$n$组询问，每次给定$x,y$，保证$\gcd(x,m)&#x3D;1,\gcd(y,m)&#x3D;1$，判定是否存在非负整数$a$使得$x^a\equiv y \pmod m$。</p>
+<p>$n\leq 2\times  10^4,m\leq 10^{18}$。</p>
 
-这种情况可以直接遍历所有平行 $x&#x2F;y$ 轴的分割线，使选取的两个矩形分别在分割线的两边。分别找出极值点直接计算即...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1470F/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1081H/">CF1081H</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                一个显然错误的想法是分别计算 $A,B$ 本质不同的回文串个数，然后将两者相乘，这将会多次计算一个字符串。
-因此要思考的问题是，为什么会计算多次？
-为了解决这个问题，将用到下面数个引理，如果只是想解决...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1081H/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-08-03</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/08/03/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%A4%BE%E7%BE%A4%E8%AE%A8%E8%AE%BA/">记一次社群讨论</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/08/03/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%A4%BE%E7%BE%A4%E8%AE%A8%E8%AE%BA/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-05-24</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/05/24/l/">l</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-不过这改变不了阿丽娜半路被捅死了（笑）
-感觉群友们APIO玩得好开心。
-...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/05/24/l/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-05-13</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/05/13/CF1423C%20Du%C5%A1an's%20Railway/">CF1423C Dušan&#39;s Railway</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                反正可以直接当 $k&#x3D;3$ 去做，然后考虑直接去构造。
-首先任意给树找一个根，然后将整棵树拆成几个大小为 $\sqrt n$ 的子树，将所有这些子树的根 $u$ 塞到一个点集 $a$ ，然后...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/05/13/CF1423C%20Du%C5%A1an's%20Railway/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-04-30</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/04/30/CF1375I%20Cubic%20Lattice/">CF1375I Cubic Lattice</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                简要题意：
-定义三维空间中的一个 lattice 是满足下列条件的三维整点的集合：
-$$L&#x3D;{u\cdot \overrightarrow{r_1}+v\cdot \overrightarr...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/04/30/CF1375I%20Cubic%20Lattice/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-04-25</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/04/25/-/">?</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-下午水群的时候看到的，群友：
-
-总之有点想笑（）
-没记错的话这个梗是海贼王的来着。
-
-然后晚上又看到了个这个，其实个人觉得这从某种意义上也是”天龙人“的表现吧（）
-挺久以前大概也是作业题全写完，大概...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/04/25/-/">READ MORE +</a>
-            </div>
-        </article>
-    
-</div> </main>
+    </div>
+</article> </main>
 
 <div class="fab-container" id="fabContainer">
     <div class="fab-menu">

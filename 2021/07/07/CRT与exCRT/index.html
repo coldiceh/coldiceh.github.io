@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<title>CRT与exCRT | Hexo</title>
+<link rel="icon" href="/avatar.jpg" type="image/jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+
+<canvas id="particle-canvas"></canvas>
+
+<header class="terminal-nav">
+    <a href="/" class="nav-logo">QAQ</a>
+    <nav class="nav-menu">
+        <a href="/" class="nav-item active"><span class="nav-en">INDEX</span><span class="nav-cn">首页</span></a>
+        <a href="#info" class="nav-item"><span class="nav-en">INFORMATION</span><span class="nav-cn">情报</span></a>
+        <a href="#operator" class="nav-item"><span class="nav-en">OPERATOR</span><span class="nav-cn">随笔</span></a>
+        <a href="#world" class="nav-item"><span class="nav-en">WORLD</span><span class="nav-cn">归档</span></a>
+        <a href="#media" class="nav-item"><span class="nav-en">MEDIA</span><span class="nav-cn">标签</span></a>
+    </nav>
+    </header>
+
+<aside class="sidebar">
+    <div class="avatar-box"><img src="/avatar.jpg" alt="Avatar"></div>
+    <h2 class="sidebar-title">COLDICEH</h2>
+    <p class="sidebar-subtitle">Dr.抢不到音律退坑了#8809</p>
+    
+    <div class="sidebar-search">
+        <div class="search-box">
+            <input type="text" id="local-search-input" placeholder="// SEARCH DATABASE...">
+        </div>
+    </div>
+    
+    <div style="margin-top: 20px;" class="sidebar-links">
+        <div style="color: var(--ak-blue); font-weight: bold; margin-bottom: 10px; border-left: 3px solid var(--ak-blue); padding-left: 10px;">常用链接</div>
+        <a href="#">我的随笔</a>
+        <a href="#">我的评论</a>
+        <a href="#">我的参与</a>
+        <a href="#">最新评论</a>
+        <a href="#">我的标签</a>
+    </div>
+</aside>
+
+<main class="main-content">
+    <article class="post-detail">
+    <h1 class="post-detail-title">CRT与exCRT</h1>
+    <div class="post-meta">
+        DATE: 2021-07-07
+    </div>
+    <div class="post-content">
+        <p>无关：<br>$$<br>ax\equiv b \pmod c\x\equiv x_0\pmod{c’}\c’&#x3D;\frac{c}{\gcd(a,c)}<br>$$</p>
+<h2 id="CRT"><a href="#CRT" class="headerlink" title="CRT"></a>CRT</h2><p>对若干互质整数解线性同余方程组：<br>$$<br>\begin{cases} x&amp;\equiv a_1 \pmod {n_1} \ x&amp;\equiv a_2 \pmod {n_2} \ \cdots \ x&amp;\equiv a_k \pmod {n_k} \end{cases}<br>$$<br>其中$n_1,n_2,\cdots ,n_k$两两互质。</p>
+<p>可以证明解在$0\sim \left(\prod\limits_{i} n_i \right)-1$范围内存在且唯一。</p>
+<p>第一个不好证明来证一下第二个：</p>
+<p>假设存在两个解$x_1,x_2\in [0,\prod_i n_i)$</p>
+<p>那么显然有$x_1-x_2\equiv 0\pmod {n_i}$</p>
+<p>因此$x_1-x_2\equiv 0\pmod {\prod_i n_i}$</p>
+<p>所以$x_1&#x3D;x_2$</p>
+<p>尝试构造一个特解：$x_0&#x3D;\sum\limits_{i&#x3D;1}^k a_i\cdot e_i\cdot \operatorname{inv}(e_i,n_i)\bmod \left({\prod\limits_{i} n_i}\right)$，其中$e_i&#x3D;\prod\limits_{i\neq j} n_j\bmod \left(\prod\limits_{i} n_i \right)$。</p>
+<p>所有解形如$x_0+c\cdot \prod\limits_{i&#x3D;1}^n n_i (c\in\mathbb{Z})$。（所以$x\equiv x_0\pmod {\prod_i n_i}$</p>
+<p>需要使用扩展欧几里得算法求逆元。</p>
+<h2 id="exCRT"><a href="#exCRT" class="headerlink" title="exCRT"></a>exCRT</h2><p>当$n_i$不满足两两互质的性质时，此时同余方程组不一定有解，刚刚的构造算法就失效了。</p>
+<p>为了解决一般化的问题，我们需要新的思路。</p>
+<p>首先还是研究解的性质。令$M&#x3D;\operatorname{lcm}(n_1,n_2,\cdots ,n_k)$。如果有解的话，我们取一个在$0\sim M-1$间的特解$x_0$，显然所有解均为$x_0+cM(c\in Z)$的形式。</p>
+<p>那么我们可以发现，我们的解同样可以写成$x\equiv x_0\pmod M$的形式，这同样是一个同余方程。这样，我们可以考虑每次选择两个同余方程合并，得到一个新的同余方程，合并完所有的方程后就找到了最后的解，问题关键在于如何合并两个同余方程。</p>
+<p>具体来说，我们要合并这样的两个同余方程：<br>$$<br>\begin{cases}x&amp;\equiv a_1\pmod {n_1}\x&amp;\equiv a_2 \pmod{n_2} \end{cases}<br>$$<br>一个思路是我们令$x&#x3D;n_1\cdot y_1+a_1&#x3D;n_2\cdot y_2+a_2$，这样我们就可以得到一个不定方程$n_1\cdot y_1+a_1&#x3D;n_2\cdot y_2+a_2$了。</p>
+<p>令$d&#x3D;\gcd(n_1,n_2)$，若$a_1\not\equiv a_2\pmod{d}$，则方程组显然无解。否则我们两边同时除$d$，得到$n_1’\cdot y_1+a_1’&#x3D;n_2’\cdot y_2+a_2’$。因为此时$\gcd(n_1’,n_2’)&#x3D;1$，那么可以直接解出$y_1\equiv(a_2’-a_1’)\cdot \operatorname{inv}(n_1’,n_2’)\pmod {n_2’}$了。</p>
+<p>回代得到$x\equiv n_1\cdot y_1+a_1\pmod {\operatorname{lcm}(n_1,n_2)}$。</p>
+<p>（<br>$$<br>n_1’y_1&#x3D; n_2’y_2+(a_2’+a_1’)\y_1\equiv (a_2’-a_1’)\cdot\operatorname{inv}(n_1’,n_2’)\pmod {n_2’}<br>$$</p>
+<p>）</p>
+<p>同样需要用扩展欧几里得算法求逆元。</p>
+<h2 id="NOI2018-屠龙勇士"><a href="#NOI2018-屠龙勇士" class="headerlink" title="[NOI2018] 屠龙勇士"></a>[NOI2018] 屠龙勇士</h2><h3 id="sol"><a href="#sol" class="headerlink" title="sol"></a>sol</h3><p>其实就是给了一堆<br>$$<br>x\cdot ATK_i\equiv a_i \pmod {p_i}<br>$$<br>但这不是一个标准的同余方程，所以要把它先转成一个标准的形式。</p>
+<p>具体就省略了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="type">int</span> a[<span class="number">111111</span>],p[<span class="number">111111</span>];</span><br><span class="line"><span class="type">int</span> f[<span class="number">111111</span>],b[<span class="number">111111</span>];</span><br><span class="line"><span class="type">int</span> v[<span class="number">111111</span>];</span><br><span class="line"><span class="type">int</span> M,ans;</span><br><span class="line"></span><br><span class="line">multiset&lt;<span class="type">int</span>&gt;st;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> &amp;x,<span class="type">int</span> y,<span class="type">int</span> p=mod)</span></span>&#123;x+=y,x&gt;=p?x-=p:<span class="number">1</span>;&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">gcd</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span></span>&#123;<span class="keyword">return</span> !b?a:<span class="built_in">gcd</span>(b,a%b);&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">exgcd</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b,<span class="type">int</span> &amp;x,<span class="type">int</span> &amp;y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!b) &#123;x=<span class="number">1</span>;y=<span class="number">0</span>;<span class="keyword">return</span> a;&#125;</span><br><span class="line">    <span class="type">int</span> ret=<span class="built_in">exgcd</span>(b,a%b,y,x);</span><br><span class="line">    y-=x*(a/b);</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">ginv</span><span class="params">(<span class="type">int</span> n,<span class="type">int</span> p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> x,y,ret;</span><br><span class="line">    ret=<span class="built_in">exgcd</span>(n,p,x,y);</span><br><span class="line">    <span class="keyword">if</span>(ret&lt;=<span class="number">1</span>) <span class="keyword">return</span> (x+p)%p;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">smul</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y,<span class="type">int</span> p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    x=(x%p+p)%p,y=(y%p+p)%p;</span><br><span class="line">    <span class="type">int</span> ret=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(y&amp;<span class="number">1</span>) <span class="built_in">add</span>(ret,x,p);</span><br><span class="line">        <span class="built_in">add</span>(x,x,p);</span><br><span class="line">        y&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">excrt</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    M=p[<span class="number">1</span>];ans=b[<span class="number">1</span>];</span><br><span class="line">    <span class="type">int</span> x,y;</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">2</span>,n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> A=M,B=p[i],C=(b[i]-ans%B+B)%B,D=<span class="built_in">exgcd</span>(A,B,x,y),BG=B/D;</span><br><span class="line">        <span class="keyword">if</span>(C%D) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        x=<span class="built_in">smul</span>(x,C/D,BG);</span><br><span class="line">        ans+=x*M;</span><br><span class="line">        M*=BG;</span><br><span class="line">        ans=(ans%M+M)%M;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    st.<span class="built_in">clear</span>();</span><br><span class="line">    n=<span class="built_in">read</span>(),m=<span class="built_in">read</span>();</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,n) a[i]=<span class="built_in">read</span>();</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,n) p[i]=<span class="built_in">read</span>();</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,n) f[i]=<span class="built_in">read</span>();</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,m) st.<span class="built_in">insert</span>(<span class="built_in">read</span>());</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,n) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">auto</span> it=st.<span class="built_in">begin</span>();</span><br><span class="line">        <span class="keyword">if</span>((*it)&lt;a[i]) it=--st.<span class="built_in">upper_bound</span>(a[i]);</span><br><span class="line">        v[i]=*it;st.<span class="built_in">erase</span>(it);</span><br><span class="line">        st.<span class="built_in">insert</span>(f[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> g,iv;</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,n)</span><br><span class="line">    &#123;</span><br><span class="line">        g=<span class="built_in">gcd</span>(a[i],<span class="built_in">gcd</span>(v[i],p[i]));</span><br><span class="line">        a[i]/=g,v[i]/=g,p[i]/=g;</span><br><span class="line">        iv=<span class="built_in">ginv</span>(v[i],p[i]);</span><br><span class="line">        <span class="keyword">if</span>(!~iv) &#123;<span class="built_in">puts</span>(<span class="string">&quot;-1&quot;</span>);<span class="keyword">return</span>;&#125;</span><br><span class="line">        b[i]=<span class="built_in">smul</span>(a[i],iv,p[i]);</span><br><span class="line">        <span class="comment">//printf(&quot;a:%lld b:%lld v:%lld p:%lld\n&quot;,a[i],b[i],v[i],p[i]);</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!~<span class="built_in">excrt</span>()) &#123;<span class="built_in">puts</span>(<span class="string">&quot;-1&quot;</span>);<span class="keyword">return</span>;&#125;</span><br><span class="line">	<span class="comment">//x=ans(mod M)</span></span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> vl=(a[i]+v[i]<span class="number">-1</span>)/v[i];</span><br><span class="line">        <span class="keyword">if</span>(vl&lt;=ans) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="type">int</span> k=(vl-ans+M<span class="number">-1</span>)/M;</span><br><span class="line">        ans+=k*M;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">writeln</span>(ans);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> _=<span class="built_in">read</span>();_--;) <span class="built_in">solve</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+</article> </main>
+
+<div class="fab-container" id="fabContainer">
+    <div class="fab-menu">
+        <div class="fab-btn sub" id="btnTheme" title="切换环境感知">◐</div>
+        <div class="fab-btn sub" id="btnMusic" title="音频终端">♫</div>
+    </div>
+    <div class="fab-btn fab-main" id="btnMain">⧉</div>
+    <div class="music-panel" id="musicPanel">
+    <div class="mp-header">AUDIO TERMINAL //</div>
+    <div class="mp-title" id="mpTitle">选择曲目...</div>
+    
+    <div class="mp-progress-container">
+        <span id="mpTimeCurrent">00:00</span>
+        <input type="range" class="mp-progress-bar" id="mpProgressBar" value="0" min="0" max="100">
+        <span id="mpTimeTotal">00:00</span>
+    </div>
+    
+    <div class="mp-controls">
+        <button class="mp-btn" id="mpPrev">⏮</button>
+        <button class="mp-btn play-btn" id="mpPlayPause">▶</button>
+        <button class="mp-btn" id="mpNext">⏭</button>
+    </div>
+    
+    <ul class="mp-playlist" id="mpPlaylistUI">
+        </ul>
+</div> </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("PRTS: System Booting...");
+
+    // ================= 1. UI 中枢系统 =================
+    const fabContainer = document.getElementById('fabContainer');
+    const btnMain = document.getElementById('btnMain');
+    const musicPanel = document.getElementById('musicPanel');
+
+    if (btnMain && fabContainer) {
+        btnMain.addEventListener('click', () => {
+            fabContainer.classList.toggle('open');
+            btnMain.style.transform = fabContainer.classList.contains('open') ? 'rotate(45deg)' : 'rotate(0)';
+            if(!fabContainer.classList.contains('open') && musicPanel){
+                musicPanel.classList.remove('active');
+            }
+        });
+    }
+
+    const btnTheme = document.getElementById('btnTheme');
+    let currentTheme = 'dark';
+    function setTheme(theme) { currentTheme = theme; document.body.setAttribute('data-theme', theme); }
+    function autoTheme() { const hour = new Date().getHours(); setTheme((hour >= 6 && hour < 18) ? 'light' : 'dark'); }
+    autoTheme();
+    if(btnTheme) btnTheme.addEventListener('click', () => { setTheme(currentTheme === 'dark' ? 'light' : 'dark'); });
+
+    // ================= 2. 音乐通讯终端 =================
+    // 【修复】：去除了容易引发引擎崩溃的 EJS 标签，直接使用绝对路径
+    const playlist = [
+        { name: "01. 生命流「熠曲丰碑」-2025音律联觉ver.", src: "/music/生命流「熠曲丰碑」-2025音律联觉.mp3" },
+        { name: "02. 櫂", src: "/music/ヨルシカ - 櫂.mp3" },
+        { name: "03. ヰ世界の宝石譚", src: "/music/ヰ世界の宝石譚.mp3" },
+        { name: "04. KAWAIIめたもる交響曲", src: "/music/KAWAIIめたもる交響曲.mp3" }
+    ];
+
+
+    let currentTrackIndex = 0;
+    const audio = new Audio();
+    const btnMusic = document.getElementById('btnMusic');
+    const mpPlayPause = document.getElementById('mpPlayPause');
+    const mpPlaylistUI = document.getElementById('mpPlaylistUI');
+
+    if(btnMusic && musicPanel) {
+        btnMusic.addEventListener('click', () => { musicPanel.classList.toggle('active'); });
+
+        if (mpPlaylistUI) {
+            playlist.forEach((track, index) => {
+                let li = document.createElement('li');
+                li.textContent = track.name;
+                li.onclick = () => loadTrack(index, true);
+                mpPlaylistUI.appendChild(li);
+            });
+        }
+
+        function loadTrack(index, autoPlay = false) {
+            if(playlist.length === 0) return;
+            currentTrackIndex = index;
+            audio.src = playlist[index].src;
+            document.getElementById('mpTitle').textContent = playlist[index].name;
+
+            if(mpPlaylistUI) {
+                const items = mpPlaylistUI.querySelectorAll('li');
+                items.forEach(item => item.classList.remove('playing'));
+                if(items[index]) items[index].classList.add('playing');
+            }
+            if (autoPlay) togglePlay(true);
+        }
+
+        function togglePlay(forcePlay = false) {
+            if (audio.paused || forcePlay) {
+                audio.play().then(() => {
+                    if(mpPlayPause) mpPlayPause.textContent = "⏸";
+                    btnMusic.classList.add('btn-playing');
+                }).catch(e => {
+                    console.warn("PRTS: 等待音频源响应...");
+                    if(mpPlayPause) mpPlayPause.textContent = "▶";
+                    btnMusic.classList.remove('btn-playing');
+                });
+            } else {
+                audio.pause();
+                if(mpPlayPause) mpPlayPause.textContent = "▶";
+                btnMusic.classList.remove('btn-playing');
+            }
+        }
+
+        if(mpPlayPause) mpPlayPause.addEventListener('click', () => togglePlay());
+
+        document.getElementById('mpPrev').addEventListener('click', () => { let newIndex = currentTrackIndex - 1; if (newIndex < 0) newIndex = playlist.length - 1; loadTrack(newIndex, true); });
+        document.getElementById('mpNext').addEventListener('click', () => { let newIndex = currentTrackIndex + 1; if (newIndex >= playlist.length) newIndex = 0; loadTrack(newIndex, true); });
+        audio.addEventListener('ended', () => { document.getElementById('mpNext').click(); });
+
+        const mpProgressBar = document.getElementById('mpProgressBar');
+        const mpTimeCurrent = document.getElementById('mpTimeCurrent');
+        const mpTimeTotal = document.getElementById('mpTimeTotal');
+
+        // 【修复】：重写了时间格式化逻辑，彻底消灭了代码里的 "<" 符号，防止被误认为 HTML
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "00:00";
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60);
+            return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        }
+
+        audio.addEventListener('loadedmetadata', () => {
+            if(mpTimeTotal) mpTimeTotal.textContent = formatTime(audio.duration);
+            if(mpProgressBar) mpProgressBar.max = audio.duration;
+        });
+
+        let isDragging = false;
+        audio.addEventListener('timeupdate', () => {
+            if(mpTimeCurrent) mpTimeCurrent.textContent = formatTime(audio.currentTime);
+            if (!isDragging && mpProgressBar) mpProgressBar.value = audio.currentTime;
+        });
+
+        if(mpProgressBar) {
+            mpProgressBar.addEventListener('mousedown', () => isDragging = true);
+            mpProgressBar.addEventListener('mouseup', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+            mpProgressBar.addEventListener('touchstart', () => isDragging = true);
+            mpProgressBar.addEventListener('touchend', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+        }
+
+        loadTrack(0, false);
+    }
+
+    // ================= 3. 背景粒子系统 =================
+    const canvas = document.getElementById('particle-canvas');
+    if(canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const mouse = { x: null, y: null, radius: 50 };
+
+        function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        initCanvas(); window.addEventListener('resize', initCanvas);
+
+        const logoImg = new Image();
+        // 【修复】：去除 EJS，直接指向根目录下的 logo
+        logoImg.src = '/logo.png';
+        logoImg.onload = function() {
+            const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d');
+            const size = 200; tempCanvas.width = size; tempCanvas.height = size;
+            tempCtx.drawImage(logoImg, 0, 0, size, size);
+            const imageData = tempCtx.getImageData(0, 0, size, size).data;
+            for (let y = 0; y < size; y += 2) {
+                for (let x = 0; x < size; x += 2) {
+                    if (imageData[((y * size + x) * 4) + 3] > 128) {
+                        particles.push(new Particle(x * 2.5 + (canvas.width / 2 - 100), y * 2.5 + (canvas.height / 2 - 250)));
+                    }
+                }
+            }
+            animate();
+            console.log("PRTS: Particles Online.");
+        };
+
+        class Particle {
+            constructor(x, y) { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.baseX = x; this.baseY = y; this.density = (Math.random() * 30) + 1; }
+            draw() {
+                ctx.fillStyle = document.body.getAttribute('data-theme') === 'light' ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.6)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2); ctx.fill();
+            }
+            update() {
+                let dx = mouse.x - this.x, dy = mouse.y - this.y, distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouse.radius) {
+                    let force = (mouse.radius - distance) / mouse.radius;
+                    this.x -= (dx / distance) * force * this.density * 0.8; this.y -= (dy / distance) * force * this.density * 0.8;
+                } else {
+                    this.x += (this.baseX - this.x) * 0.12; this.y += (this.baseY - this.y) * 0.12;
+                }
+            }
+        }
+
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
+        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+    }
+});
+</script> </body>
+</html>

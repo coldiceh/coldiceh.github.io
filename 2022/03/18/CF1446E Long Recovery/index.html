@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<title>CF1446E Long Recovery | Hexo</title>
+<link rel="icon" href="/avatar.jpg" type="image/jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+
+<canvas id="particle-canvas"></canvas>
+
+<header class="terminal-nav">
+    <a href="/" class="nav-logo">QAQ</a>
+    <nav class="nav-menu">
+        <a href="/" class="nav-item active"><span class="nav-en">INDEX</span><span class="nav-cn">首页</span></a>
+        <a href="#info" class="nav-item"><span class="nav-en">INFORMATION</span><span class="nav-cn">情报</span></a>
+        <a href="#operator" class="nav-item"><span class="nav-en">OPERATOR</span><span class="nav-cn">随笔</span></a>
+        <a href="#world" class="nav-item"><span class="nav-en">WORLD</span><span class="nav-cn">归档</span></a>
+        <a href="#media" class="nav-item"><span class="nav-en">MEDIA</span><span class="nav-cn">标签</span></a>
+    </nav>
+    </header>
+
+<aside class="sidebar">
+    <div class="avatar-box"><img src="/avatar.jpg" alt="Avatar"></div>
+    <h2 class="sidebar-title">COLDICEH</h2>
+    <p class="sidebar-subtitle">Dr.抢不到音律退坑了#8809</p>
+    
+    <div class="sidebar-search">
+        <div class="search-box">
+            <input type="text" id="local-search-input" placeholder="// SEARCH DATABASE...">
+        </div>
+    </div>
+    
+    <div style="margin-top: 20px;" class="sidebar-links">
+        <div style="color: var(--ak-blue); font-weight: bold; margin-bottom: 10px; border-left: 3px solid var(--ak-blue); padding-left: 10px;">常用链接</div>
+        <a href="#">我的随笔</a>
+        <a href="#">我的评论</a>
+        <a href="#">我的参与</a>
+        <a href="#">最新评论</a>
+        <a href="#">我的标签</a>
+    </div>
+</aside>
+
+<main class="main-content">
+    <article class="post-detail">
+    <h1 class="post-detail-title">CF1446E Long Recovery</h1>
+    <div class="post-meta">
+        DATE: 2022-03-18
+    </div>
+    <div class="post-content">
+        <p>令 $P$ 为不同颜色相邻格子的数量，考虑更改一个格子 $c$ 的颜色后会发生什么。</p>
+<p>若与 $c$ 相邻的格子均为不同颜色，则 $P$ 将减去 $3$，否则 $P$ 将减去 $1$。</p>
+<p>显然我们需要让一操作的次数尽量少。</p>
+<p>然后来考虑怎么判断无解：</p>
+<p>根据第二个样例，如果某个时刻存在黑色格子的环，显然此时无解。否则，就有可能让一些黑色格子变白。假设 $A$ 为初始的黑色格子点集，$\overline{A}$ 为尽量染黑操作后形成的点集，显然当 $\overline{A}$ 中包含这样一个环时无解，而 $\overline{A}$ 可以直接通过 BFS 求出。</p>
+<p>接下来认为 $\overline {A}$ 中不存在环，且仅包含一个连通块（如果有多个分别考虑即可，记连通块数量为 $D$）。</p>
+<p>首先可以发现最后一步必须要使用一操作，且只有当不能使用二操作时才会使用一操作。具体的，只有当 $A$ 长成这个样子(称这个为 triforce)才需要一操作，且并不会出现其他情况，记 triforce 的数量为 $Q$。</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/0ea0u3st.png"></p>
+<p>证明：</p>
+<p>假设 $A$ 是一个至少有两个格子的集合，满足：</p>
+<ol>
+<li><p>$\overline{A}$ 中不存在环。</p>
+</li>
+<li><p>$\overline{A}$ 连通。</p>
+</li>
+<li><p>$A$ 不是 triforce。</p>
+</li>
+</ol>
+<p>可以发现存在一个二操作，满足操作后的集合 $A’$ 仍然满足上面的条件，首先 1. 将一直满足，因为 $\overline{A’}⊆\overline{A}$。因此只需要证明后两个，即 $A’$ 连通，且 $A’$ 不是 triforce。</p>
+<p>考虑分类讨论：</p>
+<ol>
+<li><p>存在一个二操作的白变黑，那么直接做就行，显然仍然满足上述条件。</p>
+</li>
+<li><p>不存在二操作的白变黑，但是存在二操作让格子 $c$ 黑变白，考虑操作后会发生什么：因为不存在二操作的白变黑，所以对于任何格子在 $\overline{A}\backslash A$ 必定在 $A$ 中有三个邻居。</p>
+</li>
+</ol>
+<p>  因此至少两个在 $A\backslash c$ 中，于是 $\overline{A}\backslash A\subseteq \overline{A\backslash c}$，即 $\overline{A}\backslash c\backslash (A\backslash c)\subseteq \overline{A\backslash c}$，又因为 $A\backslash c\subseteq \overline{A\backslash c}$，所以 $\overline{A}\backslash c\subseteq \overline{A\backslash c}$。</p>
+<p>  可以发现 $\overline{A\backslash c}$ 一定连通，仍然分类讨论：</p>
+<ol>
+<li><p>$c$ 是 $\overline{A}$ 的叶子，去掉后仍然连通。</p>
+</li>
+<li><p>$c$ 不是 $\overline {A}$ 的叶子，那么 $c$ 至少有两个邻居在 $\overline{A}\backslash c$ 中，即 $\overline{A\backslash c}$ 中，所以 $\overline{A\backslash c}&#x3D;\overline A$。</p>
+</li>
+</ol>
+<p>  并且 $A\backslash c$ 不是 triforce。假设 $A\backslash c$ 是 triforce，那么 $A$ 一定是 triforce 加上一个额外的格子，那么可以选择另一个满足条件的 $c$。</p>
+<ol start="3">
+<li>不存在任何二操作，此时 $A$ 中的格子互不相邻（因为相邻就是存在一棵大小 $&gt; 1$ 的树，那么一定存在一个叶子节点），并且 $\overline{A}\backslash A$ 被 $A$ 包围。且由于 $A$ 至少有两个格子，且 $\overline A$ 中不存在环，所以必须构造出 triforce 来满足条件。</li>
+</ol>
+<p>  如图，绿色格子因为在 $A$ 中没有格子是相邻的所以不在 $A$ 中，而红色格子因为 $\overline A$ 会成环所以也不在 $A$ 中。</p>
+<p>  因此 $A$ 不能有除了这三个格子以外的格子，因为 $\overline A$ 是连通的。</p>
+<p>  <img src="https://cdn.luogu.com.cn/upload/image_hosting/6bclj9dn.png"></p>
+<p>最后分别计算出 $P,D,Q$，答案就是 $P-2\times D-2\times Q$。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> R(i,a,b) for(int i=(a),i##E=(b);i&lt;=i##E;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> L(i,a,b) for(int i=(b),i##E=(a);i&gt;=i##E;i--)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> vis[<span class="number">255555</span>],a[<span class="number">255555</span>],b[<span class="number">255555</span>];</span><br><span class="line">vector&lt;<span class="type">int</span>&gt;e[<span class="number">255555</span>];</span><br><span class="line">deque&lt;<span class="type">int</span>&gt;q;</span><br><span class="line"><span class="type">int</span> ans;</span><br><span class="line"><span class="type">int</span> ok=<span class="number">1</span>,cb,tr;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">gkd</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">501</span>*x+y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs1</span><span class="params">(<span class="type">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(vis[u]) <span class="keyword">return</span>;</span><br><span class="line">	vis[u]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> v:e[u]) <span class="keyword">if</span>(a[v]) <span class="built_in">dfs1</span>(v);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs2</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> f)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(vis[u]==<span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		ok=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	vis[u]=<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">if</span>(a[u]) ++cb;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> v:e[u]) <span class="keyword">if</span>(v^f&amp;&amp;b[v]) <span class="built_in">dfs2</span>(v,u);</span><br><span class="line">	<span class="keyword">if</span>(!a[u])</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> v:e[u]) cnt+=(a[v]==<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">if</span>(cnt==<span class="number">3</span>) tr=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="literal">NULL</span>);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,<span class="number">500</span>) <span class="built_in">R</span>(j,<span class="number">1</span>,<span class="number">500</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> u=<span class="built_in">gkd</span>(i,j),v=<span class="built_in">gkd</span>(i<span class="number">-1</span>,j);</span><br><span class="line">		e[u].<span class="built_in">emplace_back</span>(v);</span><br><span class="line">		v=<span class="built_in">gkd</span>(i<span class="number">+1</span>,j);</span><br><span class="line">		e[u].<span class="built_in">emplace_back</span>(v);</span><br><span class="line">		<span class="keyword">if</span>(i&amp;<span class="number">1</span>) v=<span class="built_in">gkd</span>(i<span class="number">+1</span>,j<span class="number">-1</span>);</span><br><span class="line">		<span class="keyword">else</span> v=<span class="built_in">gkd</span>(i<span class="number">-1</span>,j<span class="number">+1</span>);</span><br><span class="line">		e[u].<span class="built_in">emplace_back</span>(v);</span><br><span class="line">	&#125;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> u,v;</span><br><span class="line">		cin&gt;&gt;u&gt;&gt;v;</span><br><span class="line">		++u,++v;</span><br><span class="line">		<span class="type">int</span> x=<span class="built_in">gkd</span>(u,v);</span><br><span class="line">		a[x]=b[x]=<span class="number">1</span>;</span><br><span class="line">		q.<span class="built_in">emplace_back</span>(x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> ans1=<span class="number">0</span>,ans2=<span class="number">0</span>,ans3=<span class="number">0</span>,u;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,<span class="number">500</span>) <span class="built_in">R</span>(j,<span class="number">1</span>,<span class="number">500</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		u=<span class="built_in">gkd</span>(i,j);</span><br><span class="line">		<span class="keyword">if</span>(!vis[u]&amp;&amp;a[u]==<span class="number">1</span>) <span class="built_in">dfs1</span>(u),++ans1;</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="keyword">while</span>(q.<span class="built_in">size</span>())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> u=q.<span class="built_in">front</span>();q.<span class="built_in">pop_front</span>();</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> v:e[u]) <span class="keyword">if</span>(!b[v])</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> vv:e[v]) cnt+=(b[vv]==<span class="number">1</span>);</span><br><span class="line">			<span class="keyword">if</span>(cnt&gt;=<span class="number">2</span>) b[v]=<span class="number">1</span>,q.<span class="built_in">emplace_back</span>(v);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,<span class="number">500</span>) <span class="built_in">R</span>(j,<span class="number">1</span>,<span class="number">500</span>) </span><br><span class="line">	&#123;</span><br><span class="line">		u=<span class="built_in">gkd</span>(i,j);</span><br><span class="line">		<span class="keyword">if</span>(vis[u]!=<span class="number">2</span>&amp;&amp;b[u]==<span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			tr=cb=<span class="number">0</span>;</span><br><span class="line">			<span class="built_in">dfs2</span>(u,u);</span><br><span class="line">			++ans2;</span><br><span class="line">			<span class="keyword">if</span>(tr&amp;&amp;cb==<span class="number">3</span>) ++ans3;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!ok)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;<span class="string">&quot;SICK&quot;</span>&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> </span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;<span class="string">&quot;RECOVERED&quot;</span>&lt;&lt;<span class="string">&#x27;\n&#x27;</span>&lt;&lt;n<span class="number">+2</span>*(ans1-ans2-ans3)&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+</article> </main>
+
+<div class="fab-container" id="fabContainer">
+    <div class="fab-menu">
+        <div class="fab-btn sub" id="btnTheme" title="切换环境感知">◐</div>
+        <div class="fab-btn sub" id="btnMusic" title="音频终端">♫</div>
+    </div>
+    <div class="fab-btn fab-main" id="btnMain">⧉</div>
+    <div class="music-panel" id="musicPanel">
+    <div class="mp-header">AUDIO TERMINAL //</div>
+    <div class="mp-title" id="mpTitle">选择曲目...</div>
+    
+    <div class="mp-progress-container">
+        <span id="mpTimeCurrent">00:00</span>
+        <input type="range" class="mp-progress-bar" id="mpProgressBar" value="0" min="0" max="100">
+        <span id="mpTimeTotal">00:00</span>
+    </div>
+    
+    <div class="mp-controls">
+        <button class="mp-btn" id="mpPrev">⏮</button>
+        <button class="mp-btn play-btn" id="mpPlayPause">▶</button>
+        <button class="mp-btn" id="mpNext">⏭</button>
+    </div>
+    
+    <ul class="mp-playlist" id="mpPlaylistUI">
+        </ul>
+</div> </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("PRTS: System Booting...");
+
+    // ================= 1. UI 中枢系统 =================
+    const fabContainer = document.getElementById('fabContainer');
+    const btnMain = document.getElementById('btnMain');
+    const musicPanel = document.getElementById('musicPanel');
+
+    if (btnMain && fabContainer) {
+        btnMain.addEventListener('click', () => {
+            fabContainer.classList.toggle('open');
+            btnMain.style.transform = fabContainer.classList.contains('open') ? 'rotate(45deg)' : 'rotate(0)';
+            if(!fabContainer.classList.contains('open') && musicPanel){
+                musicPanel.classList.remove('active');
+            }
+        });
+    }
+
+    const btnTheme = document.getElementById('btnTheme');
+    let currentTheme = 'dark';
+    function setTheme(theme) { currentTheme = theme; document.body.setAttribute('data-theme', theme); }
+    function autoTheme() { const hour = new Date().getHours(); setTheme((hour >= 6 && hour < 18) ? 'light' : 'dark'); }
+    autoTheme();
+    if(btnTheme) btnTheme.addEventListener('click', () => { setTheme(currentTheme === 'dark' ? 'light' : 'dark'); });
+
+    // ================= 2. 音乐通讯终端 =================
+    // 【修复】：去除了容易引发引擎崩溃的 EJS 标签，直接使用绝对路径
+    const playlist = [
+        { name: "01. 生命流「熠曲丰碑」-2025音律联觉ver.", src: "/music/生命流「熠曲丰碑」-2025音律联觉.mp3" },
+        { name: "02. 櫂", src: "/music/ヨルシカ - 櫂.mp3" },
+        { name: "03. ヰ世界の宝石譚", src: "/music/ヰ世界の宝石譚.mp3" },
+        { name: "04. KAWAIIめたもる交響曲", src: "/music/KAWAIIめたもる交響曲.mp3" }
+    ];
+
+
+    let currentTrackIndex = 0;
+    const audio = new Audio();
+    const btnMusic = document.getElementById('btnMusic');
+    const mpPlayPause = document.getElementById('mpPlayPause');
+    const mpPlaylistUI = document.getElementById('mpPlaylistUI');
+
+    if(btnMusic && musicPanel) {
+        btnMusic.addEventListener('click', () => { musicPanel.classList.toggle('active'); });
+
+        if (mpPlaylistUI) {
+            playlist.forEach((track, index) => {
+                let li = document.createElement('li');
+                li.textContent = track.name;
+                li.onclick = () => loadTrack(index, true);
+                mpPlaylistUI.appendChild(li);
+            });
+        }
+
+        function loadTrack(index, autoPlay = false) {
+            if(playlist.length === 0) return;
+            currentTrackIndex = index;
+            audio.src = playlist[index].src;
+            document.getElementById('mpTitle').textContent = playlist[index].name;
+
+            if(mpPlaylistUI) {
+                const items = mpPlaylistUI.querySelectorAll('li');
+                items.forEach(item => item.classList.remove('playing'));
+                if(items[index]) items[index].classList.add('playing');
+            }
+            if (autoPlay) togglePlay(true);
+        }
+
+        function togglePlay(forcePlay = false) {
+            if (audio.paused || forcePlay) {
+                audio.play().then(() => {
+                    if(mpPlayPause) mpPlayPause.textContent = "⏸";
+                    btnMusic.classList.add('btn-playing');
+                }).catch(e => {
+                    console.warn("PRTS: 等待音频源响应...");
+                    if(mpPlayPause) mpPlayPause.textContent = "▶";
+                    btnMusic.classList.remove('btn-playing');
+                });
+            } else {
+                audio.pause();
+                if(mpPlayPause) mpPlayPause.textContent = "▶";
+                btnMusic.classList.remove('btn-playing');
+            }
+        }
+
+        if(mpPlayPause) mpPlayPause.addEventListener('click', () => togglePlay());
+
+        document.getElementById('mpPrev').addEventListener('click', () => { let newIndex = currentTrackIndex - 1; if (newIndex < 0) newIndex = playlist.length - 1; loadTrack(newIndex, true); });
+        document.getElementById('mpNext').addEventListener('click', () => { let newIndex = currentTrackIndex + 1; if (newIndex >= playlist.length) newIndex = 0; loadTrack(newIndex, true); });
+        audio.addEventListener('ended', () => { document.getElementById('mpNext').click(); });
+
+        const mpProgressBar = document.getElementById('mpProgressBar');
+        const mpTimeCurrent = document.getElementById('mpTimeCurrent');
+        const mpTimeTotal = document.getElementById('mpTimeTotal');
+
+        // 【修复】：重写了时间格式化逻辑，彻底消灭了代码里的 "<" 符号，防止被误认为 HTML
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "00:00";
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60);
+            return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        }
+
+        audio.addEventListener('loadedmetadata', () => {
+            if(mpTimeTotal) mpTimeTotal.textContent = formatTime(audio.duration);
+            if(mpProgressBar) mpProgressBar.max = audio.duration;
+        });
+
+        let isDragging = false;
+        audio.addEventListener('timeupdate', () => {
+            if(mpTimeCurrent) mpTimeCurrent.textContent = formatTime(audio.currentTime);
+            if (!isDragging && mpProgressBar) mpProgressBar.value = audio.currentTime;
+        });
+
+        if(mpProgressBar) {
+            mpProgressBar.addEventListener('mousedown', () => isDragging = true);
+            mpProgressBar.addEventListener('mouseup', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+            mpProgressBar.addEventListener('touchstart', () => isDragging = true);
+            mpProgressBar.addEventListener('touchend', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+        }
+
+        loadTrack(0, false);
+    }
+
+    // ================= 3. 背景粒子系统 =================
+    const canvas = document.getElementById('particle-canvas');
+    if(canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const mouse = { x: null, y: null, radius: 50 };
+
+        function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        initCanvas(); window.addEventListener('resize', initCanvas);
+
+        const logoImg = new Image();
+        // 【修复】：去除 EJS，直接指向根目录下的 logo
+        logoImg.src = '/logo.png';
+        logoImg.onload = function() {
+            const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d');
+            const size = 200; tempCanvas.width = size; tempCanvas.height = size;
+            tempCtx.drawImage(logoImg, 0, 0, size, size);
+            const imageData = tempCtx.getImageData(0, 0, size, size).data;
+            for (let y = 0; y < size; y += 2) {
+                for (let x = 0; x < size; x += 2) {
+                    if (imageData[((y * size + x) * 4) + 3] > 128) {
+                        particles.push(new Particle(x * 2.5 + (canvas.width / 2 - 100), y * 2.5 + (canvas.height / 2 - 250)));
+                    }
+                }
+            }
+            animate();
+            console.log("PRTS: Particles Online.");
+        };
+
+        class Particle {
+            constructor(x, y) { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.baseX = x; this.baseY = y; this.density = (Math.random() * 30) + 1; }
+            draw() {
+                ctx.fillStyle = document.body.getAttribute('data-theme') === 'light' ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.6)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2); ctx.fill();
+            }
+            update() {
+                let dx = mouse.x - this.x, dy = mouse.y - this.y, distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouse.radius) {
+                    let force = (mouse.radius - distance) / mouse.radius;
+                    this.x -= (dx / distance) * force * this.density * 0.8; this.y -= (dy / distance) * force * this.density * 0.8;
+                } else {
+                    this.x += (this.baseX - this.x) * 0.12; this.y += (this.baseY - this.y) * 0.12;
+                }
+            }
+        }
+
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
+        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+    }
+});
+</script> </body>
+</html>

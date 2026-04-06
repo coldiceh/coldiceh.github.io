@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<title>Hexo</title>
+<title>计算几何 | Hexo</title>
 <link rel="icon" href="/avatar.jpg" type="image/jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
@@ -43,226 +43,40 @@
 </aside>
 
 <main class="main-content">
-    <h2 class="archive-title">// DATA ARCHIVE</h2>
-<div class="post-list">
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/%E5%AF%B9%E6%9F%90%E6%A0%A1%E9%83%A8%E5%88%86%E5%9B%9E%E5%BF%86/">对某校部分回忆</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                这辈子和你校最牛学科以及OI赛事都没有任何关系了，干脆来随便写点对你校印象深的事。
-事先声明：本人重度抑郁，重度焦虑，有自残以及伤害他人倾向。
-大概是21年1月来的你校？前几天的感受大概就是你校明明1...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/%E5%AF%B9%E6%9F%90%E6%A0%A1%E9%83%A8%E5%88%86%E5%9B%9E%E5%BF%86/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                有人问我为什么不去机房，为什么不去NOIP，那我好像也只能回答个这个：
+    <article class="post-detail">
+    <h1 class="post-detail-title">计算几何</h1>
+    <div class="post-meta">
+        DATE: 2021-06-12
+    </div>
+    <div class="post-content">
+        <h2 id="闵可夫斯基和"><a href="#闵可夫斯基和" class="headerlink" title="闵可夫斯基和"></a>闵可夫斯基和</h2><p>闵可夫斯基和就是给你两个凸多变形$A,B$，求$A+B&#x3D;{a+b|a\in A,b\in B}$；</p>
+<p>做法就是先找到两个凸包上$y$轴最小的点，然后将所有的边拿出来，按照斜率排序，直接串起来即可。</p>
+<p>为什么正确？</p>
+<p>一个简单的考虑就是如果对于每个方向如果都知道在这个方向上最远的点，那么就可以把整个凸多边形求出来。</p>
+<p>$A+B$对于某个方向最远的点就是$A$在这个方向上最远的点加上$B$这个方向上最远的点。</p>
+<p>那么考虑方向向量转$360$度，类似于旋转卡壳，每次把$A,B$两个凸包被卡住的点拿出来，这样就把整个凸包求出来了。</p>
+<h3 id="杂题"><a href="#杂题" class="headerlink" title="杂题"></a>杂题</h3><p>平面上给出$n$条线段</p>
+<p>每条线段上选一个点，结果为这些点加起来</p>
+<p>问在横坐标大于等于$X$的时候纵坐标最小值是多少</p>
+<p>输出方案</p>
+<p>$n\leq 10^5$</p>
+<p>线段可以看作一个两边形，若干条线段加起来，可以看作将所有线段排完序之后按照斜率拼起来。</p>
+<p>然后就相当于把闵可夫斯基和并求出来之后，求某个位置上的点是由哪些点加起来的。</p>
+<p>这就相当于从起点开始绕一圈，然后绕到这个点的时候看一下绕了哪些线段。</p>
+<h3 id="JSOI2018-战争"><a href="#JSOI2018-战争" class="headerlink" title="[JSOI2018]战争"></a>[JSOI2018]战争</h3><h4 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h4><p>一个点集的领地为它的凸包（包括边界）</p>
+<p>给出两个点集$A,B$以及$q$组询问</p>
+<p>每组询问给出一个向量，问把$A$沿着这个向量平移后，领地是否会和$B$有交</p>
+<p>点集大小,$q\leq 10^5$</p>
+<h4 id="sol"><a href="#sol" class="headerlink" title="sol"></a>sol</h4><p>想象一下移了哪些区域向量会有交。</p>
+<p>若$A+q$与$B$有交</p>
+<p>那么一定存在一个$a\in A,b\in B$</p>
+<p>满足$q&#x3D;b-a$</p>
+<p>这个条件就告诉我们所有满足这个条件的区域就是${b-a|b\in B,a\in A}$，即$B-A$。</p>
+<p>于是把$A$反过来，求出它的闵可夫斯基和，然后直接判一个点是否在凸包内部即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">struct node</span><br><span class="line">&#123;</span><br><span class="line">    int x,y;</span><br><span class="line">    inline node (double X=0,double Y=0) :x(X),y(Y) &#123;&#125;</span><br><span class="line">    inline node operator +(const node &amp;A)const &#123;return node(x+A.x,y+A.y);&#125;</span><br><span class="line">    inline node operator -(const node &amp;A)const &#123;return node(x-A.x,y-A.y);&#125;</span><br><span class="line">    inline int det(const node &amp;A)const &#123;return x*A.y-y*A.x;&#125;</span><br><span class="line">    inline int abs2()const &#123;return x*x+y*y;&#125;</span><br><span class="line">    inline double abs()const &#123;return sqrt(abs2());&#125;</span><br><span class="line">&#125;a[222222],b[222222],c[222222];</span><br><span class="line">int n,m,q,nm;</span><br><span class="line">void solve(int &amp;n,node *A)</span><br><span class="line">&#123;</span><br><span class="line">    sort(A+1,A+n+1,[&amp;](const node &amp;x,const node &amp;y)&#123;return x.y^y.y?x.y&lt;y.y:x.x&lt;y.x;&#125;);</span><br><span class="line">    static node lwp;lwp=A[1];</span><br><span class="line">    static int stk[222222],top;stk[top=1]=1;</span><br><span class="line">    R(i,1,n) A[i]=A[i]-lwp;</span><br><span class="line">    sort(A+2,A+n+1,[&amp;](const node &amp;x,const node &amp;y)&#123;return x.det(y)&gt;0||(x.det(y)==0&amp;&amp;x.abs2()&lt;y.abs2());&#125;);</span><br><span class="line">    R(i,2,n) </span><br><span class="line">    &#123;</span><br><span class="line">        while(top&gt;=2&amp;&amp;(A[i]-A[stk[top-1]]).det(A[stk[top]]-A[stk[top-1]])&gt;=0) top--;</span><br><span class="line">        stk[++top]=i;</span><br><span class="line">    &#125;</span><br><span class="line">    R(i,1,top) A[i]=A[stk[i]]+lwp;</span><br><span class="line">    n=top;A[n+1]=A[1];</span><br><span class="line">&#125;</span><br><span class="line">void minkow(node *A,node *B,node *C,int &amp;n,int &amp;m,int &amp;k)</span><br><span class="line">&#123;</span><br><span class="line">    static node tmp1[222222],tmp2[222222];</span><br><span class="line">    static int l,r;</span><br><span class="line">    k=l=r=1;</span><br><span class="line">    R(i,1,n-1) tmp1[i]=A[i+1]-A[i];tmp1[n]=A[1]-A[n];</span><br><span class="line">    R(i,1,m-1) tmp2[i]=B[i+1]-B[i];tmp2[m]=B[1]-B[m];</span><br><span class="line">    C[1]=A[1]+B[1];</span><br><span class="line">    while(l&lt;=n&amp;&amp;r&lt;=m) ++k,C[k]=C[k-1]+(tmp1[l].det(tmp2[r])&gt;=0?tmp1[l++]:tmp2[r++]);</span><br><span class="line">    while(l&lt;=n) ++k,C[k]=C[k-1]+tmp1[l++];</span><br><span class="line">    while(r&lt;=m) ++k,C[k]=C[k-1]+tmp2[r++];</span><br><span class="line">&#125;</span><br><span class="line">inline int check(node x,node *A,int n)</span><br><span class="line">&#123;</span><br><span class="line">    if(x.det(A[1])&gt;0||A[n].det(x)&gt;0) return 0;</span><br><span class="line">    int pos=lower_bound(A+1,A+n+1,x,[&amp;](node x,node y)&#123;return x.det(y)&gt;0||(x.det(y)==0&amp;&amp;x.abs2()&lt;y.abs2());&#125;)-A-1;</span><br><span class="line">    return (x-A[pos]).det(A[pos%n+1]-A[pos])&lt;=0;</span><br><span class="line">&#125;</span><br><span class="line">signed main()</span><br><span class="line">&#123;</span><br><span class="line">    n=read(),m=read(),q=read();</span><br><span class="line">    int x,y;</span><br><span class="line">    R(i,1,n) x=read(),y=read(),a[i]=node(x,y);</span><br><span class="line">    R(i,1,m) x=read(),y=read(),b[i]=node(-x,-y);</span><br><span class="line">    solve(n,a);solve(m,b);</span><br><span class="line">    minkow(a,b,c,n,m,nm);</span><br><span class="line">    solve(nm,c);</span><br><span class="line">    node lwp=c[1];</span><br><span class="line">    R(i,1,nm) c[i]=c[i]-lwp;</span><br><span class="line">    while(q--)</span><br><span class="line">    &#123;</span><br><span class="line">        x=read(),y=read();</span><br><span class="line">        writeln(check(node(x,y)-lwp,c,nm));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-————————————————————————————————————————————————
-花对钱似乎非常敏感。
-大概是...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1704G/">CF1704G</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                令 $A_i&#x3D;a_i+2a_{i-1}+a_{i-2},B_i&#x3D;b_i-2b_{i-1}+b_{i-2}$，然后可以发现对于任意位置 $i$ 进行操作，除了 $A_{i}$ 将会变...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1704G/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1470F/">CF1470F</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                显然只会存在 $3$ 种本质不同的方式选择两个矩形。
-
-两个矩形不相交。
-
-这种情况可以直接遍历所有平行 $x&#x2F;y$ 轴的分割线，使选取的两个矩形分别在分割线的两边。分别找出极值点直接计算即...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1470F/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1081H/">CF1081H</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                一个显然错误的想法是分别计算 $A,B$ 本质不同的回文串个数，然后将两者相乘，这将会多次计算一个字符串。
-因此要思考的问题是，为什么会计算多次？
-为了解决这个问题，将用到下面数个引理，如果只是想解决...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1081H/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-08-03</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/08/03/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%A4%BE%E7%BE%A4%E8%AE%A8%E8%AE%BA/">记一次社群讨论</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/08/03/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%A4%BE%E7%BE%A4%E8%AE%A8%E8%AE%BA/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-05-24</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/05/24/l/">l</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-不过这改变不了阿丽娜半路被捅死了（笑）
-感觉群友们APIO玩得好开心。
-...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/05/24/l/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-05-13</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/05/13/CF1423C%20Du%C5%A1an's%20Railway/">CF1423C Dušan&#39;s Railway</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                反正可以直接当 $k&#x3D;3$ 去做，然后考虑直接去构造。
-首先任意给树找一个根，然后将整棵树拆成几个大小为 $\sqrt n$ 的子树，将所有这些子树的根 $u$ 塞到一个点集 $a$ ，然后...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/05/13/CF1423C%20Du%C5%A1an's%20Railway/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-04-30</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/04/30/CF1375I%20Cubic%20Lattice/">CF1375I Cubic Lattice</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                简要题意：
-定义三维空间中的一个 lattice 是满足下列条件的三维整点的集合：
-$$L&#x3D;{u\cdot \overrightarrow{r_1}+v\cdot \overrightarr...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/04/30/CF1375I%20Cubic%20Lattice/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-04-25</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/04/25/-/">?</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-下午水群的时候看到的，群友：
-
-总之有点想笑（）
-没记错的话这个梗是海贼王的来着。
-
-然后晚上又看到了个这个，其实个人觉得这从某种意义上也是”天龙人“的表现吧（）
-挺久以前大概也是作业题全写完，大概...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/04/25/-/">READ MORE +</a>
-            </div>
-        </article>
-    
-</div> </main>
+    </div>
+</article> </main>
 
 <div class="fab-container" id="fabContainer">
     <div class="fab-menu">

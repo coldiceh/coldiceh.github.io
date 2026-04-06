@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<title>反演与筛法 | Hexo</title>
+<link rel="icon" href="/avatar.jpg" type="image/jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+
+<canvas id="particle-canvas"></canvas>
+
+<header class="terminal-nav">
+    <a href="/" class="nav-logo">QAQ</a>
+    <nav class="nav-menu">
+        <a href="/" class="nav-item active"><span class="nav-en">INDEX</span><span class="nav-cn">首页</span></a>
+        <a href="#info" class="nav-item"><span class="nav-en">INFORMATION</span><span class="nav-cn">情报</span></a>
+        <a href="#operator" class="nav-item"><span class="nav-en">OPERATOR</span><span class="nav-cn">随笔</span></a>
+        <a href="#world" class="nav-item"><span class="nav-en">WORLD</span><span class="nav-cn">归档</span></a>
+        <a href="#media" class="nav-item"><span class="nav-en">MEDIA</span><span class="nav-cn">标签</span></a>
+    </nav>
+    </header>
+
+<aside class="sidebar">
+    <div class="avatar-box"><img src="/avatar.jpg" alt="Avatar"></div>
+    <h2 class="sidebar-title">COLDICEH</h2>
+    <p class="sidebar-subtitle">Dr.抢不到音律退坑了#8809</p>
+    
+    <div class="sidebar-search">
+        <div class="search-box">
+            <input type="text" id="local-search-input" placeholder="// SEARCH DATABASE...">
+        </div>
+    </div>
+    
+    <div style="margin-top: 20px;" class="sidebar-links">
+        <div style="color: var(--ak-blue); font-weight: bold; margin-bottom: 10px; border-left: 3px solid var(--ak-blue); padding-left: 10px;">常用链接</div>
+        <a href="#">我的随笔</a>
+        <a href="#">我的评论</a>
+        <a href="#">我的参与</a>
+        <a href="#">最新评论</a>
+        <a href="#">我的标签</a>
+    </div>
+</aside>
+
+<main class="main-content">
+    <article class="post-detail">
+    <h1 class="post-detail-title">反演与筛法</h1>
+    <div class="post-meta">
+        DATE: 2021-07-13
+    </div>
+    <div class="post-content">
+        <h2 id="积性函数与反演"><a href="#积性函数与反演" class="headerlink" title="积性函数与反演"></a>积性函数与反演</h2><h3 id="积性函数"><a href="#积性函数" class="headerlink" title="积性函数"></a>积性函数</h3><p>如果一个数论函数$f(n)$满足$f(pq)&#x3D;f(p)f(q),\forall p\perp q$，则称$f(n)$是一个积性函数。（数论函数$f:\mathbb{N}^* \rightarrow \mathbb{R}$）</p>
+<p>特别的，如果不要求$p\perp q$且依然满足上述式子的话，则称$f(n)$是一个完全积性函数。</p>
+<p>这里默认$f(1)&#x3D;1$的非平凡情况。</p>
+<p>常见积性函数：</p>
+<p>$\epsilon(n)&#x3D;[n&#x3D;1]$。（完全积性）</p>
+<p>$1(n)&#x3D;1$。（完全积性）</p>
+<p>$id(n)&#x3D;n$。（完全积性）</p>
+<p>$id^k(n)&#x3D;n^k$。（完全积性）</p>
+<p>$d(n)$：约数函数。</p>
+<p>$\sigma (n)&#x3D;(1+p_1+\ldots +p_1^{e_1})\cdot (1+p_2+\ldots +p_2^{e_2})\cdot \ldots  \cdot (1+p_k+\ldots +p_k^{e_k})$：约数和函数。</p>
+<p>$\mu(n)$：莫比乌斯函数。</p>
+<p>$\varphi(n)$：欧拉函数。</p>
+<p>$\lambda(n)&#x3D;e_1+e_2+\ldots +e_k,\lambda(p)+\lambda(q)&#x3D;\lambda(pq)$：$n$中可重质因子个数并不是一个积性函数，但是是一个重要的数论函数。</p>
+<p>数论函数的运算中，最重要的就是狄利克雷卷积了。</p>
+<p>两个数论函数$f$和$g$的狄利克雷卷积$h&#x3D;f* g$定义为$h(n)&#x3D;\sum\limits_{d\mid n} f(d)\cdot g(\frac{n}{d})$。</p>
+<p>一个非常重要的性质：若$f$和$g$都是积性函数，则$h&#x3D;f<em>g$也是积性函数；若$f$和$g$都是完全积性函数，则$h&#x3D;f</em> g$也是完全积性函数。<br>$$<br>\begin{aligned}<br>h(n)&amp;&#x3D;\sum_{d\mid n}f(d)g(\frac{n}{d})\<br>&amp;&#x3D;\sum_{d\mid n} f(p_1q_1)g(p_2q_2)\<br>&amp;&#x3D; \sum_{d\mid n} f(p_1)f(q_1)g(p_2)g(q_2)\<br>&amp;&#x3D;\left(\sum_{p_1|p}f(p_1)g(p_2) \right)\left(\sum_{q_1|q}f(q_1)g(q_2) \right)\<br>&amp;&#x3D;h(p)h(q)<br>\end{aligned}<br>$$<br>也可以类似形式幂级数的逆，定义数论函数$f$的逆$f^{-1}$为满足$f* f^{-1}&#x3D;\epsilon$的数论函数（显然存在且唯一），两个数论函数的除法$f&#x2F;g&#x3D;f* g^{-1}$。若$f$是积性函数，则$f^{-1}$也是积性函数；若$f$是完全积性函数，则$f^{-1}$也是完全积性函数。另外一个数论函数的重要运算是点乘：数论函数$f$和数论函数$g$的点乘$h&#x3D;f\cdot g$定义为$h(n)&#x3D;f(n)* g(n)$。若$f$和$g$都是积性函数，则$h$也是积性函数；若$f$和$g$都是完全积性函数，则$h$也是完全积性函数。</p>
+<p>狄利克雷卷积与点乘自身都满足交换律与结合律。</p>
+<p>数论函数还有数乘、加法等运算，比较简单，这里就不提了。</p>
+<h3 id="贝尔级数"><a href="#贝尔级数" class="headerlink" title="贝尔级数"></a>贝尔级数</h3><p>定义一个数论函数$f$的狄利克雷生成函数为：<br>$$<br>F(z)&#x3D;\sum_{n\ge 1} \frac{f(n)}{n^z}<br>$$<br>两个数论函数的狄利克雷卷积对应它们狄利克雷生成函数的乘法：<br>$$<br>\begin{aligned}<br>F(z)G(z)&amp;&#x3D;\left(\sum_{n_1\ge 1} \frac{f(n_1)}{n_1^z} \right)\left(\sum_{n_2\ge 1} \frac{g(n_2)}{n_2^z} \right)\<br>&amp;&#x3D;\sum_{n\ge 1} \frac{\sum_{d\mid n}f(d)g(\frac{n}{d})}{n^z}\<br>&amp;&#x3D;(F*G)(z)<br>\end{aligned}<br>$$<br>不过这通常在计算上不够方便。对于积性函数来说，我们只关心它在所有指数幂上的取值，就能确定它了。</p>
+<p>定义积性函数$f$在质数$p$上的贝尔级数：<br>$$<br>F_p(z)&#x3D;\sum_{n\ge 0} f(p^n) z^n<br>$$<br>那么两个积性函数的狄利克雷卷积对应它们在每个质数的贝尔级数上的乘法。</p>
+<p>一些常用积性函数的贝尔级数：<br>$$<br>\epsilon_p(z)&#x3D;1+0+0+\ldots<br>$$</p>
+<p>$$<br>\epsilon_p(z)&#x3D;1<br>$$</p>
+<p>$$<br>1_p(z)&#x3D;1+z+z^2+\ldots<br>$$</p>
+<p>$$<br>1_p(z)&#x3D;\frac{1}{1-z}<br>$$</p>
+<p>$$<br>id_p^k&#x3D;1+p^kz+p^{2k}z^2+\ldots<br>$$</p>
+<p>$$<br>id_p(z)&#x3D;\frac{1}{1-pz}<br>$$</p>
+<p>$$<br>id_p^k (z)&#x3D;\frac{1}{1-p^kz}<br>$$</p>
+<p>$$<br>\mu_p(z)&#x3D;1-z<br>$$</p>
+<p>$$<br>\mu^2_p(z)<br>\begin{cases}<br>1,e_1&#x3D;e_2&#x3D;\ldots &#x3D;e_k&#x3D;1\<br>0,otheres<br>\end{cases}<br>$$</p>
+<p>$$<br>\mu_p^2(z)&#x3D;1+z<br>$$</p>
+<p>$$<br>\varphi_p(z)&#x3D;1+(p-1)z+p(p-1)z^2+p^2(p-1)z^3+\ldots&#x3D;1+\frac{(p-1)z}{1-pz}<br>$$</p>
+<p>$$<br>\varphi_p(z)&#x3D;\frac{1-z}{1-pz}<br>$$</p>
+<p>这里可以看出两个重要的等式：<br>$$<br>\mu_p(z)\cdot 1_p(z)&#x3D;(1-z)\cdot \frac{1}{1-z}&#x3D;1&#x3D; \epsilon_p(z)<br>$$<br>即$\mu *1&#x3D;\epsilon$。<br>$$<br>\varphi_p(z)\cdot 1_p(z)&#x3D;\frac{1-z}{1-pz}\cdot\frac{1}{1-z}&#x3D;\frac{1}{1-pz}&#x3D; id_p(z)<br>$$<br>即$\varphi *1&#x3D;id$</p>
+<h3 id="积性函数求值"><a href="#积性函数求值" class="headerlink" title="积性函数求值"></a>积性函数求值</h3><p>我们经常会遇到积性函数求前$n$项或前$n$项和的问题。当$n$不太大的时候，我们通常可以$\mathcal O (n)$预处理。</p>
+<p>通常给出积性函数的方式是给出它在质数幂处的定义形式，我们可以采取在所有质数和质数幂处暴力按定义计算，然后用欧拉筛法（线性筛法）预处理前$n$项的做法。</p>
+<p>很多积性函数在质数处的计算较快（$\mathcal O(1)$或$\mathcal O(\log n)$），但在质数幂处的计算量很大（例如是一个关于质数幂次的多项式DP）。这时候的复杂度是多少呢？</p>
+<p>注意到$n$以内质数个数是$\mathcal O(\frac{n}{\log n})$，而严格的指数幂只有</p>
+
+$\mathcal O(\frac{\sqrt{n}}{\log n})$
+
+<p>，所以即使是关于次数的多项式，复杂度仍然是$\mathcal O(n)$的。</p>
+<h3 id="莫比乌斯反演"><a href="#莫比乌斯反演" class="headerlink" title="莫比乌斯反演"></a>莫比乌斯反演</h3><p>$\mu <em>1&#x3D;\epsilon$可以推出$f&#x3D;f</em>\epsilon &#x3D;f* (\mu * 1)&#x3D;f*\mu <em>1&#x3D;(f</em>1)*\mu$，得到莫比乌斯反演：<br>$$<br>g(n)&#x3D;\sum_{d\mid n}f (d)\Leftrightarrow f(n)&#x3D;\sum_{d\mid n}\mu\left(\frac{n}{d}\right)g(d)<br>$$<br>或是：<br>$$<br>g(d)&#x3D;\sum_{d\mid n}f(n)\Leftrightarrow f(d)&#x3D;\sum_{d\mid n}\mu\left(\frac{n}{d} \right)g(n)<br>$$<br>有时候如果我们要处理跟$\gcd$的值有关的问题，利用$\varphi *1 &#x3D;id$可以得到另外的等式：<br>$$<br>\sum_{d\mid n} \varphi(d)&#x3D;n<br>$$</p>
+<h3 id="数论分块"><a href="#数论分块" class="headerlink" title="数论分块"></a>数论分块</h3><p>很多时候在数论题中，我们需要计算形如：<br>$$<br>\sum_{d&#x3D;1}^n f(d)g(\lfloor \frac{n}{d}\rfloor)<br>$$<br>这样的式子。其中$f$的前缀和可以快速求。</p>
+<p>这时候我们通常需要数论分块的思想：这里$\lfloor \frac{n}{d}\rfloor$只有$\mathcal O(\sqrt n)$种不同的取值：对于$d&gt;\sqrt n,\frac{n}{d}\le \sqrt n$。我们枚举所有不同的$\lfloor \frac{n}{d}\rfloor$，然后计算某段区间中$f$的前缀和。一个非常好的性质是若我们进行差分，则递归到的$f$求前缀和位置也是$\lfloor \frac{n}{d} \rfloor$。并且$\lfloor\frac{\lfloor \frac{n}{i} \rfloor}{j} \rfloor&#x3D;\lfloor\frac{n}{ij}\rfloor$，于是总体递归到的也不会太多。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>,j=<span class="number">0</span>;i&lt;=n;i=j<span class="number">+1</span>)</span><br><span class="line">&#123;</span><br><span class="line">	j=n/(n/i);</span><br><span class="line">	(<span class="built_in">S</span>(j)-<span class="built_in">S</span>(i<span class="number">-1</span>))*<span class="built_in">f</span>(n/i);</span><br><span class="line">	<span class="comment">//[i,j]         n/i</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="选数"><a href="#选数" class="headerlink" title="选数"></a>选数</h3><h4 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h4><p>从区间$[L,H]$中有序选择$n$个数形成一个数组，共有$(H-L+1)^n$种方案。</p>
+<p>问其中选择的数$\gcd&#x3D;k$的方案数。</p>
+<p>$n,k,L,H\leq 10^9,H-L\leq 10^5$。</p>
+<h3 id="prime"><a href="#prime" class="headerlink" title="prime"></a>prime</h3><h4 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h4><p>求$\left(\sum\limits_{i&#x3D;1}^n 2^{f(i)} \right)\bmod 998244353$，其中$f(i)$为$i$的不同质因子个数。</p>
+<p>$n\le 10^{12}$。</p>
+<h4 id="sol"><a href="#sol" class="headerlink" title="sol"></a>sol</h4><p>首先对$2^{f(i)}$做转换，$2^{f(i)}$组合意义就是$i$这个数每个不同质因子都有选或不选两种方案，而$2^{f(i)}$为总方案数，也就是说$i$的无平方因子的约数个数，即：<br>$$<br>2^{f(n)}&#x3D;\sum_{d\mid n}\mu^2(d)<br>$$<br>因此<br>$$<br>\begin{aligned}<br>\sum_{i&#x3D;1}^n 2^{f(i)}&amp;&#x3D;\sum_{i&#x3D;1}^n\sum_{d\mid n} \mu^2(d)\<br>&amp;&#x3D;\sum_{i&#x3D;1}^n \mu^2(i)\lfloor \frac{n}{i}\rfloor<br>\end{aligned}<br>$$</p>
+<p>而<br>$$<br>\begin{aligned}<br>\sum_{i&#x3D;1}^n \mu^2(i)&amp;&#x3D;\sum_{i&#x3D;1}^n \sum_{d^2\mid i}\mu(d)\<br>&amp;&#x3D;\sum_{d&#x3D;1}^{\sqrt n}\mu (d)\lfloor \frac{n}{d^2}\rfloor<br>\end{aligned}<br>$$</p>
+<p>代回原式</p>
+<p>$$<br>\begin{aligned}<br>\sum_{i&#x3D;1}^n \mu^2(i)\lfloor\frac{n}{i}\rfloor&amp;&#x3D;<br>\sum_{d&#x3D;1}^{\sqrt n} \mu(d)\left(\sum_{i&#x3D;1}^{\lfloor\frac{n}{d^2}\rfloor}d(i) \right)\<br>&amp;&#x3D;\sum_{d&#x3D;1}^{\lfloor\sqrt n\rfloor} \mu (d)\sum_{i&#x3D;1}^{\lfloor\frac{n}{d^2}\rfloor}\lfloor \frac{n}{d^2 i}\rfloor<br>\end{aligned}<br>$$</p>
+<p>时间复杂度</p>
+
+$\mathcal O\left(\sum\limits_{i=1}^{\sqrt n} \sqrt{\frac{n}{i^2}}\right)=\mathcal O\left(\sqrt n \log n \right)$
+
+<p>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n,nn;</span><br><span class="line"><span class="type">bool</span> npr[<span class="number">1000010</span>];</span><br><span class="line"><span class="type">int</span> pri[<span class="number">100010</span>],cnt_p,mu[<span class="number">1000010</span>],sm[<span class="number">1000100</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> &amp;x,<span class="type">int</span> y)</span></span>&#123;x+=y;x&gt;=mod?x-=mod:<span class="number">1</span>;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">getF</span><span class="params">(<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> ret=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>,j=<span class="number">0</span>;i&lt;=n;i=j<span class="number">+1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        j=<span class="built_in">min</span>(n/(n/i),n);</span><br><span class="line">        <span class="built_in">add</span>(ret,(j-i<span class="number">+1</span>)*(n/i)%mod);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n=<span class="built_in">read</span>();</span><br><span class="line">    mu[<span class="number">1</span>]=sm[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">2</span>,<span class="number">1000000</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!npr[i]) pri[++cnt_p]=i,mu[i]=<span class="number">-1</span>;</span><br><span class="line">        <span class="built_in">R</span>(j,<span class="number">1</span>,cnt_p)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">static</span> <span class="type">int</span> t;</span><br><span class="line">            t=pri[j]*i;</span><br><span class="line">            <span class="keyword">if</span>(t&gt;<span class="number">1000000</span>) <span class="keyword">break</span>;</span><br><span class="line">            npr[t]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(i%pri[j]==<span class="number">0</span>) &#123;mu[t]=<span class="number">0</span>;<span class="keyword">break</span>;&#125;</span><br><span class="line">            mu[t]=-mu[i];</span><br><span class="line">        &#125;</span><br><span class="line">        sm[i]=sm[i<span class="number">-1</span>]+mu[i];</span><br><span class="line">    &#125;</span><br><span class="line">    nn=(<span class="type">int</span>)<span class="built_in">sqrt</span>(<span class="number">1.0</span>*n);</span><br><span class="line">    <span class="type">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>,j=<span class="number">0</span>;i&lt;=nn;i=j<span class="number">+1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        j=<span class="built_in">min</span>((<span class="type">int</span>)<span class="built_in">sqrt</span>(n/(n/(<span class="number">1ll</span>*i*i))),nn);</span><br><span class="line">        <span class="built_in">add</span>(ans,(<span class="number">1ll</span>*(sm[j]-sm[i<span class="number">-1</span>])*<span class="built_in">getF</span>(n/(<span class="number">1ll</span>*i*i))%mod+mod)%mod);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">writeln</span>(ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiao-ju-ruo-xjr/p/8278549.html">https://www.cnblogs.com/xiao-ju-ruo-xjr/p/8278549.html</a></p>
+<h3 id="毒瘤之神的考验"><a href="#毒瘤之神的考验" class="headerlink" title="毒瘤之神的考验"></a>毒瘤之神的考验</h3><h4 id="题意-2"><a href="#题意-2" class="headerlink" title="题意"></a>题意</h4><p>多测。求<br>$$<br>\left(\sum_{i&#x3D;1}^n \sum_{j&#x3D;1}^m \varphi(ij) \right)\bmod 998244353<br>$$<br>$T\le 10^4,n,m\leq 10^5$。</p>
+<h4 id="sol-1"><a href="#sol-1" class="headerlink" title="sol"></a>sol</h4><p>两个结论<br>$$<br>d(nm)&#x3D;\sum_{i\mid n} \sum_{j\mid m} [\gcd(i,j)&#x3D;1]<br>$$</p>
+<p>$$<br>\varphi(nm)&#x3D;\frac{\varphi(n)\varphi(m)\gcd(n,m)}{\varphi\left(\gcd(n,m)\right)}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>\sum_{i&#x3D;1}^n\sum_{j&#x3D;1}^m \varphi(ij)&amp;&#x3D;\sum_{i&#x3D;1}^n\sum_{j&#x3D;1}^m \frac{\varphi(i)\varphi(j)\gcd(i,j)}{\varphi(\gcd(i,j))}\<br>&amp;&#x3D;\sum_{d&#x3D;1}^{\min(n,m)} \frac{d}{\varphi(d)}\sum_{i&#x3D;1}^n\sum_{j&#x3D;1}^m \varphi(i)\varphi(j)[\gcd(i,j)&#x3D;d]\<br>&amp;&#x3D;\sum_{d&#x3D;1}^{\min(n,m)}\frac{d}{\varphi(d)} \sum_{i&#x3D;1}^{\lfloor\frac{n}{d}\rfloor} \sum_{j&#x3D;1}^{\lfloor\frac{m}{d}\rfloor} \varphi(id)\varphi(jd)[\gcd(i,j)&#x3D;1]\<br>&amp;&#x3D;\sum_{d&#x3D;1}^{\min(n,m)}\frac{d}{\varphi(d)} \sum_{i&#x3D;1}^{\lfloor \frac{n}{d}\rfloor} \sum_{j&#x3D;1}^{\lfloor\frac{m}{d}\rfloor}\varphi(id)\varphi(jd)\sum_{k\mid i\or k\mid j} \mu(k)\<br>&amp;&#x3D;\sum_{d&#x3D;1}^{\min(n,m)}\frac{d}{\varphi(d)} \sum_{k&#x3D;1}^{\lfloor\frac{\min(n,m)}{d}\rfloor}\sum_{i&#x3D;1}^{\lfloor \frac{n}{dk}\rfloor}\sum_{j&#x3D;1}^{\lfloor\frac{m}{dk}\rfloor} \varphi(idk)\varphi(jdk)\<br>&amp;&#x3D;\sum_{k&#x3D;1}^{\min(n,m)} \sum_{d|k}\mu(\frac{k}{d})\frac{d}{\varphi(d)}\sum_{i&#x3D;1}^{\lfloor\frac{n}{k}\rfloor}\sum_{j&#x3D;1}^{\lfloor\frac{m}{k}\rfloor} \varphi(ik)\varphi(jk)<br>\end{aligned}<br>$$</p>
+<p>然后是神奇的预处理了，具体只能看题解了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> npr[<span class="number">111111</span>];</span><br><span class="line"><span class="type">int</span> pri[<span class="number">55555</span>],mu[<span class="number">111111</span>],phi[<span class="number">111111</span>],cp;</span><br><span class="line"><span class="type">int</span> F[<span class="number">111111</span>];</span><br><span class="line">vector&lt;<span class="type">int</span>&gt;G[<span class="number">100101</span>],S[<span class="number">44</span>][<span class="number">44</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> &amp;x,<span class="type">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    x+=y;</span><br><span class="line">    x&gt;=mod?x-=mod:<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//vector&lt;int&gt;v(1000010);</span></span><br><span class="line">    mu[<span class="number">1</span>]=phi[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">2</span>,<span class="number">100000</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!npr[i]) pri[++cp]=i,mu[i]=<span class="number">-1</span>,phi[i]=i<span class="number">-1</span>;</span><br><span class="line">        <span class="built_in">R</span>(j,<span class="number">1</span>,cp)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">static</span> <span class="type">int</span> t;</span><br><span class="line">            t=pri[j]*i;</span><br><span class="line">            <span class="keyword">if</span>(t&gt;<span class="number">100000</span>) <span class="keyword">break</span>;</span><br><span class="line">            npr[t]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(i%pri[j]==<span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                phi[t]=phi[i]*pri[j];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                phi[t]=phi[i]*phi[pri[j]];</span><br><span class="line">                mu[t]=-mu[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> inv[<span class="number">111111</span>];</span><br><span class="line">    inv[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">2</span>,<span class="number">100000</span>) inv[i]=(mod-mod/i)*inv[mod%i]%mod;</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,<span class="number">100000</span>) <span class="built_in">R</span>(j,<span class="number">1</span>,<span class="number">100000</span>/i) <span class="built_in">add</span>(F[i*j],(i*inv[phi[i]]%mod*(mu[j]%mod+mod)%mod)%mod);</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,<span class="number">100000</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//test</span></span><br><span class="line">        <span class="comment">//G[i].resize(100000/i);</span></span><br><span class="line">        G[i].<span class="built_in">resize</span>(<span class="number">100000</span>/i<span class="number">+5</span>);</span><br><span class="line">        <span class="comment">//printf(&quot;%lld\n&quot;,(int)G[i].size());</span></span><br><span class="line">        <span class="comment">//test</span></span><br><span class="line">        <span class="built_in">R</span>(j,<span class="number">1</span>,<span class="number">100000</span>/i) G[i][j]=(G[i][j<span class="number">-1</span>]+phi[i*j])%mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//test</span></span><br><span class="line">    <span class="built_in">R</span>(j,<span class="number">1</span>,<span class="number">40</span>) <span class="built_in">R</span>(k,j,<span class="number">40</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        S[j][k].<span class="built_in">resize</span>(<span class="number">100000</span>/k<span class="number">+5</span>);</span><br><span class="line">        <span class="built_in">R</span>(i,<span class="number">1</span>,<span class="number">100000</span>/k) S[j][k][i]=(S[j][k][i<span class="number">-1</span>]+F[i]*G[i][j]%mod*G[i][k]%mod)%mod;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">calc</span><span class="params">(<span class="type">int</span> n,<span class="type">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n&gt;m) <span class="built_in">swap</span>(n,m);</span><br><span class="line">    <span class="type">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,m/<span class="number">40</span>) <span class="built_in">add</span>(ans,F[i]*G[i][n/i]%mod*G[i][m/i]%mod);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=m/<span class="number">40</span><span class="number">+1</span>,j=<span class="number">0</span>;i&lt;=n;i=j<span class="number">+1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        j=<span class="built_in">min</span>(n/(n/i),m/(m/i));</span><br><span class="line">        <span class="built_in">add</span>(ans,(S[n/i][m/i][j]-S[n/i][m/i][i<span class="number">-1</span>]+mod)%mod);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">init</span>();</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> _=<span class="built_in">read</span>();_--;)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> n=<span class="built_in">read</span>(),m=<span class="built_in">read</span>();</span><br><span class="line">        <span class="built_in">writeln</span>(<span class="built_in">calc</span>(n,m));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="狄利克雷k次根加强版"><a href="#狄利克雷k次根加强版" class="headerlink" title="狄利克雷k次根加强版"></a>狄利克雷k次根加强版</h3><h4 id="题意-3"><a href="#题意-3" class="headerlink" title="题意"></a>题意</h4><p>给出一个函数$f:{1,2,\cdots ,n}\to \mathbb{Z}$，定义$(f*g)(n)&#x3D;\sum\limits_{d\mid n}f(d)g(\frac{n}{d})$。</p>
+<p>求一个$g:{1,2,\cdots ,n}\to \mathbb{Z}$使$g^k&#x3D;f$。这里保证$f(1)&#x3D;1$，所有运算在$\mathbb{F}_p$上进行，其中$p&#x3D;998244353$。</p>
+<p>$2\leq n\leq 10^6,1\le k&lt;998244353$。</p>
+<h4 id="sol-2"><a href="#sol-2" class="headerlink" title="sol"></a>sol</h4><p>$$<br>\ln F&#x3D;\int \frac{F’}{F}<br>$$</p>
+<p>$$<br>F’&#x3D;F\ln n<br>$$</p>
+<p>$$<br>\begin{alignat}{8}<br>F^k &amp;&#x3D; G \<br>kF^{k-1}\frac{G}{F} &amp; &#x3D;G’  \<br>kF’\frac{G}{F} &amp; &#x3D; G’ \<br>F’G &amp;&#x3D;\frac{1}{k}G’\<br>\sum_{d\mid n} f’(d)g\left(\frac{n}{d} \right)&amp;&#x3D;\frac{1}{k}\sum_{d\mid n} f(d)g’\left(\frac{n}{d} \right)\<br>f’(n)g(1)+\sum_{d\mid n,d\neq n} f’(d)g\left(\frac{n}{d} \right)&amp;&#x3D;\frac{1}{k}\left(f(n)g’(1)+\sum_{d\mid n,d\ne n} f(d)g’\left(\frac{n}{d} \right) \right)<br>\end{alignat}<br>$$</p>
+<p>$g(1)&#x3D;1,g’(1)&#x3D;0$。</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/cj-xxz/p/12193589.html">https://www.cnblogs.com/cj-xxz/p/12193589.html</a></p>
+<h2 id="杜教筛"><a href="#杜教筛" class="headerlink" title="杜教筛"></a>杜教筛</h2><p>很多时候需要求积性函数的前缀和$\sum\limits_{i&#x3D;1}^n f(i)$。当$n$不太大的时候，我们可以允许$\mathcal O(n)$复杂度的算法。但当$n$过大的时候，我们需要更优秀的亚线性算法，一个算法是杜教筛：</p>
+<p>考虑构造另一个积性函数$g$，且$g$的前缀和可以快速求得，同时我们还可以快速求出$h&#x3D;f*g$（一个积性函数）的前缀和。这个时候我们将$h(n)&#x3D;\sum\limits_{d\mid n} f(d)g(\frac{n}{d})$求前缀和，可以得到：<br>$$<br>\begin{aligned}<br>\sum_{i&#x3D;1}^n h(i)&amp;&#x3D;\sum_{i&#x3D;1}^n\left(\sum_{d\mid i}f(d)g(\frac{i}{d}) \right)\&amp;&#x3D;<br>\sum_{i&#x3D;1}^n g(i)\left(\sum_{j&#x3D;1}^{\lfloor \frac{n}{i}\rfloor}f(j) \right)\<br>&amp;&#x3D; \left(\sum_{i&#x3D;1}^nf(i) \right)+\sum_{i&#x3D;2}^n g(i)\left(\sum_{j&#x3D;1}^{\lfloor \frac{n}{i}\rfloor}f(j) \right)<br>\end{aligned}<br>$$<br>关于上面的解释：</p>
+<p>（</p>
+<p>这里令$S(n)&#x3D;\sum\limits_{i&#x3D;1}^n f(i)$<br>$$<br>\sum_{i&#x3D;1}^n h(i)&#x3D;\sum_{i&#x3D;1}^n g(i)S\left(\lfloor\frac{n}{i}\rfloor \right)<br>$$<br>而因为$g(1)&#x3D;1$<br>$$<br>\sum_{i&#x3D;1}^n h(i)&#x3D;g(1)S(n)+\sum_{i&#x3D;2}^n g(i)S\left(\lfloor \frac{n}{i}\rfloor \right)<br>$$<br>移项可以得到所需要的式子：<br>$$<br>\sum_{i&#x3D;1}^n f(i)&#x3D;\left(\sum_{i&#x3D;1}^n h(i) \right)-\sum_{i&#x3D;2}^n g(i)\left(\sum_{j&#x3D;1}^{\lfloor \frac{n}{i}\rfloor}f(j) \right)<br>$$<br>）</p>
+<p>对右边后一项做一个数论分块，这样就可以递归利用$f\left(\lfloor \frac{n}{d}\rfloor \right)$前缀和计算了。</p>
+<p>分析一下这样做的复杂度：</p>
+<p>假设我们可以在$\mathcal O(1)$的时间复杂度内求出$g,h$的前缀和。那么我们每层递归就只需要$\mathcal O(\sqrt n)$的时间复杂度（不计算递归的复杂度）了。直接递归复杂度是指数级的，不过我们发现如果用记忆化搜索的话，会得到很大的优化。这是因为假设初始时的$n$是$N$，我们递归到的$\lfloor \frac{n}{d}\rfloor$一定是某个$\lfloor \frac{N}{d}\rfloor$形式。这样，我们只需要考虑对所有的$\lfloor \frac{N}{d}\rfloor$，递归的时间复杂度了。用积分近似可以得到这样做是</p>
+
+$\mathcal O(n^{\frac{3}{4}})$
+
+<p>的，确实是一个亚线性算法。</p>
+<p>还可以进一步优化：考虑我们设定一个阙值$S$，我们预先求出$f(1)\sim f(S)$以及它们对应的前缀和，这部分使用线性筛法即可$\mathcal O(S)$完成，递归到$\leq S$的时候不需要再递归了。同样用积分近似可以发现复杂度是</p>
+
+$\mathcal O\left(\dfrac{n}{S^\frac{1}{2}}+S \right)$
+
+<p>的，取</p>
+
+$S=n^{\frac{2}{3}}$
+
+<p>左右最优，复杂度为</p>
+
+$\mathcal O(n^{\frac{2}{3}})$
+
+<p>。</p>
+<p>伪代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> N,MaxN;</span><br><span class="line"><span class="type">int</span> f[Maxn<span class="number">+5</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">SF</span><span class="params">(<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> sum[NN];</span><br><span class="line">    <span class="type">static</span> <span class="type">bool</span> vis[NN];</span><br><span class="line">    <span class="keyword">if</span>(n&lt;=Maxn) <span class="keyword">return</span> f[n];</span><br><span class="line">    <span class="type">int</span> t=N/n;</span><br><span class="line">    <span class="keyword">if</span>(vis[t]) <span class="keyword">return</span> sum[t];</span><br><span class="line">    vis[t]=<span class="number">1</span>;</span><br><span class="line">    <span class="type">int</span> s=<span class="built_in">SH</span>(n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>,j=<span class="number">1</span>;i&lt;=n;i=j<span class="number">+1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        j=n/(n/i);</span><br><span class="line">        s-=<span class="built_in">SF</span>(n/i)*(<span class="built_in">SG</span>(j)-<span class="built_in">SG</span>(i<span class="number">-1</span>));</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> sum[t]=s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="构造杜教筛"><a href="#构造杜教筛" class="headerlink" title="构造杜教筛"></a>构造杜教筛</h3><p>构造杜教筛是很需要经验和技巧的事情，如果利用贝尔级数可以稍微简单一些。</p>
+<p>首先是两个重要积性函数$\mu$和$\varphi$，我们还是利用前面的两个等式构造：</p>
+<p>对于$f&#x3D;\mu$，我们构造$g&#x3D;1$，则$h&#x3D;f*g&#x3D;\epsilon$，显然$g$和$h$前缀和都可以$\mathcal O(1)$计算。</p>
+<p>对于$f&#x3D;\varphi$，我们构造$g&#x3D;1$，则$h&#x3D;f*g&#x3D;id$，显然$g$和$h$前缀和都可以$\mathcal O(1)$计算。</p>
+<p>这样$\mu$和$\varphi$的前缀和都可以</p>
+
+$\mathcal O\left(n^{\frac{2}{3}} \right)$
+
+<p>计算了。</p>
+<p>事实上，若$k$为小常数，则$id^k\cdot \mu$也可以同样用杜教筛计算：构造$g&#x3D;id^k,h&#x3D;f*g&#x3D;\epsilon$即可。</p>
+<p>即<br>$$<br>f(n)&#x3D;n^k\cdot \mu(n)<br>$$</p>
+<p>$$<br>\begin{aligned}<br>\sum_{d\mid n} f(d)\left(\frac{n}{d} \right)^k&amp;&#x3D;\sum_{d\mid n}d^k\mu(d)\left(\frac{n}{d} \right)^k\<br>&amp;&#x3D;n^k\sum_{d\mid n} \mu(d)&#x3D;[n&#x3D;1]<br>\end{aligned}<br>$$</p>
+<p>更多时候我们的$g$或$h$可能也需要递归计算，这时候若我们的递归是常数层的，记忆化的话时间复杂度其实也是</p>
+
+$\mathcal O(n^{\frac{2}{3}})$
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> hs=<span class="number">173219</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">hashtable</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> head[hs<span class="number">+10</span>],cnt;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">edge</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> nxt,key,val;</span><br><span class="line">    &#125;e[<span class="number">200020</span>];</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">hash</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;<span class="keyword">return</span> (x%hs+hs)%hs;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">add_edge</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> v,<span class="type">int</span> d)</span></span>&#123;e[++cnt]=(edge)&#123;head[u],v,d&#125;;head[u]=cnt;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">find</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">static</span> <span class="type">int</span> h;</span><br><span class="line">        h=<span class="built_in">hash</span>(x);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=head[h];i;i=e[i].nxt) <span class="keyword">if</span>(e[i].key==x) <span class="keyword">return</span> i;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">ins</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> d)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="type">static</span> <span class="type">int</span> h;</span><br><span class="line">        h=<span class="built_in">hash</span>(x);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=head[h];i;i=e[i].nxt) <span class="keyword">if</span>(e[i].key==x) <span class="keyword">return</span>;</span><br><span class="line">        <span class="built_in">add_edge</span>(h,x,d);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;ht1,ht2;</span><br><span class="line"><span class="type">int</span> phi[<span class="number">5555555</span>],mu[<span class="number">5555555</span>],pri[<span class="number">555555</span>],cp;</span><br><span class="line"><span class="type">int</span> Sp[<span class="number">5555555</span>],Sm[<span class="number">5555555</span>];</span><br><span class="line"><span class="type">bool</span> npr[<span class="number">5555555</span>];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">calc_Phi</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x&lt;=<span class="number">5000000</span>) <span class="keyword">return</span> Sp[x];</span><br><span class="line">    <span class="type">int</span> t=ht<span class="number">1.f</span>ind(x);</span><br><span class="line">    <span class="keyword">if</span>(t) <span class="keyword">return</span> ht<span class="number">1.</span>e[t].val;</span><br><span class="line">    <span class="type">int</span> ret=((x<span class="number">+1</span>)*x)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>,j=<span class="number">0</span>;i&lt;=x;i=j<span class="number">+1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        j=x/(x/i);</span><br><span class="line">        ret-=<span class="number">1ll</span>*(j-i<span class="number">+1</span>)*<span class="built_in">calc_Phi</span>(x/i);</span><br><span class="line">    &#125;</span><br><span class="line">    ht<span class="number">1.</span><span class="built_in">ins</span>(x,ret);</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">calc_Mu</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(x&lt;=<span class="number">5000000</span>) <span class="keyword">return</span> Sm[x];</span><br><span class="line">    <span class="type">int</span> t=ht<span class="number">2.f</span>ind(x);</span><br><span class="line">    <span class="keyword">if</span>(t) <span class="keyword">return</span> ht<span class="number">2.</span>e[t].val;</span><br><span class="line">    <span class="type">int</span> ret=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>,j=<span class="number">0</span>;i&lt;=x;i=j<span class="number">+1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        j=x/(x/i);</span><br><span class="line">        ret-=<span class="number">1ll</span>*(j-i<span class="number">+1</span>)*<span class="built_in">calc_Mu</span>(x/i);</span><br><span class="line">    &#125;</span><br><span class="line">    ht<span class="number">2.</span><span class="built_in">ins</span>(x,ret);</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    mu[<span class="number">1</span>]=phi[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">2</span>,<span class="number">5000000</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!npr[i]) pri[++cp]=i,mu[i]=<span class="number">-1</span>,phi[i]=i<span class="number">-1</span>;</span><br><span class="line">        <span class="built_in">R</span>(j,<span class="number">1</span>,cp)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">static</span> <span class="type">int</span> t;</span><br><span class="line">            t=i*pri[j];</span><br><span class="line">            <span class="keyword">if</span>(t&gt;<span class="number">5000000</span>) <span class="keyword">break</span>;</span><br><span class="line">            npr[t]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(i%pri[j]==<span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                phi[t]=phi[i]*pri[j];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                phi[t]=phi[i]*phi[pri[j]];</span><br><span class="line">                mu[t]=-mu[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,<span class="number">5000000</span>) Sp[i]=Sp[i<span class="number">-1</span>]+phi[i],Sm[i]=Sm[i<span class="number">-1</span>]+mu[i];</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> x;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> _=<span class="built_in">read</span>();_--;)x=<span class="built_in">read</span>(),<span class="built_in">writesp</span>(<span class="built_in">calc_Phi</span>(x)),<span class="built_in">writeln</span>(<span class="built_in">calc_Mu</span>(x));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="简单的数学题"><a href="#简单的数学题" class="headerlink" title="简单的数学题"></a>简单的数学题</h3><h4 id="题意-4"><a href="#题意-4" class="headerlink" title="题意"></a>题意</h4><p>$$<br>\left(\sum_{i&#x3D;1}^n \sum_{j&#x3D;1}^n ij\gcd(i,j) \right)\bmod p<br>$$</p>
+<p>$n\leq 10^{10}$。</p>
+<h3 id="sol-3"><a href="#sol-3" class="headerlink" title="sol"></a>sol</h3><p>这题做法似乎很多？<br>$$<br>\begin{aligned}<br>\sum_{i&#x3D;1}^n \sum_{j&#x3D;1}^n ij\gcd(i,j)&amp;&#x3D;\sum_{d&#x3D;1}^{n} d^3\sum_{i&#x3D;1}^{\lfloor \frac{n}{d}\rfloor}\sum_{j&#x3D;1}^{\lfloor\frac{n}{d}\rfloor} ij[\gcd(i,j)&#x3D;1]\<br>&amp;&#x3D;\left(\sum_{d&#x3D;1}^n \sum_{T&#x3D;1}^{\lfloor\frac{n}{d}\rfloor}(dT)^2d\mu(T)\left( \sum_{i&#x3D;1}^{\lfloor\frac{n}{dT} \rfloor}i \right)^2 \right)\<br>&amp;&#x3D;\left(\sum_{d&#x3D;1}^n \sum_{T&#x3D;1}^{\lfloor\frac{n}{d}\rfloor}(dT)^2d\mu(T) S\left(\left\lfloor\frac{n}{dT}\right\rfloor \right)^2\right)\<br>&amp;&#x3D;\sum_{i&#x3D;1}^n i^2\left(\sum_{T\mid i}\frac{i}{T}\cdot \mu(T)\right)S\left(\frac{n}{i} \right) ^2\<br>&amp;&#x3D; \sum_{i&#x3D;1}^n i^2\varphi(i)S\left(\frac{n}{i} \right)^2<br>\end{aligned}<br>$$</p>
+<p>希望没错&#x2F;jk</p>
+<h3 id="循环之美"><a href="#循环之美" class="headerlink" title="循环之美"></a>循环之美</h3><h4 id="题意-5"><a href="#题意-5" class="headerlink" title="题意"></a>题意</h4><p>求有多少个数值互不相同的$k$进制下纯循环小数，可以写成$\frac{x}{y}$的形式。其中$1\leq x\le n,1\leq y\leq m$。</p>
+<p>$1\le n,m\le 10^9,2\le k\le 2000$。</p>
+<h2 id="Powerful-Numbers"><a href="#Powerful-Numbers" class="headerlink" title="Powerful Numbers"></a>Powerful Numbers</h2><p>大部分积性函数求前缀和是困难的。但若我们已知某个特殊积性函数在所有$\frac{n}{d}$处求前缀和的快速算法（例如$\mu$和$\varphi$），我们可以利用 Powerful Numbers 理论得到一大类积性函数前缀和的快速算法。</p>
+<p>设我们要求积性函数前缀和$\sum\limits_{i&#x3D;1}^n f(i)$，另有一个容易求前缀和的积性函数$g$，满足所有质数处取值$f(p)&#x3D;g(p)$。我们可以定义积性函数$h&#x3D;f&#x2F;g$，即$f&#x3D;g*h$，那么有：<br>$$<br>\begin{aligned}<br>\sum_{i&#x3D;1}^n f(i)&amp;&#x3D;\sum_{i&#x3D;1}^n \left(\sum_{d\mid i}g(d)h\left(\frac{i}{d}\right) \right)\<br>&amp;&#x3D;\sum_{i&#x3D;1}^nh(i)\left(\sum_{j&#x3D;1}^{\lfloor\frac{n}{i}\rfloor}g(j) \right)<br>\end{aligned}<br>$$<br>注意到由于$f(p)&#x3D;g(p)$，于是$h(p)&#x3D;(f&#x2F;g)(p)&#x3D;0$，且$h$是一个积性函数，则$h(n)$非$0$的一个必要条件是$n$的每个质因子幂次都$&gt;1$我们可以只枚举所有这样的$n$（Powerful Numbers）算出$h(n)$并乘上对应的$g$前缀和。</p>
+<p>计算$h(n)$的时候，由于$h$是一个积性函数，可以先计算每个质因子的贝尔级数，对于每个质因子$p\le\sqrt n$，我们可以对$F_p(z)$和$G_p(z)$暴力做多项式除法，在$\mathcal O\left(\left(\log n\right)^2 \right)$的时间复杂度内算出$H_p(z)$。从前面的讨论我们知道这样的时间复杂度仍然是$\mathcal O\left(\frac{\sqrt n}{\log n} \right)$的。</p>
+<p>知道了每个质数幂处的$h$取值后，容易 DFS 一遍找出所有有用的$n$并计算这些$h(n)$的值更新答案。</p>
+<p>这样 DFS 的时间复杂度是什么呢？可以发现所有每个质因子幂次$&gt;1$的$n$均可以写成$a^2\cdot b^3$的形式。比如$2^5\cdot 3^7\cdot 5^2$可以分解成$(2^1\cdot 3^2\cdot 5^1)^2\cdot (2^1\cdot 3^1)^3$。那么可以尝试计数所有$\le n$的$a^2\cdot b^3$的对数</p>
+
+$\sum\limits_{i=1}^{\lfloor\sqrt n\rfloor} \left\lfloor\sqrt[3]{ \frac{n}{i^2}} \right\rfloor$
+
+<p>，用积分近似可以发现这是$\mathcal O(\sqrt n)$的。</p>
+<p>于是，如果不计算初始时求所有$\frac{n}{d}$处$g$前缀和的复杂度，后面部分时间复杂度是$\mathcal O(\sqrt n)$的。</p>
+<h3 id="简单的函数"><a href="#简单的函数" class="headerlink" title="简单的函数"></a>简单的函数</h3><h4 id="题意-6"><a href="#题意-6" class="headerlink" title="题意"></a>题意</h4><p>给定积性函数$f$满足$f\left(p^c\right)&#x3D;p\oplus c$。</p>
+<p>求$\sum\limits_{i&#x3D;1}^n f(i)$对$10^9+7$取模的值。</p>
+<p>$n\le 10^{10}$。</p>
+<h4 id="sol-4"><a href="#sol-4" class="headerlink" title="sol"></a>sol</h4><p>当$p$为质数且$p&gt;2$时$f(p)&#x3D;p-1$，但当$p&#x3D;2$时$f(p)&#x3D;3$。</p>
+<p>而$\varphi(p)&#x3D;p-1$并且$\varphi$可以快速计算前缀和，那么先$\mathcal O(n^\frac{2}{3})$使用杜教筛将$\varphi$前缀和算出来，并且可以将$\frac{n}{d}$处全部算一遍。然后直接枚举$2$的幂次，这只有$\sqrt n$个，再做一下容斥即可。</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zzqsblog/p/9904271.html">https://www.cnblogs.com/zzqsblog/p/9904271.html</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> phi[<span class="number">10000111</span>],pri[<span class="number">777777</span>],Sp[<span class="number">10000111</span>],cp;</span><br><span class="line"><span class="type">bool</span> npr[<span class="number">10000111</span>];</span><br><span class="line">ll n,m,g[<span class="number">111111</span>];</span><br><span class="line">ll ans;</span><br><span class="line"><span class="type">int</span> cnt[<span class="number">177777</span>],h[<span class="number">177777</span>][<span class="number">77</span>];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(ll i,ll v,<span class="type">int</span> d)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ans=(ans+v*((n/i&lt;<span class="number">10000000</span>)?Sp[n/i]:g[n/(n/i)])%mod+mod)%mod;</span><br><span class="line">    <span class="built_in">R</span>(s,d,cp)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(s&gt;<span class="number">1</span>&amp;&amp;<span class="number">1ll</span>*i*pri[s]*pri[s]&gt;n) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">1</span>,j=i*pri[s];j&lt;=n;++k,j*=pri[s])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(cnt[s]&lt;k)</span><br><span class="line">            &#123;</span><br><span class="line">                ++cnt[s];</span><br><span class="line">                ll F=pri[s]^k,G=phi[pri[s]];</span><br><span class="line">                <span class="built_in">R</span>(p,<span class="number">1</span>,k) F=(F-G*h[s][k-p]%mod+mod)%mod,G*=pri[s],G%=mod;</span><br><span class="line">                h[s][k]=F;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(!h[s][k]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="built_in">dfs</span>(j,<span class="number">1ll</span>*v*h[s][k]%mod,s<span class="number">+1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Sp[<span class="number">1</span>]=phi[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">2</span>,<span class="number">10000000</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!npr[i]) pri[++cp]=i,phi[i]=i<span class="number">-1</span>;</span><br><span class="line">        <span class="built_in">R</span>(j,<span class="number">1</span>,cp)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">static</span> <span class="type">int</span> t;</span><br><span class="line">            t=i*pri[j];</span><br><span class="line">            <span class="keyword">if</span>(t&gt;<span class="number">10000000</span>) <span class="keyword">break</span>;</span><br><span class="line">            npr[t]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(i%pri[j]==<span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                phi[t]=phi[i]*pri[j];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> phi[t]=phi[i]*phi[pri[j]];</span><br><span class="line">        &#125;</span><br><span class="line">        Sp[i]=(Sp[i<span class="number">-1</span>]+phi[i])%mod;</span><br><span class="line">    &#125;        </span><br><span class="line">    </span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">0</span>,<span class="number">100777</span>) h[i][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    n=<span class="built_in">read</span>(),m=(n<span class="number">+9999999</span>)/<span class="number">10000000</span>;</span><br><span class="line">    <span class="built_in">L</span>(k,<span class="number">1</span>,m)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">static</span> ll t;</span><br><span class="line">        t=n/k;</span><br><span class="line">        <span class="type">int</span> t0=t,t1=t<span class="number">+1</span>;</span><br><span class="line">        <span class="keyword">if</span>(t0&amp;<span class="number">1</span>) t1&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> t0&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">        g[k]=((t1%mod)*(t0%mod))%mod;                </span><br><span class="line">        <span class="keyword">for</span>(ll i=<span class="number">2</span>,j=<span class="number">0</span>;i&lt;=t;i=j<span class="number">+1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            j=t/(t/i);</span><br><span class="line">            <span class="type">static</span> ll tt;</span><br><span class="line">            tt=t/i;</span><br><span class="line">            g[k]=(g[k]<span class="number">-1ll</span>*(j-i<span class="number">+1</span>)%mod*((tt&lt;<span class="number">10000000</span>)?Sp[tt]:g[j*k])%mod+mod)%mod;</span><br><span class="line">        &#125;       </span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">writeln</span>((ans%mod+mod)%mod);</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="？？？"><a href="#？？？" class="headerlink" title="？？？"></a>？？？</h3><h4 id="题意-7"><a href="#题意-7" class="headerlink" title="题意"></a>题意</h4><p>给定完全积性函数$f$满足$f(n)&#x3D;2^{\lambda(n)}$。（$\lambda (n)$为可重质因子个数）</p>
+<p>求$\sum_{i&#x3D;1}^n f(i)$对$998244353$取模的值。</p>
+<p>$n\leq 10^{13}$。</p>
+<h4 id="sol-5"><a href="#sol-5" class="headerlink" title="sol"></a>sol</h4><p>注意到$f(p)&#x3D;2$，而$d(p)&#x3D;2$。然后令$g&#x3D;d$，剩下的东西直接算，每一次就用根号复杂度计算$d$的前缀和。因为 Powerful Numbers 实际分成两部分，一部分是枚举$h$，另一部分是算$g$的前缀和，但是如果将所有$g$的前缀和算出来至少要</p>
+
+$n^{\frac{2}{3}}$
+
+<p>。而如果只对 Powerful Numbers 算一次，复杂度是很低的。枚举每一个 Powerful Numbers 的复杂度：</p>
+
+$$
+\sum_{i=1}^{\sqrt n}\sum_{j=1}^{\sqrt[3]{\frac{n}{i^2}}} \sqrt{\frac{n}{i^2j^3}}
+$$
+
+
+
+
+
+$$
+g(n)=\sum_{i=1}^{\sqrt[3]n} \sqrt{\frac{n}{i^3}}=\mathcal O(\sqrt n)	
+$$
+
+
+
+
+
+$$
+\sum_{i=1}^{\sqrt n}g\left(\frac{n}{i^2}\right)=\mathcal O\left(\sum_{i=1}^{\sqrt n}\sqrt{\frac{n}{i^2}} \right)=\mathcal O(\sqrt n \log n)
+$$
+
+
+
+<h2 id="Min25-筛"><a href="#Min25-筛" class="headerlink" title="Min25 筛"></a>Min25 筛</h2><p>Min25 筛可以用来给更加一般化的积性函数求前缀和。</p>
+<p>它对积性函数的要求相对较弱，只要求求前缀和的数论函数$f$在质数处取值$f(p)$的形式较为简单，是易于求前缀和的完全积性函数或若干个积性函数的线性组合。例如，$f(p)&#x3D;c$或$f(p)&#x3D;p$或$f(p)&#x3D;g_k(p)$（$g_k(p)$是一个关于$p$的$k$次多项式，且$k$不大）等都满足条件。</p>
+<p>Min25 筛的算法过程可以分成两部分：先对所有$\lfloor\frac{n}{d}\rfloor$处求$f(p)$的前缀和，再 DFS 求出完整的$f$前缀和。</p>
+<p>先考虑如何对$\lfloor\frac{n}{d}\rfloor$处求$f(p)$的前缀和：</p>
+<p>令$f(p)&#x3D;g(p)$，其中$g$是一个可以快速求前缀和的完全积性函数（一般积性函数精细实现也可以做，积性函数线性组合的话可以分开做）（比如$f(2)&#x3D;g(2),f(3)&#x3D;g(3),f(4)\neq g(4)$），质数从小到大分别为$p_1,p_2,\cdots$，再令$s_{i,j}&#x3D;\sum\limits_{k&#x3D;1}^i g(k)[k为质数或k不存在\leq p_j的质因子]$，这里$i$是某个$\lfloor\frac{n}{d}\rfloor$，且$1\leq p_j\leq \lfloor\sqrt{n}\rfloor$。</p>
+<p>比如$1,2,3,4,5,6,7,8,9,10$</p>
+<p>先除去包含$2$因子的数，剩下：$1,2,3,5,7,9$</p>
+<p>再除去包含$3$因子的数，剩下：$1,2,3,5,7$</p>
+<p>……</p>
+<p>这样若干轮之后，就只剩下$1$和质数了。</p>
+<p>那么最后就可以得到$s_i$表示$\sum\limits_{p\leq i}f(p)$了。那么初始时$s_{i,0}&#x3D;\sum\limits_{j&#x3D;1}^i g(j)$。我们从小到大枚举$j$，在$s_{i,j-1}$中减去所有最小质因子为$p_j$且质因子个数$&gt;1$的$g(k)$的贡献，即可得到$s_{i,j}$。转移可以从大到小枚举$i$，简单讨论一下。注意这里需要修改的$i$一定满足$\ge p_j^2$，只枚举这些$i$即可。</p>
+
+$g1_i=s_i,g2_i=s_{\frac{n}{i}}$
+
+
+<p>$$<br>s_{i,j}&#x3D;s_{i,j-1}-g(p_j)\cdot \left(s_{\frac{i}{p_j},j-1}-s_{p_j-1,j-1} \right)<br>$$<br>$s_{\frac{i}{p_j},j-1}$表示所有要么是质数，要么最小质因子$\ge p_j$的数，因为之后还会把$&lt;p_j$的质数多算，所以还要减去后面一部分。</p>
+<p>对于</p>
+
+$\le n^{\frac{1}{4}}$
+
+<p>的$p_j$，我们需要枚举$\mathcal O(\sqrt n)$的$i$，但对于$&gt;n^\frac{1}{4}$的$p_j$，我们只需要枚举$\mathcal O\left(\frac{n}{p_j^2}\right)$个$i$。考虑质数分布，容易分析出时间复杂度为：</p>
+
+$$
+\mathcal O\left(\left(n^{\frac{1}{4}}\cdot n^{\frac{1}{2}}+\sum_{i=n^{\frac{1}{4}}}^{n^\frac{1}{2} }\frac{n}{i^2} \right)/\log n \right)=\mathcal O\left(\frac{n^{\frac{3}{4}}}{\log n} \right)
+$$
+
+
+<p>再考虑如何求出最终答案。</p>
+<p>定义一个函数$S(m,k)&#x3D;\sum\limits_{i&#x3D;2}^m f(i)[i不存在&lt;p_k的质因子]$，$m$是某个$\frac{n}{d}$，且$1\le p_k\le \lfloor\sqrt m \rfloor$，则答案即为$S(n,1)+1$。</p>
+<p>考虑如何求出$S(m,k)$。一类满足条件的$i$是$p_j(j&gt;k)$，这一类$i$的贡献可以直接用预处理的$s_n-s_{p_k-1}$得到。否则$i$至少有两个$&gt;p_k$的允许重复的质因子，那么其中最小的一个一定$\le \lfloor \sqrt m\rfloor$，枚举最小质因子和它的指数，递归计算即可，注意若$i$就是最小质因子的$&gt;1$次幂，递归调用时不会统计到，要特殊处理。</p>
+<p>时间复杂度可以分析出是很劣的$\mathcal O(n^{1-\epsilon})$，但在$n\le 10^{14}$内可以分析出递归次数不超过</p>
+
+$\mathcal O\left(\frac{n^{\frac{3}{4}}}{\log n}\right)$
+
+<p>。</p>
+<p>这一部分也可以类似第一部分做 DP （反过来统计），不仅时间复杂度是严格的</p>
+
+$\mathcal O\left(\frac{n^{\frac{3}{4}}}{\log n}\right)$
+
+<p>，还可以计算出每个$\lfloor\frac{n}{d}\rfloor$处的前缀和。（洲阁筛）</p>
+<h3 id="简单的函数-1"><a href="#简单的函数-1" class="headerlink" title="简单的函数"></a>简单的函数</h3><h4 id="题意-8"><a href="#题意-8" class="headerlink" title="题意"></a>题意</h4><p>给定积性函数$f$满足$f\left(p^c\right)&#x3D;p\oplus c$。</p>
+<p>求$\sum\limits_{i&#x3D;1}^n f(i)$对$10^9+7$取模的值。</p>
+<p>$n\le 10^{10}$。</p>
+<h3 id="sol-6"><a href="#sol-6" class="headerlink" title="sol"></a>sol</h3><p>仍然是当$p&gt;2$时$f(p)&#x3D;p-1$，</p>
+<p>然后设$g(p)&#x3D;p-1$但是这不是一个积性函数，令$g_1(p)&#x3D;p,g_2(p)&#x3D;1$</p>
+<h3 id="人类的本质"><a href="#人类的本质" class="headerlink" title="人类的本质"></a>人类的本质</h3><h4 id="题意-9"><a href="#题意-9" class="headerlink" title="题意"></a>题意</h4><p>令<br>$$<br>f(n)&#x3D;\sum_{1\le a_1,a_2,\cdots ,a_k\le n} \operatorname{lcm}(\gcd(a_1,n),\gcd(a_2,n),\cdots ,\gcd(a_k,n))<br>$$<br>求<br>$$<br>\sum_{i&#x3D;1}^n f(i)\bmod 10^9+7<br>$$<br>$n\times k\le 10^9$。</p>
+<h4 id="sol-7"><a href="#sol-7" class="headerlink" title="sol"></a>sol</h4><p>$$<br>\sum_{1\leq a_1,a_2,\cdots ,a_k\leq n} \operatorname{lcm}\left(\gcd(a_1,n),\gcd(a_2,n),\cdots,\gcd(a_k,n)\right)&#x3D;\sum_{1\le a_1,a_2,\cdots ,a_k\le n}\frac{i}{\gcd\left(\left(\frac{i}{\gcd(i,a_1)},\frac{i}{\gcd(i,a_2)},\cdots ,\frac{i}{\gcd(i,a_k)} \right)\right)}<br>$$</p>
+<p>然后令$b_j&#x3D;\frac{i}{\gcd(i,a_j)}$，考虑对于每个$b_j$，有多少$a_j$满足$\frac{i}{\gcd(i,a_j)}&#x3D;b_j$。<br>$$<br>\begin{array}{lcl}<br>\frac{i}{\gcd(i,a_j)} &amp; &#x3D; &amp; b_j \<br>\gcd(i,a_j) &amp; &#x3D; &amp; \frac{i}{b_j} \<br>\gcd(\frac{a_jb_j}{i},b_j)&amp;&#x3D;&amp;1<br>\end{array}<br>$$<br>因此共有$\varphi(b_j)$个$a_j$满足$\frac{i}{\gcd(i,a_j)}&#x3D;b_j$。</p>
+<p>然后原式变为：<br>$$<br>\sum_{i&#x3D;1}^n \sum_{b_1,b_2,\cdots,b_k \mid i}\varphi(b_1)\varphi(b_2)\cdots \varphi(b_k)\frac{i}{\gcd(b_1,b_2,\cdots ,b_k)}<br>$$<br>然后令<br>$$<br>f(i)&#x3D;\sum_{b_1,b_2,\cdots b_k\mid i}\varphi(b_1)\varphi(b_2)\cdots \varphi(b_k)\frac{i}{\gcd(b_1,b_2,\cdots ,b_k)}<br>$$<br>可以发现$f(i)$为积性函数。</p>
+<p>证明：<br>$$<br>\begin{aligned}<br>f(i)f(j)&amp;&#x3D;\sum_{a_1,a_2,\cdots ,a_k\mid i} \varphi(a_1)\varphi(a_2)\cdots \varphi(a_k)\frac{i}{\gcd(a_1,a_2,\cdots,a_k)} \sum_{b_1,b_2,\cdots ,b_k\mid j} \varphi(b_1)\varphi(b_2)\cdots \varphi(b_k)\frac{j}{\gcd(b_1,b_2,\cdots,b_k)}\<br>&amp;&#x3D;\sum_{a_1,a_2,\cdots ,a_k\mid i} \sum_{b_1,b_2,\cdots ,b_k\mid j} \varphi(a_1)\varphi(a_2)\cdots \varphi(a_k)\frac{i}{\gcd(a_1,a_2,\cdots,a_k)} \varphi(b_1)\varphi(b_2)\cdots \varphi(b_k)\frac{j}{\gcd(b_1,b_2,\cdots,b_k)}\<br>&amp;&#x3D;\sum_{a_1b_1,a_2b_2,\cdots ,a_kb_k\mid ij} \varphi(a_1b_1)\varphi(a_2b_2)\cdots \varphi(a_kb_k)\frac{ij}{\gcd(a_1b_1,a_2b_2,\cdots ,a_kb_k)}\<br>&amp;&#x3D;f(ij)<br>\end{aligned}<br>$$<br>考虑当$n&#x3D;p^c$时$f(n)$的值，此时</p>
+
+$$
+f(p^c)=p^c\cdot \sum_{0\leq a_1,a_2,\cdots,a_k\leq c}\frac{\varphi(p^{a_1})\varphi(p^{a_2})\cdots\varphi(p^{a_k})}{p^{\min\{a_1,a_2,\cdots ,a_k\}}}
+$$
+
+
+<p>令$m&#x3D;\min{a_1,a_2,\cdots ,a_k}$<br>$$<br>\begin{aligned}<br>\sum_{\min{a_1,a_2,\cdots,a_k}&#x3D;m} \varphi(p^{a_1})\varphi(p^{a_2})\cdots\varphi(p^{a_k})&amp;&#x3D;<br>\sum_{m\leq \min{a_1,a_2,\cdots,a_k}\le c} \varphi(p^{a_1})\varphi(p^{a_2})\cdots\varphi(p^{a_k})-\sum_{m&lt; \min{a_1,a_2,\cdots,a_k}\le c} \varphi(p^{a_1})\varphi(p^{a_2})\cdots\varphi(p^{a_k})\<br>&amp;&#x3D;\prod_{i&#x3D;1}^k\sum_{m\leq j\leq c} \varphi(p^j)-\prod_{i&#x3D;1}^k \sum_{m&lt;j\le c} \varphi(p^j)\<br>&amp;&#x3D;<br>\begin{cases}<br>p^{ck}-\left(p^{c-1} \right)^k &amp; m&#x3D;0\<br>\left(p^c-p^{m-1} \right)^k-\left(p^c-p^{m} \right)^k &amp; 0&lt;m\leq c<br>\end{cases}<br>\end{aligned}<br>$$<br>因此若$m&#x3D;0$，则$f(p^c)$的答案贡献为$p^c\left(p^{ck}-(p^c-1)^k\right)$，若$m\ge 1$，对答案的贡献为$p^{c-m}\left((p^c-p^{m-1})^k-(p^c-p^m)^k \right)$。</p>
+<p>因此<br>$$<br>f(p^c)&#x3D;p^c\left(p^{ck}-\left(p^c-1\right)^k \right)+\sum_{m&#x3D;1}^c p^{c-m}\left(\left(p^c-p^{m-1} \right)^k-\left(p^c-p^m \right)^k \right)<br>$$<br>代入$c&#x3D;1$，可以得到<br>$$<br>f(p)&#x3D;p\cdot \left(p^k-(p-1)^k \right)+1\cdot \left((p-1)^k-(p-p)^k \right)&#x3D;p^{k+1}-(p-1)^{k+1}<br>$$<br>同理可以得到：<br>$$<br>f(p^{c+1})&#x3D;p^mf(p^c)+(p-1)p^c\cdot \left(p^{(c+1)k}-\left(p^{c+1}-1 \right)^k \right)<br>$$</p>
+<p>（</p>
+<p>而此时<br>$$<br>\begin{aligned}<br>f(p^c)&amp;&#x3D;\sum_{a_1,a_2,\cdots ,a_k\mid p^c}\varphi(a_1)\varphi(a_2)\cdots \varphi(a_k)\frac{p^c}{\gcd(a_1,a_2,\cdots,a_k)} \<br>&amp;&#x3D;\sum_{0\le a_1,a_2,\cdots ,a_k\le c} \varphi(p^{c-a_1})\varphi(p^{c-a_2})\cdots \varphi(p^{c-a_k})\cdot p^{\max(a_1,a_2,\cdots ,a_k)}\<br>&amp;&#x3D; \sum_{i&#x3D;1}^c\left(g(i)-g(i-1) \right)  p^{i}<br>\end{aligned}<br>$$<br>其中$g(i)$表示$\max(x_1,x_2,\cdots,x_k)$小于等于$i$的方案数。</p>
+<p>有：<br>$$<br>g(i)&#x3D;<br>\begin{cases}<br>p^{ck}, &amp; \mbox{if }i&#x3D;c \<br>\left(p^c -p^{c-i-1} \right)^k, &amp; \mbox{otherwise}<br>\end{cases}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>f(p^{c+1})&amp;&#x3D;p^kf(p^c)-p^c\left(p^{(c+1)k}-\left(p^{c+1}-1 \right)^k \right)+p^{c+1}\left(p^{(c+1)k} -\left(p^{c+1}-1 \right)^k\right)\<br>&amp;&#x3D;p^kf(p^c)+p^c(p-1)\left(p^{(c+1)k}-\left(p^{c+1}-1 \right)^k \right)<br>\end{aligned}<br>$$</p>
+<p>）</p>
+<p>然后就可以$O(n)$递推。</p>
+<p>可以通过$n\le 10^7$的数据。</p>
+<p>$$<br>\begin{aligned}<br>f(p)&amp;&#x3D;g(0)+pg(1)-pg(0)\<br>&amp;&#x3D;(1-p)(p-1)^{k+1}-p^{k+1}\<br>&amp;&#x3D;p^{k+1}-(p-1)^{k+1}<br>\end{aligned}<br>$$<br>将$(p-1)^{k+1}$展开，得到<br>$$<br>\begin{aligned}<br>f(p)&amp;&#x3D;p^{k+1}-\sum_{i&#x3D;0}^{k+1}(-1)^{k-i+1} \binom{k+1}{i}p^i\<br>&amp;&#x3D;-\sum_{i&#x3D;0}^{k} (-1)^{k-i+1} \binom{k+1}{i} p^i\<br>&amp;&#x3D;\sum_{i&#x3D;0}^k (-1)^{k-i}\binom{k+1}{i}p^i<br>\end{aligned}<br>$$<br>因此$f(p)$就可以拆成$k+1$个完全积性函数的和。因此可以使用MIN-25筛来做，然后中间需要求自然数幂和，可以通过Bernoulli 数&#x2F;Lagrange 插值*等方法完成。</p>
+<p><a target="_blank" rel="noopener" href="https://yhx-12243.github.io/OI-transit/records/uoj448.html">https://yhx-12243.github.io/OI-transit/records/uoj448.html</a></p>
+<p>代码不会写</p>
+<h4 id="题意-10"><a href="#题意-10" class="headerlink" title="题意"></a>题意</h4><p>求<br>$$<br>S_4(n,m)&#x3D;\sum_{i&#x3D;1}^n \sum_{d\mid m!} d(id) \bmod 323232323<br>$$<br>$n,m\le 10^{10}$</p>
+<h4 id="sol-8"><a href="#sol-8" class="headerlink" title="sol"></a>sol</h4><p>$$<br>\begin{aligned}<br>\sum_{i&#x3D;1}^n \sum_{j\mid m!}d(ij)&amp;&#x3D;\sum_{i&#x3D;1}^n\sum_{j\mid m!}\sum_{i’\mid i}\sum_{j’\mid j}[\gcd(i’,j’)&#x3D;1]\<br>&amp;&#x3D;\sum_{d&#x3D;1}^n\mu(d)\left(\sum_{i&#x3D;1}^{\lfloor\frac{n}{d}\rfloor}d(i) \right)\left(\sum_{d\mid j’\mid j\mid m! }1 \right)\<br>\end{aligned}<br>$$</p>
+<p>然后考虑如何计算$ALL&#x3D;\sum\limits_{j’\mid j \mid m!}1$</p>
+<p>因为$m!$只用考虑每一个质数方案数乘起来</p>
+<p>方案数为$\prod_p\binom{v_p(m!)+1}{2}$，其中$v_p(m!)&#x3D;\sum_{i\ge 1}\lfloor\frac{m}{p^i}\rfloor$。</p>
+<p>而当$p&gt;\sqrt m$时，$v_p(m!)&#x3D;\lfloor\frac{m}{p}\rfloor$。</p>
+<p>可以发现$v_p(m!)$总共只有$\sqrt m$段，每一段中每个质数贡献是一样的，所以只需要把每一段中质数个数算一遍，就是要算每一个$\lfloor\frac{m}{p}\rfloor$的质数个数前缀和，这是一个经典的Min25 筛问题，然后每段再做一个快速幂。</p>
+<p>然后再考虑如何计算上面式子。</p>
+<p>考虑在这个东西的基础上改出这个，可以发现如果某一个$p$没有在$d$中出现，那么它对答案的贡献没有变。但如果$d$的某个质因子也是$m!$的质因子???</p>
+<p>$g(d)&#x3D;ALL*g’(d)$，$g’(d)$是一个积性函数，且每个质数$p$处取值仅与$v_p(m!)$，即$\lfloor\frac{m}{p}\rfloor$有关。</p>
+<p>尝试计算$g’(p)$在$\lfloor\frac{n}{d}\rfloor$和$\lfloor\frac{m}{d}\rfloor$处的前缀和。</p>
+<p>那么再套一次Min25，即可得到$g’(d)$在所有$\lfloor\frac{n}{d}\rfloor$和$\lfloor\frac{m}{d}\rfloor$处前缀和。</p>
+<p>在套数论分块即可得到答案。</p>
+<p>官方题解：</p>
+<p>令$C_i$为第$i$个质数在$M!$中的出现次数。</p>
+<p>令$F_{i,j}$为不考虑前$i$个质数的贡献时$S_4(j,M)$的答案。</p>
+<p>那么最终$S_4(N,M)&#x3D;F_{0,N}$。</p>
+<p>有转移：<br>$$<br>F_{i-1,j}&#x3D;\sum_{k}\frac{1}{2}(C_i+1)(C_i+2k+2)F_{i,\left\lfloor\frac{j}{p_i^k}\right\rfloor}<br>$$<br>显然，计算$C$和$F$的过程都可以通过Min25筛优化，时间复杂度为</p>
+
+$\mathcal O\left(\frac{N^{\frac{3}{4}}}{\log N}+\frac{M^{\frac{3}{4}}}{\log M}\right)$
+
+
+
+<p>细节较多…</p>
+<p>代码坑待填..</p>
+<p><img src="https://files.catbox.moe/m0c3kc.png"></p>
+<p><img src="https://files.catbox.moe/h8xbul.png"></p>
+<p><img src="https://files.catbox.moe/v4k298.png"></p>
+<p><img src="https://files.catbox.moe/ln6xnj.png"></p>
+<p><img src="https://files.catbox.moe/f6rsc6.png"></p>
+<p><img src="https://files.catbox.moe/91jlfa.png"></p>
+<p><img src="https://files.catbox.moe/qdm64h.png"></p>
+<p><img src="https://files.catbox.moe/tt693i.png"></p>
+<p><img src="https://files.catbox.moe/6rqhhc.png"></p>
+<p><img src="https://files.catbox.moe/3j8ciy.png"></p>
+<p><img src="https://files.catbox.moe/lcerpn.png"></p>
+<p><img src="https://files.catbox.moe/n3wpe9.png"></p>
+<p><img src="https://files.catbox.moe/kqhwmh.png"></p>
+
+    </div>
+</article> </main>
+
+<div class="fab-container" id="fabContainer">
+    <div class="fab-menu">
+        <div class="fab-btn sub" id="btnTheme" title="切换环境感知">◐</div>
+        <div class="fab-btn sub" id="btnMusic" title="音频终端">♫</div>
+    </div>
+    <div class="fab-btn fab-main" id="btnMain">⧉</div>
+    <div class="music-panel" id="musicPanel">
+    <div class="mp-header">AUDIO TERMINAL //</div>
+    <div class="mp-title" id="mpTitle">选择曲目...</div>
+    
+    <div class="mp-progress-container">
+        <span id="mpTimeCurrent">00:00</span>
+        <input type="range" class="mp-progress-bar" id="mpProgressBar" value="0" min="0" max="100">
+        <span id="mpTimeTotal">00:00</span>
+    </div>
+    
+    <div class="mp-controls">
+        <button class="mp-btn" id="mpPrev">⏮</button>
+        <button class="mp-btn play-btn" id="mpPlayPause">▶</button>
+        <button class="mp-btn" id="mpNext">⏭</button>
+    </div>
+    
+    <ul class="mp-playlist" id="mpPlaylistUI">
+        </ul>
+</div> </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("PRTS: System Booting...");
+
+    // ================= 1. UI 中枢系统 =================
+    const fabContainer = document.getElementById('fabContainer');
+    const btnMain = document.getElementById('btnMain');
+    const musicPanel = document.getElementById('musicPanel');
+
+    if (btnMain && fabContainer) {
+        btnMain.addEventListener('click', () => {
+            fabContainer.classList.toggle('open');
+            btnMain.style.transform = fabContainer.classList.contains('open') ? 'rotate(45deg)' : 'rotate(0)';
+            if(!fabContainer.classList.contains('open') && musicPanel){
+                musicPanel.classList.remove('active');
+            }
+        });
+    }
+
+    const btnTheme = document.getElementById('btnTheme');
+    let currentTheme = 'dark';
+    function setTheme(theme) { currentTheme = theme; document.body.setAttribute('data-theme', theme); }
+    function autoTheme() { const hour = new Date().getHours(); setTheme((hour >= 6 && hour < 18) ? 'light' : 'dark'); }
+    autoTheme();
+    if(btnTheme) btnTheme.addEventListener('click', () => { setTheme(currentTheme === 'dark' ? 'light' : 'dark'); });
+
+    // ================= 2. 音乐通讯终端 =================
+    // 【修复】：去除了容易引发引擎崩溃的 EJS 标签，直接使用绝对路径
+    const playlist = [
+        { name: "01. 生命流「熠曲丰碑」-2025音律联觉ver.", src: "/music/生命流「熠曲丰碑」-2025音律联觉.mp3" },
+        { name: "02. 櫂", src: "/music/ヨルシカ - 櫂.mp3" },
+        { name: "03. ヰ世界の宝石譚", src: "/music/ヰ世界の宝石譚.mp3" },
+        { name: "04. KAWAIIめたもる交響曲", src: "/music/KAWAIIめたもる交響曲.mp3" }
+    ];
+
+
+    let currentTrackIndex = 0;
+    const audio = new Audio();
+    const btnMusic = document.getElementById('btnMusic');
+    const mpPlayPause = document.getElementById('mpPlayPause');
+    const mpPlaylistUI = document.getElementById('mpPlaylistUI');
+
+    if(btnMusic && musicPanel) {
+        btnMusic.addEventListener('click', () => { musicPanel.classList.toggle('active'); });
+
+        if (mpPlaylistUI) {
+            playlist.forEach((track, index) => {
+                let li = document.createElement('li');
+                li.textContent = track.name;
+                li.onclick = () => loadTrack(index, true);
+                mpPlaylistUI.appendChild(li);
+            });
+        }
+
+        function loadTrack(index, autoPlay = false) {
+            if(playlist.length === 0) return;
+            currentTrackIndex = index;
+            audio.src = playlist[index].src;
+            document.getElementById('mpTitle').textContent = playlist[index].name;
+
+            if(mpPlaylistUI) {
+                const items = mpPlaylistUI.querySelectorAll('li');
+                items.forEach(item => item.classList.remove('playing'));
+                if(items[index]) items[index].classList.add('playing');
+            }
+            if (autoPlay) togglePlay(true);
+        }
+
+        function togglePlay(forcePlay = false) {
+            if (audio.paused || forcePlay) {
+                audio.play().then(() => {
+                    if(mpPlayPause) mpPlayPause.textContent = "⏸";
+                    btnMusic.classList.add('btn-playing');
+                }).catch(e => {
+                    console.warn("PRTS: 等待音频源响应...");
+                    if(mpPlayPause) mpPlayPause.textContent = "▶";
+                    btnMusic.classList.remove('btn-playing');
+                });
+            } else {
+                audio.pause();
+                if(mpPlayPause) mpPlayPause.textContent = "▶";
+                btnMusic.classList.remove('btn-playing');
+            }
+        }
+
+        if(mpPlayPause) mpPlayPause.addEventListener('click', () => togglePlay());
+
+        document.getElementById('mpPrev').addEventListener('click', () => { let newIndex = currentTrackIndex - 1; if (newIndex < 0) newIndex = playlist.length - 1; loadTrack(newIndex, true); });
+        document.getElementById('mpNext').addEventListener('click', () => { let newIndex = currentTrackIndex + 1; if (newIndex >= playlist.length) newIndex = 0; loadTrack(newIndex, true); });
+        audio.addEventListener('ended', () => { document.getElementById('mpNext').click(); });
+
+        const mpProgressBar = document.getElementById('mpProgressBar');
+        const mpTimeCurrent = document.getElementById('mpTimeCurrent');
+        const mpTimeTotal = document.getElementById('mpTimeTotal');
+
+        // 【修复】：重写了时间格式化逻辑，彻底消灭了代码里的 "<" 符号，防止被误认为 HTML
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "00:00";
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60);
+            return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        }
+
+        audio.addEventListener('loadedmetadata', () => {
+            if(mpTimeTotal) mpTimeTotal.textContent = formatTime(audio.duration);
+            if(mpProgressBar) mpProgressBar.max = audio.duration;
+        });
+
+        let isDragging = false;
+        audio.addEventListener('timeupdate', () => {
+            if(mpTimeCurrent) mpTimeCurrent.textContent = formatTime(audio.currentTime);
+            if (!isDragging && mpProgressBar) mpProgressBar.value = audio.currentTime;
+        });
+
+        if(mpProgressBar) {
+            mpProgressBar.addEventListener('mousedown', () => isDragging = true);
+            mpProgressBar.addEventListener('mouseup', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+            mpProgressBar.addEventListener('touchstart', () => isDragging = true);
+            mpProgressBar.addEventListener('touchend', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+        }
+
+        loadTrack(0, false);
+    }
+
+    // ================= 3. 背景粒子系统 =================
+    const canvas = document.getElementById('particle-canvas');
+    if(canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const mouse = { x: null, y: null, radius: 50 };
+
+        function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        initCanvas(); window.addEventListener('resize', initCanvas);
+
+        const logoImg = new Image();
+        // 【修复】：去除 EJS，直接指向根目录下的 logo
+        logoImg.src = '/logo.png';
+        logoImg.onload = function() {
+            const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d');
+            const size = 200; tempCanvas.width = size; tempCanvas.height = size;
+            tempCtx.drawImage(logoImg, 0, 0, size, size);
+            const imageData = tempCtx.getImageData(0, 0, size, size).data;
+            for (let y = 0; y < size; y += 2) {
+                for (let x = 0; x < size; x += 2) {
+                    if (imageData[((y * size + x) * 4) + 3] > 128) {
+                        particles.push(new Particle(x * 2.5 + (canvas.width / 2 - 100), y * 2.5 + (canvas.height / 2 - 250)));
+                    }
+                }
+            }
+            animate();
+            console.log("PRTS: Particles Online.");
+        };
+
+        class Particle {
+            constructor(x, y) { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.baseX = x; this.baseY = y; this.density = (Math.random() * 30) + 1; }
+            draw() {
+                ctx.fillStyle = document.body.getAttribute('data-theme') === 'light' ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.6)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2); ctx.fill();
+            }
+            update() {
+                let dx = mouse.x - this.x, dy = mouse.y - this.y, distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouse.radius) {
+                    let force = (mouse.radius - distance) / mouse.radius;
+                    this.x -= (dx / distance) * force * this.density * 0.8; this.y -= (dy / distance) * force * this.density * 0.8;
+                } else {
+                    this.x += (this.baseX - this.x) * 0.12; this.y += (this.baseY - this.y) * 0.12;
+                }
+            }
+        }
+
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
+        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+    }
+});
+</script> </body>
+</html>

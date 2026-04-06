@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<title>Hexo</title>
+<title>cf812e | Hexo</title>
 <link rel="icon" href="/avatar.jpg" type="image/jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
@@ -43,226 +43,36 @@
 </aside>
 
 <main class="main-content">
-    <h2 class="archive-title">// DATA ARCHIVE</h2>
-<div class="post-list">
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/%E5%AF%B9%E6%9F%90%E6%A0%A1%E9%83%A8%E5%88%86%E5%9B%9E%E5%BF%86/">对某校部分回忆</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                这辈子和你校最牛学科以及OI赛事都没有任何关系了，干脆来随便写点对你校印象深的事。
-事先声明：本人重度抑郁，重度焦虑，有自残以及伤害他人倾向。
-大概是21年1月来的你校？前几天的感受大概就是你校明明1...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/%E5%AF%B9%E6%9F%90%E6%A0%A1%E9%83%A8%E5%88%86%E5%9B%9E%E5%BF%86/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                有人问我为什么不去机房，为什么不去NOIP，那我好像也只能回答个这个：
+    <article class="post-detail">
+    <h1 class="post-detail-title">cf812e</h1>
+    <div class="post-meta">
+        DATE: 2021-06-19
+    </div>
+    <div class="post-content">
+        <h3 id="题意："><a href="#题意：" class="headerlink" title="题意："></a>题意：</h3><p>给定一棵$n$个节点的苹果树，第$i$个点上有$a_i$个苹果。这棵树有一个特殊的性质是：从根到任何叶子的路径长度的奇偶性相同。</p>
+<p>Sagheer 和 Soliman 将在树上轮流移动，Soliman 先手，当轮到某个玩家在自己的回合不能移动时这个玩家失败。</p>
+<p>每次移动时，两个玩家都可以任意选择一个节点，从中取出至少一个苹果，进行以下两种操作之一：</p>
+<ol>
+<li>若选择叶子节点，则吃掉这些苹果</li>
+<li>若选择非叶节点，则可以将这些苹果移动到某个子节点。</li>
+</ol>
+<p>在每次游戏开始之前，Sagheer 可以对苹果树进行一次更改：选择两个节点$u,v(u\ne v)$然后交换$a_u,a_v$。</p>
+<p>假设双方都走最优方案，求出有多少对$(u,v)$满足后手获胜（$(u,v)$与$(v,u)$视为一样）。</p>
+<h3 id="sol："><a href="#sol：" class="headerlink" title="sol："></a>sol：</h3><p>在标准nim游戏中，直接计算每堆石子的异或值，若异或值为$0$，则先手必败，否则先手必胜。</p>
+<p>而nim游戏的某个变体为有一个额外操作，允许玩家将$&gt;0$个石子加入某个石堆中（以及给定一些使游戏不会无限进行的条件），那么这个问题的解决方案类似于标准nim游戏，因为这个额外的操作将被原本获胜的玩家使用，而当原本失败的玩家使用时，原本胜利的玩家可以通过扔掉这些被加入的石子。</p>
+<p>而本题可以建模为上面所提到的变体。令所有叶节点为黑色，然后让所有黑色节点的父亲为白色，白色节点的父亲为黑色……这样黑白染色之后，黑色节点就可以看成石堆，而白色节点就可以看成拿石子或加石子的操作。</p>
+<p>注意到由于题目保证了题目保证了从根到任何叶子的路径长度的奇偶性相同，因此不会有一个节点有两种颜色。</p>
+<p>所以说，若所有黑色节点的异或值$s&#x3D;0$，则在初始树上 Soliman 为先手必败，而为了保持这种状态，Sagheer 可以进行以下两个操作：</p>
+<ol>
+<li>交换任意两个黑色节点或者白色节点。</li>
+<li>交换两个黑白节点满足两个点的苹果数量相同。</li>
+</ol>
+<p>若所有黑色节点的异或值$s\neq 0$，则在初始树上 Sagheer 为后手必败。因此为了交换后改变异或值满足$s&#x3D;0$，Sagheer 需要将某个黑色节点$u$与白色节点$v$交换满足$s\oplus a_u \oplus a_v&#x3D;0$。</p>
+<p>时间复杂度为线性。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n;</span><br><span class="line"><span class="type">int</span> col[<span class="number">111111</span>];</span><br><span class="line">vector&lt;<span class="type">int</span>&gt;e[<span class="number">111111</span>],blk;</span><br><span class="line"><span class="type">int</span> a[<span class="number">111111</span>],cnt[<span class="number">2</span>];</span><br><span class="line">map&lt;<span class="type">int</span>,<span class="type">int</span>&gt;mp;</span><br><span class="line"><span class="type">int</span> s,ans;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> v:e[u]) <span class="built_in">dfs</span>(v);</span><br><span class="line">    <span class="keyword">if</span>(e[u].<span class="built_in">size</span>()==<span class="number">0</span>) col[u]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> col[u]=col[e[u][<span class="number">0</span>]]^<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(!col[u]) s^=a[u],blk.<span class="built_in">pb</span>(a[u]);</span><br><span class="line">    <span class="keyword">else</span> ++mp[a[u]];</span><br><span class="line">    ++cnt[col[u]];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    n=<span class="built_in">read</span>();</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,n) a[i]=<span class="built_in">read</span>();</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">2</span>,n) e[<span class="built_in">read</span>()].<span class="built_in">pb</span>(i);</span><br><span class="line">    <span class="built_in">dfs</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(s==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ans=(cnt[<span class="number">0</span>]*(cnt[<span class="number">0</span>]<span class="number">-1ll</span>)+cnt[<span class="number">1</span>]*(cnt[<span class="number">1</span>]<span class="number">-1</span>))&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> x:blk) ans+=mp[x];</span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> x:blk) <span class="keyword">if</span>((x^s)&lt;=<span class="number">10000000</span>) ans+=mp[x^s];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">writeln</span>(ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-————————————————————————————————————————————————
-花对钱似乎非常敏感。
-大概是...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1704G/">CF1704G</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                令 $A_i&#x3D;a_i+2a_{i-1}+a_{i-2},B_i&#x3D;b_i-2b_{i-1}+b_{i-2}$，然后可以发现对于任意位置 $i$ 进行操作，除了 $A_{i}$ 将会变...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1704G/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1470F/">CF1470F</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                显然只会存在 $3$ 种本质不同的方式选择两个矩形。
-
-两个矩形不相交。
-
-这种情况可以直接遍历所有平行 $x&#x2F;y$ 轴的分割线，使选取的两个矩形分别在分割线的两边。分别找出极值点直接计算即...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1470F/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1081H/">CF1081H</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                一个显然错误的想法是分别计算 $A,B$ 本质不同的回文串个数，然后将两者相乘，这将会多次计算一个字符串。
-因此要思考的问题是，为什么会计算多次？
-为了解决这个问题，将用到下面数个引理，如果只是想解决...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1081H/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-08-03</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/08/03/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%A4%BE%E7%BE%A4%E8%AE%A8%E8%AE%BA/">记一次社群讨论</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/08/03/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%A4%BE%E7%BE%A4%E8%AE%A8%E8%AE%BA/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-05-24</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/05/24/l/">l</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-不过这改变不了阿丽娜半路被捅死了（笑）
-感觉群友们APIO玩得好开心。
-...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/05/24/l/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-05-13</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/05/13/CF1423C%20Du%C5%A1an's%20Railway/">CF1423C Dušan&#39;s Railway</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                反正可以直接当 $k&#x3D;3$ 去做，然后考虑直接去构造。
-首先任意给树找一个根，然后将整棵树拆成几个大小为 $\sqrt n$ 的子树，将所有这些子树的根 $u$ 塞到一个点集 $a$ ，然后...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/05/13/CF1423C%20Du%C5%A1an's%20Railway/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-04-30</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/04/30/CF1375I%20Cubic%20Lattice/">CF1375I Cubic Lattice</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                简要题意：
-定义三维空间中的一个 lattice 是满足下列条件的三维整点的集合：
-$$L&#x3D;{u\cdot \overrightarrow{r_1}+v\cdot \overrightarr...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/04/30/CF1375I%20Cubic%20Lattice/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-04-25</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/04/25/-/">?</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-下午水群的时候看到的，群友：
-
-总之有点想笑（）
-没记错的话这个梗是海贼王的来着。
-
-然后晚上又看到了个这个，其实个人觉得这从某种意义上也是”天龙人“的表现吧（）
-挺久以前大概也是作业题全写完，大概...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/04/25/-/">READ MORE +</a>
-            </div>
-        </article>
-    
-</div> </main>
+    </div>
+</article> </main>
 
 <div class="fab-container" id="fabContainer">
     <div class="fab-menu">

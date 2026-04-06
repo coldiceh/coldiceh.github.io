@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<title>生成函数 | Hexo</title>
+<link rel="icon" href="/avatar.jpg" type="image/jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+
+<canvas id="particle-canvas"></canvas>
+
+<header class="terminal-nav">
+    <a href="/" class="nav-logo">QAQ</a>
+    <nav class="nav-menu">
+        <a href="/" class="nav-item active"><span class="nav-en">INDEX</span><span class="nav-cn">首页</span></a>
+        <a href="#info" class="nav-item"><span class="nav-en">INFORMATION</span><span class="nav-cn">情报</span></a>
+        <a href="#operator" class="nav-item"><span class="nav-en">OPERATOR</span><span class="nav-cn">随笔</span></a>
+        <a href="#world" class="nav-item"><span class="nav-en">WORLD</span><span class="nav-cn">归档</span></a>
+        <a href="#media" class="nav-item"><span class="nav-en">MEDIA</span><span class="nav-cn">标签</span></a>
+    </nav>
+    </header>
+
+<aside class="sidebar">
+    <div class="avatar-box"><img src="/avatar.jpg" alt="Avatar"></div>
+    <h2 class="sidebar-title">COLDICEH</h2>
+    <p class="sidebar-subtitle">Dr.抢不到音律退坑了#8809</p>
+    
+    <div class="sidebar-search">
+        <div class="search-box">
+            <input type="text" id="local-search-input" placeholder="// SEARCH DATABASE...">
+        </div>
+    </div>
+    
+    <div style="margin-top: 20px;" class="sidebar-links">
+        <div style="color: var(--ak-blue); font-weight: bold; margin-bottom: 10px; border-left: 3px solid var(--ak-blue); padding-left: 10px;">常用链接</div>
+        <a href="#">我的随笔</a>
+        <a href="#">我的评论</a>
+        <a href="#">我的参与</a>
+        <a href="#">最新评论</a>
+        <a href="#">我的标签</a>
+    </div>
+</aside>
+
+<main class="main-content">
+    <article class="post-detail">
+    <h1 class="post-detail-title">生成函数</h1>
+    <div class="post-meta">
+        DATE: 2021-06-15
+    </div>
+    <div class="post-content">
+        <h2 id="泰勒多项式"><a href="#泰勒多项式" class="headerlink" title="泰勒多项式"></a>泰勒多项式</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>对于函数$f$，设它在点$x_0$存在直到$n$阶的导数，则我们由这些导数构造一个$n$次多项式：<br>$$<br>T_n(x)&#x3D;f(x_0)+\frac{f’(x_0) }{1!}(x-x_0)+\frac{f’’(x_0)}{2!}(x-x_0)^2+\ldots +\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n<br>$$<br> 称为$f$在点$x_0$处（带有皮亚诺型余项）的<strong>泰勒多项式</strong>，$T_n(x)$的各项系数称为<strong>泰勒系数</strong>。</p>
+<p>稍微来解释一下</p>
+<p>第一项就是已经知道在$x_0$处的所有性质，现在要用这个点性质来拟合$x$处的$f(x)$。</p>
+<p><img src="https://i.loli.net/2021/04/29/2B81YbdURuaNJXQ.png" alt="QQ图片20210429073754.png"></p>
+<p>那么首先中间这一段我们并不知道它具体是什么样子的，它可能是歪歪扭扭的，但可以先把它近似为一条直线。那么既然是一条直线，那么它有一个形式为$y&#x3D;kx+b$。在很靠近$x_0$处，斜率$k$可以表示为$f’(x_0)$。那么前两项的意思就是将这个东西拟合成一条直线。再加一项就是拟合为一个二次函数，再加一项就是三次函数……再往后就是不断加次数。次数越来越大这个箭头就越来越扭，所以说最后到$n$次之后就没有误差了。如果$f(x)$是一个100次曲线，那么拟合到100项时就没有误差了。</p>
+<p>以及当$x_0&#x3D;0$时，有<strong>麦克劳林公式</strong>：<br>$$<br>f(x)&#x3D;f(0)+f’(0)x+\frac{f’’(0)}{2!}x^2+\ldots +\frac{f^{(n)}(0)}{n!}x^n+o(x^n)<br>$$</p>
+<h3 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h3><p>若函数$f$在点$x_0$存在直到$n$阶的导数，则<br>$$<br>f(x)&#x3D;T_n(x)+o((x-x_0)^n)<br>$$</p>
+<p>展开就是<br>$$<br>f(x)&#x3D;f(x_0)+\frac{f’(x_0)}{1!}(x-x_0)+\frac{f^{(2)}(x_0)}{2!}(x-x_0)^2+\ldots +\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+ o((x-x_0)^n)<br>$$<br>其实除去最后小 $o$ 那一项就是 $f(x) $了。而小 $o$ 的意思，主要就是其实 $f(x)$ 和 $T_n(x)$ 差了一些的，差了的东西是比$(x-x_0)^n$要低阶（当$x$和$x_0$很靠近的时候，$(x-x_0)^n$特别特别小）的。误差项就是说，当 $x$ 很靠近 $x_0$ 时，它比 $(x-x_0)^n$ 在渐进意义下还要小。（在所有应用中将它展开到无限项，误差会特别特别小）。</p>
+<p>以及拓展一下<strong>拉格朗日余项</strong><br>$$<br>f(x)&#x3D;T_n(x)+\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}<br>$$<br>其中$\xi \in [x_0,x]$</p>
+<p>$o((x-x_0)^n)$ 显然是一个从 $A(x-x_0)^{n+1}$ 开始的，有无穷多项的多项式函数</p>
+<p>对 $f(x)$ 求 $n$ 次导<br>$$<br>f^{(n)}(x)&#x3D;0+0+\ldots+f^{(n)}(x_0)+o^{(n)}((x-x_0)^n)<br>$$<br>化简得到<br>$$<br>f^{(n)}(x)-f^{(n)}(x_0)&#x3D;o^{(n)}((x-x_0)^n)<br>$$<br>根据拉格朗日中值定理，将左边替换成<br>$$<br>f^{(n+1)}(ξ)\times (x-x_0)<br>$$</p>
+<p>得到<br>$$<br>o^{(n)}((x-x_0)^n)&#x3D;f^{(n+1)}(ξ)\times (x-x_0)<br>$$</p>
+<p>最后做 $n$ 次积分就得到<br>$$<br>o((x-x_0)^n)&#x3D;\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}<br>$$</p>
+<h3 id="一些常用的求导"><a href="#一些常用的求导" class="headerlink" title="一些常用的求导"></a>一些常用的求导</h3><p>$$<br>(a^x)’&#x3D;a^x \ln a<br>$$</p>
+<p>$$<br>(\sin x)’&#x3D; \cos x<br>$$</p>
+<p>$$<br>(\cos x)’&#x3D;-\sin x<br>$$</p>
+<p>$$<br>(x^a)’&#x3D;ax^{a-1}<br>$$</p>
+<p>$$<br>(\ln x)’&#x3D;\frac{1}{x}<br>$$</p>
+<h3 id="关于定理的一些简单例子"><a href="#关于定理的一些简单例子" class="headerlink" title="关于定理的一些简单例子"></a>关于定理的一些简单例子</h3><p>$$<br>f(x)&#x3D;\sum_{i&#x3D;0}^n \frac{f^{(i)}(x_0)}{i!} (x-x_0)^i<br>$$</p>
+<p>$e^x$</p>
+<p>因为<br>$$<br>(e^x)’&#x3D;e^x \ln e&#x3D;e^x<br>$$<br>令$x_0&#x3D;0$，则有<br>$$<br>e^x&#x3D; \sum_{i&#x3D;0}^n \frac{x^i}{i!}<br>$$<br>所以<br>$$<br>e^x&#x3D;1+\frac{x}{1!}+\frac{x^2}{2!}+\frac{x^3}{3!}+\ldots + \frac{x^n}{n!}+\ldots ;<br>$$</p>
+<p>$\sin(x)$</p>
+<p>因为<br>$$<br>(\sin x )’ &#x3D; \cos x<br>$$<br>$$<br>(\cos x)’ &#x3D; -\sin x<br>$$</p>
+<p>所以<br>$$<br>f(x)&#x3D;\sin x<br>$$</p>
+<p>$$<br>f^{(1)} (x)&#x3D;\cos x<br>$$</p>
+<p>$$<br>f^{(2)} (x)&#x3D; -\sin x<br>$$</p>
+<p>$$<br>f^{(3)} (x) &#x3D; -\cos x<br>$$</p>
+<p>$$<br>f^{(4)} (x)&#x3D;\sin x<br>$$</p>
+<p>仍然令$x_0&#x3D;0$</p>
+<p>由于<br>$$<br>\sin x &#x3D;0<br>$$</p>
+<p>$$<br>\cos x &#x3D;1<br>$$</p>
+<p>$$<br>-\sin x &#x3D;0<br>$$</p>
+<p>$$<br>-\cos x&#x3D; -1<br>$$</p>
+<p>所以</p>
+
+$$
+\sin(x) = \frac{x}{1!} - \frac{x^3}{3!}+\frac{x^5}{5!} + \ldots + (-1)^n \frac{x^{2n+1}}{(2n+1)!}+ \ldots;
+$$
+
+
+
+
+<p>$\cos x$</p>
+<p>同理<br>$$<br>f(x)&#x3D;\cos x<br>$$</p>
+<p>$$<br>f^{(1)} (x)&#x3D;-\sin x<br>$$</p>
+<p>$$<br>f^{(2)} (x)&#x3D; -\cos x<br>$$</p>
+<p>$$<br>f^{(3)} (x) &#x3D; -\sin x<br>$$</p>
+<p>$$<br>f^{(4)} (x)&#x3D;\cos x<br>$$</p>
+<p>所以：</p>
+
+$$
+\cos(x) =1-\frac{x^2}{2!}+\frac{x^4}{4!}+\ldots +(-1)^n \frac{x^{2n}}{(2n)!}+\ldots;
+$$
+
+
+
+<p>$\ln (x+1)$</p>
+<p>下面均取$x_0&#x3D;0$<br>$$<br>\ln ^{(1)}(x+1) &#x3D;\frac{1}{x+1}&#x3D;1<br>$$</p>
+<p>$$<br>\ln^{(2)} (x+1)&#x3D; -\frac{1}{(x+1)^2}&#x3D;-1<br>$$</p>
+<p>$$<br>\ln^{(3)} (x+1)&#x3D;\frac{2}{(x+1)^3} &#x3D;2<br>$$</p>
+<p>$$<br>\ln ^{(k)} (x+1)&#x3D;\frac{(-1)^{k-1}\times (k-1)!}{(x+1)^k}<br>$$</p>
+<p>所以：<br>$$<br>\ln(1+x)&#x3D;\frac{x}{1}-\frac{x^2}{2}+\frac{x^3}{3}+\ldots +(-1)^{n+1}\frac{x^n}{n}+\ldots ;<br>$$</p>
+<p>$\frac{1}{1+x}$<br>$$<br>\frac{1}{1+x} &#x3D; (1+x)^{-1}<br>$$</p>
+<p>$$<br>(\frac{1}{1+x})’ &#x3D; -(1+x)^{-2}&#x3D;\frac{-1}{(1+x)^2}<br>$$</p>
+<p>然后就硬展开就行了..<br>$$<br>\frac{1}{1+x} &#x3D;1-x+x^2-x^3+\ldots +(-1)^n\cdot x^n+\ldots ;<br>$$<br>$(1+x)^a$<br>$$<br>((1+x)^a)’ &#x3D;(a (1+x)^{a-1 })<br>$$<br>然后还是硬展开…<br>$$<br>(1+x)^a&#x3D;1+\frac{a}{1!}x+\frac{a(a-1)}{2!}x^2+\ldots +\frac{a(a-1)\ldots (a-n+1)}{n!} +\ldots;<br>$$</p>
+<h2 id="普通生成函数"><a href="#普通生成函数" class="headerlink" title="普通生成函数"></a>普通生成函数</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><p>对于一个无穷序列${a_0,a_1,a_2,\cdots}$，定义其<strong>普通生成函数</strong>为<strong>形式</strong>幂级数：$\sum\limits_{k&#x3D;0}^{\infty} a_k\cdot x^k$。</p>
+<p>注意是形式幂级数，<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%BD%A2%E5%BC%8F%E5%B9%82%E7%BA%A7%E6%95%B0">维基百科</a>。</p>
+<p>与一般幂级数的区别在于一般幂级数可以表示为$f(x)$，相当于一个函数，如$x&#x3D;-1$时，$f(-1)&#x3D;\sum\limits_{k&#x3D;0}^{\infty} (-1)^k a^k$。</p>
+<p>而形式幂级数就没有这样的操作，它只是长成这个样子，只是一个形式。大概就是$R[[x]]$，它与$1,2,3,4,5\ldots$这些数地位等同。</p>
+<h3 id="一些例子"><a href="#一些例子" class="headerlink" title="一些例子"></a>一些例子</h3><p>序列${\frac{1}{0!},\frac{1}{1!},\cdots ,\frac{1}{k!},\cdots }$的普通生成函数？<br>$$<br>\sum_{k&#x3D;0}^{\infty} \frac{x^k}{k!}&#x3D;e^x<br>$$<br>序列${1,1,1,\cdots ,1,\cdots}$的普通生成函数？<br>$$<br>\sum_{k&#x3D;0}^\infty x^k&#x3D;\frac{1}{1-x}<br>$$<br>序列${1,2,4,\cdots ,2^n,\cdots }$的普通生成函数？<br>$$<br>\sum_{k&#x3D;0}^\infty 2^k \cdot x^k&#x3D;\sum_{k&#x3D;0}^\infty (2x)^k<br>$$<br>令$y&#x3D;2x$</p>
+<p>那么<br>$$<br>\sum_{k&#x3D;0}^\infty y^k&#x3D;\frac{1}{1-y}&#x3D;\frac{1}{1-2x}<br>$$<br>序列${1,0,1,0,\cdots,1,0,\cdots }$的普通生成函数？<br>$$<br>\sum_{k&#x3D;0}^\infty x^k[k\bmod 2&#x3D;0]&#x3D;\sum_{k&#x3D;0}^\infty x^{2k} &#x3D;\sum_{k&#x3D;0}^\infty (x^2)^k<br>$$<br>令$y&#x3D;x^2$<br>$$<br>\sum_{k&#x3D;0}^k y^k&#x3D;\frac{1}{1-y}&#x3D;\frac{1}{1- x^2}<br>$$<br>序列${0,1,0,1,\cdots ,0,1,\cdots}$的普通生成函数？<br>$$<br>\sum_{k&#x3D;0}^\infty x^k[k\bmod 2&#x3D;1]&#x3D;\sum_{k&#x3D;0}^\infty x^{2k+1}&#x3D;x\cdot \sum_{k&#x3D;0}^\infty x^{2k}&#x3D;\frac{x}{1-x^2}<br>$$<br>序列${1,2,3,4,\cdots ,n,\cdots}$的普通生成函数？<br>$$<br>\sum_{k&#x3D;0}^\infty(k+1)x^k&#x3D;\sum_{k&#x3D;0}^{\infty} k\cdot x^{k-1}&#x3D;\sum_{k&#x3D;0}^\infty (x^k)’<br>$$<br>因为$(f+g)’&#x3D;f’+g’$</p>
+<p>所以<br>$$<br>\sum_{k&#x3D;0}^\infty (x^k)’&#x3D; \big(\sum_{k&#x3D;0}^{\infty}x^k \big)’ &#x3D; (\frac{1}{1-x})’&#x3D;\frac{1}{(1-x)^2}<br>$$<br>以及为什么可以这么做：</p>
+<p>令$F(x)&#x3D;(\frac{1}{1-x})’$，可以当做一般函数求导，为什么这是对的呢？</p>
+<p>因为实际上把所有东西都用幂级数展开定义了，在一般的函数里面泰勒展开是成立的。</p>
+<p>一般的式子来进行这样一个求导操作之后得到的结果也是符合泰勒展开的。</p>
+<p>在多项式函数世界当中求导就是这么定义的。</p>
+<p>任何一个非多项式函数都可以使用泰勒展开写成若干个多项式函数的和，所以我们知道这几个东西在函数求导都是对的，所以在这个里面我们也可以对它的生成函数求导。对生成函数求导就等价于对原序列求导。</p>
+<p>所以$F(x)&#x3D;\frac{1}{(1-x)^2}$</p>
+<p>$$<br>\frac{d(1+x+x^2+x^3+\ldots)}{dx}&#x3D;\frac{1}{(1-x)^2}<br>$$</p>
+<h3 id="小练习"><a href="#小练习" class="headerlink" title="小练习"></a>小练习</h3><p>序列${1,3,5,7,\cdots ,2n-1,\cdots }$的普通生成函数？</p>
+<p>$$<br>S&#x3D;1+a+a^2+\ldots<br>$$</p>
+<p>$$<br>aS&#x3D;a+a^2+a^3+\ldots<br>$$</p>
+<p>$$<br>S\cdot (1-a)&#x3D;1<br>$$</p>
+<p>$$<br>S&#x3D;\frac{1}{1-a}<br>$$</p>
+<p>令$F(x)&#x3D;1+3x+5x^2+7x^3+\ldots$</p>
+<p>那么<br>$$<br>xF(x)&#x3D;x+3x^2+5x^3+7x^4+\ldots<br>$$</p>
+<p>$$<br>(1-x)\cdot F(x)&#x3D;1+2x+2x^2+2x^3+2x^4+\ldots<br>$$</p>
+<p>然后将1和后面的2分开来，即${1,0,0,\ldots }$和${0,2,2,\ldots }$</p>
+<p>得到：<br>$$<br>(1-x)\cdot F(x)&#x3D;1+2x+2x^2+2x^3+\ldots &#x3D;1+\frac{2x}{1-x}<br>$$</p>
+
+$$
+F(x)=\frac{1+\frac{2x}{1-x}}{1-x}=\frac{1+x}{(1-x)^2}
+$$
+
+
+
+<p>当然还有一种做法是拆成${1,1,1,1,\ldots}+{0,1,2,3,4,\ldots}+{0,1,2,3,4,\ldots}$，然后把解出来的加起来就是了。</p>
+<h3 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h3><p>求下列级数的普通生成函数：</p>
+<p>${4,4,4,4,\ldots }$</p>
+<p>$$<br>4\cdot \sum_{k&#x3D;0}^\infty x^k<br>$$</p>
+<p>$$<br>\frac{4}{1-x}<br>$$</p>
+<p>${2,4,6,8,\ldots }$<br>$$<br>2\cdot \sum_{k&#x3D;0}^\infty (k+1) \cdot x^k &#x3D;2\cdot \sum_{k&#x3D;0}^\infty k\cdot x^{k-1}&#x3D;2\cdot \sum_{k&#x3D;0}^\infty (x^k)’&#x3D;2\cdot\big(\sum_{k&#x3D;0}^\infty x^k \big)’&#x3D;2\cdot (\frac{1}{1-x})’&#x3D;\frac{2}{(1-x)^2}<br>$$<br>${0,0,0,2,4,6,8,\ldots }$</p>
+<p>$2\cdot {0,0,0,1,2,3,4}$<br>$$<br>2\cdot \sum_{k&#x3D;0}^{\infty} k \cdot x^{k+2} &#x3D; 2x^3 \sum_{k&#x3D;0}^\infty k\cdot x^{k-1}&#x3D;\frac{2x^3}{(1-x)^2}<br>$$<br>${1,5,25,125,\ldots }$<br>$$<br>\sum_{k&#x3D;0}^\infty 5^k \cdot x^k &#x3D;\sum_{k&#x3D;0}^\infty (5x)^k&#x3D;\frac{1}{1-5x}<br>$$<br>${1,-3,9,-27,81,\ldots}$<br>$$<br>\sum_{k&#x3D;0}^{\infty} (-3)^k\cdot x^k&#x3D;(-3x)^k &#x3D;\frac{1}{1+3x}<br>$$<br>${1,0,5,0,25,0,125,0,\ldots }$</p>
+
+$$
+\sum_{k=0}^\infty 5^{\frac{k}{2}} x^k [k\bmod 2=0]=\sum_{k=0}^{\infty} 5^{k}\cdot x^{2k}=\sum_{k=0}^\infty (5x^2)^k=\frac{1}{1-5x^2} 
+$$
+
+
+<p>${0,1,0,0,2,0,0,3,0,0,4,0,0,5,\ldots }$<br>$$<br>\sum_{k&#x3D;0}^{\infty} k\cdot x^{3k-2}&#x3D;x^{-2} \sum_{k&#x3D;0}^{\infty} k \cdot x^{3k}<br>$$<br>令$y&#x3D;x^3$<br>$$<br>x^{-2} \sum_{k&#x3D;0}^{\infty} k \cdot x^{3k}&#x3D;x\sum_{k&#x3D;0}^{\infty} k\cdot y^{k-1}&#x3D;x \sum_{k&#x3D;0}^{\infty}(y^k)’&#x3D;\frac{x}{(1-y)^2}&#x3D;\frac{x}{(1-x^3)^2}<br>$$<br>${4,5,7,10,14,19,25,\ldots  }$</p>
+<p>令$F(x)&#x3D;4+5x+7x^2+10x^3+\ldots$<br>$$<br>(1-x)\cdot F(x)&#x3D;4+x+2x^2+3x^3+\ldots<br>$$<br>拆成${4,0,0,\ldots }+{0,1,2,3,\ldots }$得到：<br>$$<br>(1-x)\cdot F(x)&#x3D;4+\frac{x}{(1-x)^2}<br>$$</p>
+<p>$$<br>F(x)&#x3D;\frac{4}{1-x}+\frac{x}{(1-x)^3}<br>$$</p>
+<h3 id="经典例题"><a href="#经典例题" class="headerlink" title="经典例题"></a>经典例题</h3><p>有四种无限多的水果，要求第一种恰好拿出偶数个，第二种恰好拿出$5$的倍数个，第三种最多拿$4$个，第四种最多拿$1$个，求恰好拿出$n$个水果的方案数。</p>
+<p>先考虑只有前两种水果时的情况</p>
+<p>现在知道了第一种水果拿$0$个的方案数是$a_0$，拿$1$个的方案数是$a_1$…拿$n$个的方案数$a_n$</p>
+<p>${a_0,a_1,a_2,\ldots ,a_n}$</p>
+<p>同样设第二种水果拿$0$个的方案数是$b_0$…….</p>
+<p>${b_0,b_1,b_2,\ldots ,b_n}$</p>
+<p> 然后现在求一共恰好拿出$n$个水果的方案<br>$$<br>\sum_{i&#x3D;0}^n a_i\cdot b_{n-i}<br>$$<br>定义$C_n$表示$\sum\limits_{i&#x3D;0}^n a_i \cdot b_{n-i}$</p>
+<p>解出$C_n$的生成函数$C(x)$<br>$$<br>\sum_{n&#x3D;0}^{\infty} C_n\cdot x^n<br>$$<br>将定义式代回来，得到：<br>$$<br>\sum_{n&#x3D;0}^\infty \sum_{i&#x3D;0}^n a_i\cdot b_{n-i} \cdot x^n<br>$$<br>看到有两个求和符号，你的DNA就动了，交换两个求和符号<br>$$<br>\sum_{i&#x3D;0}^\infty a_i \sum_{n&#x3D;i}^n b_{n-i} \cdot x^n<br>$$<br>然后令$j&#x3D;n-i$，原式变为：<br>$$<br>\sum_{i&#x3D;0}^\infty a_i \sum_{j&#x3D;0}^\infty b_j\cdot x^{i+j}<br>$$<br>而$x^{i+j}&#x3D;x^i\cdot x^j$，所以继续转化原式变为：<br>$$<br>\big(\sum_{i&#x3D;0}^\infty a_i\cdot x^i \big )\big(\sum_{j&#x3D;0}^\infty b_j\cdot x^j \big )<br>$$<br>那么其实这就分别是$a$和$b$的生成函数，记作$A(x)$和$B(x)$</p>
+<p>事实上$C(x)&#x3D;A(x)\cdot B(x)$</p>
+<p>那么例题就是分别求出$4$个条件的生成函数然后直接乘起来就是了</p>
+<p>为什么这会是对的呢？</p>
+<p>可以想象一下做一个$dp$，设$dp_{i,j}$表示前$i$种水果恰好拿出$j$个的方案数。</p>
+<p>假设它第$i$行的一个生成函数叫做$F_i$</p>
+<p>就有$F_i(x)&#x3D;F_{i-1}(x)\cdot A_i(x)$，$A_i(x)$为从第$i$个水果中拿恰好多少个对应的生成函数</p>
+<p>那么如$F_4(x)&#x3D;A_1A_2A_3A_4$</p>
+<p>回到例题</p>
+<p>第一种水果的数列为${1,0,1,0,\ldots}$，它的生成函数即$\frac{1}{1-x^2}$</p>
+<p>第二种生成函数为$\frac{1}{1-x^5}$</p>
+<p>第三种为${1,1,1,1,1,0,0,0,0,\ldots}$，它的生成函数即$1+x^1+x^2+x^3+x^4$</p>
+<p>第四种的生成函数为$1+x$</p>
+<p>四个相乘就可以得到恰好拿出$n$个水果的方案数即$\frac{1}{(1-x)^2}$。</p>
+<p>就是${1,2,3,4,5,\ldots}$的生成函数</p>
+<p>故方案数为$n+1$</p>
+<p>对于线性递推都可以求普通生成函数</p>
+<h3 id="Fibonacci-数列"><a href="#Fibonacci-数列" class="headerlink" title="Fibonacci 数列"></a>Fibonacci 数列</h3><p>求 Fibonacci 数列 $a_0&#x3D;a_1&#x3D;1,a_n&#x3D;a_{n-1}+a_{n-2}(n\ge 2)$的普通生成函数？</p>
+<p>设：<br>$$<br>A&#x3D;a_0+a_1x+a_2x^2+a_3x^3+\ldots<br>$$</p>
+<p>$$<br>xA&#x3D;0+a_0x+a_1x^2+a_2x^3+\ldots<br>$$</p>
+<p>$$<br>x^2A&#x3D;0+0+a_0x^2+a_1x^3+a_2x^4\ldots<br>$$</p>
+<p>然后可以得到<br>$$<br>(1-x-x^2)A&#x3D;a_0+a_1x-a_0x&#x3D;1<br>$$</p>
+<p>$$<br>A&#x3D;\frac{1}{1-x-x^2}<br>$$</p>
+<h3 id="线性递推的特征根法"><a href="#线性递推的特征根法" class="headerlink" title="线性递推的特征根法"></a>线性递推的特征根法</h3><p>假设现在有一个$k$阶的线性递推$a_n&#x3D;\sum\limits_{i&#x3D;1}^k b_i\cdot a_{n-i}$</p>
+<p>怎么用上述方法来做呢。</p>
+<p>我们想要凑出来在某一项之后，在某一个位置，</p>
+<p>第一位是$a_n$，第二位$b_1a_{n-1}$，第三位$b_2a_{n-2}$….</p>
+<p>在后面乘的$x^n$要对齐，那么第一个就是$A$，第二个就是$b_1xA$，第三个就是$b_2x^2A$</p>
+<p>大概就这个样子</p>
+<p><img src="https://i.loli.net/2021/04/30/hdQli42PNRB3rFJ.png" alt="QQ图片20210430110014.png"></p>
+<p>仿照刚刚一减，就可以得到式子<br>$$<br>(1-b_1x-b_2x^2-b_3x^3-\ldots-b_k x^k)A(x)&#x3D;F(x)<br>$$<br>其中$F(x)$是一个低次多项式。</p>
+<p>考虑解这个方程</p>
+<p>左边的一堆东西可以分解成形如<br>$$<br>(1-\alpha_1 x)\cdot (1-\alpha_2 x)\cdot \ldots \cdot (1-\alpha_n x)<br>$$<br>假设$\alpha$两两不相同，那么分母待定系数一下，可以证明可以写成<br>$$<br>\frac{a_1}{1-\alpha_1x}+\frac{a_2}{1-\alpha_2 x}+\ldots<br>$$<br>每一项都可以算出来如第$n$项第一位为$\alpha_1^n \cdot a_1$</p>
+<p>通项公式第$n$项就是<br>$$<br>\alpha_1 a_1+\alpha_2 a_2+\ldots<br>$$<br>假如有重复就有一点麻烦，比如$\alpha_1 &#x3D;\alpha_2$</p>
+<p>就会出现<br>$$<br>\frac{a_1}{1-a_1x}+\frac{a_2}{(1-a_1x)^2}<br>$$<br>当然这也能算。</p>
+<p>通过这种方法可以很方便地求出一个线性递推的通项公式。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hefenghhhh/article/details/84897165">如果看不懂可以看这里</a></p>
+<p>使用特征根法，即可得到Fibonacci数列的通项公式</p>
+<h3 id="Catlan数"><a href="#Catlan数" class="headerlink" title="Catlan数"></a>Catlan数</h3><p>求Catlan数$c_0&#x3D;1,c_n&#x3D;\sum\limits_{i&#x3D;0}^{n-1}c_i\cdot c_{n-i-1}(n\ge 1)$的普通生成函数？</p>
+<p>错误版：</p>
+<p>$c_n$的生成函数$C(x)&#x3D;\sum\limits_{n&#x3D;0}^{\infty} \sum\limits_{i&#x3D;0}^{n-1} c_i\cdot c_{n-i-1}\cdot  x^n$</p>
+<p>将$x^n$拆成$x^i,x^{n-i-1},x$</p>
+<p>然后原式变成$\sum\limits_{i&#x3D;0}^{\infty} c_i x^i\cdot \sum\limits_{j&#x3D;0}^{\infty} c_j x^j\cdot x$</p>
+<p>这样会得到$C(x)&#x3D;C^2(x)\cdot x$，然而这实际上是错的，因为当$n\ge 1$时，$c_n$才会等于这个式子。</p>
+<p>即$c_n$本来为$\sum\limits_{n&#x3D;1}^{\infty} c_nx^n&#x3D;\sum\limits_{n&#x3D;1}^{\infty} \sum\limits_{i&#x3D;0}^{n-1} c_i\cdot c_{n-i-1}\cdot x^n$</p>
+<p>然而$n$从$0$开始或从$1$开始在下面的式子并不能体现出来，因为已经将$x^n$拆成$x^i,x^{n-i-1},x$</p>
+<p>所以说正确的式子应长成$C(x)&#x3D;\sum\limits_{n&#x3D;1}^{\infty} c_nx^n+c_0\cdot x^0$</p>
+<p>而$c_0\cdot x^0&#x3D;1$</p>
+<p>所以$C(x)&#x3D;C^2(x)+x+1$</p>
+<p>解得</p>
+
+$C(x)=\frac{1\pm \sqrt{1-4x}}{2x}$
+
+
+
+<p>若</p>
+
+$C(x)=\frac{1+\sqrt{1-4x}}{2x}$
+
+<p>，则$\lim\limits_{x\to 0} C(x)&#x3D;\infty$，与$C(x)$的常数项为$1$矛盾。（或者将这个按照下面展开，可以发现$c_0\neq 1$）</p>
+<p> 现在知道</p>
+
+$C(x)=\frac{1-\sqrt{1-4x}}{2x}$
+
+<p>，现在来求通项，将它泰勒展开（因为$\sqrt{1-4x}$长得很像$x^a$的形状</p>
+
+$-\sqrt{1-4x}=-(1-4x)^{\frac{1}{2}}$
+
+<p>，将它按照$x^a$泰勒展开，然后将$1-4x$代入，就可以得到：</p>
+
+$$
+\frac{1-\sqrt{1-4x}}{2x}=\frac{1}{2x} \sum_{k=1}^{\infty} \frac{1\cdot 3 \cdot \ldots \cdot (2k-3)}{2^k}\cdot \frac{(4x)^k}{k!}
+$$
+
+
+<p>因为这个东西就是原来的生成函数$\sum\limits_{k&#x3D;0}^{\infty} c_k x^k$，按$x$对齐，将系数提出来，就得到了</p>
+
+$$
+c_k=\frac{1}{2}\cdot \frac{1\cdot 3\cdot \ldots \cdot (2k-1)}{2^{k+1}} \cdot \frac{4^{k+1}}{(k+1)!}
+$$
+
+
+<p>整理得到：<br>$$<br>c_k&#x3D;\frac{(2k)!}{(k+1)!k!}&#x3D;\frac{1}{k+1} \binom {2k} {k}<br>$$</p>
+<h3 id="例子3（多元生成函数）"><a href="#例子3（多元生成函数）" class="headerlink" title="例子3（多元生成函数）"></a>例子3（多元生成函数）</h3><p>$$<br>a_n&#x3D;\sum\limits_{i&#x3D;0}^{\infty}\binom {n+i}{2i}<br>$$</p>
+<p>令$A(x)$为这个的生成函数<br>$$<br>A(x)&#x3D;\sum_{n&#x3D;0}^{\infty} \sum_{i&#x3D;0}^n \binom {n+i} {2i} x^n<br>$$<br>令杨辉三角第$n$行的生成函数为$F_n(x)&#x3D;\sum\limits_{i&#x3D;0}^n \binom {n}{i} x^i$</p>
+<p>然后对着$F_0(x),F_1(x),F_2(x),\ldots$这些生成函数再整一个生成函数$\sum\limits_{n&#x3D;0}^{\infty} F_n(x)\cdot y^n $</p>
+<p>$$<br>\sum_{n&#x3D;0}^{\infty} \sum_{i&#x3D;0}^n \binom{n}{i} x^i y^n<br>$$<br>然后转换一下形式<br>$$<br>\sum_{i&#x3D;0}^{\infty} \sum_{j&#x3D;0}^{\infty} \binom{i+j}{i} x^i y^{i+j}<br>$$<br>注意到同时有$x^i$和$y^i$，令$z&#x3D;xy$</p>
+<p>原式化为：<br>$$<br>\sum_{i&#x3D;0}^{\infty} \sum_{j&#x3D;0}^{\infty} \binom{i+j}{i} z^i y^j<br>$$<br>这个东西是一个二项式定理的形状</p>
+<p>就可以化为<br>$$<br>\sum_{n&#x3D;0}^{\infty} (y+z)^n<br>$$<br>回到一开始的生成函数$A(x)&#x3D;\sum\limits_{n&#x3D;0}^{\infty}\sum\limits_{i&#x3D;0}^n \binom{n+i}{2i} x^n$</p>
+<p>与上面那个式子进行比较$\sum\limits_{a&#x3D;0}^{\infty} \sum\limits_{b&#x3D;0}^a \binom {a+b}{a} z^ay^b$</p>
+<p>考虑先让组合数对应起来，就是让$a&#x3D;2i,b&#x3D;n-i$</p>
+<p>那么后面的系数就变成了$z^{2i} y^{n-i}$</p>
+<p>然后令$y&#x3D;z^2$，系数就变成了$z^{2n}$，然后令$x&#x3D;z^2$，就可以对应起来的，然后得到了一个新的生成函数<br>$$<br>B(x)&#x3D;\sum_{n&#x3D;0}^{\infty} \sum_{i&#x3D;0}^n \binom{n+i}{2i} z^{2n}&#x3D;\sum_{n&#x3D;0}^{\infty} (z^2+z)^n<br>$$<br>这是一个等比数列求和$&#x3D;\frac{1}{1-z-z^2}$</p>
+<p>假如将$B(x)$写成$b_0,b_1,b_2\ldots$，$A(x)$写成$a_0,a_1,a_2,\ldots$</p>
+<p>因为$x&#x3D;z^2$，所以$a_0\to b_0,a_1\to b_2,a_2\to b_4$即$a_k&#x3D;b_{2k}$</p>
+<p>而因为$b$是斐波那契数列，所以第$n$条对角线的和$a_n&#x3D;\sum\limits_{i&#x3D;0}^{\infty}\binom {n+i}{2i}&#x3D;\operatorname{Fib}_{2n}$</p>
+<p>最后理一下步骤</p>
+<p>首先明确问题是求$a_n&#x3D;\sum\limits_{i&#x3D;0}^n \binom{n+i}{2i}$</p>
+<p>那第一步是写出他的生成函数$A(x)&#x3D;\sum\limits_{n&#x3D;0}^{\infty} a_n x^n$</p>
+<p>代入$a_n$得到<br>$$<br>\sum_{n&#x3D;0}^{\infty} \sum_{i&#x3D;0}^n \binom {n+i}{2i}x^n<br>$$<br>然后对于杨辉三角每一行都写出一个生成函数$F_n(x)&#x3D;\sum\limits_{j&#x3D;0}^n \binom n j x^j$</p>
+<p>然后对于这$F_0(x),F_1(x),\ldots, F_{\infty}(x)$再写一个生成函数$G(x,y)$<br>$$<br>G(x,y)&#x3D;\sum_{n&#x3D;0}^{\infty} F_n(x) y^n&#x3D;\sum_{n&#x3D;0}^{\infty} \sum_{i&#x3D;0}^n \binom n i x^i y^n<br>$$</p>
+<p>将$y^n$拆成$y^i\cdot y^{n-i}$，令$z&#x3D;xy$</p>
+<p>就有<br>$$<br>\sum_{n&#x3D;0}^{\infty} \sum_{i&#x3D;0}^n \binom n i z^i y^{n-i}<br>$$<br>运用二项式定理，得到：<br>$$<br>\sum_{n&#x3D;0}^{\infty} (z+y)^n<br>$$<br>再把两个生成函数抄下来<br>$$<br>A(x)&#x3D;\sum_{n&#x3D;0}^{\infty} \sum_{i&#x3D;0}^n \binom {n+i}{2i}\cdot x^n<br>$$</p>
+<p>$$<br>G(z,y)&#x3D;\sum_{n&#x3D;0}^{\infty} \sum_{i&#x3D;0}^{n} \binom n i z^i y^{n-i}<br>$$</p>
+<p>令$a&#x3D;i,b&#x3D;n-i$<br>$$<br>\sum_{a&#x3D;0}^{\infty} \sum_{b&#x3D;0}^{\infty} \binom {a+b} {a}y^b z^a<br>$$<br>然后要让这两个式子尽量一样，令$a&#x3D;2i,b&#x3D;n-i$</p>
+<p>然后$G(z,y)$就长成<br>$$<br>\sum_{n&#x3D;0}^{\infty} \sum_{i&#x3D;0}^n \binom {n+i} {2i} y^{n-i} z^{2i}<br>$$<br>然后它还是等于$\sum\limits_{n&#x3D;0}^{\infty} (y+z)^n$</p>
+<p>接下来令$y&#x3D;z^2$，然后两个式子就分别变成$\sum_{n&#x3D;0}^{\infty} \sum_{i&#x3D;0}^n \binom {n+i} {2i} z^{2n}$和$\sum\limits_{n&#x3D;0}^{\infty} (z^2+z)^n$</p>
+<p>其中$\sum\limits_{n&#x3D;0}^{\infty}(z^2+z)^n $可以通过等比数列求和得到$\frac{1}{1-z-z^2}$，即斐波那契数列。</p>
+<p>然后对比$A(x)&#x3D;\sum\limits_{n&#x3D;0}^\infty \sum\limits_{i&#x3D;0}^\infty \binom {n+i}{2i} x^n$，令$x&#x3D;z^2$</p>
+<p>上面那个就相当于斐波那契数列的$1,2,3\ldots$项，而下面斐波那契数列的$2,4,6,\ldots$ 项</p>
+<p>所以$a_k&#x3D;F_{2k}$，其中$F_{k}$为斐波那契数列第$k$项。</p>
+<h2 id="指数生成函数"><a href="#指数生成函数" class="headerlink" title="指数生成函数"></a>指数生成函数</h2><p>对于一个无穷序列${a_0,a_1,a_2,\ldots }$，定义其<strong>指数生成函数</strong>为级数：$\sum\limits_{k&#x3D;0}^{\infty} a_k \cdot \frac{x^k}{k!}$</p>
+<p>普通生成函数通常用来解决无标号计数问题，指数生成函数通常用来解决带标号的计数问题。</p>
+<h3 id="一些例子-1"><a href="#一些例子-1" class="headerlink" title="一些例子"></a>一些例子</h3><p>$n$个元素的排列数$p_n&#x3D;n!$的指数生成函数？<br>$$<br>\hat{P}(x)&#x3D;\sum\limits_{n&#x3D;0}^{\infty} \frac{n!}{n!} x^n&#x3D;\frac{1}{1-x}<br>$$<br>$n$个元素的环排列数$c_n&#x3D;(n-1)! (n\ge 1)$的指数生成函数？<br>$$<br>\hat{C}&#x3D;\sum_{n&#x3D;0}^{\infty} \frac{1}{n} x^n<br>$$<br>这个东西和$\ln(1+x)$长的比较像$\ln(1+x)&#x3D;\sum\limits_{n&#x3D;0}^{\infty} (-1)^{n-1} \frac{x^n}{n}$</p>
+<p>然后把那个$-1$去掉，变成$(-1) \sum\limits_{n&#x3D;0}^{\infty} (-1)^n \frac{x^n}{n}&#x3D;(-1)\sum\limits_{n&#x3D;0}^{\infty} (-x)^n \frac{1}{n}$</p>
+<p>如果变成$\ln(1-x)$就变成$(-1)\sum\limits_{n&#x3D;0}^{\infty} x^n \frac{1}{n!}$</p>
+<p>所以$\hat{C}&#x3D;-\ln(1-x)&#x3D;\ln(\frac{1}{1-x})$</p>
+<p>注意到$\hat{P}(x)&#x3D;e^{\hat{C}(x)}$</p>
+<p>考虑一个排列，对它进行置换分解，即沿</p>
+
+$i\to p_i\to p_{p_i}\to p_{p_{p_i}}\to \ldots \to i$
+
+<p>。这样会组成一个环。</p>
+<p>假设现在知道$1,3,5,8$这四个位置组成了一个环，然后现在要搞出来$p_1,p_3,p_5,p_8$分别是多少。</p>
+<p>举个例子$p_1&#x3D;3,p_3&#x3D;5,p_5&#x3D;8,p_8&#x3D;1$。</p>
+<p>现在要求出这样的排列数有多少个，显然为$(n-1)!$</p>
+<p>现在考虑排列数和原排列数的生成函数有什么关系</p>
+<p>先枚举它被分成了多少个环</p>
+<p>只有一个环就是$(n-1)!$</p>
+<p>假如组成两个环就是$f_n&#x3D;\frac{1}{2} \sum\limits_{i&#x3D;0}^{n} \binom n i (i-1)!(n-i-1)!$</p>
+<p>令$g_i&#x3D;(n-1)!$那么$g_{n-i}&#x3D;(n-i-1)!$（$g_0&#x3D;0$）</p>
+<p>那么$f_n&#x3D;\frac{1}{2}\sum\limits_{i&#x3D;0}^n \binom n i g_i g_{n-i}$即一个卷积的形式</p>
+<p>然后写出它的生成函数<br>$$<br>\hat{F_2}(x)&#x3D;\sum_{n&#x3D;0}^{\infty} f_n \frac{x^n}{n!}&#x3D;\sum_{n&#x3D;0}^{\infty} \frac{1}{2} \sum_{i&#x3D;0}^n \binom n i g_i g_{n-i} \frac{x^n}{n!}<br>$$<br>因为$\binom n i &#x3D;\frac{n!}{i!(n-i)!},x^n&#x3D; x^i\cdot x^{n-i}$</p>
+<p>所以原式</p>
+
+$$
+\sum_{n=0}^{\infty} \frac{1}{2} \sum_{i=0}^n \frac{g_i}{i!} \frac{g_{n-i}}{(n-i)!} x^i x^{n-i}=\frac{1}{2}\sum_{i=0}^{\infty} \frac{g_i}{i!} x^i \sum_{j=0}^{\infty} \frac{g_j}{j!} x^j=\frac{1}{2} (\hat{G}(x))^2
+$$
+
+
+<p>发现<br>$$<br>\hat{F_1}(x)&#x3D;\hat{G} (x)<br>$$</p>
+<p>$$<br>\hat{F_2} (x)&#x3D;\frac{1}{2} (\hat{G}(x))^2<br>$$</p>
+<p>$$<br>\hat{F_3}(x)&#x3D;\frac{1}{6}(\hat{G}(x))^3<br>$$</p>
+<p>$$<br>\ldots<br>$$</p>
+<p>$$<br>\hat{F_n}(x)&#x3D;\frac{1}{n!} (\hat{G}(x))^n<br>$$<br>而<br>$$<br>\hat{F} (x)&#x3D;\sum_{n&#x3D;0}^{\infty} \frac{1}{n!} (\hat{G}(x))^n<br>$$<br>这就是一个$\exp$的样子。<br>$$<br>\hat{F}(x)&#x3D;e^{\hat{G}(x)}<br>$$</p>
+<p>错排数的指数生成函数？</p>
+<p>把排列拆成环排列，只要没有大小为1的环就是一个错排。</p>
+<p>当$n\ge 2$时，类似地$g_n&#x3D;(n-1)!$，但当$n&#x3D;1$时，$g_n&#x3D;0$</p>
+<p>这里同样以两个环为例：$d_n&#x3D;\frac{1}{2}\sum\limits_{i&#x3D;2}^{n-2} \binom n i g_i g_{n-i} $</p>
+<p>但是这个东西不太好卷起来，实际上只有下标为1不能选</p>
+<p>所以改成$\frac{1}{2}\sum\limits_{i&#x3D;0}^n \binom n i g_i g_{n-i} [i\neq 1][n-i\neq 1]$</p>
+<p>然后令$h_i&#x3D;g_i\cdot [i\neq 1]$</p>
+<p>式子就变成$\frac{1}{2}\sum\limits_{i&#x3D;0}^n \binom n i h_i h_{n-i}$<br>$$<br>\hat{H} &#x3D;\sum_{n&#x3D;0}^{\infty} \frac{h_n}{n!} x^n&#x3D;\sum_{n&#x3D;0}^{\infty} \frac{g_n[n\neq 1]}{n!} x^n&#x3D;\sum_{n&#x3D;2}^{\infty} \frac{g_n}{n!} x^n<br>$$<br>因为$g_1&#x3D;1$，所以又等于$\sum\limits_{n&#x3D;0}^{\infty} \frac{g_n}{n!}x^n-x$</p>
+<p>前面的一堆就是$\hat{G}(x)&#x3D;\ln (\frac{1}{1-x})$</p>
+<p>所以$\hat{H}(x)&#x3D;\ln(\frac{1}{1-x})-x$</p>
+<p>那错排数</p>
+
+$\hat{D}(x)=\exp(\hat{H}(x))= \exp(\ln(\frac{1}{1-x})-x)=\frac{e^{-x}}{1-x}$
+
+
+
+<p>这个东西看上去挺简洁的，实际上一点也不简洁。</p>
+<p>展开就相当于两个东西卷起来，分子是一个无限项的东西，分母又是一个无限项的东西，所以这个通项展开并不好看。</p>
+<p>$n$个点的有标号无向连通图个数的指数生成函数？</p>
+<p>先把连通这个条件去掉，即$n$个点的有标号无向连通图个数显然为</p>
+
+$2^{\frac{n(n-1)}{2}}$
+
+<p>。</p>
+<p>假设这个东西为$b_n$，这个的生成函数为$\hat{B}$。</p>
+<p>一个无向图可以分成若干个连通块的不交并，而且这还是带标号的。</p>
+<p>第一步，先确定每一个联通块分别有哪些点。</p>
+<p>第二步，将每一个联通块内的联通方式算上。</p>
+<p>假如已经知道这个东西是$a_n$了，那现在就相当于求$b_n$</p>
+<p>然后两个连通块，三个连通块这样推下来……</p>
+<p>就可以得到$\hat{B}&#x3D;\exp (\hat{A})$</p>
+<p>所以有$\hat{A}&#x3D;\ln (\hat{B})$</p>
+<h2 id="生成函数操作"><a href="#生成函数操作" class="headerlink" title="生成函数操作"></a>生成函数操作</h2><h3 id="乘法"><a href="#乘法" class="headerlink" title="乘法"></a>乘法</h3><p>FFT：</p>
+<p>假如现在有一个$n$次多项式$f(x)$，现在求出了$f(x_0),f(x_1),\ldots ,f(x_n)$且知道$x_0,x_1,\ldots x_n$，那么就可以求出$f(x)$，现在有$f(x)$也可以知道在$x_0,x_1\ldots x_n$的点值。</p>
+<p>通过拉格朗日插值可以在任意$x_0,x_1,\ldots x_n$平方复杂度插出来。</p>
+<p>但是如果不取任意位置，可以在更优的时间复杂度求出</p>
+<p>假设$n &lt; 2^k$，令$\omega &#x3D;\exp(\frac{2\pi i}{2^k})&#x3D;\cos(\frac{2\pi}{2^k})+i\sin (\frac{2\pi}{2^k})$</p>
+<p>假设$f(x)&#x3D;\sum\limits_{i&#x3D;0}^n a_i x^i$</p>
+<p>现在求$\sum\limits_{i&#x3D;0}^n a_i \omega_{2^k} ^i$</p>
+<p>不妨设系数到$2^k-1$即求$\sum\limits_{i&#x3D;0}^{2^k} a_i \omega_{2^k}^i$</p>
+<p>单位圆有</p>
+
+$\omega_{2^k}=\omega_{2^{k+1}}^2$
+
+<p>的性质</p>
+<p>这启发我们分治，将它劈成奇数项和偶数项<br>$$<br>\sum_{i&#x3D;0}^{2^{k-1}-1} a_{2i} \omega <em>{2^k}^{2i} +\sum</em>{i&#x3D;0}^{2^{k-1}-1} a_{2i+1} \omega _{2^k}^{2i+1}<br>$$</p>
+<p>$$<br>\sum_{i&#x3D;0}^{2^{k-1}-1} a_{2i} \omega <em>{2^k}^{2i} +\omega</em>{2k} \sum_{i&#x3D;0}^{2^{k-1}-1} a_{2i+1} \omega _{2^k}^{2i}<br>$$</p>
+<p>而</p>
+
+$\omega_{2^k}^{2i}=\omega_{2^{k-1}}^i$
+
+
+
+<p>所以可以将左边偶数项的$a_0,a_2,a_4,\ldots$再分治下去就可以求出左边，右边奇数项同理。</p>
+<p>这样就得到了$i$在$0\to 2^{k-1}-1$范围的结果。</p>
+<p>实际上这只是求了$x_1&#x3D;\omega_{2^k}^1$处的点值</p>
+<p>我们需要一次性求出上面的这些。</p>
+<p>我们还需要求$\omega^2$的$i$次方，$\omega^3$的$i$次方。</p>
+<p>但是为了保证复杂度，显然不能一次全部把$0\to 2^k -1$全部都代进去。</p>
+<p>每次分治的时候求一半，那么之后怎么合并回去呢？</p>
+<p>直接合并只能求出一半。</p>
+<p>但是注意到$\omega_{2^k}$转$2^k -1$次正好转到$-1$。且现在已经知道$0\to 2^k-1$（上半圆）的点值。</p>
+<p>对于一半之后的，在提出来的$\omega_{2^k}$上直接乘一个$-1$，具体原因是转一半就正好转出了$-1$。因此分治下去即可。时间复杂度就是$O(n\log n)$的。</p>
+<p>所以说可以在$O(n\log n)$时间复杂度求出在$f(x)$上的点值，插值回去同样，这涉及到傅里叶变换一个优美的性质，两个只差一个系数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1351111</span>;</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CP</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">double</span> x,y;</span><br><span class="line">	<span class="built_in">CP</span> (<span class="type">double</span> xx=<span class="number">0</span>,<span class="type">double</span> yy=<span class="number">0</span>) &#123;x=xx,y=yy;&#125;</span><br><span class="line">	CP <span class="keyword">operator</span> + (CP <span class="type">const</span> &amp;A)<span class="type">const</span>&#123;<span class="keyword">return</span> <span class="built_in">CP</span>(x+A.x,y+A.y);&#125;</span><br><span class="line">	CP <span class="keyword">operator</span> - (CP <span class="type">const</span> &amp;A)<span class="type">const</span>&#123;<span class="keyword">return</span> <span class="built_in">CP</span>(x-A.x,y-A.y);&#125;</span><br><span class="line">	CP <span class="keyword">operator</span> * (CP <span class="type">const</span> &amp;A)<span class="type">const</span>&#123;<span class="keyword">return</span> <span class="built_in">CP</span>(x*A.x-y*A.y,x*A.y+y*A.x);&#125;</span><br><span class="line">	CP <span class="keyword">operator</span> / (CP <span class="type">const</span> &amp;A)<span class="type">const</span>&#123;<span class="type">double</span> tt=A.x*A.x-A.y*A.y;<span class="keyword">return</span> <span class="built_in">CP</span>((x*A.x+y*A.y)/tt,(y*A.x-x*A.y)/tt);&#125;</span><br><span class="line">&#125;f[N&lt;&lt;<span class="number">1</span>],p[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="type">int</span> tr[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fft</span><span class="params">(CP *f,<span class="type">int</span> rev)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) <span class="keyword">if</span>(i&lt;tr[i]) <span class="built_in">swap</span>(f[i],f[tr[i]]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> p=<span class="number">2</span>;p&lt;=n;p&lt;&lt;=<span class="number">1</span>) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> len=p&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="function">CP <span class="title">tG</span><span class="params">(cos(<span class="number">2</span>*Pi/p),sin(<span class="number">2</span>*Pi/p))</span></span>;</span><br><span class="line">		<span class="keyword">if</span>(!rev) tG.y*=<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>;k&lt;n;k+=p) </span><br><span class="line">		&#123;</span><br><span class="line">			<span class="function">CP <span class="title">buf</span><span class="params">(<span class="number">1</span>,<span class="number">0</span>)</span></span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> l=k;l&lt;k+len;l++)</span><br><span class="line">			&#123;</span><br><span class="line">				CP tt=buf*f[len+l];</span><br><span class="line">				f[l+len]=f[l]-tt;</span><br><span class="line">				f[l]=f[l]+tt;</span><br><span class="line">				buf=buf*tG;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">//F(x)=FL(x^2)+x*FR(x^2)</span></span><br><span class="line"><span class="comment">//F(W^k)=FL(w^k)+W^k*FR(w^k)</span></span><br><span class="line"><span class="comment">//F(W^&#123;k+n/2&#125;)=FL(w^k)-W^k*FR(w^k)</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	n=<span class="built_in">read</span>(),m=<span class="built_in">read</span>();</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n) <span class="built_in">scanf</span>(<span class="string">&quot;%lf&quot;</span>,&amp;f[i].x);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,m) <span class="built_in">scanf</span>(<span class="string">&quot;%lf&quot;</span>,&amp;p[i].x);</span><br><span class="line">	<span class="keyword">for</span>(m+=n,n=<span class="number">1</span>;n&lt;=m;n&lt;&lt;=<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) tr[i]=(tr[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)?n&gt;&gt;<span class="number">1</span>:<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">fft</span>(f,<span class="number">1</span>);<span class="built_in">fft</span>(p,<span class="number">1</span>); </span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) f[i]=f[i]*p[i];</span><br><span class="line">	<span class="built_in">fft</span>(f,<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,m) <span class="built_in">printf</span>(<span class="string">&quot;%lld &quot;</span>,(<span class="type">int</span>)(f[i].x/n<span class="number">+0.49999</span>));</span><br><span class="line">&#125;</span><br><span class="line">````</span><br><span class="line"></span><br><span class="line">以及三变二：</span><br><span class="line"></span><br><span class="line">```c++</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1351111</span>;</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">CP</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">double</span> x,y;</span><br><span class="line">	<span class="built_in">CP</span> (<span class="type">double</span> xx=<span class="number">0</span>,<span class="type">double</span> yy=<span class="number">0</span>) &#123;x=xx,y=yy;&#125;</span><br><span class="line">	CP <span class="keyword">operator</span> + (CP <span class="type">const</span> &amp;A)<span class="type">const</span>&#123;<span class="keyword">return</span> <span class="built_in">CP</span>(x+A.x,y+A.y);&#125;</span><br><span class="line">	CP <span class="keyword">operator</span> - (CP <span class="type">const</span> &amp;A)<span class="type">const</span>&#123;<span class="keyword">return</span> <span class="built_in">CP</span>(x-A.x,y-A.y);&#125;</span><br><span class="line">	CP <span class="keyword">operator</span> * (CP <span class="type">const</span> &amp;A)<span class="type">const</span>&#123;<span class="keyword">return</span> <span class="built_in">CP</span>(x*A.x-y*A.y,x*A.y+y*A.x);&#125;</span><br><span class="line">	CP <span class="keyword">operator</span> / (CP <span class="type">const</span> &amp;A)<span class="type">const</span>&#123;<span class="type">double</span> tt=A.x*A.x-A.y*A.y;<span class="keyword">return</span> <span class="built_in">CP</span>((x*A.x+y*A.y)/tt,(y*A.x-x*A.y)/tt);&#125;	</span><br><span class="line">&#125;f[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="type">int</span> tr[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">fft</span><span class="params">(CP *f,<span class="type">int</span> rev)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) <span class="keyword">if</span>(i&lt;tr[i]) <span class="built_in">swap</span>(f[i],f[tr[i]]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> p=<span class="number">2</span>;p&lt;=n;p&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> len=p&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="function">CP <span class="title">tG</span><span class="params">(cos(<span class="number">2</span>*Pi/p),sin(<span class="number">2</span>*Pi/p))</span></span>;</span><br><span class="line">		<span class="keyword">if</span>(!rev) tG.y*=<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>;k&lt;n;k+=p)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="function">CP <span class="title">buf</span><span class="params">(<span class="number">1</span>,<span class="number">0</span>)</span></span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="type">int</span> l=k;l&lt;k+len;l++)</span><br><span class="line">			&#123;</span><br><span class="line">				CP tt=buf*f[len+l];</span><br><span class="line">				f[l+len]=f[l]-tt;</span><br><span class="line">				f[l]=f[l]+tt;</span><br><span class="line">				buf=buf*tG;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;		</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	n=<span class="built_in">read</span>(),m=<span class="built_in">read</span>();</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n) f[i].x=<span class="built_in">read</span>();</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,m) f[i].y=<span class="built_in">read</span>();</span><br><span class="line">	<span class="keyword">for</span>(m+=n,n=<span class="number">1</span>;n&lt;=m;n&lt;&lt;=<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) tr[i]=(tr[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)?n&gt;&gt;<span class="number">1</span>:<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">fft</span>(f,<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) f[i]=f[i]*f[i];</span><br><span class="line">	<span class="built_in">fft</span>(f,<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,m) <span class="built_in">printf</span>(<span class="string">&quot;%lld &quot;</span>,(<span class="type">int</span>)(f[i].y/n/<span class="number">2</span><span class="number">+0.499999</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">至于修正方法,可以把两个多项式数乘到相同的值域范围,这样子就不会产生平方项的大误差了。</span></span><br><span class="line"><span class="comment">注意最后要除回去。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>NTT：</p>
+<p>与FFT是一样的，唯一的区别是FTT是在复平面上做这件事，相当于$1$开了$2^k$根。而NTT是在数论域（模$p$域）上做这件事，这个时候也是把$1$开$2^k$根。</p>
+<p>原根：</p>
+<p>$g^0,g^1,\ldots,,g^{p-2}$在模$p$意义下两两不同，且遍历$1\to p-1$</p>
+<p>若$2^k | p-1$</p>
+<p>令</p>
+
+$\omega_{2^k}=g^{\frac{p-1}{2^k}}$
+
+
+
+<p>就得到了一个开$2^k$的结果</p>
+<p>所以说只要求出$g$，且$2^k|p-1$，就能很方便求出不管多少次的单位根。</p>
+<p>第一个条件比较好弄直接暴力枚举或者随机即可。如$998244353$的一个原根就是$3$。</p>
+<p>第二个条件比较麻烦。如$10^9+7$就只能处理$2$以内的DFT。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> _G=<span class="number">3</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1111111</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> invG=<span class="built_in">fpow</span>(_G);</span><br><span class="line"><span class="type">int</span> tr[N&lt;&lt;<span class="number">1</span>],tf;</span><br><span class="line"><span class="type">int</span> n,m,F[N&lt;&lt;<span class="number">1</span>],G[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">tpre</span><span class="params">(<span class="type">int</span> n)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(tf==n) <span class="keyword">return</span>;tf=n;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) tr[i]=(tr[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)?n&gt;&gt;<span class="number">1</span>:<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">NTT</span><span class="params">(<span class="type">int</span> *g,<span class="type">int</span> rev,<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">tpre</span>(n);</span><br><span class="line">	<span class="type">static</span> ull f[N&lt;&lt;<span class="number">1</span>],w[N&lt;&lt;<span class="number">1</span>];w[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) f[i]=(((ll)mod&lt;&lt;<span class="number">5</span>)+g[tr[i]])%mod;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> l=<span class="number">1</span>;l&lt;n;l&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		ull tG=<span class="built_in">fpow</span>(rev?_G:invG,(mod<span class="number">-1</span>)/(l+l));</span><br><span class="line">		<span class="built_in">R</span>(i,<span class="number">1</span>,l<span class="number">-1</span>) w[i]=w[i<span class="number">-1</span>]*tG%mod;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>;k&lt;n;k+=l+l)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">R</span>(p,<span class="number">0</span>,l<span class="number">-1</span>) </span><br><span class="line">			&#123;</span><br><span class="line">				<span class="type">int</span> tt=w[p]*f[k|l|p]%mod;</span><br><span class="line">				f[k|l|p]=f[k|p]+mod-tt;</span><br><span class="line">				f[k|p]+=tt;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(l==(<span class="number">1</span>&lt;&lt;<span class="number">10</span>)) <span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) f[i]%=mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!rev) </span><br><span class="line">	&#123;</span><br><span class="line">		ull invn=<span class="built_in">fpow</span>(n);</span><br><span class="line">		<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) g[i]=f[i]%mod*invn%mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) g[i]=f[i]%mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">px</span><span class="params">(<span class="type">int</span> *f,<span class="type">int</span> *g,<span class="type">int</span> n)</span> </span>&#123;<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>)f[i]=<span class="number">1ll</span>*f[i]*g[i]%mod;&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">times</span><span class="params">(<span class="type">int</span> *f,<span class="type">int</span> *g,<span class="type">int</span> len,<span class="type">int</span> lim)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> sav[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line">	<span class="type">int</span> n=<span class="number">1</span>;<span class="keyword">for</span>(;n&lt;=len;n&lt;&lt;=<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">clr</span>(sav,n);<span class="built_in">cpy</span>(sav,g,n);</span><br><span class="line">	<span class="built_in">NTT</span>(f,<span class="number">1</span>,n);<span class="built_in">NTT</span>(sav,<span class="number">1</span>,n);</span><br><span class="line">	<span class="built_in">px</span>(f,sav,n);<span class="built_in">NTT</span>(f,<span class="number">0</span>,n);</span><br><span class="line">	<span class="built_in">clr</span>(f+lim,n-lim);<span class="built_in">clr</span>(sav,n);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	n=<span class="built_in">read</span>(),m=<span class="built_in">read</span>();</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n) F[i]=<span class="built_in">read</span>();</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,m) G[i]=<span class="built_in">read</span>();</span><br><span class="line">	<span class="keyword">for</span>(m+=n,n=<span class="number">1</span>;n&lt;=m;n&lt;&lt;=<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">times</span>(F,G,m,n);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,m) <span class="built_in">printf</span>(<span class="string">&quot;%lld &quot;</span>,F[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以及<code>vector</code>版</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> _G=<span class="number">3</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">1111111</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> invG=<span class="built_in">fpow</span>(_G);</span><br><span class="line"><span class="type">int</span> tr[N&lt;&lt;<span class="number">1</span>],tf;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">tpre</span><span class="params">(<span class="type">int</span> n)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(tf==n) <span class="keyword">return</span>;tf=n;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) tr[i]=(tr[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)?n&gt;&gt;<span class="number">1</span>:<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">NTT</span><span class="params">(<span class="type">int</span> *g,<span class="type">int</span> rev,<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">tpre</span>(n);</span><br><span class="line">	<span class="type">static</span> ull f[N&lt;&lt;<span class="number">1</span>],w[N&lt;&lt;<span class="number">1</span>];w[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) f[i]=(((ll)mod&lt;&lt;<span class="number">5</span>)+g[tr[i]])%mod;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> l=<span class="number">1</span>;l&lt;n;l&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		ull tG=<span class="built_in">fpow</span>(rev?_G:invG,(mod<span class="number">-1</span>)/(l+l));</span><br><span class="line">		<span class="built_in">R</span>(i,<span class="number">1</span>,l<span class="number">-1</span>) w[i]=w[i<span class="number">-1</span>]*tG%mod;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>;k&lt;n;k+=l+l)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">R</span>(p,<span class="number">0</span>,l<span class="number">-1</span>) </span><br><span class="line">			&#123;</span><br><span class="line">				<span class="type">int</span> tt=w[p]*f[k|l|p]%mod;</span><br><span class="line">				f[k|l|p]=f[k|p]+mod-tt;</span><br><span class="line">				f[k|p]+=tt;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(l==(<span class="number">1</span>&lt;&lt;<span class="number">10</span>)) <span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) f[i]%=mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!rev) </span><br><span class="line">	&#123;</span><br><span class="line">		ull invn=<span class="built_in">fpow</span>(n);</span><br><span class="line">		<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) g[i]=f[i]%mod*invn%mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) g[i]=f[i]%mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">px</span><span class="params">(<span class="type">int</span> *f,<span class="type">int</span> *g,<span class="type">int</span> n)</span> </span>&#123;<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>)f[i]=<span class="number">1ll</span>*f[i]*g[i]%mod;&#125;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> Poly vector<span class="string">&lt;int&gt;</span></span></span><br><span class="line">Poly <span class="keyword">operator</span> + (<span class="type">const</span> Poly &amp;A,<span class="type">const</span> Poly &amp;B)</span><br><span class="line">&#123;</span><br><span class="line">	Poly C=A;C.<span class="built_in">resize</span>(<span class="built_in">max</span>(A.<span class="built_in">size</span>(),B.<span class="built_in">size</span>()));</span><br><span class="line">	<span class="built_in">FR</span>(i,<span class="number">0</span>,(<span class="type">int</span>)B.<span class="built_in">size</span>()) C[i]=(C[i]+B[i])%mod;</span><br><span class="line">	<span class="keyword">return</span> C;</span><br><span class="line">&#125;</span><br><span class="line">Poly <span class="keyword">operator</span> * (<span class="type">const</span> Poly &amp;A,<span class="type">const</span> Poly &amp;B)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> a[N&lt;&lt;<span class="number">1</span>],b[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line">	<span class="comment">//FR(i,0,(int)A.size()) a[i]=A[i];</span></span><br><span class="line">	<span class="built_in">cpy</span>(a,&amp;A[<span class="number">0</span>],A.<span class="built_in">size</span>()),<span class="built_in">cpy</span>(b,&amp;B[<span class="number">0</span>],B.<span class="built_in">size</span>());</span><br><span class="line">	Poly C;C.<span class="built_in">resize</span>(A.<span class="built_in">size</span>()+B.<span class="built_in">size</span>()<span class="number">-1</span>);</span><br><span class="line">	<span class="type">int</span> n=<span class="number">1</span>;<span class="keyword">for</span>(n;n&lt;(<span class="type">int</span>)C.<span class="built_in">size</span>();n&lt;&lt;=<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">NTT</span>(a,<span class="number">1</span>,n);<span class="built_in">NTT</span>(b,<span class="number">1</span>,n);</span><br><span class="line">	<span class="built_in">px</span>(a,b,n);<span class="built_in">NTT</span>(a,<span class="number">0</span>,n);</span><br><span class="line">	<span class="built_in">cpy</span>(&amp;C[<span class="number">0</span>],a,C.<span class="built_in">size</span>());</span><br><span class="line">	<span class="built_in">clr</span>(a,n);<span class="built_in">clr</span>(b,n);</span><br><span class="line">	<span class="keyword">return</span> C;</span><br><span class="line">&#125;</span><br><span class="line">Poly F,G;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> n=<span class="built_in">read</span>(),m=<span class="built_in">read</span>();</span><br><span class="line">	F.<span class="built_in">resize</span>(n<span class="number">+1</span>),G.<span class="built_in">resize</span>(m<span class="number">+1</span>);</span><br><span class="line">	<span class="built_in">FR</span>(i,<span class="number">0</span>,(<span class="type">int</span>)F.<span class="built_in">size</span>()) F[i]=<span class="built_in">read</span>();</span><br><span class="line">	<span class="built_in">FR</span>(i,<span class="number">0</span>,(<span class="type">int</span>)G.<span class="built_in">size</span>()) G[i]=<span class="built_in">read</span>();</span><br><span class="line">	F=F*G;</span><br><span class="line">	<span class="built_in">FR</span>(i,<span class="number">0</span>,(<span class="type">int</span>)F.<span class="built_in">size</span>()) <span class="built_in">printf</span>(<span class="string">&quot;%lld &quot;</span>,F[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>MTT：</p>
+<p>在模数为$10^9+7$时就不太好，这个时候一般有几种做法：</p>
+<p>FFT，需要精度比较高</p>
+<p>中国剩余定理，要达到$10^9+7$，每一次NTT选的模数也在$10^9$左右，且若值域较大要选三个左右。</p>
+<p>假如要乘两个矩阵$A,B$，那么$A$要一次FFT到$A$的点值，$B$也需要一次FFT到$B$的点值，乘起来得到$C$的点值，再FFT回去得到$C$，就需要三次FFT，选三个FFT模数就要九次.</p>
+<p>而MTT只需要做四次。</p>
+<p>模数是$P$，$P$只要是一个质数就行。</p>
+<p>然后随便一个数$M$，这个$M$差不多是$\sqrt P$。</p>
+<p>然后把每一个数字表示成$a+bM$</p>
+<p>现在要卷两个序列，假设系数分别为$a_1,a_2,\ldots a_n,b_1,b_2,\ldots b_n$。</p>
+<p>然后把每一个数字都写成这样的形式，如$a_i&#x3D;a_{1i}+b_{1i}M,b_i&#x3D;a_{2i}+b_{2i}M$</p>
+<p>相乘会长成这个样子<br>$$<br>(a_1+b_1M)(a_2+b_2M)&#x3D;a_1a_2+(a_1b_2+a_2b_1)M+b_1b_2M^2<br>$$<br>然后假如现在给它DFT过去，然后回来的时候只要DFT $a_1 a_2,(a_1b_2+a_2b_1)M,b_1b_2M^2$即可。</p>
+<p>这时就把$9$次FFT变成了$7$次FFT，因为$a,b$都在$M$以内，所以结果是在$P$以内的，所以<code>double</code>的精度够了，直接FFT即可。</p>
+<p>这样总共是7次FFT（去4次，回来3次），继续优化。</p>
+<p>假如说现在有两个实数序列$A(x),B(x)$</p>
+<p>令$P(x)&#x3D;A(x)+iB(x),Q(x)&#x3D;A(x)-iB(x)$<br>$$<br>P(\omega ^k_{2^n})&#x3D;\sum_{j&#x3D;0}^{2^n-1} (a_j+ib_j)\omega_{2^n}^{jk}&#x3D;\sum_{j&#x3D;0}^{2^n-1} (a_j+ib_j)(\cos(\frac{2\pi jk}{2^n})+i\sin \frac{2\pi j k}{2^n} )<br>$$<br>然后暴力乘开<br>$$<br>\sum_{j&#x3D;0}^{2^n-1} (a_j \cos(\frac{2\pi jk}{2^n})-b_j\sin(\frac{2\pi jk}{2^n}) )+i(b_j \cos(\frac{2\pi jk}{2^n})+a_j\sin(\frac{2\pi jk}{2^n}))<br>$$<br>同理<br>$$<br>Q(\omega^k)&#x3D;\sum_{j&#x3D;0}^{2^n-1} (a_j \cos(\frac{2\pi jk}{2^n})+b_j\sin(\frac{2\pi jk}{2^n}) )-i(b_j \cos(\frac{2\pi jk}{2^n})-a_j\sin(\frac{2\pi jk}{2^n}))<br>$$<br>对比一下上下的式子，大概就是$\cos$不变而$\sin$正负号变了</p>
+<p>$\cos$是横坐标，$\sin$是纵坐标，有什么方法让横坐标不变而纵坐标变呢，就是上下折一下，原来是$\theta$就变成$-\theta$，然后式子就变成：<br>$$<br>\sum_{j&#x3D;0}^{2^n-1} (a_j \cos(\frac{2\pi jk}{2^n})-b_j\sin(\frac{2\pi jk}{2^n}) )-i(b_j \cos(\frac{2\pi jk}{2^n})+a_j\sin(\frac{2\pi jk}{2^n}))<br>$$<br>就和上面那个式子差不多了，除了$i$那里一个是加一个是减。</p>
+<p>所以$&#x3D;\overline{P(\omega^{-k})}&#x3D;\overline{P(\omega^{2^n-k})}$</p>
+<p>所以只需要对$P$跑一次DFT，就可以得到$P$的所有$\omega^k$（$P(\omega^k)$）</p>
+<p>然后<code>reverse</code>一下再取一个共轭，就可以得到$Q(\omega^k)$</p>
+<p>然后还可以求出$A,B$</p>
+<p>$P&#x3D;A+iB,Q&#x3D;A-iB$</p>
+<p>所以$\frac{1}{2}(P+Q)&#x3D;A$</p>
+<p>所以说对$a_1,b_1$做一次DFT得到$a_1,b_1$的点值，再对$a_2,b_2$做一次得到点值，反过来三个东西$a_1a_2+(a_1b_2+a_2b_1)M+b_1b_2M^2$就是把两个一拼做一次DFT，然后另外一个自己做一次。总共就是$4$次了。这玩意就是MTT。</p>
+<p>然而这玩意没有什么用…我还不会写…</p>
+<h3 id="求逆"><a href="#求逆" class="headerlink" title="求逆"></a>求逆</h3><p>给你一个多项式$f$，求$\frac{1}{f}$。（假设$f$的常数项不为0，因为0乘任何数都不为1）</p>
+<p>假设只需要求一个多项式$g$满足$f\cdot g\equiv 1 \pmod {x^n}$，不妨设$n$是$2$的幂。</p>
+<p>倍增下去，令$k&#x3D;\frac{n}{2}$</p>
+<p>假设当前已经知道$f\cdot h\equiv 1 \pmod {x^k}$</p>
+<p>有$f\cdot g\equiv 1\pmod {x^k}$</p>
+<p>将两式相减，一定要有这个式子成立<br>$$<br>f\cdot (g-h) \equiv 0 \pmod {x^k}<br>$$<br>将两边平方</p>
+
+$$
+f^2\cdot(g-h)^2\equiv 0 \pmod {x^{2k}}
+$$
+
+
+<p>因为$f$显然不为$0$</p>
+
+$$
+g^2-2gh+h^2\equiv 0 \pmod {x^{2k}}
+$$
+
+
+<p>然后两边同时乘个$f$</p>
+
+$$
+fg^2-2fgh+fh^2\equiv 0 \pmod {x^{2k}}
+$$
+
+
+<p>因为上面的各种条件可以得到：<br>$$<br>g&#x3D;2h-h^2f&#x3D;h(2-hf)<br>$$<br>然后分析一下时间复杂度<br>$$<br>T(n)&#x3D;T(\frac{n}{2})+O(n\log n)<br>$$</p>
+<p>$$<br>\rightarrow T(n)&#x3D;O(n\log n)<br>$$</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">poly_inv</span><span class="params">(<span class="type">int</span> *f,<span class="type">int</span> *g,<span class="type">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> n=<span class="number">1</span>;<span class="keyword">for</span>(;n&lt;m;n&lt;&lt;=<span class="number">1</span>);</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> w[N&lt;&lt;<span class="number">1</span>],r[N&lt;&lt;<span class="number">1</span>],sav[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line">	w[<span class="number">0</span>]=<span class="built_in">fpow</span>(f[<span class="number">0</span>]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> l=<span class="number">2</span>;l&lt;=n;l&lt;&lt;=<span class="number">1</span>) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">FR</span>(i,<span class="number">0</span>,(l&gt;&gt;<span class="number">1</span>)) r[i]=w[i];</span><br><span class="line">		<span class="built_in">cpy</span>(sav,f,l);<span class="built_in">NTT</span>(sav,<span class="number">1</span>,l);</span><br><span class="line">		<span class="built_in">NTT</span>(r,<span class="number">1</span>,l);<span class="built_in">px</span>(r,sav,r,l);</span><br><span class="line">		<span class="built_in">NTT</span>(r,<span class="number">0</span>,l);<span class="built_in">clr</span>(r,l&gt;&gt;<span class="number">1</span>);</span><br><span class="line">		<span class="built_in">cpy</span>(sav,w,l);<span class="built_in">NTT</span>(sav,<span class="number">1</span>,l);</span><br><span class="line">		<span class="built_in">NTT</span>(r,<span class="number">1</span>,l);<span class="built_in">px</span>(r,sav,r,l);</span><br><span class="line">		<span class="built_in">NTT</span>(r,<span class="number">0</span>,l);</span><br><span class="line">		<span class="built_in">FR</span>(i,l&gt;&gt;<span class="number">1</span>,l) w[i]=(w[i]*<span class="number">2ll</span>-r[i]+mod)%mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cpy</span>(g,w,m<span class="number">+1</span>);<span class="built_in">clr</span>(sav,n);<span class="built_in">clr</span>(w,n);<span class="built_in">clr</span>(r,n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="牛顿迭代"><a href="#牛顿迭代" class="headerlink" title="牛顿迭代"></a>牛顿迭代</h3><p>解方程$f(Y)\equiv 0 \pmod {x^n}$</p>
+<p>其中$f:R[x]\to R[x]$（从多项式到多项式的一个函数）</p>
+<p>然后令$k&#x3D;\frac{n}{2}$，然后现在已经知道$f(Z)\equiv 0 \pmod {x^k}$</p>
+<p>因为$f$是一个函数，既然它是一个函数，那么它就能泰勒展开，具体原因我不会！！1</p>
+<p>我们对$f$这个函数在$Z$位置泰勒展开<br>$$<br>f(Y)&#x3D;f(Z)+\frac{f’(Z)}{1!}(Y-Z)+\frac{f’’(Z)}{2!}(Y-Z)^2+\ldots<br>$$<br>解方程的时候，不妨设$Y\equiv Z \pmod {x^k}$（因为解是不唯一的）</p>
+<p>所以说</p>
+
+$(Y-Z)^2\equiv 0 \pmod {x^{2k}}$
+
+
+
+<p>所以上面泰勒展开后面的几项全没了。</p>
+<p>即：<br>$$<br>f(Y)&#x3D;f(Z)+f’(Z)(Y-Z) \pmod {x^2k}<br>$$<br>而因为$f(Y)\equiv 0 \pmod {x^n}$</p>
+<p>所以</p>
+
+$0\equiv f(Z)+f'(Z)(Y-Z) \pmod {x^{2k}}$
+
+
+
+
+$$
+Y\cdot f'(Z)\equiv Z f'(Z)-f(Z) \pmod {x^{2k}}
+$$
+
+
+
+
+
+$$
+Y\equiv Z- \frac{f(Z)}{f'(Z)} \pmod {x^{2k}}
+$$
+
+
+
+<p>$\frac{f(Z)}{f’(Z)}&#x3D;(f’(Z))^{-1} \cdot f(Z)$</p>
+<p>时间复杂度为$O(n\log n)$</p>
+<p>值得一提的是$f’$怎么办，这个东西机器不会帮我们求，只能具体问题具体分析，</p>
+<p>比如说$f(A)&#x3D;\ln A$</p>
+<p>对它求导是$\frac{1}{A}$还是$\frac{A’}{A}$。</p>
+<p>什么叫求导？</p>
+<p>应该是<br>$$<br>\frac{\mathrm{d}f}{\mathrm{d}A} &#x3D; \frac{\mathrm{d}(\ln A)}{\mathrm{d} A}&#x3D;\frac{1}{A}<br>$$<br>而后面这个是<br>$$<br>\frac{\mathrm{d}f}{\mathrm{d}x}&#x3D;\frac{\mathrm{d}(\ln A)}{\mathrm{d}A} \frac{\mathrm{d}A}{\mathrm{d}x}&#x3D;\frac{A’}{A}<br>$$<br>我们要上面那一个，因为泰勒公式是对$f$里面这个东西求导</p>
+<p>加入写作$f(Y)$，那么$f’(Y)$应该被定义成$\frac{df}{dY}$，就是说不管里面是什么东西都是说对里面这个东西求导，而不是更里层的变量来求导。</p>
+<p>再举个例子$f(A)&#x3D;A-B$而$B$是一个固定的多项式，</p>
+<p>而$f’(A)&#x3D;1$，因为你要记住你是对A求导的，所以对A而言B只是一个常数。</p>
+<p><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/blog/fuyuki/dui-duo-xiang-shi-niu-dun-die-dai-suan-fa-di-yi-suo-li-xie">fuyuki</a></p>
+<h3 id="求-ln"><a href="#求-ln" class="headerlink" title="求$\ln$"></a>求$\ln$</h3><p>$$<br>\frac{\mathrm{d}(\ln A)}{\mathrm{d}x	}&#x3D;\frac{A’}{A}<br>$$</p>
+<p>而$A’$好求，$\frac{1}{A}$也好求，右边就可以求出来了。而因为是对$x$求导的，所以对$x$的积分也直接求出来了，就有<br>$$<br>\ln x&#x3D;\int \frac{A’}{A} \mathrm{d} x<br>$$<br>附求导和求积分公式：<br>$$<br>(x^a)’&#x3D;ax^{a-1} , \int x^a\mathrm{d} x&#x3D;\frac{1}{a+1} x^{a+1}<br>$$<br>时间复杂度$O(n\log n)$</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">poly_derivation</span><span class="params">(<span class="type">int</span> *f,<span class="type">int</span> *g,<span class="type">int</span> n)</span></span>&#123;<span class="built_in">R</span>(i,<span class="number">1</span>,n<span class="number">-1</span>)g[i<span class="number">-1</span>]=<span class="number">1ll</span>*f[i]*i%mod;g[n<span class="number">-1</span>]=<span class="number">0</span>;&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">poly_integral</span><span class="params">(<span class="type">int</span> *f,<span class="type">int</span> *g,<span class="type">int</span> n)</span></span>&#123;<span class="built_in">R</span>(i,<span class="number">1</span>,n<span class="number">-1</span>)g[i]=<span class="number">1ll</span>*f[i<span class="number">-1</span>]*inv[i]%mod;g[<span class="number">0</span>]=<span class="number">0</span>;&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">poly_ln</span><span class="params">(<span class="type">int</span> *f,<span class="type">int</span> *g,<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> ff[N&lt;&lt;<span class="number">1</span>],_f[N&lt;&lt;<span class="number">1</span>],_g[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line">	<span class="built_in">poly_derivation</span>(f,ff,n);</span><br><span class="line">	<span class="built_in">poly_inv</span>(f,_f,n);</span><br><span class="line">	<span class="built_in">poly_times</span>(ff,_f,_g,n,n,n);</span><br><span class="line">	<span class="built_in">poly_integral</span>(_g,g,n);</span><br><span class="line">	<span class="built_in">clr</span>(ff,n),<span class="built_in">clr</span>(_g,n),<span class="built_in">clr</span>(_f,n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="求-exp"><a href="#求-exp" class="headerlink" title="求$\exp$"></a>求$\exp$</h3><p>相当于解$B(x)&#x3D; e^{A(x)}$</p>
+<p>两边取$\ln$，$\ln B(x) &#x3D;A(x)$</p>
+<p>令$f(B(x))&#x3D;\ln B(x)-A(x)$，牛顿迭代求零点即可。</p>
+<p>由于保证$a_0&#x3D;0$，则有$\ln b_0-0&#x3D;0$，所以直接赋值为$1$即可。</p>
+<p>由于有$f’(B(x))&#x3D;\frac{1}{B(x)}$：</p>
+
+$$
+B(x) \equiv B_0(x)-\frac{\ln B_0(x) - A(x)}{\frac{1}{B_0(x)}} \pmod {x^n}
+$$
+
+
+
+<p>$$<br>\equiv B_0(x)-B_0(\ln B_0(x)-A(x)) \pmod {x^n}<br>$$</p>
+<p>$$<br>\equiv B_0(x)(1-\ln B_0(x)+A(x))<br>$$</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">poly_exp</span><span class="params">(<span class="type">int</span> *f,<span class="type">int</span> *g,<span class="type">int</span> m)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(m==<span class="number">1</span>) &#123;g[<span class="number">0</span>]=<span class="number">1</span>;<span class="keyword">return</span>;&#125;</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> s[N&lt;&lt;<span class="number">1</span>],w[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line">	<span class="built_in">poly_exp</span>(f,g,(m<span class="number">+1</span>)&gt;&gt;<span class="number">1</span>);</span><br><span class="line">	<span class="type">int</span> n=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(;n&lt;(m&lt;&lt;<span class="number">1</span>);n&lt;&lt;=<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">clr</span>(s,m);</span><br><span class="line">	<span class="built_in">poly_ln</span>(g,s,m);</span><br><span class="line">	<span class="built_in">tpre</span>(n);</span><br><span class="line">	<span class="built_in">cpy</span>(w,f,n);<span class="built_in">clr</span>(w+m,n-m);</span><br><span class="line">	<span class="built_in">NTT</span>(w,<span class="number">1</span>,n);<span class="built_in">NTT</span>(g,<span class="number">1</span>,n);<span class="built_in">NTT</span>(s,<span class="number">1</span>,n);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n) g[i]=<span class="number">1ll</span>*g[i]*(<span class="number">1</span>-s[i]+w[i]+mod)%mod;</span><br><span class="line">	<span class="built_in">NTT</span>(g,<span class="number">0</span>,n);</span><br><span class="line">	<span class="built_in">clr</span>(g+m,n-m);<span class="built_in">clr</span>(s+m,n-m);<span class="built_in">clr</span>(w+m,n-m);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以及不知道对不对但是跑得较慢得迭代版：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">poly_exp</span><span class="params">(<span class="type">int</span> *f,<span class="type">int</span> *g,<span class="type">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> s[N&lt;&lt;<span class="number">1</span>],s2[N&lt;&lt;<span class="number">1</span>],w[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line">	<span class="type">int</span> n=<span class="number">1</span>;<span class="keyword">for</span>(;n&lt;m;n&lt;&lt;=<span class="number">1</span>);</span><br><span class="line">	s2[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> l=<span class="number">2</span>;l&lt;=n;l&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cpy</span>(s,s2,l&gt;&gt;<span class="number">1</span>);<span class="built_in">poly_ln</span>(s,s,l);</span><br><span class="line">		<span class="built_in">cpy</span>(w,s2,l);</span><br><span class="line">		<span class="built_in">R</span>(i,<span class="number">0</span>,l<span class="number">-1</span>) s[i]=(f[i]-s[i]+mod)%mod;</span><br><span class="line">		s[<span class="number">0</span>]=(s[<span class="number">0</span>]<span class="number">+1</span>)%mod;</span><br><span class="line">		<span class="built_in">poly_times</span>(s2,s,s2,l,l,l);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cpy</span>(g,s2,m);<span class="built_in">clr</span>(s,n);<span class="built_in">clr</span>(s2,n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还有一种方法是$O(n\log^2 n)$的分治FFT</p>
+<p>由于常数小并不会比牛顿迭代慢。</p>
+<p>考虑两边求导，得到$B’(x)&#x3D;B(x)A’(x)$</p>
+<p>可能是过程：<br>$$<br>A&#x3D;e^B<br>$$</p>
+<p>$$<br>\ln A&#x3D;B<br>$$</p>
+<p>$$<br>\frac{A’}{A}&#x3D;B<br>$$</p>
+<p>然后提取$n$次项系数得到：<br>$$<br>(n+1)b_{n+1}&#x3D;\sum\limits_{i&#x3D;0}^n (i+1)a_{i+1} b_{n-i}<br>$$</p>
+<p>$$<br>b_n &#x3D;\frac{1}{n} \sum_{i&#x3D;1}^n i\cdot a_i b_{n-i}<br>$$</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> _G=<span class="number">3</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> invG=<span class="number">332748118</span>;</span><br><span class="line"><span class="type">int</span> n,m,F[<span class="number">333333</span>],G[<span class="number">333333</span>],s1[<span class="number">333333</span>],s2[<span class="number">633333</span>];</span><br><span class="line"><span class="type">int</span> tr[<span class="number">644444</span>],tf;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">tpre</span><span class="params">(<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(tf==n) <span class="keyword">return</span>;tf=n;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">+5</span>) tr[i]=(tr[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)?n&gt;&gt;<span class="number">1</span>:<span class="number">0</span>); </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">NTT</span><span class="params">(<span class="type">int</span> *g,<span class="type">int</span> rev,<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">tpre</span>(n);</span><br><span class="line">	<span class="type">static</span> ull f[<span class="number">666666</span>],w[<span class="number">666666</span>];w[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) f[i]=(((ll)mod&lt;&lt;<span class="number">5</span>)+g[tr[i]])%mod;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> l=<span class="number">1</span>;l&lt;n;l&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		ull tG=<span class="built_in">fpow</span>(rev?_G:invG,(mod<span class="number">-1</span>)/(l+l));</span><br><span class="line">		<span class="built_in">R</span>(i,<span class="number">1</span>,l<span class="number">-1</span>) w[i]=w[i<span class="number">-1</span>]*tG%mod;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">0</span>;k&lt;n;k+=l+l)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">R</span>(p,<span class="number">0</span>,l<span class="number">-1</span>) </span><br><span class="line">			&#123;</span><br><span class="line">				<span class="type">int</span> tt=f[k|l|p]*w[p]%mod;</span><br><span class="line">				f[k|l|p]=f[k|p]+mod-tt;</span><br><span class="line">				f[k|p]+=tt;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(l==(<span class="number">1</span>&lt;&lt;<span class="number">10</span>)) <span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) f[i]%=mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!rev)</span><br><span class="line">	&#123;</span><br><span class="line">		ull invn=<span class="built_in">fpow</span>(n);</span><br><span class="line">		<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) g[i]=f[i]%mod*invn%mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) g[i]=f[i]%mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">px</span><span class="params">(<span class="type">int</span> *f,<span class="type">int</span> *g,<span class="type">int</span> *p,<span class="type">int</span> n)</span> </span>&#123;<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>)p[i]=<span class="number">1ll</span>*f[i]*g[i]%mod;&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">cdq</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(r-l==<span class="number">1</span>) &#123;<span class="keyword">if</span>(l&gt;<span class="number">0</span>)G[l]=<span class="number">1ll</span>*<span class="built_in">fpow</span>(l)*G[l]%mod;<span class="keyword">return</span>;&#125;</span><br><span class="line">	<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>,n=r-l;</span><br><span class="line">	<span class="built_in">cdq</span>(l,mid);</span><br><span class="line">	<span class="built_in">cpy</span>(s1,G+l,n/<span class="number">2</span>);<span class="built_in">clr</span>(s1+n/<span class="number">2</span>,n/<span class="number">2</span>);<span class="built_in">NTT</span>(s1,<span class="number">1</span>,n);</span><br><span class="line">	<span class="built_in">px</span>(s1,s2+n,s1,n);<span class="built_in">NTT</span>(s1,<span class="number">0</span>,n);</span><br><span class="line">	<span class="built_in">R</span>(i,n/<span class="number">2</span>,n<span class="number">-1</span>) G[l+i]=(G[l+i]+s1[i])%mod;</span><br><span class="line">	<span class="built_in">cdq</span>(mid,r);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	m=<span class="built_in">read</span>();G[<span class="number">0</span>]=<span class="number">1</span>;	</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,m<span class="number">-1</span>) F[i]=<span class="number">1ll</span>*<span class="built_in">read</span>()*i%mod;</span><br><span class="line">	<span class="keyword">for</span>(n=<span class="number">1</span>;(n&gt;&gt;<span class="number">1</span>)&lt;m;n&lt;&lt;=<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cpy</span>(s1,F,n);<span class="built_in">NTT</span>(s1,<span class="number">1</span>,n);</span><br><span class="line">		<span class="built_in">cpy</span>(s2+n,s1,n);</span><br><span class="line">	&#125;</span><br><span class="line">	n&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	<span class="built_in">cdq</span>(<span class="number">0</span>,n);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,m<span class="number">-1</span>) <span class="built_in">writesp</span>(G[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="除法与取模"><a href="#除法与取模" class="headerlink" title="除法与取模"></a>除法与取模</h2><p>$A&#x3D;DB+R$</p>
+<p>翻转一下，即将所有的$X$用$\frac{1}{X}$代替，$A(\frac{1}{x})&#x3D;D(\frac{1}{x})B(\frac{1}{x})+R(\frac{1}{x})$</p>
+<p>两边同乘$x^n$，$x^n A(\frac{1}{x})&#x3D;x^n D(\frac{1}{x})B(\frac{1}{x})+R(\frac{1}{x})$</p>
+<p>然后拆成<br>$$<br>x^nA(\frac{1}{x})&#x3D;(x^{n-m} D(\frac{1}{x})) (x^m B(\frac{1}{x}))+x^{m-1}\cdot x^{n-m+1} R(\frac{1}{x})<br>$$<br>注意到$x^n A(\frac{1}{x})$就是把$A$的各项系数给反过来，就是$\sum\limits_{i&#x3D;0}^n a_{n-i}\cdot x^i$记作$A^R(x)$</p>
+<p>那么有<br>$$<br>A^R(x)&#x3D;D^R (x)B^R(x)+x^{n-m+1} R^R(x)<br>$$<br>然后两边对$x^{n-m+1}$取模，因为$D^R(x)$是$n-m$次的，所以取模之后$x^{n-m+1}\cdot R^R(x)$这一项就没有了。而$D^R(x)$是不变的，所以再将$A^R(x)$与$B^R(x)$取模之后，就可以准确求出$D^R(X)$。然后把系数翻回去就得到了$D$，然后再代回原式$A&#x3D;DB+R$，就得到了$R$。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">poly_times</span><span class="params">(<span class="type">int</span> *f,<span class="type">int</span> *g,<span class="type">int</span> *p,<span class="type">int</span> n,<span class="type">int</span> m,<span class="type">int</span> lim)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> tmpf[N&lt;&lt;<span class="number">1</span>],tmpg[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line">	<span class="keyword">for</span>(m+=n,n=<span class="number">1</span>;n&lt;m;n&lt;&lt;=<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">clr</span>(tmpf,n);<span class="built_in">cpy</span>(tmpf,f,n);</span><br><span class="line">	<span class="built_in">clr</span>(tmpg,n);<span class="built_in">cpy</span>(tmpg,g,n);</span><br><span class="line">	<span class="built_in">NTT</span>(tmpf,<span class="number">1</span>,n);<span class="built_in">NTT</span>(tmpg,<span class="number">1</span>,n);</span><br><span class="line">	<span class="built_in">px</span>(tmpf,tmpg,p,n);<span class="built_in">NTT</span>(p,<span class="number">0</span>,n);</span><br><span class="line">	<span class="built_in">clr</span>(p+lim,n-lim);<span class="built_in">clr</span>(tmpf,n);<span class="built_in">clr</span>(tmpg,n);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">poly_division</span><span class="params">(<span class="type">int</span> *f,<span class="type">int</span> *g,<span class="type">int</span> *q,<span class="type">int</span> *r,<span class="type">int</span> n,<span class="type">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> tmpf[N&lt;&lt;<span class="number">1</span>],tmpg[N&lt;&lt;<span class="number">1</span>],d[N&lt;&lt;<span class="number">1</span>],ivd[N&lt;&lt;<span class="number">1</span>],_d[N&lt;&lt;<span class="number">1</span>],_g[N&lt;&lt;<span class="number">1</span>],fg[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line">	<span class="built_in">cpy</span>(tmpf,f,n),<span class="built_in">cpy</span>(tmpg,g,m);</span><br><span class="line">	<span class="type">int</span> L=n-m<span class="number">+1</span>;</span><br><span class="line">	<span class="built_in">reverse</span>(tmpf,tmpf+n);<span class="built_in">cpy</span>(fg,tmpf,L);<span class="built_in">reverse</span>(tmpf,tmpf+n);</span><br><span class="line">	<span class="built_in">reverse</span>(tmpg,tmpg+m);<span class="built_in">cpy</span>(d,tmpg,L);<span class="built_in">reverse</span>(tmpg,tmpg+m);</span><br><span class="line">	<span class="built_in">poly_inv</span>(d,ivd,L);<span class="built_in">poly_times</span>(ivd,fg,_d,L,L,L);<span class="built_in">reverse</span>(_d,_d+L);</span><br><span class="line">	<span class="built_in">poly_times</span>(tmpg,_d,_g,n,n,n);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,m<span class="number">-2</span>) _g[i]=(tmpf[i]-_g[i]+mod)%mod;</span><br><span class="line">	<span class="built_in">cpy</span>(r,_g,m<span class="number">-1</span>);<span class="built_in">clr</span>(r+m<span class="number">-1</span>,L);</span><br><span class="line">	<span class="built_in">cpy</span>(q,_d,L);<span class="built_in">clr</span>(q+L,n-L);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="开根"><a href="#开根" class="headerlink" title="开根"></a>开根</h3><p>假设当前有</p>
+
+$$
+H^2(x)\equiv F(x) \pmod {x^{\lceil \frac{n}{2} \rceil}}
+$$
+
+
+<p>求</p>
+
+$$
+G(x)\equiv H(x) \pmod {x^{\lceil \frac{n}{2}\rceil}}
+$$
+
+
+<p>所以</p>
+
+$$
+G(x)-H(x)\equiv 0 \pmod {x^{\lceil \frac{n}{2} \rceil}}
+$$
+
+
+<p>两边开方</p>
+
+$$
+(G(x)-H(x))^2\equiv 0 \pmod {x^{n}}
+$$
+
+
+
+<p>$$<br>G^2(x)-2H(x)G(x)+H^2(x) \equiv 0 \pmod {x^n}<br>$$</p>
+<p>$$<br>F(x)-2H(x)G(x)+H^2(x) \equiv 0 \pmod {x^n}<br>$$</p>
+<p>$$<br>G(x)&#x3D;\frac{F(x)+H^2(x)}{2H(x)}<br>$$</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">poly_sqrt</span><span class="params">(<span class="type">int</span> *f,<span class="type">int</span> *g,<span class="type">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> n=<span class="number">1</span>;<span class="keyword">for</span>(;n&lt;m;n&lt;&lt;=<span class="number">1</span>);</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> _g[N&lt;&lt;<span class="number">1</span>],ivg[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line">	g[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> l=<span class="number">2</span>;l&lt;=n;l&lt;&lt;=<span class="number">1</span>) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">FR</span>(i,<span class="number">0</span>,l&gt;&gt;<span class="number">1</span>) _g[i]=(g[i]&lt;&lt;<span class="number">1</span>)%mod;</span><br><span class="line">		<span class="built_in">poly_inv</span>(_g,ivg,l);</span><br><span class="line">		<span class="built_in">NTT</span>(g,<span class="number">1</span>,l);<span class="built_in">px</span>(g,g,g,l);<span class="built_in">NTT</span>(g,<span class="number">0</span>,l);</span><br><span class="line">		<span class="built_in">R</span>(i,<span class="number">0</span>,l<span class="number">-1</span>) g[i]=(f[i]+g[i])%mod;</span><br><span class="line">		<span class="built_in">poly_times</span>(g,ivg,g,l,l,l);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">clr</span>(_g,n+n),<span class="built_in">clr</span>(ivg,n+n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="幂函数"><a href="#幂函数" class="headerlink" title="幂函数"></a>幂函数</h3><p>求$G(x)\equiv F^k (x) \pmod {x^n}$</p>
+<p>当满足$f_0&#x3D;1$时</p>
+<p>两边取$\ln$<br>$$<br>\ln G(x)\equiv k \ln F(x) \pmod {x^n}<br>$$<br>然后两边$\exp$<br>$$<br>G(x)\equiv e^{k\ln F(x)} \pmod {x^n}<br>$$</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">poly_fpow</span><span class="params">(<span class="type">int</span> *f,<span class="type">int</span> *g,<span class="type">int</span> m,<span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> ff[N];</span><br><span class="line">	<span class="type">int</span> n=<span class="number">1</span>;<span class="keyword">for</span>(;n&lt;m;n&lt;&lt;=<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">poly_ln</span>(f,ff,n);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) ff[i]=<span class="number">1ll</span>*ff[i]*k%mod;</span><br><span class="line">	<span class="built_in">poly_exp</span>(ff,g,n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果不满足$f_0&#x3D;1$</p>
+<p>在取$\ln$之前需要先提取一个公因式$g\cdot x^t$满足$a_t\neq 0$且$a_i&#x3D;0,i\in[0,t)$。$b$为$g^t$的系数，这样就可以保证最低位为$1$。<br>$$<br>F^k(x)&#x3D;\big(\frac{F(x)}{x^t}\big)^k x^{tk}<br>$$<br>需要注意$t\times k&gt;n$的特殊处理。</p>
+<p>以及新的$F^k(x)$的$k$应对$p$取模，而$g^k$中的$k$应对于$\varphi(p)$取模</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">2222222</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> _G=<span class="number">3</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> invG=<span class="number">332748118</span>;</span><br><span class="line"><span class="type">int</span> tr[N&lt;&lt;<span class="number">1</span>],tf;</span><br><span class="line"><span class="type">int</span> n,k1,k2,k3,A[N],B[N],C[N];</span><br><span class="line"><span class="type">int</span> inv[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="type">int</span> ixi;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">read_mod</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">char</span> c=<span class="built_in">getchar</span>();<span class="type">int</span> x=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(;<span class="built_in">isdigit</span>(c);c=<span class="built_in">getchar</span>())k1=((k1&lt;&lt;<span class="number">1</span>)+(k1&lt;&lt;<span class="number">3</span>)+(c^<span class="number">48</span>))%mod,k2=((k2&lt;&lt;<span class="number">1</span>)+(k2&lt;&lt;<span class="number">3</span>)+(c^<span class="number">48</span>))%(mod<span class="number">-1</span>),k3++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">poly_pwr</span><span class="params">(<span class="type">int</span> *f,<span class="type">int</span> *g,<span class="type">int</span> m)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> _f[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line">	<span class="type">int</span> x=m;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;x;++i) <span class="keyword">if</span>(f[i]) x=i;</span><br><span class="line">	<span class="keyword">if</span>(x==m||(x&amp;&amp;k3&gt;<span class="number">5</span>)) <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span>(!k1&amp;&amp;!k2) &#123;g[<span class="number">0</span>]=<span class="number">1</span>;<span class="keyword">return</span>;&#125;</span><br><span class="line">	m-=x;</span><br><span class="line">	<span class="built_in">cpy</span>(f,f+x,m);</span><br><span class="line">	<span class="built_in">poly_ln</span>(f,_f,m);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,m<span class="number">-1</span>) _f[i]=_f[i]*k1%mod;</span><br><span class="line">	<span class="built_in">poly_exp</span>(_f,g,m);</span><br><span class="line">	<span class="type">int</span> tt=<span class="built_in">fpow</span>(f[<span class="number">0</span>],k2);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,m<span class="number">-1</span>) g[i]=g[i]*tt%mod;</span><br><span class="line">	m+=x;x=<span class="built_in">min</span>(x*k1,m);</span><br><span class="line">	<span class="built_in">cpy</span>(g+x,g,m-x);</span><br><span class="line">	<span class="built_in">clr</span>(_f,n);<span class="built_in">clr</span>(g,x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">init_inv</span>(<span class="number">2621244</span><span class="number">+5</span>);</span><br><span class="line">	n=<span class="built_in">read</span>();<span class="built_in">read_mod</span>();</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) A[i]=<span class="built_in">read</span>();</span><br><span class="line">	<span class="built_in">poly_pwr</span>(A,B,n);</span><br><span class="line">	<span class="built_in">printofary</span>(B,n);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="多点求值"><a href="#多点求值" class="headerlink" title="多点求值"></a>多点求值</h3><p>咕咕咕</p>
+<h3 id="多点插值"><a href="#多点插值" class="headerlink" title="多点插值"></a>多点插值</h3><p>咕咕咕</p>
+<h3 id="复合逆（拉格朗日反演）"><a href="#复合逆（拉格朗日反演）" class="headerlink" title="复合逆（拉格朗日反演）"></a>复合逆（拉格朗日反演）</h3><p>给出$F(x)$求$G(x)$满足$F\circ G&#x3D;G\circ F &#x3D;id$（$id$为恒等函数）<br>$$<br>[x^n]G(x)&#x3D;\frac{1}{n} [x^{n-1}] (\frac{x}{F(x)})^n<br>$$<br>（$[x^n]G(x)$表示$G(x)$的$n$次项。）</p>
+<p>证明：</p>
+<p>令$G&#x3D;\sum\limits_{i&#x3D;0}^{\infty} a_i x^i$</p>
+<p>要求$\sum\limits_{i&#x3D;0}^{\infty} a_i F^i(x)&#x3D;x$</p>
+<p>然后两边对$x$求导<br>$$<br>\frac{\mathrm{d}\sum\limits_{i&#x3D;0}^{\infty} a_i F^i(x) }{\mathrm{d}x}&#x3D;1<br>$$</p>
+<p>$$<br>1&#x3D;\sum_{i&#x3D;1}^{\infty} a_i\cdot iF^{i-1}(x) F’(x)<br>$$</p>
+<p>然后左右两边同时除以$F^n(x)$<br>$$<br>\frac{1}{F^n(x)} &#x3D;\frac{ \sum\limits_{i&#x3D;1}^{\infty} a_i \cdot i F^{i-1}(x) F’(x)} {F^{n}(x)}<br>$$<br>两边同时取$[x^{-1}]$得到<br>$$<br>[x^{-1}]\sum_{i&#x3D;0}^{\infty} i \cdot a_i F^{i-n-1}(x)F’(x)&#x3D;[x^{-1}]\frac{1}{F^n(x)}<br>$$<br>然后考虑这个$\sum$的式子</p>
+<p>分两种情况</p>
+<ol>
+<li>$i \neq n$，$F^{i-n-1}(x)F’(x)$这个东西是刚刚求导求出来的东西，所以可以搞回去$&#x3D;\frac{1}{i-n} (F^{i-n}(x))’$这个东西是一个多项式$\in R[[x]]$（用两个中括号表示$x$的幂都$\ge 0$，就形式幂级数化），所以不存在$x^{-1}$项，所以这边是$0$。</li>
+<li>$i&#x3D;n$，当$i&#x3D;n$时，上面有一个$F^{-1}(x)$，这个东西想要求导直接用$0$次方是求不出来的，相当应用$\ln$求导，$\frac{F’(x)}{F(x)}$，而不是用多项式求导。（然而也没用$\ln$求导），考虑直接写出来$\frac{F’(x)}{F(x)}&#x3D;\frac{a_1+2a_2x+3a_3x^2+\ldots}{a_1x+a_2x^2+a_3x^3+\ldots}&#x3D;\frac{a_1\ldots}{a_1x}\cdot \frac{1}{1+\frac{a_2}{a_1}x+\frac{a_3}{a_1}x^2+\ldots}$，后面那个东西是一个多项式的逆，因为常数项为$1$，所以可以逆。而前面那个东西$[x^{-1}]$上的系数为$1$,而后面那个东西$[x^0]&#x3D;1$，所以$a_n&#x3D;[x^{-1}]\frac{1}{F^{n}(x)}$</li>
+</ol>
+<p>所以就有$[x^n]G(x)&#x3D;\frac{1}{n} [x^{n-1}] (\frac{x}{F(x)})^n$</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">poly_lagrange_inversion</span><span class="params">(<span class="type">int</span> *f,<span class="type">int</span> m,<span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">int</span> g[N],ivf[N];</span><br><span class="line">	<span class="type">int</span> n=<span class="number">1</span>;<span class="keyword">for</span>(;n&lt;=m;n&lt;&lt;=<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">tpre</span>(n);</span><br><span class="line">	<span class="built_in">poly_inv</span>(f,ivf,n);	</span><br><span class="line">	<span class="built_in">poly_fpow</span>(ivf,g,n,k);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1ll</span>*g[k<span class="number">-1</span>]*inv[k]%mod;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>更有趣的东西：</p>
+<h3 id="扩展拉格朗日反演"><a href="#扩展拉格朗日反演" class="headerlink" title="扩展拉格朗日反演"></a>扩展拉格朗日反演</h3><p>$$<br>[x^n]H(G(x))&#x3D;\frac{1}{n}<a href="H'(x)(%5Cfrac%7Bx%7D%7BF(x)%7D)%5En"> x^{n-1} </a><br>$$</p>
+<p>这个东西记住即可，证明没有什么用，而且我也不会。</p>
+<p>而且不像前面的东西的证明过程可能会有点用…</p>
+
+    </div>
+</article> </main>
+
+<div class="fab-container" id="fabContainer">
+    <div class="fab-menu">
+        <div class="fab-btn sub" id="btnTheme" title="切换环境感知">◐</div>
+        <div class="fab-btn sub" id="btnMusic" title="音频终端">♫</div>
+    </div>
+    <div class="fab-btn fab-main" id="btnMain">⧉</div>
+    <div class="music-panel" id="musicPanel">
+    <div class="mp-header">AUDIO TERMINAL //</div>
+    <div class="mp-title" id="mpTitle">选择曲目...</div>
+    
+    <div class="mp-progress-container">
+        <span id="mpTimeCurrent">00:00</span>
+        <input type="range" class="mp-progress-bar" id="mpProgressBar" value="0" min="0" max="100">
+        <span id="mpTimeTotal">00:00</span>
+    </div>
+    
+    <div class="mp-controls">
+        <button class="mp-btn" id="mpPrev">⏮</button>
+        <button class="mp-btn play-btn" id="mpPlayPause">▶</button>
+        <button class="mp-btn" id="mpNext">⏭</button>
+    </div>
+    
+    <ul class="mp-playlist" id="mpPlaylistUI">
+        </ul>
+</div> </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("PRTS: System Booting...");
+
+    // ================= 1. UI 中枢系统 =================
+    const fabContainer = document.getElementById('fabContainer');
+    const btnMain = document.getElementById('btnMain');
+    const musicPanel = document.getElementById('musicPanel');
+
+    if (btnMain && fabContainer) {
+        btnMain.addEventListener('click', () => {
+            fabContainer.classList.toggle('open');
+            btnMain.style.transform = fabContainer.classList.contains('open') ? 'rotate(45deg)' : 'rotate(0)';
+            if(!fabContainer.classList.contains('open') && musicPanel){
+                musicPanel.classList.remove('active');
+            }
+        });
+    }
+
+    const btnTheme = document.getElementById('btnTheme');
+    let currentTheme = 'dark';
+    function setTheme(theme) { currentTheme = theme; document.body.setAttribute('data-theme', theme); }
+    function autoTheme() { const hour = new Date().getHours(); setTheme((hour >= 6 && hour < 18) ? 'light' : 'dark'); }
+    autoTheme();
+    if(btnTheme) btnTheme.addEventListener('click', () => { setTheme(currentTheme === 'dark' ? 'light' : 'dark'); });
+
+    // ================= 2. 音乐通讯终端 =================
+    // 【修复】：去除了容易引发引擎崩溃的 EJS 标签，直接使用绝对路径
+    const playlist = [
+        { name: "01. 生命流「熠曲丰碑」-2025音律联觉ver.", src: "/music/生命流「熠曲丰碑」-2025音律联觉.mp3" },
+        { name: "02. 櫂", src: "/music/ヨルシカ - 櫂.mp3" },
+        { name: "03. ヰ世界の宝石譚", src: "/music/ヰ世界の宝石譚.mp3" },
+        { name: "04. KAWAIIめたもる交響曲", src: "/music/KAWAIIめたもる交響曲.mp3" }
+    ];
+
+
+    let currentTrackIndex = 0;
+    const audio = new Audio();
+    const btnMusic = document.getElementById('btnMusic');
+    const mpPlayPause = document.getElementById('mpPlayPause');
+    const mpPlaylistUI = document.getElementById('mpPlaylistUI');
+
+    if(btnMusic && musicPanel) {
+        btnMusic.addEventListener('click', () => { musicPanel.classList.toggle('active'); });
+
+        if (mpPlaylistUI) {
+            playlist.forEach((track, index) => {
+                let li = document.createElement('li');
+                li.textContent = track.name;
+                li.onclick = () => loadTrack(index, true);
+                mpPlaylistUI.appendChild(li);
+            });
+        }
+
+        function loadTrack(index, autoPlay = false) {
+            if(playlist.length === 0) return;
+            currentTrackIndex = index;
+            audio.src = playlist[index].src;
+            document.getElementById('mpTitle').textContent = playlist[index].name;
+
+            if(mpPlaylistUI) {
+                const items = mpPlaylistUI.querySelectorAll('li');
+                items.forEach(item => item.classList.remove('playing'));
+                if(items[index]) items[index].classList.add('playing');
+            }
+            if (autoPlay) togglePlay(true);
+        }
+
+        function togglePlay(forcePlay = false) {
+            if (audio.paused || forcePlay) {
+                audio.play().then(() => {
+                    if(mpPlayPause) mpPlayPause.textContent = "⏸";
+                    btnMusic.classList.add('btn-playing');
+                }).catch(e => {
+                    console.warn("PRTS: 等待音频源响应...");
+                    if(mpPlayPause) mpPlayPause.textContent = "▶";
+                    btnMusic.classList.remove('btn-playing');
+                });
+            } else {
+                audio.pause();
+                if(mpPlayPause) mpPlayPause.textContent = "▶";
+                btnMusic.classList.remove('btn-playing');
+            }
+        }
+
+        if(mpPlayPause) mpPlayPause.addEventListener('click', () => togglePlay());
+
+        document.getElementById('mpPrev').addEventListener('click', () => { let newIndex = currentTrackIndex - 1; if (newIndex < 0) newIndex = playlist.length - 1; loadTrack(newIndex, true); });
+        document.getElementById('mpNext').addEventListener('click', () => { let newIndex = currentTrackIndex + 1; if (newIndex >= playlist.length) newIndex = 0; loadTrack(newIndex, true); });
+        audio.addEventListener('ended', () => { document.getElementById('mpNext').click(); });
+
+        const mpProgressBar = document.getElementById('mpProgressBar');
+        const mpTimeCurrent = document.getElementById('mpTimeCurrent');
+        const mpTimeTotal = document.getElementById('mpTimeTotal');
+
+        // 【修复】：重写了时间格式化逻辑，彻底消灭了代码里的 "<" 符号，防止被误认为 HTML
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "00:00";
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60);
+            return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        }
+
+        audio.addEventListener('loadedmetadata', () => {
+            if(mpTimeTotal) mpTimeTotal.textContent = formatTime(audio.duration);
+            if(mpProgressBar) mpProgressBar.max = audio.duration;
+        });
+
+        let isDragging = false;
+        audio.addEventListener('timeupdate', () => {
+            if(mpTimeCurrent) mpTimeCurrent.textContent = formatTime(audio.currentTime);
+            if (!isDragging && mpProgressBar) mpProgressBar.value = audio.currentTime;
+        });
+
+        if(mpProgressBar) {
+            mpProgressBar.addEventListener('mousedown', () => isDragging = true);
+            mpProgressBar.addEventListener('mouseup', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+            mpProgressBar.addEventListener('touchstart', () => isDragging = true);
+            mpProgressBar.addEventListener('touchend', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+        }
+
+        loadTrack(0, false);
+    }
+
+    // ================= 3. 背景粒子系统 =================
+    const canvas = document.getElementById('particle-canvas');
+    if(canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const mouse = { x: null, y: null, radius: 50 };
+
+        function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        initCanvas(); window.addEventListener('resize', initCanvas);
+
+        const logoImg = new Image();
+        // 【修复】：去除 EJS，直接指向根目录下的 logo
+        logoImg.src = '/logo.png';
+        logoImg.onload = function() {
+            const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d');
+            const size = 200; tempCanvas.width = size; tempCanvas.height = size;
+            tempCtx.drawImage(logoImg, 0, 0, size, size);
+            const imageData = tempCtx.getImageData(0, 0, size, size).data;
+            for (let y = 0; y < size; y += 2) {
+                for (let x = 0; x < size; x += 2) {
+                    if (imageData[((y * size + x) * 4) + 3] > 128) {
+                        particles.push(new Particle(x * 2.5 + (canvas.width / 2 - 100), y * 2.5 + (canvas.height / 2 - 250)));
+                    }
+                }
+            }
+            animate();
+            console.log("PRTS: Particles Online.");
+        };
+
+        class Particle {
+            constructor(x, y) { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.baseX = x; this.baseY = y; this.density = (Math.random() * 30) + 1; }
+            draw() {
+                ctx.fillStyle = document.body.getAttribute('data-theme') === 'light' ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.6)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2); ctx.fill();
+            }
+            update() {
+                let dx = mouse.x - this.x, dy = mouse.y - this.y, distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouse.radius) {
+                    let force = (mouse.radius - distance) / mouse.radius;
+                    this.x -= (dx / distance) * force * this.density * 0.8; this.y -= (dy / distance) * force * this.density * 0.8;
+                } else {
+                    this.x += (this.baseX - this.x) * 0.12; this.y += (this.baseY - this.y) * 0.12;
+                }
+            }
+        }
+
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
+        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+    }
+});
+</script> </body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<title>CF1276E Four Stones | Hexo</title>
+<link rel="icon" href="/avatar.jpg" type="image/jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+
+<canvas id="particle-canvas"></canvas>
+
+<header class="terminal-nav">
+    <a href="/" class="nav-logo">QAQ</a>
+    <nav class="nav-menu">
+        <a href="/" class="nav-item active"><span class="nav-en">INDEX</span><span class="nav-cn">首页</span></a>
+        <a href="#info" class="nav-item"><span class="nav-en">INFORMATION</span><span class="nav-cn">情报</span></a>
+        <a href="#operator" class="nav-item"><span class="nav-en">OPERATOR</span><span class="nav-cn">随笔</span></a>
+        <a href="#world" class="nav-item"><span class="nav-en">WORLD</span><span class="nav-cn">归档</span></a>
+        <a href="#media" class="nav-item"><span class="nav-en">MEDIA</span><span class="nav-cn">标签</span></a>
+    </nav>
+    </header>
+
+<aside class="sidebar">
+    <div class="avatar-box"><img src="/avatar.jpg" alt="Avatar"></div>
+    <h2 class="sidebar-title">COLDICEH</h2>
+    <p class="sidebar-subtitle">Dr.抢不到音律退坑了#8809</p>
+    
+    <div class="sidebar-search">
+        <div class="search-box">
+            <input type="text" id="local-search-input" placeholder="// SEARCH DATABASE...">
+        </div>
+    </div>
+    
+    <div style="margin-top: 20px;" class="sidebar-links">
+        <div style="color: var(--ak-blue); font-weight: bold; margin-bottom: 10px; border-left: 3px solid var(--ak-blue); padding-left: 10px;">常用链接</div>
+        <a href="#">我的随笔</a>
+        <a href="#">我的评论</a>
+        <a href="#">我的参与</a>
+        <a href="#">最新评论</a>
+        <a href="#">我的标签</a>
+    </div>
+</aside>
+
+<main class="main-content">
+    <article class="post-detail">
+    <h1 class="post-detail-title">CF1276E Four Stones</h1>
+    <div class="post-meta">
+        DATE: 2022-03-07
+    </div>
+    <div class="post-content">
+        <p>首先判断是否无解：</p>
+<p>如果初始四颗石头都在一个位置上需要直接特判掉。</p>
+<p>令 $g&#x3D;\gcd(a_2-a_1,a_3-a_1,a_4-a_1),g2&#x3D;\gcd(b_2-b_1,b_3-b_1,b_4-b_1)$ ，那么需要有 $g&#x3D;g_2$ 并且 $a_1&#x3D;b_1 \pmod g$ ，否则显然无解。</p>
+<p>令 $d&#x3D;a_1\bmod g$</p>
+<p>为了方便，将所有坐标变 $x$ 为 $x&#x3D;(x-d)&#x2F;g$。此时可以发现，在任何操作下，每个坐标的奇偶性都是不变的，因此 $a$ 与 $b$ 之间的奇数和偶数数量应该相同。否则仍然无解。</p>
+<p>然后考虑固定两个中间状态：将 $a_1,\ldots a_4$ 放到 $[x,x+1]$ 上，将 $b_1,\ldots b_4$ 放到 $[y,y+1]$ 上，最后将 $[x,x+1]$ 上的石头放到 $[y,y+1]$ 上即可，输出时只要把 $b_1,\ldots b_4$ 放到 $[y,y+1]$ 这一部分倒着输出即可。（为了方便这里的 $x,y$ 统一为偶数）</p>
+<p>接下来先考虑怎么把石头放到 $[x,x+1]$ 上。</p>
+<p>令 $\Delta&#x3D;$ 任意两块石头之间的最大距离。</p>
+<p>为了方便，假设 $a$ 递增。</p>
+<p>当其中一颗石头 $a_i$ 在 $[a_1+\frac{\Delta}{4},a_1+\frac{3\Delta}{4}]$ 时，</p>
+<p>考虑将 $[a_1,a_4]$ 分成 $[a_1,a_i]$ 和 $[a_i,a_4]$，并将所有的石头对称到相对于 $a_i$ 较近的一半。</p>
+<p>此时 $a_i$ 将成为最左边或者最右边的石头，新的最大距离 $\Delta’$ 最大为 $\frac{3\Delta}{4}$，$\Delta$ 减少至少 $\frac{1}{4}$。</p>
+<p>否则假如不存在这颗石头时，令 $d_i&#x3D;\min(a_i-a_1,a_4-a_i)$ ，即从 $a_i$ 到最近两端石头的最短距离，那么可以发现 $d_2,d_3&lt;\frac{\Delta}{4}$ 且至少有一个数 $\neq 0$ 。否则此时已经有 $g&#x3D;1&#x3D;\Delta$，已经完成目标。</p>
+<p>然后观察进行 $(a_i,a_j),(a_i,a_k)$ 两次操作将 $a_i$ 变为 $a_i+2(a_k-a_j)$。这样就可以将 $d_i$ 变成 $d_i+2d_j$。在这样 $\mathcal O(\log \Delta)$ 次操作后，会有 $\max(d_2,d_3)\ge \frac{\Delta}{4}$，然后就可以继续重复上面的操作了。</p>
+<p>最后，所有的 $a_i\in [x,x+1]$。为了方便，如果 $x$ 是奇数，可以让所有的 $a_i&#x3D;x$ 变成 $x+2$。</p>
+<p>总复杂度为 $\mathcal O(\log \Delta)$ 的。</p>
+<p>然后考虑怎么将 $[x,x+1]$ 上的石子移到 $[y,y+1]$ 上，假设此时要将它们移动 $2d$，假设 $2d\ge 0$。</p>
+<p>可以发现任何石头的排列的排列都可以通过将最右边那颗石头对称两次来移动 $2\Delta$。</p>
+<p>假设 $a$ 递增。</p>
+<p>令一个叫 Expand 操作为 $(a_3,a_1),(a_2,a_4)$。可以发现，如果使用 Expand $k$ 次，最大距离 $\Delta$ 将呈指数增长。</p>
+<p>然后我们可以将石头移动 $2d$ 如下：</p>
+<ol>
+<li>进行 Expand 操作直到 $\Delta &gt;d$。</li>
+<li>当 $\Delta \le d$ 时，进行上面那种操作将所有石头移动 $2\Delta$，并将 $d$ 减少 $\Delta$。</li>
+<li>若 $\Delta &#x3D;1$，则退出。</li>
+<li>执行 Expand 的逆操作，返回步骤 2</li>
+</ol>
+<p>最后可以得到 $\Delta &#x3D;1,d&#x3D;0$ 。此外由于 $\Delta$ 在 Expand 操作中呈指数增长，对于每个 $\Delta$ 基本操作都是 $\mathcal O(1)$ 的，因此总操作次数是 $\mathcal O(\log d)$ 的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> R(i,a,b) for(int i=(a),i##E=(b);i&lt;=i##E;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> L(i,a,b) for(int i=(b),i##E=(a);i&gt;=i##E;i--)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> a[<span class="number">11</span>],b[<span class="number">11</span>],g,g2;</span><br><span class="line">vector&lt;pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; &gt;ans1,ans2,ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">nos</span><span class="params">(<span class="type">int</span> a=<span class="number">-1</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cout&lt;&lt;a&lt;&lt;endl;</span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">gcd</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> !b?a:<span class="built_in">gcd</span>(b,a%b);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">(<span class="type">int</span> *a,vector&lt;pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; &gt;&amp;ans)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">sort</span>(a<span class="number">+1</span>,a<span class="number">+5</span>);</span><br><span class="line">		<span class="keyword">if</span>(a[<span class="number">4</span>]-a[<span class="number">1</span>]==<span class="number">1</span>) <span class="keyword">break</span>;</span><br><span class="line">		<span class="type">int</span> p=<span class="number">1e10</span>;</span><br><span class="line">		<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> l=a[<span class="number">1</span>]*<span class="number">3</span>+a[<span class="number">4</span>],r=a[<span class="number">1</span>]+a[<span class="number">4</span>]*<span class="number">3</span>;</span><br><span class="line">			<span class="keyword">if</span>(l&lt;=a[<span class="number">2</span>]*<span class="number">4</span>&amp;&amp;a[<span class="number">2</span>]*<span class="number">4</span>&lt;=r) p=a[<span class="number">2</span>];</span><br><span class="line">			<span class="keyword">if</span>(l&lt;=a[<span class="number">3</span>]*<span class="number">4</span>&amp;&amp;a[<span class="number">3</span>]*<span class="number">4</span>&lt;=r) p=a[<span class="number">3</span>];</span><br><span class="line">			<span class="keyword">if</span>(p!=<span class="number">1e10</span>) <span class="keyword">break</span>;</span><br><span class="line">			<span class="type">int</span> d2=<span class="built_in">min</span>(a[<span class="number">2</span>]-a[<span class="number">1</span>],a[<span class="number">4</span>]-a[<span class="number">2</span>]),d3=<span class="built_in">min</span>(a[<span class="number">3</span>]-a[<span class="number">1</span>],a[<span class="number">4</span>]-a[<span class="number">3</span>]);</span><br><span class="line">			<span class="keyword">if</span>(d2&gt;d3) <span class="built_in">swap</span>(d2,d3),<span class="built_in">swap</span>(a[<span class="number">2</span>],a[<span class="number">3</span>]);</span><br><span class="line">			<span class="type">int</span> id1,id2;</span><br><span class="line">			<span class="keyword">if</span>(a[<span class="number">4</span>]-a[<span class="number">3</span>]&lt;a[<span class="number">3</span>]-a[<span class="number">1</span>]) id1=<span class="number">3</span>,id2=<span class="number">4</span>;</span><br><span class="line">			<span class="keyword">else</span> id1=<span class="number">1</span>,id2=<span class="number">3</span>;</span><br><span class="line">			<span class="keyword">if</span>(a[<span class="number">4</span>]-a[<span class="number">2</span>]&lt;a[<span class="number">2</span>]-a[<span class="number">1</span>]) <span class="built_in">swap</span>(id1,id2);</span><br><span class="line">			ans.<span class="built_in">emplace_back</span>(a[<span class="number">2</span>],a[id1]);</span><br><span class="line">			a[<span class="number">2</span>]=(a[id1]&lt;&lt;<span class="number">1</span>)-a[<span class="number">2</span>];</span><br><span class="line">			ans.<span class="built_in">emplace_back</span>(a[<span class="number">2</span>],a[id2]);</span><br><span class="line">			a[<span class="number">2</span>]=(a[id2]&lt;&lt;<span class="number">1</span>)-a[<span class="number">2</span>];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(a[<span class="number">1</span>]+a[<span class="number">4</span>]&gt;=(p&lt;&lt;<span class="number">1</span>))</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">R</span>(i,<span class="number">1</span>,<span class="number">4</span>) <span class="keyword">if</span>(a[i]&lt;p) ans.<span class="built_in">emplace_back</span>(a[i],p),a[i]=(p&lt;&lt;<span class="number">1</span>)-a[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">R</span>(i,<span class="number">1</span>,<span class="number">4</span>) <span class="keyword">if</span>(a[i]&gt;p) ans.<span class="built_in">emplace_back</span>(a[i],p),a[i]=(p&lt;&lt;<span class="number">1</span>)-a[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">sort</span>(a<span class="number">+1</span>,a<span class="number">+5</span>);</span><br><span class="line">	<span class="keyword">if</span>(a[<span class="number">1</span>]&amp;<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">R</span>(i,<span class="number">1</span>,<span class="number">4</span>) <span class="keyword">if</span>(a[i]&amp;<span class="number">1</span>) ans.<span class="built_in">emplace_back</span>(a[i],a[i]<span class="number">+1</span>),a[i]+=<span class="number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">sort</span>(a<span class="number">+1</span>,a<span class="number">+5</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="literal">NULL</span>);</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	cin&gt;&gt;a[<span class="number">1</span>]&gt;&gt;a[<span class="number">2</span>]&gt;&gt;a[<span class="number">3</span>]&gt;&gt;a[<span class="number">4</span>]&gt;&gt;b[<span class="number">1</span>]&gt;&gt;b[<span class="number">2</span>]&gt;&gt;b[<span class="number">3</span>]&gt;&gt;b[<span class="number">4</span>];</span><br><span class="line">	<span class="built_in">sort</span>(a<span class="number">+1</span>,a<span class="number">+4</span><span class="number">+1</span>),<span class="built_in">sort</span>(b<span class="number">+1</span>,b<span class="number">+4</span><span class="number">+1</span>);</span><br><span class="line">    </span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">2</span>,<span class="number">4</span>) g=<span class="built_in">gcd</span>(g,a[i]-a[<span class="number">1</span>]),g2=<span class="built_in">gcd</span>(g2,b[i]-b[<span class="number">1</span>]);</span><br><span class="line">	<span class="keyword">if</span>(g^g2) <span class="built_in">nos</span>();</span><br><span class="line">	<span class="keyword">if</span>(!g) <span class="built_in">nos</span>(a[<span class="number">1</span>]==b[<span class="number">1</span>]?<span class="number">0</span>:<span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">if</span>((a[<span class="number">1</span>]-b[<span class="number">1</span>])%g) <span class="built_in">nos</span>();</span><br><span class="line">   </span><br><span class="line">	<span class="type">int</span> d=(a[<span class="number">1</span>]%g+g)%g;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,<span class="number">4</span>) a[i]=(a[i]-d)/g,b[i]=(b[i]-d)/g; </span><br><span class="line">	<span class="built_in">solve</span>(a,ans1),<span class="built_in">solve</span>(b,ans2);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,<span class="number">4</span>) <span class="keyword">if</span>((a[i]&amp;<span class="number">1</span>)!=(b[i]&amp;<span class="number">1</span>)) <span class="built_in">nos</span>();</span><br><span class="line">	d=(b[<span class="number">1</span>]-a[<span class="number">1</span>])/<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">for</span>(;<span class="number">3</span>*(a[<span class="number">4</span>]-a[<span class="number">1</span>])&lt;=<span class="built_in">abs</span>(d);)</span><br><span class="line">	&#123;</span><br><span class="line">		ans<span class="number">1.</span><span class="built_in">emplace_back</span>(a[<span class="number">3</span>],a[<span class="number">1</span>]),a[<span class="number">3</span>]=(a[<span class="number">1</span>]&lt;&lt;<span class="number">1</span>)-a[<span class="number">3</span>];</span><br><span class="line">		ans<span class="number">1.</span><span class="built_in">emplace_back</span>(a[<span class="number">2</span>],a[<span class="number">4</span>]);a[<span class="number">2</span>]=(a[<span class="number">4</span>]&lt;&lt;<span class="number">1</span>)-a[<span class="number">2</span>];</span><br><span class="line">		<span class="built_in">sort</span>(a<span class="number">+1</span>,a<span class="number">+5</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(<span class="built_in">abs</span>(d)&gt;=a[<span class="number">4</span>]-a[<span class="number">1</span>])</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(d&lt;<span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				d+=a[<span class="number">4</span>]-a[<span class="number">1</span>];</span><br><span class="line">				<span class="built_in">R</span>(i,<span class="number">1</span>,<span class="number">2</span>) </span><br><span class="line">				&#123;</span><br><span class="line">					<span class="built_in">R</span>(j,<span class="number">2</span>,<span class="number">4</span>)</span><br><span class="line">					&#123;</span><br><span class="line">						ans<span class="number">1.</span><span class="built_in">emplace_back</span>(a[j],a[<span class="number">1</span>]);</span><br><span class="line">						a[j]=(a[<span class="number">1</span>]&lt;&lt;<span class="number">1</span>)-a[j];</span><br><span class="line">					&#125; </span><br><span class="line">					<span class="built_in">sort</span>(a<span class="number">+1</span>,a<span class="number">+5</span>);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				d-=a[<span class="number">4</span>]-a[<span class="number">1</span>];</span><br><span class="line">				<span class="built_in">R</span>(i,<span class="number">1</span>,<span class="number">2</span>) </span><br><span class="line">				&#123;</span><br><span class="line">					<span class="built_in">R</span>(j,<span class="number">1</span>,<span class="number">3</span>)</span><br><span class="line">					&#123;</span><br><span class="line">						ans<span class="number">1.</span><span class="built_in">emplace_back</span>(a[j],a[<span class="number">4</span>]);</span><br><span class="line">						a[j]=(a[<span class="number">4</span>]&lt;&lt;<span class="number">1</span>)-a[j];</span><br><span class="line">					&#125;			</span><br><span class="line">					<span class="built_in">sort</span>(a<span class="number">+1</span>,a<span class="number">+5</span>);</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">			&#125;				</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(a[<span class="number">4</span>]-a[<span class="number">1</span>]&lt;=<span class="number">1</span>) <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">		ans<span class="number">1.</span><span class="built_in">emplace_back</span>(a[<span class="number">1</span>],a[<span class="number">2</span>]);a[<span class="number">1</span>]=(a[<span class="number">2</span>]&lt;&lt;<span class="number">1</span>)-a[<span class="number">1</span>];</span><br><span class="line">		ans<span class="number">1.</span><span class="built_in">emplace_back</span>(a[<span class="number">4</span>],a[<span class="number">3</span>]);a[<span class="number">4</span>]=(a[<span class="number">3</span>]&lt;&lt;<span class="number">1</span>)-a[<span class="number">4</span>];</span><br><span class="line">		<span class="built_in">sort</span>(a<span class="number">+1</span>,a<span class="number">+5</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">reverse</span>(ans<span class="number">2.</span><span class="built_in">begin</span>(),ans<span class="number">2.</span><span class="built_in">end</span>());</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> x:ans2) ans<span class="number">1.</span><span class="built_in">emplace_back</span>((x.second&lt;&lt;<span class="number">1</span>)-x.first,x.second);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> x:ans1) <span class="keyword">if</span>(x.first!=x.second) ans.<span class="built_in">emplace_back</span>(x.first*g+d,x.second*g+d);</span><br><span class="line">	cout&lt;&lt;ans.<span class="built_in">size</span>()&lt;&lt;endl;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> x:ans) cout&lt;&lt;x.first&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;x.second&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+</article> </main>
+
+<div class="fab-container" id="fabContainer">
+    <div class="fab-menu">
+        <div class="fab-btn sub" id="btnTheme" title="切换环境感知">◐</div>
+        <div class="fab-btn sub" id="btnMusic" title="音频终端">♫</div>
+    </div>
+    <div class="fab-btn fab-main" id="btnMain">⧉</div>
+    <div class="music-panel" id="musicPanel">
+    <div class="mp-header">AUDIO TERMINAL //</div>
+    <div class="mp-title" id="mpTitle">选择曲目...</div>
+    
+    <div class="mp-progress-container">
+        <span id="mpTimeCurrent">00:00</span>
+        <input type="range" class="mp-progress-bar" id="mpProgressBar" value="0" min="0" max="100">
+        <span id="mpTimeTotal">00:00</span>
+    </div>
+    
+    <div class="mp-controls">
+        <button class="mp-btn" id="mpPrev">⏮</button>
+        <button class="mp-btn play-btn" id="mpPlayPause">▶</button>
+        <button class="mp-btn" id="mpNext">⏭</button>
+    </div>
+    
+    <ul class="mp-playlist" id="mpPlaylistUI">
+        </ul>
+</div> </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("PRTS: System Booting...");
+
+    // ================= 1. UI 中枢系统 =================
+    const fabContainer = document.getElementById('fabContainer');
+    const btnMain = document.getElementById('btnMain');
+    const musicPanel = document.getElementById('musicPanel');
+
+    if (btnMain && fabContainer) {
+        btnMain.addEventListener('click', () => {
+            fabContainer.classList.toggle('open');
+            btnMain.style.transform = fabContainer.classList.contains('open') ? 'rotate(45deg)' : 'rotate(0)';
+            if(!fabContainer.classList.contains('open') && musicPanel){
+                musicPanel.classList.remove('active');
+            }
+        });
+    }
+
+    const btnTheme = document.getElementById('btnTheme');
+    let currentTheme = 'dark';
+    function setTheme(theme) { currentTheme = theme; document.body.setAttribute('data-theme', theme); }
+    function autoTheme() { const hour = new Date().getHours(); setTheme((hour >= 6 && hour < 18) ? 'light' : 'dark'); }
+    autoTheme();
+    if(btnTheme) btnTheme.addEventListener('click', () => { setTheme(currentTheme === 'dark' ? 'light' : 'dark'); });
+
+    // ================= 2. 音乐通讯终端 =================
+    // 【修复】：去除了容易引发引擎崩溃的 EJS 标签，直接使用绝对路径
+    const playlist = [
+        { name: "01. 生命流「熠曲丰碑」-2025音律联觉ver.", src: "/music/生命流「熠曲丰碑」-2025音律联觉.mp3" },
+        { name: "02. 櫂", src: "/music/ヨルシカ - 櫂.mp3" },
+        { name: "03. ヰ世界の宝石譚", src: "/music/ヰ世界の宝石譚.mp3" },
+        { name: "04. KAWAIIめたもる交響曲", src: "/music/KAWAIIめたもる交響曲.mp3" }
+    ];
+
+
+    let currentTrackIndex = 0;
+    const audio = new Audio();
+    const btnMusic = document.getElementById('btnMusic');
+    const mpPlayPause = document.getElementById('mpPlayPause');
+    const mpPlaylistUI = document.getElementById('mpPlaylistUI');
+
+    if(btnMusic && musicPanel) {
+        btnMusic.addEventListener('click', () => { musicPanel.classList.toggle('active'); });
+
+        if (mpPlaylistUI) {
+            playlist.forEach((track, index) => {
+                let li = document.createElement('li');
+                li.textContent = track.name;
+                li.onclick = () => loadTrack(index, true);
+                mpPlaylistUI.appendChild(li);
+            });
+        }
+
+        function loadTrack(index, autoPlay = false) {
+            if(playlist.length === 0) return;
+            currentTrackIndex = index;
+            audio.src = playlist[index].src;
+            document.getElementById('mpTitle').textContent = playlist[index].name;
+
+            if(mpPlaylistUI) {
+                const items = mpPlaylistUI.querySelectorAll('li');
+                items.forEach(item => item.classList.remove('playing'));
+                if(items[index]) items[index].classList.add('playing');
+            }
+            if (autoPlay) togglePlay(true);
+        }
+
+        function togglePlay(forcePlay = false) {
+            if (audio.paused || forcePlay) {
+                audio.play().then(() => {
+                    if(mpPlayPause) mpPlayPause.textContent = "⏸";
+                    btnMusic.classList.add('btn-playing');
+                }).catch(e => {
+                    console.warn("PRTS: 等待音频源响应...");
+                    if(mpPlayPause) mpPlayPause.textContent = "▶";
+                    btnMusic.classList.remove('btn-playing');
+                });
+            } else {
+                audio.pause();
+                if(mpPlayPause) mpPlayPause.textContent = "▶";
+                btnMusic.classList.remove('btn-playing');
+            }
+        }
+
+        if(mpPlayPause) mpPlayPause.addEventListener('click', () => togglePlay());
+
+        document.getElementById('mpPrev').addEventListener('click', () => { let newIndex = currentTrackIndex - 1; if (newIndex < 0) newIndex = playlist.length - 1; loadTrack(newIndex, true); });
+        document.getElementById('mpNext').addEventListener('click', () => { let newIndex = currentTrackIndex + 1; if (newIndex >= playlist.length) newIndex = 0; loadTrack(newIndex, true); });
+        audio.addEventListener('ended', () => { document.getElementById('mpNext').click(); });
+
+        const mpProgressBar = document.getElementById('mpProgressBar');
+        const mpTimeCurrent = document.getElementById('mpTimeCurrent');
+        const mpTimeTotal = document.getElementById('mpTimeTotal');
+
+        // 【修复】：重写了时间格式化逻辑，彻底消灭了代码里的 "<" 符号，防止被误认为 HTML
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "00:00";
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60);
+            return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        }
+
+        audio.addEventListener('loadedmetadata', () => {
+            if(mpTimeTotal) mpTimeTotal.textContent = formatTime(audio.duration);
+            if(mpProgressBar) mpProgressBar.max = audio.duration;
+        });
+
+        let isDragging = false;
+        audio.addEventListener('timeupdate', () => {
+            if(mpTimeCurrent) mpTimeCurrent.textContent = formatTime(audio.currentTime);
+            if (!isDragging && mpProgressBar) mpProgressBar.value = audio.currentTime;
+        });
+
+        if(mpProgressBar) {
+            mpProgressBar.addEventListener('mousedown', () => isDragging = true);
+            mpProgressBar.addEventListener('mouseup', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+            mpProgressBar.addEventListener('touchstart', () => isDragging = true);
+            mpProgressBar.addEventListener('touchend', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+        }
+
+        loadTrack(0, false);
+    }
+
+    // ================= 3. 背景粒子系统 =================
+    const canvas = document.getElementById('particle-canvas');
+    if(canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const mouse = { x: null, y: null, radius: 50 };
+
+        function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        initCanvas(); window.addEventListener('resize', initCanvas);
+
+        const logoImg = new Image();
+        // 【修复】：去除 EJS，直接指向根目录下的 logo
+        logoImg.src = '/logo.png';
+        logoImg.onload = function() {
+            const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d');
+            const size = 200; tempCanvas.width = size; tempCanvas.height = size;
+            tempCtx.drawImage(logoImg, 0, 0, size, size);
+            const imageData = tempCtx.getImageData(0, 0, size, size).data;
+            for (let y = 0; y < size; y += 2) {
+                for (let x = 0; x < size; x += 2) {
+                    if (imageData[((y * size + x) * 4) + 3] > 128) {
+                        particles.push(new Particle(x * 2.5 + (canvas.width / 2 - 100), y * 2.5 + (canvas.height / 2 - 250)));
+                    }
+                }
+            }
+            animate();
+            console.log("PRTS: Particles Online.");
+        };
+
+        class Particle {
+            constructor(x, y) { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.baseX = x; this.baseY = y; this.density = (Math.random() * 30) + 1; }
+            draw() {
+                ctx.fillStyle = document.body.getAttribute('data-theme') === 'light' ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.6)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2); ctx.fill();
+            }
+            update() {
+                let dx = mouse.x - this.x, dy = mouse.y - this.y, distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouse.radius) {
+                    let force = (mouse.radius - distance) / mouse.radius;
+                    this.x -= (dx / distance) * force * this.density * 0.8; this.y -= (dy / distance) * force * this.density * 0.8;
+                } else {
+                    this.x += (this.baseX - this.x) * 0.12; this.y += (this.baseY - this.y) * 0.12;
+                }
+            }
+        }
+
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
+        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+    }
+});
+</script> </body>
+</html>

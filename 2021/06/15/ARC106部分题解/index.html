@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<title>Hexo</title>
+<title>ARC106部分题解 | Hexo</title>
 <link rel="icon" href="/avatar.jpg" type="image/jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
@@ -43,226 +43,57 @@
 </aside>
 
 <main class="main-content">
-    <h2 class="archive-title">// DATA ARCHIVE</h2>
-<div class="post-list">
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/%E5%AF%B9%E6%9F%90%E6%A0%A1%E9%83%A8%E5%88%86%E5%9B%9E%E5%BF%86/">对某校部分回忆</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                这辈子和你校最牛学科以及OI赛事都没有任何关系了，干脆来随便写点对你校印象深的事。
-事先声明：本人重度抑郁，重度焦虑，有自残以及伤害他人倾向。
-大概是21年1月来的你校？前几天的感受大概就是你校明明1...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/%E5%AF%B9%E6%9F%90%E6%A0%A1%E9%83%A8%E5%88%86%E5%9B%9E%E5%BF%86/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                有人问我为什么不去机房，为什么不去NOIP，那我好像也只能回答个这个：
+    <article class="post-detail">
+    <h1 class="post-detail-title">ARC106部分题解</h1>
+    <div class="post-meta">
+        DATE: 2021-06-15
+    </div>
+    <div class="post-content">
+        <h2 id="D："><a href="#D：" class="headerlink" title="D："></a>D：</h2><h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>给出$N,K,A_i$</p>
+<p>对于每个$X\in [1,k]$计算$\sum\limits_{L&#x3D;1}^{N-1} \sum\limits_{R&#x3D;L+1} ^N (A_i+A_j)^X $</p>
+<h3 id="sol"><a href="#sol" class="headerlink" title="sol"></a>sol</h3><p>考虑将式子改成<br>$$<br>\frac{\sum\limits_{i&#x3D;1}^N \sum\limits_{j&#x3D;1}^N (A_i+A_j)^X-\sum\limits_{i&#x3D;1}^ N (2\cdot A_i)^X }{2}<br>$$<br>然后继续化简左边那个东西。<br>$$<br>\sum_{i&#x3D;1}^N \sum_{j&#x3D;1}^N (A_i+A_j) ^X&#x3D;\sum_{i&#x3D;1} ^N \sum_{j&#x3D;1}^N \sum_{k&#x3D;0}^{X} \binom X k A_j^k A_j^{X-k}<br>$$<br>然后拆开$\binom X k$</p>
 
-————————————————————————————————————————————————
-花对钱似乎非常敏感。
-大概是...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1704G/">CF1704G</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                令 $A_i&#x3D;a_i+2a_{i-1}+a_{i-2},B_i&#x3D;b_i-2b_{i-1}+b_{i-2}$，然后可以发现对于任意位置 $i$ 进行操作，除了 $A_{i}$ 将会变...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1704G/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1470F/">CF1470F</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                显然只会存在 $3$ 种本质不同的方式选择两个矩形。
+$$
+\sum_{i=1} ^N \sum_{j=1}^N \sum_{k=0} ^{X} {X!}\cdot  \frac{A_j^k}{k!} \cdot \frac{A_j^{X-k}}{(X-k)!}=X! \cdot \sum_{k=0}^X \big(\sum_{i=1}^N \frac{A_i^k}{k!} \big)\cdot \big(\sum_{j=1}^N \frac{A_j^{X-k}}{(X-k)!} \big)
+$$
 
-两个矩形不相交。
 
-这种情况可以直接遍历所有平行 $x&#x2F;y$ 轴的分割线，使选取的两个矩形分别在分割线的两边。分别找出极值点直接计算即...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1470F/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1081H/">CF1081H</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                一个显然错误的想法是分别计算 $A,B$ 本质不同的回文串个数，然后将两者相乘，这将会多次计算一个字符串。
-因此要思考的问题是，为什么会计算多次？
-为了解决这个问题，将用到下面数个引理，如果只是想解决...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1081H/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-08-03</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/08/03/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%A4%BE%E7%BE%A4%E8%AE%A8%E8%AE%BA/">记一次社群讨论</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/08/03/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%A4%BE%E7%BE%A4%E8%AE%A8%E8%AE%BA/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-05-24</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/05/24/l/">l</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-不过这改变不了阿丽娜半路被捅死了（笑）
-感觉群友们APIO玩得好开心。
-...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/05/24/l/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-05-13</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/05/13/CF1423C%20Du%C5%A1an's%20Railway/">CF1423C Dušan&#39;s Railway</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                反正可以直接当 $k&#x3D;3$ 去做，然后考虑直接去构造。
-首先任意给树找一个根，然后将整棵树拆成几个大小为 $\sqrt n$ 的子树，将所有这些子树的根 $u$ 塞到一个点集 $a$ ，然后...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/05/13/CF1423C%20Du%C5%A1an's%20Railway/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-04-30</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/04/30/CF1375I%20Cubic%20Lattice/">CF1375I Cubic Lattice</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                简要题意：
-定义三维空间中的一个 lattice 是满足下列条件的三维整点的集合：
-$$L&#x3D;{u\cdot \overrightarrow{r_1}+v\cdot \overrightarr...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/04/30/CF1375I%20Cubic%20Lattice/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-04-25</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/04/25/-/">?</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-下午水群的时候看到的，群友：
+<p>$\sum\limits_{i&#x3D;1}^N \frac{A_i^ k }{k!}$可以在$O(NK)$的时间内预处理出来。</p>
+<p>整个式子可以在$O(k^2)$的时间复杂度算出来（也可以做到$O(k\log k)$）</p>
+<h2 id="E"><a href="#E" class="headerlink" title="E:"></a>E:</h2><h3 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h3><p>你经营着一家有$N$个员工的商店，从今天开始，第$i$个员工会连续上$A_i$天班然后连续休息$A_i$天。</p>
+<p>每一天，你都可以从所有上班的员工中选出一位，给它一枚奖章，求最少要几天每个员工获得至少$k$枚奖章。</p>
+<h3 id="sol-1"><a href="#sol-1" class="headerlink" title="sol"></a>sol</h3><p>考虑通过二分答案来找到最少的天数$D$。</p>
+<p>考虑一个二分图拥有$N\times K +D$个点。</p>
+<p>令$U$表示这$N\times K$个顶点的集合。</p>
+<p>将代表每天的点与当天工作的员工相对应的点连一条边，那么满足题目条件就相当于覆盖整个$U$。</p>
+<blockquote>
+<p>霍尔定理：二分图存在最大完备匹配的充要条件是与某一侧的<strong>任意</strong>$k$个点相连的另一侧节点$\ge k$个</p>
+</blockquote>
+<p>考虑霍尔定理，这种情况就相当于对于每个子集$A \in U$，满足$|A|\le |\Gamma (A)|$</p>
+<p>而$|\Gamma (A)|$只取决于关于$A$中包含的一组员工。因此对于与某个相对应的点，我们只需考虑两种情况：情况A不包含所有的点，或者包含所有的点。</p>
+<p>因此，对于每一个包含员工的非空子集，我们可以找到子集中包含的至少一名员工开始上班的天数。</p>
+<p>此外$|A|\leq NK \leq |\Gamma (A)|$，显然这不会超过$2NK$天。</p>
+<p>由于这不是很说人话，搬一份别人的题解：</p>
+<p><img src="https://i.loli.net/2021/05/12/Ifhe6uYoLCD8a7N.png" alt="QQ图片20210512085433.png"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n,k,a[<span class="number">22</span>];</span><br><span class="line"><span class="type">int</span> popcnt1[<span class="number">1</span>&lt;&lt;<span class="number">18</span>],cnt[<span class="number">1</span>&lt;&lt;<span class="number">18</span>];</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> m=<span class="number">18</span>*<span class="number">100000</span>*<span class="number">2</span>;</span><br><span class="line"><span class="type">int</span> tag[<span class="number">3600010</span>];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">check</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//cnt[i]表示选择工人集合是i（i看成一个二进制数）的子集天数和</span></span><br><span class="line">	<span class="built_in">memset</span>(cnt,<span class="number">0</span>,<span class="built_in">sizeof</span>(cnt));</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,x<span class="number">-1</span>) cnt[tag[i]]++;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) <span class="built_in">R</span>(j,<span class="number">0</span>,(<span class="number">1</span>&lt;&lt;n)<span class="number">-1</span>) <span class="keyword">if</span>((j&gt;&gt;i)&amp;<span class="number">1</span>) cnt[j]+=cnt[j^(<span class="number">1</span>&lt;&lt;i)]; </span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,(<span class="number">1</span>&lt;&lt;n)<span class="number">-1</span>) <span class="keyword">if</span>(popcnt1[i]*k&gt;x-cnt[(<span class="number">1</span>&lt;&lt;n)<span class="number">-1</span>-i]) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	n=<span class="built_in">read</span>(),k=<span class="built_in">read</span>();</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,(<span class="number">1</span>&lt;&lt;n)<span class="number">-1</span>) popcnt1[i]=popcnt1[i&gt;&gt;<span class="number">1</span>]+(i&amp;<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) a[i]=<span class="built_in">read</span>();</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) <span class="built_in">R</span>(j,<span class="number">0</span>,m<span class="number">-1</span>) <span class="keyword">if</span>(j%(a[i]*<span class="number">2</span>)&lt;a[i]) tag[j]|=(<span class="number">1</span>&lt;&lt;i);<span class="comment">//选择员工的集合。</span></span><br><span class="line">	<span class="type">int</span> l=<span class="number">1</span>,r=m,best=m;</span><br><span class="line">	<span class="keyword">while</span>(l&lt;=r)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">check</span>(mid)) best=mid,r=mid<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">else</span> l=mid<span class="number">+1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">writeln</span>(best);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-总之有点想笑（）
-没记错的话这个梗是海贼王的来着。
+<h2 id="F"><a href="#F" class="headerlink" title="F:"></a>F:</h2><h3 id="题意-2"><a href="#题意-2" class="headerlink" title="题意"></a>题意</h3><p>有$n$个点，第$i$个点有$d_i$个孔（孔是有标号的），每个孔只能使用一次。每条边可以连接任意两个点上的孔，求有多少不同的连边方式可以连出一棵树。</p>
+<h3 id="sol-2"><a href="#sol-2" class="headerlink" title="sol"></a>sol</h3><p>令$S&#x3D;\sum d_i$。</p>
+<p>当$S&lt;2(N-1)$时，显然无解</p>
+<p>当$S\ge 2(N-1)$时，考虑按照以下方式选出一棵生成树：</p>
+<p>先为每个零件选择一个特殊孔</p>
+<p>然后进行以下操作$n-2$次：</p>
+<ul>
+<li>选择一个未使用的非特殊孔</li>
+<li>选择一个与所选点不连通的点中未被使用的特殊孔</li>
+<li>将两个孔连接起来。</li>
+</ul>
+<p>最后，将两个没有使用的特殊孔连接起来。</p>
+<p>因此以这种方式制造生成树方式为：<br>$$<br>\prod d_i\times \prod_{i&#x3D;0}^{N-3} (S-N-i)\times (N-1)!<br>$$<br>但是显然我们并不在意边添加的顺序，因此答案还要除以$(N-1)!$。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int n,s;</span><br><span class="line">int ans=1;</span><br><span class="line">signed main()</span><br><span class="line">&#123;</span><br><span class="line">    n=read();</span><br><span class="line">    R(i,1,n)</span><br><span class="line">    &#123;</span><br><span class="line">        static int x;</span><br><span class="line">        x=read()%mod;</span><br><span class="line">        s+=x;s%=mod;</span><br><span class="line">        ans*=x;ans%=mod;</span><br><span class="line">    &#125;</span><br><span class="line">    R(i,0,n-3) ans=1ll*ans*(s-i-n)%mod;</span><br><span class="line">    writeln(ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-然后晚上又看到了个这个，其实个人觉得这从某种意义上也是”天龙人“的表现吧（）
-挺久以前大概也是作业题全写完，大概...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/04/25/-/">READ MORE +</a>
-            </div>
-        </article>
-    
-</div> </main>
+    </div>
+</article> </main>
 
 <div class="fab-container" id="fabContainer">
     <div class="fab-menu">

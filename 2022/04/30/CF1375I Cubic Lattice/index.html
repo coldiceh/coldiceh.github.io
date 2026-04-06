@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<title>CF1375I Cubic Lattice | Hexo</title>
+<link rel="icon" href="/avatar.jpg" type="image/jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+
+<canvas id="particle-canvas"></canvas>
+
+<header class="terminal-nav">
+    <a href="/" class="nav-logo">QAQ</a>
+    <nav class="nav-menu">
+        <a href="/" class="nav-item active"><span class="nav-en">INDEX</span><span class="nav-cn">首页</span></a>
+        <a href="#info" class="nav-item"><span class="nav-en">INFORMATION</span><span class="nav-cn">情报</span></a>
+        <a href="#operator" class="nav-item"><span class="nav-en">OPERATOR</span><span class="nav-cn">随笔</span></a>
+        <a href="#world" class="nav-item"><span class="nav-en">WORLD</span><span class="nav-cn">归档</span></a>
+        <a href="#media" class="nav-item"><span class="nav-en">MEDIA</span><span class="nav-cn">标签</span></a>
+    </nav>
+    </header>
+
+<aside class="sidebar">
+    <div class="avatar-box"><img src="/avatar.jpg" alt="Avatar"></div>
+    <h2 class="sidebar-title">COLDICEH</h2>
+    <p class="sidebar-subtitle">Dr.抢不到音律退坑了#8809</p>
+    
+    <div class="sidebar-search">
+        <div class="search-box">
+            <input type="text" id="local-search-input" placeholder="// SEARCH DATABASE...">
+        </div>
+    </div>
+    
+    <div style="margin-top: 20px;" class="sidebar-links">
+        <div style="color: var(--ak-blue); font-weight: bold; margin-bottom: 10px; border-left: 3px solid var(--ak-blue); padding-left: 10px;">常用链接</div>
+        <a href="#">我的随笔</a>
+        <a href="#">我的评论</a>
+        <a href="#">我的参与</a>
+        <a href="#">最新评论</a>
+        <a href="#">我的标签</a>
+    </div>
+</aside>
+
+<main class="main-content">
+    <article class="post-detail">
+    <h1 class="post-detail-title">CF1375I Cubic Lattice</h1>
+    <div class="post-meta">
+        DATE: 2022-04-30
+    </div>
+    <div class="post-content">
+        <p>简要题意：</p>
+<p>定义三维空间中的一个 lattice 是满足下列条件的三维整点的集合：</p>
+<p>$$<br>L&#x3D;{u\cdot \overrightarrow{r_1}+v\cdot \overrightarrow{r_2}+w\cdot \overrightarrow{r_3} }_{u,v,w\in \mathbb Z}<br>$$</p>
+<p>其中 $\overrightarrow{r_1},\overrightarrow{r_2},\overrightarrow{r_3}$ 为三维空间中的整系数坐标向量，满足：</p>
+<ol>
+<li>$\overrightarrow{r_1},\overrightarrow{r_2},\overrightarrow{r_3}$ 两两正交，即</li>
+</ol>
+<p>$$<br>\overrightarrow{r_1}\cdot \overrightarrow{r_2}&#x3D;\overrightarrow{r_1}\cdot \overrightarrow{r_3} &#x3D;\overrightarrow{r_2}\cdot \overrightarrow{r_3}&#x3D;0<br>$$</p>
+<ol start="2">
+<li>$\overrightarrow{r_1},\overrightarrow{r_2},\overrightarrow{r_3}$ 长度相等，即</li>
+</ol>
+<p>$$<br>|\overrightarrow{r_1}|&#x3D;|\overrightarrow{r_2}|&#x3D;|\overrightarrow{r_3}|<br>$$</p>
+<p>现在由有 $n$ 个三维整点构成的的集合 $A&#x3D;{\overrightarrow{a_1},\overrightarrow{a_2},\cdots,\overrightarrow{a_n} }$ ，其中 $\overrightarrow{a_i}&#x3D;(x_i,y_i,z_i)$。</p>
+<p>你需要找到一个 lattice L 满足 $A⊂ L$ 且组成 $L$ 的三个基向量尽可能大。</p>
+<p>sol：</p>
+<p>二维平面上的变换一般使用复数来刻画，其中相当于整数在实数中地位的，被称为 Gauss 整数（即 $a+b\text{i}$ 其中 $a,b\in \mathbb Z$）。所有 Gauss 整数关于 $+$ 和 $\times$ 的算构成一个 Euclid 整环。</p>
+<p>先考虑一个简化的二维版本：</p>
+<p>可以发现所有 $a_i$ 可以被拆成两个高斯整数的乘积，即 $a_i&#x3D;b_i\cdot g$，其中 $g&#x3D;(\overrightarrow{r_1},\overrightarrow{r_2})$。而要找到最大的 $g$ 可以直接通过 Euclid 算法完成。</p>
+<p>然后来考虑三维空间：</p>
+<p>根据第一个条件，可以发现  $\overrightarrow{r_3}$ 与 $\overrightarrow{r_1}\times \overrightarrow{r_2}$ 是共线向量。</p>
+<p>而又因为 $|\overrightarrow{r_1}\times \overrightarrow{r_2}|&#x3D;r^2,|\overrightarrow{r_3}|&#x3D;r$，说明 $\overrightarrow{r_1}\times \overrightarrow{r_2}&#x3D;\pm r\cdot \overrightarrow{r_3}⇒ r\in \mathbb N^{*}$ 。</p>
+<p>（即 $\overrightarrow{r_3}$ 可以用 </p>
+
+$\overrightarrow{r_3}=\pm \frac{\overrightarrow{r_1}\cdot \overrightarrow{r_2}}{|r_1|} $
+
+<p> 表示）</p>
+<p>并且，由于 $\overrightarrow{a}&#x3D;u\cdot \overrightarrow{r_1}+v\cdot \overrightarrow{r_2}+w\cdot \overrightarrow{r_3}$，则 $|\overrightarrow{a}|^2&#x3D;(u^2+v^2+w^2)\cdot r^2⇒r^2 |(|\overrightarrow{a}|^2)$</p>
+<p>即 $r$ 需要满足 $r^2|\gcd(x_1^2+y_1^2+z_1^2,x_2^2+y_2^2+z_2^2,\cdots ,x_n^2+y_n^2+z_n^2)$。</p>
+<p>并且因为满足这个条件的 $r$ 数量不多，所以可以对 $r$ 从大到小逐个检验是否合法。</p>
+<p>而在三维空间中的变换，一般使用四元数 $a+b\text{i}+c\text{j}+d\text{k}$ 来刻画，而在四元数中有整数地位的，被称为 Lipschitz 四元数。（四元数的运算满足结合律，不满足交换律，$\text i^2&#x3D;\text j ^2 &#x3D;\text k ^2&#x3D;ijk&#x3D;-1$</p>
+<p>但是这样定义出来的四元数集合不构成 Euclid 整环，而这道题中的操作类似于 $\gcd$ 的过程，因此需要扩充一下定义，考虑增加部分有理四元数。</p>
+<p>在复数中，$|a+b\text i|&#x3D;\sqrt{a^2+b^2}$，会有一些满足 $a^2+b^2\in\mathbb Z$，这样就会有一些形如 $\frac 4 5+\frac 3 5 \text i$ 的东西，虽然模长为整数，但是可以和 $1,\text i$ 整系数表示出 $\frac{1+\text i}{5}$，模长就不为整数。</p>
+<p>于是在 $\mathbb C$ 中，如果能扩充的话，肯定要考虑 $a+b\text i$，其中 $\frac 1 a,\frac 1 b\in{\mathbb Z}$。那么在这种情况情况下，除了 $a&#x3D;b&#x3D;1$，其余所有的有理复数模长均不等于 $1$，因此不能扩充。</p>
+<p>但是，这件事搬到四元数 $\mathbb H$ 中就不一样了，可以发现 $a&#x3D;b&#x3D;c&#x3D;d&#x3D;2$ 时，$|\frac{1+\text i +\text j +\text k}2|&#x3D;1$。</p>
+<p>因此，如果将 $\omega&#x3D;\frac{1+\text i+\text j+\text k}2$ 加入 Lipschitz 四元数集合，并取正系数表示，就得到了Hurwitz 四元数：</p>
+<p>$$<br>H&#x3D;{a+b\text i+c\text j+d\text k|a,b,c,d\in \mathbb{Z}\vee a,b,c,d\in\mathbb Z+\frac 1 2 }<br>$$</p>
+<p>可以证明，虽然没有交换律，但是 $H$ 中依然有类似地唯一分解定理，可以做 Euclid 算法。</p>
+<p>具体地，在 $H$ 中，对于两个数 $A,B$，可以定义它的左商、左余数，右商、右余数，以及左 $\gcd$ 和右 $\gcd$。如，左商和左余数对应表达式 $A&#x3D;qB+r$，而左 $\gcd $ 就表示模最大的 $d$ 满足 $A&#x3D;du,B&#x3D;dv$。</p>
+<p>有了 Hurwitz 四元数后，整个问题就清晰了很多：</p>
+<p>首先对于三维空间中的向量 $\overrightarrow a&#x3D;(x,y,z)$ ，对应到四元数 $A&#x3D;x\text i+y\text j+z\text k$。那么三维空间中其中一组标准的正交基就可以表示为 $\text{i,j,k}$。</p>
+<p>根据立体几何，三维空间中的旋转变换可以这样表示：</p>
+<p>$$<br>\overrightarrow{v}↦k\cdot \frac{q\cdot \overrightarrow v\cdot \overline q}{q\cdot \overline q}&#x3D;k\cdot \frac{q\cdot \overrightarrow v\cdot \overline q}{|q|^2}<br>$$</p>
+<p>其中 $\overrightarrow v$ 表示实部为 $0$ 的四元数，$q&#x3D;a+b\text i+c\text j+d\text k$ 为一个特定的四元数，$\overline q$ 为 $q$ 的共轭 $\overline q&#x3D;a-b\text i -c\text j-d\text k$。</p>
+<p>于是，$\overrightarrow{r_1},\overrightarrow{r_2},\overrightarrow{r_3}$ 都可以看成标准正交基经过某个旋转并缩放后的结果，因此有：</p>
+
+$$
+\begin{cases} 
+\overrightarrow{r_1} =r\cdot \frac{q\cdot \text i\cdot \overline{q}}{|q|^2}\\
+\overrightarrow{r_2} =r\cdot \frac{q\cdot \text j\cdot \overline{q}}{|q|^2}\\
+\overrightarrow{r_3} =r\cdot \frac{q\cdot \text k\cdot \overline{q}}{|q|^2}\\
+\end{cases}
+
+$$
+
+
+
+
+
+<p>然后可以发现 $x&#x3D;\frac{k}{|q|^2}&#x3D;\frac{k}{a^2+b^2+c^2+d^2}$ 的分母是 $4$ 的约数。</p>
+<p>具体证明：</p>
+<p>首先还是这个式子 $\overrightarrow{v}↦k\cdot \frac{q\cdot \overrightarrow v\cdot \overline q}{q\cdot \overline q}$。</p>
+<p>考虑写成矩阵形式：</p>
+<p>$$<br>\frac{k}{a^2+b^2+c^2+d^2}\cdot<br>\begin{pmatrix}<br>a^2+b^2-c^2-d^2 &amp; 2cb-2ad &amp; 2ac+2bd\<br>2ad+2bc &amp; a^2-b^2+c^2-d^2 &amp; 2cd-2ab\<br>2bd-2ac &amp; 2ab+2cd &amp; a^2-b^2-c^2+d^2\<br>\end{pmatrix}<br>$$</p>
+<p>显然矩阵中所有元素均为整数。因此分数 $\frac{k}{a^2+b^2+c^2+d^2}$ 应该整除于所有矩阵元素。不失一般性，可以假设 $\gcd(a,b,c,d)&#x3D;1$（否则可以让 $a,b,c,d$ 除以这个数使四元数坐标减小，并且矩阵元素不变）。假设 $\frac{k}{a^2+b^2+c^2+d^2}&#x3D;\frac{P}{Q}$，则 $Q$ 要整除于所有矩阵元素， 并且整除于 $a^2 +b^2+c^2+d^2$，即整除于：</p>
+<p>$$<br>\gcd<br>\begin{pmatrix}<br>a^2+b^2+c^2+d^2\<br>a^2+b^2-c^2-d^2 \<br>a^2-b^2+c^2-d^2 \<br>a^2-b^2-c^2+d^2<br>\end{pmatrix}<br>&#x3D;\gcd<br>\begin{pmatrix}<br>a^2+b^2+c^2+d^2\<br>2(c^2+d^2) \<br>2(b^2+d^2) \<br>2(b^2+c^2)<br>\end{pmatrix}<br>&#x3D;\gcd<br>\begin{pmatrix}<br>a^2+b^2+c^2+d^2\<br>2(c^2+d^2) \<br>2(b^2+d^2) \<br>4d^2<br>\end{pmatrix}<br>$$</p>
+<p>（$\gcd(a\pm b,b)&#x3D;\gcd(a,b)&#x3D;\gcd(-a,b)$）</p>
+<p>并且由于 $\gcd(a,b)$ 整除于 $\gcd(k\cdot a,b)$，因此 $Q$ 整除于：</p>
+<p>$$<br>\gcd<br>\begin{pmatrix}<br>4(a^2+b^2+c^2+d^2)\<br>4(c^2+d^2) \<br>2(b^2+d^2) \<br>4d^2<br>\end{pmatrix}<br>&#x3D;4\gcd (a^2,b^2,c^2,d^2)&#x3D;4<br>$$</p>
+<p>因此 $\overrightarrow{v}↦k\cdot \frac{q\cdot \overrightarrow v\cdot \overline q}{4}$。</p>
+<p>如果放宽条件 $x\in H$，则进一步可说明 $x$ 的分母是 $2$ 的约数，即 $2x\in\mathbb Z$。通过适当调整使得 $q$ 为 Lipschitz 四元数 ，根据题目条件可得到 $x&#x3D;1$。</p>
+<p>定义 $f(v)&#x3D;q\cdot v\cdot \overline{q}$，那么存在一组向量  $\overrightarrow{b_1},\overrightarrow{b_2},\cdots,\overrightarrow{b_n}$ 满足</p>
+<p>$$<br>\overrightarrow{a_i}&#x3D;f(\overrightarrow{b_i})&#x3D;q\cdot \overrightarrow{b_i} \cdot \overline{q}<br>$$</p>
+<p>于是，此时有 $q|\overrightarrow{a_i}$ ，因此 $q|\gcd(\overrightarrow{a_1},\overrightarrow{a_2},\cdots,\overrightarrow{a_n})$。</p>
+<p>并且还枚举了 $r$，因此必须有 $|q|^2&#x3D;r$，由唯一分解定理可得到 $q|r$。</p>
+<p>于是 $q|\gcd(\overrightarrow{a_1},\overrightarrow{a_2},\cdots,\overrightarrow{a_n},r)$。事实上，设 $q_0&#x3D;\gcd(\overrightarrow{a_1},\overrightarrow{a_2},\cdots,\overrightarrow{a_n},r)$ ，则 $|q_0|^2|r$，因此只有当 $|q_0|^2&#x3D;r$ 时才有必要验证下去。</p>
+<p>之后就只需要反解出 $\overrightarrow{b_i}&#x3D;\frac{q\cdot \overrightarrow{a_i}\cdot \overline q}{r^2}$ 并检验是否是整数即可。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ll long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> ld long double</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> R(i,a,b) for(int i=(a),i##E=(b);i&lt;=i##E;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> L(i,a,b) for(int i=(b),i##E=(a);i&gt;=i##E;i--)</span></span><br><span class="line"><span class="type">const</span> ld eps=<span class="number">1e-10l</span>;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">qua</span></span><br><span class="line">&#123;</span><br><span class="line">	ld a,b,c,d;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="title">qua</span><span class="params">(ld A=<span class="number">0</span>,ld B=<span class="number">0</span>,ld C=<span class="number">0</span>,ld D=<span class="number">0</span>)</span>:a(A),b(B),c(C),d(D) &#123;</span>&#125;</span><br><span class="line">	<span class="keyword">inline</span> qua <span class="keyword">operator</span> + (qua A) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">qua</span>(a+A.a,b+A.b,c+A.c,d+A.d);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">inline</span> qua <span class="keyword">operator</span> - (qua A)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">qua</span>(a-A.a,b-A.b,c-A.c,d-A.d);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">inline</span> qua <span class="keyword">operator</span> * (qua A)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">qua</span>(</span><br><span class="line">			a*A.a-b*A.b-c*A.c-d*A.d,</span><br><span class="line">			a*A.b+b*A.a+c*A.d-d*A.c,</span><br><span class="line">			a*A.c-b*A.d+c*A.a+d*A.b,</span><br><span class="line">			a*A.d+b*A.c-c*A.b+d*A.a</span><br><span class="line">		);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> qua <span class="title">conj</span><span class="params">()</span><span class="comment">//共轭</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">qua</span>(a,-b,-c,-d);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> ld <span class="title">norm</span><span class="params">()</span><span class="comment">//|q|^2</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> a*a+b*b+c*c+d*d;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> qua <span class="title">inv</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">conj</span>()*<span class="built_in">qua</span>(<span class="number">1.l</span>/<span class="built_in">norm</span>());</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">check_int</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">fabsl</span>(<span class="built_in">roundl</span>(a)-a)&lt;eps&amp;&amp;<span class="built_in">fabsl</span>(<span class="built_in">roundl</span>(b)-b)&lt;eps&amp;&amp;<span class="built_in">fabsl</span>(<span class="built_in">roundl</span>(c)-c)&lt;eps&amp;&amp;<span class="built_in">fabsl</span>(<span class="built_in">roundl</span>(d)-d)&lt;eps;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> qua <span class="title">qround</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		qua q1=<span class="built_in">qua</span>(<span class="built_in">roundl</span>(a),<span class="built_in">roundl</span>(b),<span class="built_in">roundl</span>(c),<span class="built_in">roundl</span>(d));</span><br><span class="line">		qua q2=<span class="built_in">qua</span>(<span class="built_in">floorl</span>(a)<span class="number">+.5l</span>,<span class="built_in">floorl</span>(b)<span class="number">+.5l</span>,<span class="built_in">floorl</span>(c)<span class="number">+.5l</span>,<span class="built_in">floorl</span>(d)<span class="number">+.5l</span>);</span><br><span class="line">		<span class="keyword">return</span> (q1-*<span class="keyword">this</span>).<span class="built_in">norm</span>()&lt;(q2-*<span class="keyword">this</span>).<span class="built_in">norm</span>()?q1:q2;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">inline</span> qua <span class="keyword">operator</span> / (qua A)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> A.<span class="built_in">inv</span>() * *<span class="keyword">this</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">inline</span> qua <span class="keyword">operator</span> % (qua A)</span><br><span class="line">	&#123;</span><br><span class="line">		qua ret=(*<span class="keyword">this</span>/A).<span class="built_in">qround</span>();</span><br><span class="line">		<span class="keyword">return</span> *<span class="keyword">this</span>-A*ret;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">printf</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		cout&lt;&lt;b&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;c&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;d&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		cout&lt;&lt;<span class="built_in">llroundl</span>(b)&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;<span class="built_in">llroundl</span>(c)&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;<span class="built_in">llroundl</span>(d)&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;a[<span class="number">11111</span>],g;</span><br><span class="line"><span class="function">qua <span class="title">gcd</span><span class="params">(qua a,qua b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b.<span class="built_in">norm</span>()&lt;eps?a:<span class="built_in">gcd</span>(b,a%b);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">gcd</span><span class="params">(ll a,ll b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> !b?a:<span class="built_in">gcd</span>(b,a%b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line">ll G;</span><br><span class="line">vector&lt;ll&gt;v;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="literal">NULL</span>);</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n)</span><br><span class="line">	&#123;</span><br><span class="line">		cin&gt;&gt;a[i].b&gt;&gt;a[i].c&gt;&gt;a[i].d;</span><br><span class="line"></span><br><span class="line">		g=<span class="built_in">gcd</span>(g,a[i]);</span><br><span class="line">		G=<span class="built_in">gcd</span>(G,(ll)a[i].<span class="built_in">norm</span>());</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(ll i=<span class="number">1</span>;i*i&lt;=G;i++) <span class="keyword">if</span>(G%(i*i)==<span class="number">0</span>) v.<span class="built_in">emplace_back</span>(i);</span><br><span class="line">	<span class="built_in">reverse</span>(v.<span class="built_in">begin</span>(),v.<span class="built_in">end</span>());</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> x:v)</span><br><span class="line">	&#123;</span><br><span class="line">		qua q=<span class="built_in">gcd</span>(g,<span class="built_in">qua</span>(x));</span><br><span class="line">		ll r=(ll)q.<span class="built_in">norm</span>();</span><br><span class="line">		<span class="keyword">if</span>(r!=x) <span class="keyword">continue</span>;</span><br><span class="line">		qua q0=q.<span class="built_in">conj</span>() / <span class="built_in">qua</span>(r * r);</span><br><span class="line">		<span class="type">int</span> ok=<span class="number">1</span>;</span><br><span class="line">		<span class="built_in">R</span>(i,<span class="number">1</span>,n) <span class="keyword">if</span>((q0*a[i]*q).<span class="built_in">check_int</span>()==<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			ok=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(ok)</span><br><span class="line">		&#123;</span><br><span class="line">			cout&lt;&lt;r*r&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">			(q*<span class="built_in">qua</span>(<span class="number">0</span>,<span class="number">1</span>)*q.<span class="built_in">conj</span>()).<span class="built_in">print</span>();</span><br><span class="line">			(q*<span class="built_in">qua</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)*q.<span class="built_in">conj</span>()).<span class="built_in">print</span>();</span><br><span class="line">			(q*<span class="built_in">qua</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)*q.<span class="built_in">conj</span>()).<span class="built_in">print</span>();</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+</article> </main>
+
+<div class="fab-container" id="fabContainer">
+    <div class="fab-menu">
+        <div class="fab-btn sub" id="btnTheme" title="切换环境感知">◐</div>
+        <div class="fab-btn sub" id="btnMusic" title="音频终端">♫</div>
+    </div>
+    <div class="fab-btn fab-main" id="btnMain">⧉</div>
+    <div class="music-panel" id="musicPanel">
+    <div class="mp-header">AUDIO TERMINAL //</div>
+    <div class="mp-title" id="mpTitle">选择曲目...</div>
+    
+    <div class="mp-progress-container">
+        <span id="mpTimeCurrent">00:00</span>
+        <input type="range" class="mp-progress-bar" id="mpProgressBar" value="0" min="0" max="100">
+        <span id="mpTimeTotal">00:00</span>
+    </div>
+    
+    <div class="mp-controls">
+        <button class="mp-btn" id="mpPrev">⏮</button>
+        <button class="mp-btn play-btn" id="mpPlayPause">▶</button>
+        <button class="mp-btn" id="mpNext">⏭</button>
+    </div>
+    
+    <ul class="mp-playlist" id="mpPlaylistUI">
+        </ul>
+</div> </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("PRTS: System Booting...");
+
+    // ================= 1. UI 中枢系统 =================
+    const fabContainer = document.getElementById('fabContainer');
+    const btnMain = document.getElementById('btnMain');
+    const musicPanel = document.getElementById('musicPanel');
+
+    if (btnMain && fabContainer) {
+        btnMain.addEventListener('click', () => {
+            fabContainer.classList.toggle('open');
+            btnMain.style.transform = fabContainer.classList.contains('open') ? 'rotate(45deg)' : 'rotate(0)';
+            if(!fabContainer.classList.contains('open') && musicPanel){
+                musicPanel.classList.remove('active');
+            }
+        });
+    }
+
+    const btnTheme = document.getElementById('btnTheme');
+    let currentTheme = 'dark';
+    function setTheme(theme) { currentTheme = theme; document.body.setAttribute('data-theme', theme); }
+    function autoTheme() { const hour = new Date().getHours(); setTheme((hour >= 6 && hour < 18) ? 'light' : 'dark'); }
+    autoTheme();
+    if(btnTheme) btnTheme.addEventListener('click', () => { setTheme(currentTheme === 'dark' ? 'light' : 'dark'); });
+
+    // ================= 2. 音乐通讯终端 =================
+    // 【修复】：去除了容易引发引擎崩溃的 EJS 标签，直接使用绝对路径
+    const playlist = [
+        { name: "01. 生命流「熠曲丰碑」-2025音律联觉ver.", src: "/music/生命流「熠曲丰碑」-2025音律联觉.mp3" },
+        { name: "02. 櫂", src: "/music/ヨルシカ - 櫂.mp3" },
+        { name: "03. ヰ世界の宝石譚", src: "/music/ヰ世界の宝石譚.mp3" },
+        { name: "04. KAWAIIめたもる交響曲", src: "/music/KAWAIIめたもる交響曲.mp3" }
+    ];
+
+
+    let currentTrackIndex = 0;
+    const audio = new Audio();
+    const btnMusic = document.getElementById('btnMusic');
+    const mpPlayPause = document.getElementById('mpPlayPause');
+    const mpPlaylistUI = document.getElementById('mpPlaylistUI');
+
+    if(btnMusic && musicPanel) {
+        btnMusic.addEventListener('click', () => { musicPanel.classList.toggle('active'); });
+
+        if (mpPlaylistUI) {
+            playlist.forEach((track, index) => {
+                let li = document.createElement('li');
+                li.textContent = track.name;
+                li.onclick = () => loadTrack(index, true);
+                mpPlaylistUI.appendChild(li);
+            });
+        }
+
+        function loadTrack(index, autoPlay = false) {
+            if(playlist.length === 0) return;
+            currentTrackIndex = index;
+            audio.src = playlist[index].src;
+            document.getElementById('mpTitle').textContent = playlist[index].name;
+
+            if(mpPlaylistUI) {
+                const items = mpPlaylistUI.querySelectorAll('li');
+                items.forEach(item => item.classList.remove('playing'));
+                if(items[index]) items[index].classList.add('playing');
+            }
+            if (autoPlay) togglePlay(true);
+        }
+
+        function togglePlay(forcePlay = false) {
+            if (audio.paused || forcePlay) {
+                audio.play().then(() => {
+                    if(mpPlayPause) mpPlayPause.textContent = "⏸";
+                    btnMusic.classList.add('btn-playing');
+                }).catch(e => {
+                    console.warn("PRTS: 等待音频源响应...");
+                    if(mpPlayPause) mpPlayPause.textContent = "▶";
+                    btnMusic.classList.remove('btn-playing');
+                });
+            } else {
+                audio.pause();
+                if(mpPlayPause) mpPlayPause.textContent = "▶";
+                btnMusic.classList.remove('btn-playing');
+            }
+        }
+
+        if(mpPlayPause) mpPlayPause.addEventListener('click', () => togglePlay());
+
+        document.getElementById('mpPrev').addEventListener('click', () => { let newIndex = currentTrackIndex - 1; if (newIndex < 0) newIndex = playlist.length - 1; loadTrack(newIndex, true); });
+        document.getElementById('mpNext').addEventListener('click', () => { let newIndex = currentTrackIndex + 1; if (newIndex >= playlist.length) newIndex = 0; loadTrack(newIndex, true); });
+        audio.addEventListener('ended', () => { document.getElementById('mpNext').click(); });
+
+        const mpProgressBar = document.getElementById('mpProgressBar');
+        const mpTimeCurrent = document.getElementById('mpTimeCurrent');
+        const mpTimeTotal = document.getElementById('mpTimeTotal');
+
+        // 【修复】：重写了时间格式化逻辑，彻底消灭了代码里的 "<" 符号，防止被误认为 HTML
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "00:00";
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60);
+            return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        }
+
+        audio.addEventListener('loadedmetadata', () => {
+            if(mpTimeTotal) mpTimeTotal.textContent = formatTime(audio.duration);
+            if(mpProgressBar) mpProgressBar.max = audio.duration;
+        });
+
+        let isDragging = false;
+        audio.addEventListener('timeupdate', () => {
+            if(mpTimeCurrent) mpTimeCurrent.textContent = formatTime(audio.currentTime);
+            if (!isDragging && mpProgressBar) mpProgressBar.value = audio.currentTime;
+        });
+
+        if(mpProgressBar) {
+            mpProgressBar.addEventListener('mousedown', () => isDragging = true);
+            mpProgressBar.addEventListener('mouseup', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+            mpProgressBar.addEventListener('touchstart', () => isDragging = true);
+            mpProgressBar.addEventListener('touchend', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+        }
+
+        loadTrack(0, false);
+    }
+
+    // ================= 3. 背景粒子系统 =================
+    const canvas = document.getElementById('particle-canvas');
+    if(canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const mouse = { x: null, y: null, radius: 50 };
+
+        function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        initCanvas(); window.addEventListener('resize', initCanvas);
+
+        const logoImg = new Image();
+        // 【修复】：去除 EJS，直接指向根目录下的 logo
+        logoImg.src = '/logo.png';
+        logoImg.onload = function() {
+            const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d');
+            const size = 200; tempCanvas.width = size; tempCanvas.height = size;
+            tempCtx.drawImage(logoImg, 0, 0, size, size);
+            const imageData = tempCtx.getImageData(0, 0, size, size).data;
+            for (let y = 0; y < size; y += 2) {
+                for (let x = 0; x < size; x += 2) {
+                    if (imageData[((y * size + x) * 4) + 3] > 128) {
+                        particles.push(new Particle(x * 2.5 + (canvas.width / 2 - 100), y * 2.5 + (canvas.height / 2 - 250)));
+                    }
+                }
+            }
+            animate();
+            console.log("PRTS: Particles Online.");
+        };
+
+        class Particle {
+            constructor(x, y) { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.baseX = x; this.baseY = y; this.density = (Math.random() * 30) + 1; }
+            draw() {
+                ctx.fillStyle = document.body.getAttribute('data-theme') === 'light' ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.6)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2); ctx.fill();
+            }
+            update() {
+                let dx = mouse.x - this.x, dy = mouse.y - this.y, distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouse.radius) {
+                    let force = (mouse.radius - distance) / mouse.radius;
+                    this.x -= (dx / distance) * force * this.density * 0.8; this.y -= (dy / distance) * force * this.density * 0.8;
+                } else {
+                    this.x += (this.baseX - this.x) * 0.12; this.y += (this.baseY - this.y) * 0.12;
+                }
+            }
+        }
+
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
+        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+    }
+});
+</script> </body>
+</html>

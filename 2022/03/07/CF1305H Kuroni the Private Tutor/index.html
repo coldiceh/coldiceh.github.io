@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+<title>CF1305H Kuroni the Private Tutor | Hexo</title>
+<link rel="icon" href="/avatar.jpg" type="image/jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
+<body>
+
+<canvas id="particle-canvas"></canvas>
+
+<header class="terminal-nav">
+    <a href="/" class="nav-logo">QAQ</a>
+    <nav class="nav-menu">
+        <a href="/" class="nav-item active"><span class="nav-en">INDEX</span><span class="nav-cn">首页</span></a>
+        <a href="#info" class="nav-item"><span class="nav-en">INFORMATION</span><span class="nav-cn">情报</span></a>
+        <a href="#operator" class="nav-item"><span class="nav-en">OPERATOR</span><span class="nav-cn">随笔</span></a>
+        <a href="#world" class="nav-item"><span class="nav-en">WORLD</span><span class="nav-cn">归档</span></a>
+        <a href="#media" class="nav-item"><span class="nav-en">MEDIA</span><span class="nav-cn">标签</span></a>
+    </nav>
+    </header>
+
+<aside class="sidebar">
+    <div class="avatar-box"><img src="/avatar.jpg" alt="Avatar"></div>
+    <h2 class="sidebar-title">COLDICEH</h2>
+    <p class="sidebar-subtitle">Dr.抢不到音律退坑了#8809</p>
+    
+    <div class="sidebar-search">
+        <div class="search-box">
+            <input type="text" id="local-search-input" placeholder="// SEARCH DATABASE...">
+        </div>
+    </div>
+    
+    <div style="margin-top: 20px;" class="sidebar-links">
+        <div style="color: var(--ak-blue); font-weight: bold; margin-bottom: 10px; border-left: 3px solid var(--ak-blue); padding-left: 10px;">常用链接</div>
+        <a href="#">我的随笔</a>
+        <a href="#">我的评论</a>
+        <a href="#">我的参与</a>
+        <a href="#">最新评论</a>
+        <a href="#">我的标签</a>
+    </div>
+</aside>
+
+<main class="main-content">
+    <article class="post-detail">
+    <h1 class="post-detail-title">CF1305H Kuroni the Private Tutor</h1>
+    <div class="post-meta">
+        DATE: 2022-03-07
+    </div>
+    <div class="post-content">
+        <p>假设如果已经知道得分分布为 $s_1\ge s_2\ge \cdots \ge s_m$，考虑如何判断是否存在满足条件的情况。</p>
+<p>考虑网络流：</p>
+<ol>
+<li>对于每一道题 $i$ ，从源点 $S$ 向 $i$ 连接一条下界 $l_i$ 上界为 $r_i$ 的边。</li>
+<li>对于每一名学生 $j$，从 $j$ 向汇点 $T$ 容量为 $s_j$ 的边。</li>
+<li>对于任意一道题 $i$ 和任意一名学生 $j$ ，连一条 从 $i$ 向 $j$ 容量为 $1$ 的边。</li>
+</ol>
+<p>当 ${s_m}$ 合法当且仅当这张图存在大小为 $\sum s_j$ 的流。</p>
+<p>然后再把这张图转成一般的（没有下界的）网络流就行了。</p>
+<p>具体地，注意到每个试题 $i$ 都有 $l_i$ 的流量逆差，因此再建一个超级源点 $S’$ 向它提供大小为 $l_i$ 的流。</p>
+<p>注意到这张图并不会存在大小超过 $\sum s_j$ 的流。</p>
+<p>于是，若这张图存在大小为 $f$ 的流，当且仅当存在大小 $\ge f$ 的流。</p>
+<p>根据最大流最小割定理，上述条件等价于这张图的每一个割集的容量和 $\ge f$。</p>
+<p>然后考虑上界，将 $S$ 和 $S’$ 看作整体，令割集为 $(A\mid B)$ ，其中 $S,S’\in S,T\in B$，令 $P_A,P_B$ 表示题目点集分别与 $A,B$ 的交集，$Q_A,Q_B$ 表示学生点集与 $A,B$ 的交集。</p>
+<p>于是割集由如下三种边构成：</p>
+<ol>
+<li>$S\to P_B$ 长度和为 $\sum\limits _{i\in P_B} r_i$</li>
+<li>$P_A\to Q_B$ 长度和为 $|P_A|\times |Q_B|$</li>
+<li>$Q_A\to T$ 长度和为 $\sum\limits_{j\in Q_A} s_j$</li>
+</ol>
+<p>因此有：<br>$$<br>\sum_{i\in P_B}r_i+|P_A|\times |Q_B|+\sum_{j\in Q_A} s_j\ge \sum s_j<br>$$<br>稍作变形<br>$$<br>\sum r_i -\sum_{i\in P_A} r_i+|P_A|\times |Q_B|\ge \sum_{j\in Q_B} s_j<br>$$<br>显然在固定集合大小时，一定是取最大的 $|P_B|$ 个 $r_i$ 和 $|Q_B|$ 个 $s_j$</p>
+<p>于是假设 $r_i$ 单调递减，这些不等式可以简化为对于 $\forall x\in[0,n],y\in [0,m]$，有：<br>$$<br>xy+\sum_{x+1} r_i+\sum_{y+1}s_j\ge \sum s_j<br>$$<br>然后来考虑下界，即 $S’$ 的出边需要全部满流 $(S\in B,S’\in A)$</p>
+<p>可以得到：<br>$$<br>\sum_{i\in P_B}l_i+|P_A|\times |Q_B|+\sum_{j\in Q_A} s_j\ge \sum l_i<br>$$<br>同上，假设 $l_i$ 单调递减，得到：<br>$$<br>xy-\sum_{i&#x3D;1}^{x}l_i+\sum_{y+1}^m s_j\ge 0<br>$$<br>其实这里还有一种情况是假设 $S\in A,S’\in B$</p>
+<p>类似上面可以得到：<br>$$<br>xy+\sum_{i&#x3D;1}^xl_i+\sum_{x+1}^n r_i +\sum <em>{y+1}^m s_j\ge\sum s_j<br>$$<br>但因为 $\sum\limits <em>{i&#x3D;1}^xl_i \ge 0$，所以当上面 $xy+\sum</em>{x+1} r_i+\sum</em>{y+1}s_j\ge \sum s_j$ 成立时这个式子一定成立。</p>
+<p>所以条件转化为了：<br>$$<br>xy+\sum_{y+1}^m s_j\ge \max\left(\sum s_j-\sum_{x+1} r_i,\sum_{i&#x3D;1}^x l_i \right)<br>$$<br>然后就变成了对这个式子快速判定。</p>
+<p>考虑枚举 $x$，可以发现不等式右边可以通过预处理快速计算且与 $y$ 无关，所以只需要找到左边最大值即可。</p>
+<p>由于 $s_j$ 单调低减，所以 $\sum\limits _{y+1}^m s_j$ 是关于 $y$ 的下凸数列（差分递增）。</p>
+<p>而 $xy+\sum\limits <em>{y+1}^m s_j$ 相当于求两个向量 $\left(x,1\right)\times \left(y,\sum\limits</em>{y+1}^m s_j \right)$ 的最大值。</p>
+<p>取到最大值的点就是斜率为 $-x$ 的下切线与凸包的交点，所以这个点的横坐标 $y$ 是单调递减的，可以通过双指针维护。</p>
+<p>时间复杂度为 $\mathcal O(n+m)$。</p>
+<p>考虑二分并列第一的人数 $w$ 是否可行。</p>
+<p>首先可以把给定的额外信息中已经有前 $w$ 名中两人得分不同的情况丢掉。</p>
+<p>然后分类讨论前 $w$ 名是否有额外信息：</p>
+<ul>
+<li><p>若存在额外信息，则说明现在已经知道前 $w$ 名的分数了。<br>考虑分配得分使 $s_i$ 尽量去满足上面那个东西。</p>
+<p>由于右边和 $s_i$ 没有关系，因此再固定 $y$ 的时候，会尽量让 $s$ 的后缀和尽量大。</p>
+<p>从调整的角度（每次找一个学生将 $s_i$ 加1） 分析，由于 $\sum s$ 是固定的，所以每次会尽量选择可以加的学生中得分最低的那个学生（要时刻满足 $s_i\ge s_{i+1}$）。</p>
+<p>于是先让每个学生得到最低分（即前 $w$ 名分数固定，剩下的学生的得分为他自己或后面第一个额外信息），然后不断加分。（当然如果这里如果总分已经 $&gt;t$ 则已经无解）</p>
+<p>具体地，可以发现每次加分都是满足 $s_{i-1}\neq s_i$ 的最大的 $i$。于是，只要从右往左枚举每个“坑”，简单判断一下当前剩下的分数能不能填平它，如果能就直接填平，否则就直接算一下能填到多高就是了。</p>
+<p>如果发现某个时刻无法加分（每个人的分数都等于他自己或前面第一个额外信息）且总分没有到达 $t$，那么也是无解。</p>
+<p>否则拿上面那个判定方式把得到的 ${s_m}$ 跑一遍看行不行就好了。</p>
+</li>
+<li><p>若不存在额外限制，则考虑类似上面先让每个学生得到最低分，然后开始“填坑”。</p>
+<p>但是此时可能会出现填到前面的时候没有分数了导致不满足前 $w$ 名得分相同的情况。</p>
+<p>此时假设第一名的学生得分为 $x$，则固定前 $w$ 名的学生得分均为 $x$，然后再做一遍就可以了。</p>
+</li>
+</ul>
+<p>二分出 $w$ 后，考虑这 $w$ 名得分的最大值。</p>
+<p>若前 $w$ 名中存在额外信息，那么显然最大值为额外信息所给的分数。</p>
+<p>否则就继续二分这个分值 $x$ 是否可行，具体与上面同理。</p>
+<p>时间复杂度为 $\mathcal O(n\log n)$ 。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> R(i,a,b) for(int i=(a),i##E=(b);i&lt;=i##E;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> L(i,a,b) for(int i=(b),i##E=(a);i&gt;=i##E;i--)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> n,m,q,st;</span><br><span class="line"><span class="type">int</span> l[<span class="number">111111</span>],r[<span class="number">111111</span>],sl[<span class="number">111111</span>],sr[<span class="number">111111</span>];</span><br><span class="line"><span class="type">int</span> lim[<span class="number">111111</span>];</span><br><span class="line"><span class="type">int</span> ans[<span class="number">111111</span>];</span><br><span class="line"><span class="type">bool</span> vis[<span class="number">111111</span>];</span><br><span class="line"><span class="type">int</span> ans1;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">ns</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	cout&lt;&lt;<span class="string">&quot;-1 -1&quot;</span>&lt;&lt;endl;</span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">divs</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> lm,<span class="type">int</span> sum)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> len=r-l<span class="number">+1</span>,t=ans[l];</span><br><span class="line">	<span class="keyword">if</span>(sum&gt;lm*len) sum=lm*len;</span><br><span class="line">	<span class="type">int</span> qt=sum/len,rem=sum%len;</span><br><span class="line">	<span class="built_in">fill</span>(ans+l,ans+l+rem,t+qt<span class="number">+1</span>);</span><br><span class="line">	<span class="built_in">fill</span>(ans+l+rem,ans+r<span class="number">+1</span>,t+qt);</span><br><span class="line">	<span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">check</span><span class="params">(<span class="type">int</span> len,<span class="type">int</span> val)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> mx=<span class="built_in">max</span>(*<span class="built_in">max_element</span>(lim,lim+m),<span class="number">0ll</span>);</span><br><span class="line">	<span class="type">int</span> cnl=<span class="built_in">count</span>(lim,lim+len,<span class="number">-1</span>),cmx=<span class="built_in">count</span>(lim,lim+len,mx);</span><br><span class="line">	<span class="keyword">if</span>(cnl+cmx!=len||(cmx&gt;<span class="number">0</span>&amp;&amp;mx&lt;val)) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(!cmx) mx=val;</span><br><span class="line">	<span class="built_in">fill</span>(ans,ans+len,mx);</span><br><span class="line">	<span class="built_in">memset</span>(vis,<span class="literal">true</span>,len);</span><br><span class="line">	<span class="built_in">L</span>(i,len,m<span class="number">-1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(~lim[i]) vis[i]=<span class="number">1</span>,ans[i]=lim[i];</span><br><span class="line">		<span class="keyword">else</span> vis[i]=<span class="number">0</span>,ans[i]=ans[i<span class="number">+1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> del=-<span class="built_in">accumulate</span>(ans,ans+m,-st);</span><br><span class="line">	<span class="keyword">if</span>(del&lt;<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="type">int</span> t=m;</span><br><span class="line">	<span class="built_in">L</span>(i,len,m<span class="number">-1</span>) <span class="keyword">if</span>(vis[i])</span><br><span class="line">	&#123;</span><br><span class="line">		i==--t||(del-=<span class="built_in">divs</span>(i<span class="number">+1</span>,t,ans[i]-ans[t],del),t=i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(len!=t) del-=<span class="built_in">divs</span>(len,t<span class="number">-1</span>,ans[len<span class="number">-1</span>]-ans[t],del);</span><br><span class="line">	<span class="keyword">if</span>(!del)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> sum=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>,j=m;i&lt;=n;++i,sum+=j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(;j&amp;&amp;ans[j<span class="number">-1</span>]&lt;=i;sum+=ans[--j]-i);</span><br><span class="line">			<span class="keyword">if</span>(sum&lt;<span class="built_in">max</span>(sl[i],st-sr[i])) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> !cmx&amp;&amp;(val+=(del+t<span class="number">-1</span>)/t)&lt;=n&amp;&amp;<span class="built_in">check</span>(len,val);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="literal">NULL</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) &#123;cin&gt;&gt;l[i]&gt;&gt;r[i];&#125;</span><br><span class="line">	<span class="built_in">sort</span>(l,l+n,<span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line">	<span class="built_in">sort</span>(r,r+n,<span class="built_in">greater</span>&lt;<span class="type">int</span>&gt;());</span><br><span class="line">	<span class="built_in">L</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) sl[i]=l[i]+sl[i<span class="number">+1</span>],sr[i]=r[i]+sr[i<span class="number">+1</span>];</span><br><span class="line">	<span class="built_in">L</span>(i,<span class="number">0</span>,n) sl[i]=sl[<span class="number">0</span>]-sl[i];</span><br><span class="line">	cin&gt;&gt;q;</span><br><span class="line">	<span class="built_in">memset</span>(lim,<span class="number">-1</span>,<span class="built_in">sizeof</span>(lim));</span><br><span class="line">	lim[m]=<span class="number">0</span>;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,q)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> x,y;</span><br><span class="line">		cin&gt;&gt;x&gt;&gt;y;lim[x<span class="number">-1</span>]=y;</span><br><span class="line">	&#125;</span><br><span class="line">	cin&gt;&gt;st;</span><br><span class="line">	<span class="type">int</span> l=<span class="number">0</span>,r=m;</span><br><span class="line">	<span class="keyword">while</span>(l&lt;r)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> mid=(l+r<span class="number">+1</span>)/<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">check</span>(mid,<span class="number">0</span>)) l=mid;</span><br><span class="line">		<span class="keyword">else</span> r=mid<span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!l) <span class="built_in">ns</span>();</span><br><span class="line">	ans1=l;</span><br><span class="line">	l=<span class="number">0</span>,r=n;</span><br><span class="line">	<span class="keyword">while</span>(l&lt;r)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> mid=(l+r<span class="number">+1</span>)/<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">check</span>(ans1,mid)) l=mid;</span><br><span class="line">		<span class="keyword">else</span> r=mid<span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;ans1&lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt;l&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+</article> </main>
+
+<div class="fab-container" id="fabContainer">
+    <div class="fab-menu">
+        <div class="fab-btn sub" id="btnTheme" title="切换环境感知">◐</div>
+        <div class="fab-btn sub" id="btnMusic" title="音频终端">♫</div>
+    </div>
+    <div class="fab-btn fab-main" id="btnMain">⧉</div>
+    <div class="music-panel" id="musicPanel">
+    <div class="mp-header">AUDIO TERMINAL //</div>
+    <div class="mp-title" id="mpTitle">选择曲目...</div>
+    
+    <div class="mp-progress-container">
+        <span id="mpTimeCurrent">00:00</span>
+        <input type="range" class="mp-progress-bar" id="mpProgressBar" value="0" min="0" max="100">
+        <span id="mpTimeTotal">00:00</span>
+    </div>
+    
+    <div class="mp-controls">
+        <button class="mp-btn" id="mpPrev">⏮</button>
+        <button class="mp-btn play-btn" id="mpPlayPause">▶</button>
+        <button class="mp-btn" id="mpNext">⏭</button>
+    </div>
+    
+    <ul class="mp-playlist" id="mpPlaylistUI">
+        </ul>
+</div> </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("PRTS: System Booting...");
+
+    // ================= 1. UI 中枢系统 =================
+    const fabContainer = document.getElementById('fabContainer');
+    const btnMain = document.getElementById('btnMain');
+    const musicPanel = document.getElementById('musicPanel');
+
+    if (btnMain && fabContainer) {
+        btnMain.addEventListener('click', () => {
+            fabContainer.classList.toggle('open');
+            btnMain.style.transform = fabContainer.classList.contains('open') ? 'rotate(45deg)' : 'rotate(0)';
+            if(!fabContainer.classList.contains('open') && musicPanel){
+                musicPanel.classList.remove('active');
+            }
+        });
+    }
+
+    const btnTheme = document.getElementById('btnTheme');
+    let currentTheme = 'dark';
+    function setTheme(theme) { currentTheme = theme; document.body.setAttribute('data-theme', theme); }
+    function autoTheme() { const hour = new Date().getHours(); setTheme((hour >= 6 && hour < 18) ? 'light' : 'dark'); }
+    autoTheme();
+    if(btnTheme) btnTheme.addEventListener('click', () => { setTheme(currentTheme === 'dark' ? 'light' : 'dark'); });
+
+    // ================= 2. 音乐通讯终端 =================
+    // 【修复】：去除了容易引发引擎崩溃的 EJS 标签，直接使用绝对路径
+    const playlist = [
+        { name: "01. 生命流「熠曲丰碑」-2025音律联觉ver.", src: "/music/生命流「熠曲丰碑」-2025音律联觉.mp3" },
+        { name: "02. 櫂", src: "/music/ヨルシカ - 櫂.mp3" },
+        { name: "03. ヰ世界の宝石譚", src: "/music/ヰ世界の宝石譚.mp3" },
+        { name: "04. KAWAIIめたもる交響曲", src: "/music/KAWAIIめたもる交響曲.mp3" }
+    ];
+
+
+    let currentTrackIndex = 0;
+    const audio = new Audio();
+    const btnMusic = document.getElementById('btnMusic');
+    const mpPlayPause = document.getElementById('mpPlayPause');
+    const mpPlaylistUI = document.getElementById('mpPlaylistUI');
+
+    if(btnMusic && musicPanel) {
+        btnMusic.addEventListener('click', () => { musicPanel.classList.toggle('active'); });
+
+        if (mpPlaylistUI) {
+            playlist.forEach((track, index) => {
+                let li = document.createElement('li');
+                li.textContent = track.name;
+                li.onclick = () => loadTrack(index, true);
+                mpPlaylistUI.appendChild(li);
+            });
+        }
+
+        function loadTrack(index, autoPlay = false) {
+            if(playlist.length === 0) return;
+            currentTrackIndex = index;
+            audio.src = playlist[index].src;
+            document.getElementById('mpTitle').textContent = playlist[index].name;
+
+            if(mpPlaylistUI) {
+                const items = mpPlaylistUI.querySelectorAll('li');
+                items.forEach(item => item.classList.remove('playing'));
+                if(items[index]) items[index].classList.add('playing');
+            }
+            if (autoPlay) togglePlay(true);
+        }
+
+        function togglePlay(forcePlay = false) {
+            if (audio.paused || forcePlay) {
+                audio.play().then(() => {
+                    if(mpPlayPause) mpPlayPause.textContent = "⏸";
+                    btnMusic.classList.add('btn-playing');
+                }).catch(e => {
+                    console.warn("PRTS: 等待音频源响应...");
+                    if(mpPlayPause) mpPlayPause.textContent = "▶";
+                    btnMusic.classList.remove('btn-playing');
+                });
+            } else {
+                audio.pause();
+                if(mpPlayPause) mpPlayPause.textContent = "▶";
+                btnMusic.classList.remove('btn-playing');
+            }
+        }
+
+        if(mpPlayPause) mpPlayPause.addEventListener('click', () => togglePlay());
+
+        document.getElementById('mpPrev').addEventListener('click', () => { let newIndex = currentTrackIndex - 1; if (newIndex < 0) newIndex = playlist.length - 1; loadTrack(newIndex, true); });
+        document.getElementById('mpNext').addEventListener('click', () => { let newIndex = currentTrackIndex + 1; if (newIndex >= playlist.length) newIndex = 0; loadTrack(newIndex, true); });
+        audio.addEventListener('ended', () => { document.getElementById('mpNext').click(); });
+
+        const mpProgressBar = document.getElementById('mpProgressBar');
+        const mpTimeCurrent = document.getElementById('mpTimeCurrent');
+        const mpTimeTotal = document.getElementById('mpTimeTotal');
+
+        // 【修复】：重写了时间格式化逻辑，彻底消灭了代码里的 "<" 符号，防止被误认为 HTML
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "00:00";
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60);
+            return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        }
+
+        audio.addEventListener('loadedmetadata', () => {
+            if(mpTimeTotal) mpTimeTotal.textContent = formatTime(audio.duration);
+            if(mpProgressBar) mpProgressBar.max = audio.duration;
+        });
+
+        let isDragging = false;
+        audio.addEventListener('timeupdate', () => {
+            if(mpTimeCurrent) mpTimeCurrent.textContent = formatTime(audio.currentTime);
+            if (!isDragging && mpProgressBar) mpProgressBar.value = audio.currentTime;
+        });
+
+        if(mpProgressBar) {
+            mpProgressBar.addEventListener('mousedown', () => isDragging = true);
+            mpProgressBar.addEventListener('mouseup', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+            mpProgressBar.addEventListener('touchstart', () => isDragging = true);
+            mpProgressBar.addEventListener('touchend', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+        }
+
+        loadTrack(0, false);
+    }
+
+    // ================= 3. 背景粒子系统 =================
+    const canvas = document.getElementById('particle-canvas');
+    if(canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const mouse = { x: null, y: null, radius: 50 };
+
+        function initCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        initCanvas(); window.addEventListener('resize', initCanvas);
+
+        const logoImg = new Image();
+        // 【修复】：去除 EJS，直接指向根目录下的 logo
+        logoImg.src = '/logo.png';
+        logoImg.onload = function() {
+            const tempCanvas = document.createElement('canvas'); const tempCtx = tempCanvas.getContext('2d');
+            const size = 200; tempCanvas.width = size; tempCanvas.height = size;
+            tempCtx.drawImage(logoImg, 0, 0, size, size);
+            const imageData = tempCtx.getImageData(0, 0, size, size).data;
+            for (let y = 0; y < size; y += 2) {
+                for (let x = 0; x < size; x += 2) {
+                    if (imageData[((y * size + x) * 4) + 3] > 128) {
+                        particles.push(new Particle(x * 2.5 + (canvas.width / 2 - 100), y * 2.5 + (canvas.height / 2 - 250)));
+                    }
+                }
+            }
+            animate();
+            console.log("PRTS: Particles Online.");
+        };
+
+        class Particle {
+            constructor(x, y) { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.baseX = x; this.baseY = y; this.density = (Math.random() * 30) + 1; }
+            draw() {
+                ctx.fillStyle = document.body.getAttribute('data-theme') === 'light' ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.6)';
+                ctx.beginPath(); ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2); ctx.fill();
+            }
+            update() {
+                let dx = mouse.x - this.x, dy = mouse.y - this.y, distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouse.radius) {
+                    let force = (mouse.radius - distance) / mouse.radius;
+                    this.x -= (dx / distance) * force * this.density * 0.8; this.y -= (dy / distance) * force * this.density * 0.8;
+                } else {
+                    this.x += (this.baseX - this.x) * 0.12; this.y += (this.baseY - this.y) * 0.12;
+                }
+            }
+        }
+
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
+        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+    }
+});
+</script> </body>
+</html>

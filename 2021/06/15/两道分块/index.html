@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<title>Hexo</title>
+<title>两道分块 | Hexo</title>
 <link rel="icon" href="/avatar.jpg" type="image/jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css"> <meta name="generator" content="Hexo 8.1.1"></head>
@@ -43,226 +43,81 @@
 </aside>
 
 <main class="main-content">
-    <h2 class="archive-title">// DATA ARCHIVE</h2>
-<div class="post-list">
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/%E5%AF%B9%E6%9F%90%E6%A0%A1%E9%83%A8%E5%88%86%E5%9B%9E%E5%BF%86/">对某校部分回忆</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                这辈子和你校最牛学科以及OI赛事都没有任何关系了，干脆来随便写点对你校印象深的事。
-事先声明：本人重度抑郁，重度焦虑，有自残以及伤害他人倾向。
-大概是21年1月来的你校？前几天的感受大概就是你校明明1...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/%E5%AF%B9%E6%9F%90%E6%A0%A1%E9%83%A8%E5%88%86%E5%9B%9E%E5%BF%86/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">随便写写</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                有人问我为什么不去机房，为什么不去NOIP，那我好像也只能回答个这个：
+    <article class="post-detail">
+    <h1 class="post-detail-title">两道分块</h1>
+    <div class="post-meta">
+        DATE: 2021-06-15
+    </div>
+    <div class="post-content">
+        <p>题面:</p>
+<p>维护一个长度为$n$的正整数序列$a$，给定常数$m$.</p>
+<p>需要进行$q$次操作。一次操作为以下三个操作的一种:</p>
+<ul>
+<li><code> 1 l r</code>:区间模$m$.即$\forall l\leq i\leq r$,将$a_i$替换为$a_i\bmod m &#x3D; a_i-m\times \lfloor \frac{a_i}{m} \rfloor$.</li>
+<li><code>2 l r</code>:求$[l,r]$的区间和。即输出$\sum_{i&#x3D;l}^r a_i$</li>
+<li><code>3 l r</code>:区间加$x$,其中$x$为整数。即$\forall l \leq i\leq r$,将$a_i$替换为$a_i+x$</li>
+</ul>
+<p>$n\leq 2\times 10^5,m\leq 10^5,q\leq 10^4$</p>
+<p>分块</p>
+<p>考虑求区间和，即单点求值和一个块的值就行了.考虑这两个怎么维护.</p>
+<p>首先对于单点求值来说,对于每一个大块,维护一个$(x+a)\bmod m+b$的$tag$,</p>
+<ul>
+<li><p>整块加就相当于给$b$加上某个值.</p>
+</li>
+<li><p>整块取模的话,要让$a$加上$b$再模$m$,然后把$b$设成$0$.</p>
+</li>
+</ul>
+<p>($a,b$分别是两个$tag$表示块内的值会先加上$a$,再对$m$取模,然后再加上$b$)</p>
+<p>这样单点求值的问题就解决了.</p>
+<p>接下来考虑如何维护块内的和</p>
+<p>对于每个块，维护块内一开始的数模$m$之后的排序.</p>
+<p>那么块内的和全局加就很好维护了,</p>
+<p>每次就相当于要求整个序列$+x$然后对$m$取模后的和.</p>
+<p>接下来考虑全局取模,</p>
+<p>考虑维护块内所有数对$m$取模后的排序.</p>
+<p>那我们就相当于求在整个序列加上$x$后,再对$m$取模后的和.</p>
+<p>所有所有$&lt;m-x$的数会加上$x$,而所有$\geq m-x$的数会减去$m-x$.(注意这个操作不会改变$tag$,即我们不会显式的改变这个$tag$,而是计算经过这个改变后它剩下的和是多少.)</p>
+<p>因为我们已经处理好了排序后的序列,所以可以直接二分一下分界线,预处理前缀和和后缀和即可,我们就完成整体取模后的和了.</p>
+<p>遇到不完整的块直接暴力更新然后暴力重构该块即可.(和和序列).</p>
+<p>时间复杂度为$O(q\times \sqrt n \log n)$</p>
+<p>代码:咕咕咕.</p>
+<h3 id="简要题意"><a href="#简要题意" class="headerlink" title="简要题意:"></a>简要题意:</h3><p>给定$n$和一个序列$x$,有$q$次询问,每次询问给出$[L,R]$,需要找到区间$[a,b],(L\leq a&lt; b\leq R)$使得$\frac{\sum_{i&#x3D;a}^{b}x_i}{b-a}$最大,以分数的形式输出这个值.</p>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h3><p>第一行两个数$n$和$q$.</p>
+<p>第二行$n$个数,第$i$个数表示$x_i$</p>
+<p>接下来$q$行每行两个数$L,R$</p>
+<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p>共$q$行，每行形如$a&#x2F;b$,满足$b&gt;0$,$\gcd(a,b)&#x3D;1$,表示最大的收益值.注意:如果答案为整数$x$，输出$x&#x2F;1$</p>
+<p>$n\leq 10^5,q\leq 3\times 10^4,|x_i|\leq 10^6$ </p>
+<p>设$x$的前缀和数组为$pre$,我们要使</p>
 
-————————————————————————————————————————————————
-花对钱似乎非常敏感。
-大概是...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/%E9%9A%8F%E4%BE%BF%E5%86%99%E5%86%99/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1704G/">CF1704G</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                令 $A_i&#x3D;a_i+2a_{i-1}+a_{i-2},B_i&#x3D;b_i-2b_{i-1}+b_{i-2}$，然后可以发现对于任意位置 $i$ 进行操作，除了 $A_{i}$ 将会变...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1704G/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1470F/">CF1470F</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                显然只会存在 $3$ 种本质不同的方式选择两个矩形。
+$\frac{pre_b-pre_{a-1}}{b-a}$
 
-两个矩形不相交。
+<p>的值尽量大.在平面上建立如下两种点:</p>
+<ul>
+<li>$1$类点:所有形如$(i,pre_{i-1})$的点</li>
+<li>$2$类点:所有形如$(i,pre_i)$的点</li>
+</ul>
+<p>那么我们要选一个$1$类点,再在后面选一个$2$类点,两个点之间的连线斜率最大.考虑如果你确定了一个点，和一个点的某个候选集合,那么另一个点一定在这个点集的凸壳上,可以在凸壳上二分得到答案.</p>
+<p>比如说现在确定了一个$1$类点，然后又确定了一个$2$类点的点集，显然只有这个点集的上凸壳是可能作为一个$1$类点的最优的集合.同理若确定了一个$2$类点，那么可取的$1$类点的点集一定成为一个下凸壳作为候选集合.然后求的时候就可以在凸壳上二分.</p>
+<p>以上是预处理过程</p>
+<p>考虑对序列分块，先预处理每个块内的答案，对于每个询问，答案的点对可能有这几种情况:</p>
+<ol>
+<li>在同一个块里.已经预处理好了,不用管.</li>
+<li>都在左边多出去的小块里.考虑直接从左往右枚举$2$类点,维护一个$1$类点的上凸壳,每次往右一格增加$1$个点,每次查询在凸壳上二分,这样子时间复杂度大概是$O(k\log n)$,($k$为常数)大概$O(\sqrt n)$级别的.</li>
+<li>都在右边多出去的小块里.同理.从右往左枚举$1$类点,维护一个$2$类点的上凸壳,每次往左平移一位,加上一个点,查询同理.这样事实上是一个静态凸包且不需要删除.</li>
+<li>一个在左边的小块里,一个在右边的小块里.仍然同理.</li>
+<li>其它情况.</li>
+</ol>
+<p>考虑前四种情况都比较好处理,离线下来集中处理最后一种情况.</p>
+<p>考虑剩下的情况即一个端点在块内,一个端点在块外的情况.考虑假设当前块的左右端点是$l’,r’$,预处理出它里面的点作为$1$类点,$[r’,x]$中的点作为$2$类点的最大的答案,设其为$p_x$.同时预处理出它里面的点作为$2$类点,$[x,l’]$中的点作为$1$类点的最大的答案,设其为$q_x$.(大概就是对于每一个$x$求出$p_x$和$q_x$) 那对于一个询问$[l,r]$,如果它包含$[l’,r’]$,那么这个块就对这个询问有$\max(p_r,q_l)$的贡献.这样我们离线算一下贡献即可.</p>
+<p>(具体版:因其一定有一边在大块里,考虑对于每一个块分别离线处理.我们对于每一个块,先求出某一个点作为$2$类点,这个块前面某一个点作为$1$类点,即对于每一个$l$都要求出,从$l$到这个$2$类点所在块的开头的最大的答案.具体的做法就是给$2$类点搞一个上凸壳,然后对于每一个点$l$搞一下,再处理一下后缀最大值$p_l$.同理还有预处理出这个块内某一个点为$1$类点,对于每一个右端点$r$为$2$类点的最大值.具体做法为给$1$类点搞一个下凸壳,对于右边的每一个点在凸壳上二分一下,搞一下前缀最大值$q_r$. 接着遍历一个询问,若包含这个块,显然这个块对询问有贡献,假设询问的左端点为$l’$，右端点是$r’$,这个块对询问的贡献就是$\max(q_{l’},p_{r’})$).</p>
+<p>预处理每一块复杂度为$O(n\log n)$,共$\sqrt n$块,所以总复杂度为$O(n\sqrt n)$（大概吧,我也不是很清楚QAQ)</p>
+<p>时间复杂度$O(q\sqrt n \log n)$.</p>
+<p>空间复杂度$O(n)$因为每个块可以离线下来单独做.</p>
+<p>以及这题的二分部分可以用$EI$那个做到$polylog$,虽然实际可能导致过不了.(</p>
+<p>代码:咕咕咕</p>
 
-这种情况可以直接遍历所有平行 $x&#x2F;y$ 轴的分割线，使选取的两个矩形分别在分割线的两边。分别找出极值点直接计算即...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1470F/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2024-01-18</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2024/01/18/CF1081H/">CF1081H</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                一个显然错误的想法是分别计算 $A,B$ 本质不同的回文串个数，然后将两者相乘，这将会多次计算一个字符串。
-因此要思考的问题是，为什么会计算多次？
-为了解决这个问题，将用到下面数个引理，如果只是想解决...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2024/01/18/CF1081H/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-08-03</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/08/03/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%A4%BE%E7%BE%A4%E8%AE%A8%E8%AE%BA/">记一次社群讨论</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/08/03/%E8%AE%B0%E4%B8%80%E6%AC%A1%E7%A4%BE%E7%BE%A4%E8%AE%A8%E8%AE%BA/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-05-24</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/05/24/l/">l</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-不过这改变不了阿丽娜半路被捅死了（笑）
-感觉群友们APIO玩得好开心。
-...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/05/24/l/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-05-13</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/05/13/CF1423C%20Du%C5%A1an's%20Railway/">CF1423C Dušan&#39;s Railway</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                反正可以直接当 $k&#x3D;3$ 去做，然后考虑直接去构造。
-首先任意给树找一个根，然后将整棵树拆成几个大小为 $\sqrt n$ 的子树，将所有这些子树的根 $u$ 塞到一个点集 $a$ ，然后...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/05/13/CF1423C%20Du%C5%A1an's%20Railway/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-04-30</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/04/30/CF1375I%20Cubic%20Lattice/">CF1375I Cubic Lattice</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                简要题意：
-定义三维空间中的一个 lattice 是满足下列条件的三维整点的集合：
-$$L&#x3D;{u\cdot \overrightarrow{r_1}+v\cdot \overrightarr...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/04/30/CF1375I%20Cubic%20Lattice/">READ MORE +</a>
-            </div>
-        </article>
-    
-        <article class="ak-card">
-            <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
-                <span>2022-04-25</span>
-            </div>
-            
-            <h3 class="ak-card-title">
-                <a href="/2022/04/25/-/">?</a>
-            </h3>
-            
-            <div class="ak-card-excerpt">
-                
-下午水群的时候看到的，群友：
-
-总之有点想笑（）
-没记错的话这个梗是海贼王的来着。
-
-然后晚上又看到了个这个，其实个人觉得这从某种意义上也是”天龙人“的表现吧（）
-挺久以前大概也是作业题全写完，大概...
-            </div>
-            
-            <div class="ak-card-footer">
-                <a class="ak-read-more" href="/2022/04/25/-/">READ MORE +</a>
-            </div>
-        </article>
-    
-</div> </main>
+    </div>
+</article> </main>
 
 <div class="fab-container" id="fabContainer">
     <div class="fab-menu">
