@@ -14,53 +14,129 @@ window.MathJax = {
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <meta charset="UTF-8">
 <title>3道数论 | Hexo</title>
-<link rel="icon" href="/avatar.jpg" type="image/jpeg">
+<link rel="icon" href="/project/avatar.jpg" type="image/jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/project/css/style.css">
 <meta name="generator" content="Hexo 8.1.1"></head>
-<body>
+<body data-hexo-root="/project/">
+
+<canvas id="global-bg-particles" aria-hidden="true"></canvas>
 
 
 <header class="terminal-nav">
-    <a href="/" class="nav-logo">QAQ</a>
+    <a href="/project/" class="nav-logo">QAQ</a>
     <nav class="nav-menu">
-        <a href="/" class="nav-item"><span class="nav-en">INDEX</span><span class="nav-cn">首页</span></a>
-        <a href="/archives/" class="nav-item"><span class="nav-en">ARCHIVES</span><span class="nav-cn">归档</span></a>
-        <a href="/about/" class="nav-item"><span class="nav-en">PROFILE</span><span class="nav-cn">自述</span></a>
+        <a href="/project/" class="nav-item"><span class="nav-en">INDEX</span><span class="nav-cn">首页</span></a>
+        <a href="/project/archives/" class="nav-item"><span class="nav-en">ARCHIVES</span><span class="nav-cn">归档</span></a>
+        <a href="/project/tags/" class="nav-item"><span class="nav-en">TAGS</span><span class="nav-cn">标签</span></a>
+        <a href="/project/comments/" class="nav-item"><span class="nav-en">COMMENTS</span><span class="nav-cn">评论</span></a>
+        <a href="/project/about/" class="nav-item"><span class="nav-en">PROFILE</span><span class="nav-cn">自述</span></a>
     </nav>
 </header>
 
 <aside class="sidebar">
     <div class="sidebar-content" style="position: relative; z-index: 2; width: 100%; height: 100%;">
-        <div class="avatar-box"><img src="/avatar.jpg" alt="Avatar"></div>
-        <h2 class="sidebar-title">COLDICEH</h2>
-        <p class="sidebar-subtitle">Dr.抢不到音律退坑了#8809</p>
-        
-        <div class="sidebar-search">
-            <div class="search-box">
-                <input type="text" id="local-search-input" placeholder="// SEARCH DATABASE...">
-            </div>
-        </div>
-        
-        <div class="sidebar-links">
-            <div style="color: var(--ak-blue); font-weight: bold; margin-bottom: 10px; border-left: 3px solid var(--ak-blue); padding-left: 10px;">常用链接</div>
-            <a href="/">首页</a>
-            <a href="/archives/">归档</a>
-            <a href="/about/">自我介绍</a>
-            
-            <a href="https://space.bilibili.com/398617002" target="_blank" rel="noopener noreferrer">哔哩哔哩空间</a>
-            
-        </div>
+        <div class="sidebar-scroll">
+    <div class="avatar-box"><img src="/project/avatar.jpg" alt="Avatar"></div>
+    <h2 class="sidebar-title">COLDICEH</h2>
+    <p class="sidebar-subtitle">Dr.抢不到音律退坑了#8809</p>
+
+    
+    <div class="sidebar-bili-row">
+        <a class="sidebar-bili-link" href="https://space.bilibili.com/398617002" target="_blank" rel="noopener noreferrer" title="哔哩哔哩空间" aria-label="哔哩哔哩空间">
+            <span class="sidebar-bili-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="24" height="24" rx="5" fill="#FB7299"/>
+                    <path fill="#fff" d="M8.5 9.2h7v5.6h-7V9.2zm1.3 1.3v3h4.4v-3H9.8z" opacity=".95"/>
+                    <path fill="#fff" d="M9.2 7.3l.9 1.2h3.8l.9-1.2H12l-.4.6h-.8l-.4-.6H9.2z"/>
+                </svg>
+            </span>
+            <span class="sidebar-bili-text">哔哩哔哩</span>
+        </a>
     </div>
     
+
+    <section class="sidebar-block">
+        <h3 class="sidebar-section-title">搜索</h3>
+        <form class="sidebar-search-form" id="sidebar-search-form" action="javascript:;" role="search">
+            <div class="search-row">
+                <input type="search" id="local-search-input" class="search-input" placeholder="标题 / 正文关键词…" autocomplete="off" aria-label="搜索文章">
+                <button type="submit" class="search-submit" id="local-search-btn">找找看</button>
+            </div>
+        </form>
+        <div class="search-results" id="local-search-results" hidden></div>
+    </section>
+
+    <section class="sidebar-block">
+        <h3 class="sidebar-section-title">常用链接</h3>
+        <nav class="sidebar-links" aria-label="常用链接">
+            <a href="/project/archives/">归档</a>
+            <a href="/project/comments/">评论</a>
+            <a href="/project/tags/">标签</a>
+        </nav>
+    </section>
+
+    <section class="sidebar-block">
+        <h3 class="sidebar-section-title">我的标签</h3>
+        <div class="sidebar-tag-cloud">
+            
+            
+            
+            <a class="sidebar-tag-chip" href="/project/tags/%E9%A2%98%E8%A7%A3/">题解</a>
+            
+            <a class="sidebar-tag-chip" href="/project/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+            
+            <a class="sidebar-tag-chip" href="/project/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+            
+            <a class="sidebar-tag-chip" href="/project/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/">组合数学</a>
+            
+            <a class="sidebar-tag-chip" href="/project/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+            
+            <a class="sidebar-tag-chip" href="/project/tags/%E6%95%B0%E8%AE%BA/">数论</a>
+            
+            <a class="sidebar-tag-chip" href="/project/tags/%E5%9B%BE%E8%AE%BA/">图论</a>
+            
+            <a class="sidebar-tag-chip" href="/project/tags/%E6%A6%82%E7%8E%87%E6%9C%9F%E6%9C%9B/">概率期望</a>
+            
+            <a class="sidebar-tag-chip" href="/project/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/">计算几何</a>
+            
+            <a class="sidebar-tag-chip" href="/project/tags/%E5%8D%9A%E5%BC%88/">博弈</a>
+            
+            
+            
+        </div>
+    </section>
+
+    <section class="sidebar-block">
+        <h3 class="sidebar-section-title">随笔档案</h3>
+        <ul class="sidebar-archive-list">
+            
+            <li><a href="/project/archives/2024/01/">2024年1月<span class="sidebar-archive-count">(5)</span></a></li>
+            
+            <li><a href="/project/archives/2022/08/">2022年8月<span class="sidebar-archive-count">(1)</span></a></li>
+            
+            <li><a href="/project/archives/2022/05/">2022年5月<span class="sidebar-archive-count">(2)</span></a></li>
+            
+            <li><a href="/project/archives/2022/04/">2022年4月<span class="sidebar-archive-count">(3)</span></a></li>
+            
+            <li><a href="/project/archives/2022/03/">2022年3月<span class="sidebar-archive-count">(11)</span></a></li>
+            
+            <li><a href="/project/archives/2022/01/">2022年1月<span class="sidebar-archive-count">(1)</span></a></li>
+            
+            <li><a href="/project/archives/2021/08/">2021年8月<span class="sidebar-archive-count">(2)</span></a></li>
+            
+            <li><a href="/project/archives/2021/07/">2021年7月<span class="sidebar-archive-count">(12)</span></a></li>
+            
+            <li><a href="/project/archives/2021/06/">2021年6月<span class="sidebar-archive-count">(35)</span></a></li>
+            
+        </ul>
+        
+    </section>
+</div>
+
+    </div>
     <canvas id="particle-canvas"></canvas>
 </aside>
-
-
-<aside class="social-dock" aria-label="社交链接">
-    <a class="social-dock-link social-dock-bili" href="https://space.bilibili.com/398617002" target="_blank" rel="noopener noreferrer" title="哔哩哔哩">B</a>
-</aside>
-
 
 <main class="main-content">
     <article class="post-detail">
@@ -98,6 +174,7 @@ $\frac{2^{a-2}}{\gcd(k,2^{a-2})}$
 
     </div>
     
+
 </article>
 
 </main>
@@ -133,6 +210,86 @@ $\frac{2^{a-2}}{\gcd(k,2^{a-2})}$
 document.addEventListener('DOMContentLoaded', () => {
     console.log("PRTS: System Booting...");
 
+    const hexoRoot = (document.body.getAttribute('data-hexo-root') || '/').replace(/\/?$/, '/');
+
+    // ================= 0. 侧栏本地搜索 =================
+    const searchInput = document.getElementById('local-search-input');
+    const searchBtn = document.getElementById('local-search-btn');
+    const searchForm = document.getElementById('sidebar-search-form');
+    const searchResults = document.getElementById('local-search-results');
+    let searchData = null;
+
+    function stripHtml(s) {
+        return (s || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    }
+
+    function escHtml(s) {
+        const d = document.createElement('div');
+        d.textContent = s == null ? '' : String(s);
+        return d.innerHTML;
+    }
+
+    function runSearch(q) {
+        if (!searchResults || !searchData) return;
+        const query = (q || '').trim().toLowerCase();
+        if (!query) {
+            searchResults.hidden = true;
+            searchResults.innerHTML = '';
+            return;
+        }
+        const hits = [];
+        for (let i = 0; i < searchData.length && hits.length < 40; i++) {
+            const item = searchData[i];
+            const title = (item.title || '').toLowerCase();
+            const body = stripHtml(item.content || '').toLowerCase();
+            if (title.includes(query) || body.includes(query)) hits.push(item);
+        }
+        searchResults.hidden = false;
+        if (!hits.length) {
+            searchResults.innerHTML = '<div class="search-empty">没有找到匹配的文章</div>';
+            return;
+        }
+        searchResults.innerHTML = hits.slice(0, 24).map(item => {
+            const u = String(item.url || '#').replace(/"/g, '');
+            const snip = escHtml(stripHtml(item.content || '').slice(0, 80));
+            const title = escHtml(item.title || '无标题');
+            return '<a class="search-hit" href="' + u + '">' + title +
+                (snip ? '<small>' + snip + '…</small>' : '') + '</a>';
+        }).join('');
+    }
+
+    fetch(hexoRoot + 'search.json').then(r => {
+        if (!r.ok) throw new Error('search.json');
+        return r.json();
+    }).then(data => {
+        searchData = data;
+    }).catch(() => {
+        if (searchResults) {
+            searchResults.hidden = false;
+            searchResults.innerHTML = '<div class="search-empty">搜索索引未生成，请先执行 hexo generate</div>';
+        }
+    });
+
+    let searchTimer;
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            clearTimeout(searchTimer);
+            searchTimer = setTimeout(() => runSearch(searchInput.value), 200);
+        });
+    }
+    if (searchForm) {
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            runSearch(searchInput ? searchInput.value : '');
+        });
+    }
+    if (searchBtn) {
+        searchBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            runSearch(searchInput ? searchInput.value : '');
+        });
+    }
+
     // ================= 1. UI 中枢系统 (FAB 控制) =================
     const fabContainer = document.getElementById('fabContainer');
     const btnMain = document.getElementById('btnMain');
@@ -142,8 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btnMain.addEventListener('click', () => {
             fabContainer.classList.toggle('open');
             btnMain.style.transform = fabContainer.classList.contains('open') ? 'rotate(45deg)' : 'rotate(0)';
-            
-            if(!fabContainer.classList.contains('open') && musicPanel){
+            if (!fabContainer.classList.contains('open') && musicPanel) {
                 musicPanel.classList.remove('active');
             }
         });
@@ -151,23 +307,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const btnTheme = document.getElementById('btnTheme');
     let currentTheme = 'dark';
-    function setTheme(theme) { 
-        currentTheme = theme; 
-        document.body.setAttribute('data-theme', theme); 
+    function setTheme(theme) {
+        currentTheme = theme;
+        document.body.setAttribute('data-theme', theme);
     }
-    function autoTheme() { 
+    function autoTheme() {
         const hour = new Date().getHours();
-        setTheme((hour >= 6 && hour < 18) ? 'light' : 'dark'); 
+        setTheme((hour >= 6 && hour < 18) ? 'light' : 'dark');
     }
     autoTheme();
-    if(btnTheme) btnTheme.addEventListener('click', () => { setTheme(currentTheme === 'dark' ? 'light' : 'dark'); });
+    if (btnTheme) btnTheme.addEventListener('click', () => { setTheme(currentTheme === 'dark' ? 'light' : 'dark'); });
 
     // ================= 2. 音乐通讯终端 =================
     const playlist = [
-        { name: "01. 生命流「熠曲丰碑」-2025音律联觉ver.", src: "/music/生命流「熠曲丰碑」-2025音律联觉.mp3" },
-        { name: "02. 櫂", src: "/music/ヨルシカ - 櫂.mp3" },
-        { name: "03. ヰ世界の宝石譚", src: "/music/ヰ世界の宝石譚.mp3" },
-        { name: "04. KAWAIIめたもる交響曲", src: "/music/KAWAIIめたもる交響曲.mp3" }
+        { name: "01. 生命流「熠曲丰碑」-2025音律联觉ver.", src: hexoRoot + "music/生命流「熠曲丰碑」-2025音律联觉.mp3" },
+        { name: "02. 櫂", src: hexoRoot + "music/ヨルシカ - 櫂.mp3" },
+        { name: "03. ヰ世界の宝石譚", src: hexoRoot + "music/ヰ世界の宝石譚.mp3" },
+        { name: "04. KAWAIIめたもる交響曲", src: hexoRoot + "music/KAWAIIめたもる交響曲.mp3" }
     ];
     let currentTrackIndex = 0;
     const audio = new Audio();
@@ -175,12 +331,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const mpPlayPause = document.getElementById('mpPlayPause');
     const mpPlaylistUI = document.getElementById('mpPlaylistUI');
 
-    if(btnMusic && musicPanel) {
+    if (btnMusic && musicPanel) {
         btnMusic.addEventListener('click', () => { musicPanel.classList.toggle('active'); });
-        
+
         if (mpPlaylistUI) {
             playlist.forEach((track, index) => {
-                let li = document.createElement('li');
+                const li = document.createElement('li');
                 li.textContent = track.name;
                 li.onclick = () => loadTrack(index, true);
                 mpPlaylistUI.appendChild(li);
@@ -188,15 +344,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function loadTrack(index, autoPlay = false) {
-            if(playlist.length === 0) return;
+            if (playlist.length === 0) return;
             currentTrackIndex = index;
             audio.src = playlist[index].src;
-            document.getElementById('mpTitle').textContent = playlist[index].name;
+            const mpTitle = document.getElementById('mpTitle');
+            if (mpTitle) mpTitle.textContent = playlist[index].name;
 
-            if(mpPlaylistUI) {
+            if (mpPlaylistUI) {
                 const items = mpPlaylistUI.querySelectorAll('li');
                 items.forEach(item => item.classList.remove('playing'));
-                if(items[index]) items[index].classList.add('playing');
+                if (items[index]) items[index].classList.add('playing');
             }
             if (autoPlay) togglePlay(true);
         }
@@ -204,29 +361,30 @@ document.addEventListener('DOMContentLoaded', () => {
         function togglePlay(forcePlay = false) {
             if (audio.paused || forcePlay) {
                 audio.play().then(() => {
-                    if(mpPlayPause) mpPlayPause.textContent = "⏸";
+                    if (mpPlayPause) mpPlayPause.textContent = "⏸";
                     btnMusic.classList.add('btn-playing');
-                }).catch(e => {
-                    console.warn("PRTS: 等待音频源响应...");
-                    if(mpPlayPause) mpPlayPause.textContent = "▶";
+                }).catch(() => {
+                    if (mpPlayPause) mpPlayPause.textContent = "▶";
                     btnMusic.classList.remove('btn-playing');
                 });
             } else {
                 audio.pause();
-                if(mpPlayPause) mpPlayPause.textContent = "▶";
+                if (mpPlayPause) mpPlayPause.textContent = "▶";
                 btnMusic.classList.remove('btn-playing');
             }
         }
 
-        if(mpPlayPause) mpPlayPause.addEventListener('click', () => togglePlay());
-        document.getElementById('mpPrev').addEventListener('click', () => { let newIndex = currentTrackIndex - 1; if (newIndex < 0) newIndex = playlist.length - 1; loadTrack(newIndex, true); });
-        document.getElementById('mpNext').addEventListener('click', () => { let newIndex = currentTrackIndex + 1; if (newIndex >= playlist.length) newIndex = 0; loadTrack(newIndex, true); });
-        audio.addEventListener('ended', () => { document.getElementById('mpNext').click(); });
+        if (mpPlayPause) mpPlayPause.addEventListener('click', () => togglePlay());
+        const mpPrev = document.getElementById('mpPrev');
+        const mpNext = document.getElementById('mpNext');
+        if (mpPrev) mpPrev.addEventListener('click', () => { let newIndex = currentTrackIndex - 1; if (newIndex < 0) newIndex = playlist.length - 1; loadTrack(newIndex, true); });
+        if (mpNext) mpNext.addEventListener('click', () => { let newIndex = currentTrackIndex + 1; if (newIndex >= playlist.length) newIndex = 0; loadTrack(newIndex, true); });
+        audio.addEventListener('ended', () => { if (mpNext) mpNext.click(); });
 
         const mpProgressBar = document.getElementById('mpProgressBar');
         const mpTimeCurrent = document.getElementById('mpTimeCurrent');
         const mpTimeTotal = document.getElementById('mpTimeTotal');
-        
+
         function formatTime(seconds) {
             if (isNaN(seconds)) return "00:00";
             const m = Math.floor(seconds / 60);
@@ -235,122 +393,206 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         audio.addEventListener('loadedmetadata', () => {
-            if(mpTimeTotal) mpTimeTotal.textContent = formatTime(audio.duration);
-            if(mpProgressBar) mpProgressBar.max = audio.duration;
+            if (mpTimeTotal) mpTimeTotal.textContent = formatTime(audio.duration);
+            if (mpProgressBar) mpProgressBar.max = audio.duration;
         });
-        
+
         let isDragging = false;
         audio.addEventListener('timeupdate', () => {
-            if(mpTimeCurrent) mpTimeCurrent.textContent = formatTime(audio.currentTime);
+            if (mpTimeCurrent) mpTimeCurrent.textContent = formatTime(audio.currentTime);
             if (!isDragging && mpProgressBar) mpProgressBar.value = audio.currentTime;
         });
-        
-        if(mpProgressBar) {
-            mpProgressBar.addEventListener('mousedown', () => isDragging = true);
+
+        if (mpProgressBar) {
+            mpProgressBar.addEventListener('mousedown', () => { isDragging = true; });
             mpProgressBar.addEventListener('mouseup', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
-            mpProgressBar.addEventListener('touchstart', () => isDragging = true);
+            mpProgressBar.addEventListener('touchstart', () => { isDragging = true; });
             mpProgressBar.addEventListener('touchend', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
         }
 
         loadTrack(0, false);
     }
 
-    // ================= 3. 背景粒子系统 (修复定位与发光色) =================
+    // ================= 3. 全屏背景飘浮粒子 =================
+    const bgCanvas = document.getElementById('global-bg-particles');
+    if (bgCanvas) {
+        const bctx = bgCanvas.getContext('2d');
+        const floats = [];
+        const N = 80;
+
+        function resizeBg() {
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+        }
+        resizeBg();
+        window.addEventListener('resize', resizeBg);
+
+        for (let i = 0; i < N; i++) {
+            floats.push({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                r: Math.random() * 1.6 + 0.35,
+                vx: (Math.random() - 0.5) * 0.28,
+                vy: (Math.random() - 0.5) * 0.28,
+                ph: Math.random() * Math.PI * 2,
+                a: Math.random() * 0.35 + 0.12
+            });
+        }
+
+        function tickBg() {
+            bctx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+            const light = document.body.getAttribute('data-theme') === 'light';
+            const t = Date.now() / 1000;
+            floats.forEach((p, i) => {
+                p.x += p.vx + Math.sin(t * 0.7 + p.ph + i) * 0.12;
+                p.y += p.vy + Math.cos(t * 0.55 + p.ph) * 0.1;
+                if (p.x < -20) p.x = bgCanvas.width + 20;
+                if (p.x > bgCanvas.width + 20) p.x = -20;
+                if (p.y < -20) p.y = bgCanvas.height + 20;
+                if (p.y > bgCanvas.height + 20) p.y = -20;
+                bctx.fillStyle = light ? 'rgba(0,100,200,' + p.a + ')' : 'rgba(0,195,255,' + p.a + ')';
+                bctx.beginPath();
+                bctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                bctx.fill();
+            });
+            requestAnimationFrame(tickBg);
+        }
+        tickBg();
+    }
+
+    // ================= 4. 侧栏 Logo 形状粒子（减轻抗锯齿杂点） =================
     const canvas = document.getElementById('particle-canvas');
-    if(canvas) {
+    if (canvas) {
         const ctx = canvas.getContext('2d');
         let particles = [];
         const mouse = { x: null, y: null, radius: 50 };
-
         const sidebar = canvas.closest('.sidebar');
-        
-        function initCanvas() { 
-            if(sidebar) {
+
+        function initCanvas() {
+            if (sidebar) {
                 canvas.width = sidebar.clientWidth;
-                canvas.height = sidebar.clientHeight; 
+                canvas.height = sidebar.clientHeight;
             }
         }
-        initCanvas(); 
+        initCanvas();
         window.addEventListener('resize', initCanvas);
 
+        function sampleLogoPoints(imageData, size, threshold, step) {
+            const out = [];
+            for (let y = 0; y < size; y += step) {
+                for (let x = 0; x < size; x += step) {
+                    const a = imageData[((y * size + x) * 4) + 3];
+                    if (a > threshold) out.push([x, y]);
+                }
+            }
+            return out;
+        }
+
+        function downsample(points, maxN) {
+            if (points.length <= maxN) return points;
+            const step = Math.ceil(points.length / maxN);
+            const res = [];
+            for (let i = 0; i < points.length; i += step) res.push(points[i]);
+            return res;
+        }
+
         const logoImg = new Image();
-        logoImg.src = '/logo.png';
-        logoImg.onload = function() {
+        logoImg.src = hexoRoot + 'logo.png';
+        logoImg.onload = function () {
             const tempCanvas = document.createElement('canvas');
             const tempCtx = tempCanvas.getContext('2d');
-            const size = 200; 
-            tempCanvas.width = size; 
+            const size = 200;
+            tempCanvas.width = size;
             tempCanvas.height = size;
             tempCtx.drawImage(logoImg, 0, 0, size, size);
             const imageData = tempCtx.getImageData(0, 0, size, size).data;
-            
-            const scale = 1.5; 
-            const scaledSize = size * scale;
-            const gap = 40; 
 
-            const offsetX = sidebar ? (sidebar.clientWidth - scaledSize) / 2 : 40;
-            const offsetY = sidebar ? (sidebar.clientHeight - scaledSize - gap) : window.innerHeight - scaledSize - gap;
+            const scale = 1.5;
+            const gap = 40;
+            const offsetX = sidebar ? (sidebar.clientWidth - size * scale) / 2 : 40;
+            const offsetY = sidebar ? (sidebar.clientHeight - size * scale - gap) : window.innerHeight - size * scale - gap;
 
-            for (let y = 0; y < size; y += 2) {
-                for (let x = 0; x < size; x += 2) {
-                    if (imageData[((y * size + x) * 4) + 3] > 128) {
-                        particles.push(new Particle(x * scale + offsetX, y * scale + offsetY));
-                    }
+            let pts = sampleLogoPoints(imageData, size, 210, 4);
+            if (pts.length < 40) pts = sampleLogoPoints(imageData, size, 165, 5);
+            pts = downsample(pts, 850);
+
+            class Particle {
+                constructor(x, y) {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.baseX = x;
+                    this.baseY = y;
+                    this.density = (Math.random() * 30) + 1;
                 }
-            }
-            animate();
-            console.log("PRTS: Particles Online. Visuals Restored.");
-        };
+                draw() {
+                    ctx.fillStyle = '#00c3ff';
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, 1.15, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                update() {
+                    const rect = canvas.getBoundingClientRect();
+                    const mouseX = mouse.x != null ? mouse.x - rect.left : null;
+                    const mouseY = mouse.y != null ? mouse.y - rect.top : null;
 
-        class Particle {
-            constructor(x, y) { 
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height; 
-                this.baseX = x; 
-                this.baseY = y; 
-                this.density = (Math.random() * 30) + 1;
-            }
-            draw() {
-                // 🌟 核心修复：强制使用 PRTS 青蓝色，不再受黑白主题影响而隐形
-                ctx.fillStyle = '#00c3ff';
-                ctx.beginPath(); 
-                ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2); 
-                ctx.fill();
-            }
-            update() {
-                let rect = canvas.getBoundingClientRect();
-                let mouseX = mouse.x ? mouse.x - rect.left : null;
-                let mouseY = mouse.y ? mouse.y - rect.top : null;
-
-                if (mouseX !== null && mouseY !== null) {
-                    let dx = mouseX - this.x;
-                    let dy = mouseY - this.y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < mouse.radius) {
-                        let force = (mouse.radius - distance) / mouse.radius;
-                        this.x -= (dx / distance) * force * this.density * 0.8;
-                        this.y -= (dy / distance) * force * this.density * 0.8;
+                    if (mouseX != null && mouseY != null) {
+                        const dx = mouseX - this.x;
+                        const dy = mouseY - this.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < mouse.radius && distance > 0.01) {
+                            const force = (mouse.radius - distance) / mouse.radius;
+                            this.x -= (dx / distance) * force * this.density * 0.8;
+                            this.y -= (dy / distance) * force * this.density * 0.8;
+                        } else {
+                            this.x += (this.baseX - this.x) * 0.12;
+                            this.y += (this.baseY - this.y) * 0.12;
+                        }
                     } else {
                         this.x += (this.baseX - this.x) * 0.12;
                         this.y += (this.baseY - this.y) * 0.12;
                     }
-                } else {
-                    this.x += (this.baseX - this.x) * 0.12;
-                    this.y += (this.baseY - this.y) * 0.12;
                 }
             }
-        }
 
-        function animate() { 
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); }); 
-            requestAnimationFrame(animate); 
-        }
-        
+            particles = pts.map(([x, y]) => new Particle(x * scale + offsetX, y * scale + offsetY));
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => { p.update(); p.draw(); });
+                requestAnimationFrame(animate);
+            }
+            animate();
+            console.log('PRTS: Logo particles:', particles.length);
+        };
+        logoImg.onerror = function () {
+            console.warn('PRTS: logo.png 加载失败，跳过侧栏形状粒子');
+        };
+
         window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
         window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
     }
+
+    // ================= 5. 首页封面图：极端尺寸则隐藏横幅 =================
+    document.querySelectorAll('img[data-cover-watch]').forEach(img => {
+        function check() {
+            const w = img.naturalWidth;
+            const h = img.naturalHeight;
+            if (!w || !h) return;
+            const ar = h / w;
+            if (w > 4400 || h > 3200 || ar > 2.25 || ar < 0.12) {
+                const wrap = img.closest('.ak-card-banner-wrap');
+                if (wrap) wrap.style.display = 'none';
+            }
+        }
+        if (img.complete) check();
+        else img.addEventListener('load', check, { once: true });
+        img.addEventListener('error', () => {
+            const wrap = img.closest('.ak-card-banner-wrap');
+            if (wrap) wrap.style.display = 'none';
+        }, { once: true });
+    });
 });
-</script> 
+</script>
+ 
 </body>
 </html>

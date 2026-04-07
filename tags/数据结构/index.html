@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta name="referrer" content="no-referrer" />
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<meta charset="UTF-8">
+<title>Hexo</title>
+<link rel="icon" href="/project/avatar.jpg" type="image/jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/project/css/style.css">
+<meta name="generator" content="Hexo 8.1.1"></head>
+<body data-hexo-root="/project/">
+
+<canvas id="global-bg-particles" aria-hidden="true"></canvas>
+
+
+<header class="terminal-nav">
+    <a href="/project/" class="nav-logo">QAQ</a>
+    <nav class="nav-menu">
+        <a href="/project/" class="nav-item"><span class="nav-en">INDEX</span><span class="nav-cn">首页</span></a>
+        <a href="/project/archives/" class="nav-item"><span class="nav-en">ARCHIVES</span><span class="nav-cn">归档</span></a>
+        <a href="/project/tags/" class="nav-item active"><span class="nav-en">TAGS</span><span class="nav-cn">标签</span></a>
+        <a href="/project/comments/" class="nav-item"><span class="nav-en">COMMENTS</span><span class="nav-cn">评论</span></a>
+        <a href="/project/about/" class="nav-item"><span class="nav-en">PROFILE</span><span class="nav-cn">自述</span></a>
+    </nav>
+</header>
+
+<aside class="sidebar">
+    <div class="sidebar-content" style="position: relative; z-index: 2; width: 100%; height: 100%;">
+        <div class="sidebar-scroll">
+    <div class="avatar-box"><img src="/project/avatar.jpg" alt="Avatar"></div>
+    <h2 class="sidebar-title">COLDICEH</h2>
+    <p class="sidebar-subtitle">Dr.抢不到音律退坑了#8809</p>
+
+    
+    <div class="sidebar-bili-row">
+        <a class="sidebar-bili-link" href="https://space.bilibili.com/398617002" target="_blank" rel="noopener noreferrer" title="哔哩哔哩空间" aria-label="哔哩哔哩空间">
+            <span class="sidebar-bili-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="24" height="24" rx="5" fill="#FB7299"/>
+                    <path fill="#fff" d="M8.5 9.2h7v5.6h-7V9.2zm1.3 1.3v3h4.4v-3H9.8z" opacity=".95"/>
+                    <path fill="#fff" d="M9.2 7.3l.9 1.2h3.8l.9-1.2H12l-.4.6h-.8l-.4-.6H9.2z"/>
+                </svg>
+            </span>
+            <span class="sidebar-bili-text">哔哩哔哩</span>
+        </a>
+    </div>
+    
+
+    <section class="sidebar-block">
+        <h3 class="sidebar-section-title">搜索</h3>
+        <form class="sidebar-search-form" id="sidebar-search-form" action="javascript:;" role="search">
+            <div class="search-row">
+                <input type="search" id="local-search-input" class="search-input" placeholder="标题 / 正文关键词…" autocomplete="off" aria-label="搜索文章">
+                <button type="submit" class="search-submit" id="local-search-btn">找找看</button>
+            </div>
+        </form>
+        <div class="search-results" id="local-search-results" hidden></div>
+    </section>
+
+    <section class="sidebar-block">
+        <h3 class="sidebar-section-title">常用链接</h3>
+        <nav class="sidebar-links" aria-label="常用链接">
+            <a href="/project/archives/">归档</a>
+            <a href="/project/comments/">评论</a>
+            <a href="/project/tags/">标签</a>
+        </nav>
+    </section>
+
+    <section class="sidebar-block">
+        <h3 class="sidebar-section-title">我的标签</h3>
+        <div class="sidebar-tag-cloud">
+            
+            
+            
+            <a class="sidebar-tag-chip" href="/project/tags/%E9%A2%98%E8%A7%A3/">题解</a>
+            
+            <a class="sidebar-tag-chip" href="/project/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+            
+            <a class="sidebar-tag-chip" href="/project/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+            
+            <a class="sidebar-tag-chip" href="/project/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/">组合数学</a>
+            
+            <a class="sidebar-tag-chip" href="/project/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+            
+            <a class="sidebar-tag-chip" href="/project/tags/%E6%95%B0%E8%AE%BA/">数论</a>
+            
+            <a class="sidebar-tag-chip" href="/project/tags/%E5%9B%BE%E8%AE%BA/">图论</a>
+            
+            <a class="sidebar-tag-chip" href="/project/tags/%E6%A6%82%E7%8E%87%E6%9C%9F%E6%9C%9B/">概率期望</a>
+            
+            <a class="sidebar-tag-chip" href="/project/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/">计算几何</a>
+            
+            <a class="sidebar-tag-chip" href="/project/tags/%E5%8D%9A%E5%BC%88/">博弈</a>
+            
+            
+            
+        </div>
+    </section>
+
+    <section class="sidebar-block">
+        <h3 class="sidebar-section-title">随笔档案</h3>
+        <ul class="sidebar-archive-list">
+            
+            <li><a href="/project/archives/2024/01/">2024年1月<span class="sidebar-archive-count">(5)</span></a></li>
+            
+            <li><a href="/project/archives/2022/08/">2022年8月<span class="sidebar-archive-count">(1)</span></a></li>
+            
+            <li><a href="/project/archives/2022/05/">2022年5月<span class="sidebar-archive-count">(2)</span></a></li>
+            
+            <li><a href="/project/archives/2022/04/">2022年4月<span class="sidebar-archive-count">(3)</span></a></li>
+            
+            <li><a href="/project/archives/2022/03/">2022年3月<span class="sidebar-archive-count">(11)</span></a></li>
+            
+            <li><a href="/project/archives/2022/01/">2022年1月<span class="sidebar-archive-count">(1)</span></a></li>
+            
+            <li><a href="/project/archives/2021/08/">2021年8月<span class="sidebar-archive-count">(2)</span></a></li>
+            
+            <li><a href="/project/archives/2021/07/">2021年7月<span class="sidebar-archive-count">(12)</span></a></li>
+            
+            <li><a href="/project/archives/2021/06/">2021年6月<span class="sidebar-archive-count">(35)</span></a></li>
+            
+        </ul>
+        
+    </section>
+</div>
+
+    </div>
+    <canvas id="particle-canvas"></canvas>
+</aside>
+
+<main class="main-content">
+    <h2 class="archive-title">
+    
+    // TAG · 数据结构
+    
+</h2>
+<div class="post-list">
+    
+        
+<article class="ak-card">
+    
+    <div class="ak-card-body">
+        <div class="ak-card-header">
+            <span style="color: var(--ak-blue);">POST</span>
+            <span>2024-01-18</span>
+        </div>
+        <h3 class="ak-card-title">
+            <a href="/project/2024/01/18/CF1470F/">CF1470F</a>
+        </h3>
+        <div class="ak-card-excerpt">
+            显然只会存在 $3$ 种本质不同的方式选择两个矩形。
+
+两个矩形不相交。
+
+这种情况可以直接遍历所有平行 $x&#x2F;y$ 轴的分割线，使选取的两个矩形分别在分割线的两边。分别找出极值点直接计算即可。
+
+相交成一个十字。
+
+可以发现此时两个矩形都至少有两条边在恰好包含所有点的大矩形的边界上。
+因此，为了有效找出这样...
+        </div>
+        <div class="ak-card-footer">
+            <a class="ak-read-more" href="/project/2024/01/18/CF1470F/">READ MORE +</a>
+        </div>
+    </div>
+</article>
+
+    
+        
+<article class="ak-card">
+    
+    <div class="ak-card-body">
+        <div class="ak-card-header">
+            <span style="color: var(--ak-blue);">POST</span>
+            <span>2022-03-18</span>
+        </div>
+        <h3 class="ak-card-title">
+            <a href="/project/2022/03/18/CF799F%20Beautiful%20fountains%20rows/">CF799F Beautiful fountains rows</a>
+        </h3>
+        <div class="ak-card-excerpt">
+            这个正解比乱搞逊多了
+先考虑只枚举 $a$。
+令 $(x,y)$ 表示 $x$ 到 $y$ 都有喷泉的花园且如果在 $[a,x]$ 段上有非零偶数个喷泉，那么对于 $a$ 来说 $x$ 是禁止的。
+然后考虑将所有花园分为两类：
+
+$x&lt;a\le y$
+
+$a\le x\le y$
+
+
+考虑第一类花园中的哪些位置是...
+        </div>
+        <div class="ak-card-footer">
+            <a class="ak-read-more" href="/project/2022/03/18/CF799F%20Beautiful%20fountains%20rows/">READ MORE +</a>
+        </div>
+    </div>
+</article>
+
+    
+        
+<article class="ak-card">
+    
+    <div class="ak-card-body">
+        <div class="ak-card-header">
+            <span style="color: var(--ak-blue);">POST</span>
+            <span>2022-03-18</span>
+        </div>
+        <h3 class="ak-card-title">
+            <a href="/project/2022/03/18/CF1060G%20Balls%20and%20Pockets/">CF1060G Balls and Pockets</a>
+        </h3>
+        <div class="ak-card-excerpt">
+            令 $f(i)$ 表示 $i$ 的后继。
+首先可以发现，在 $[0,a_1)$ 中的数的状态不会改变，所以对于 $x&lt;a_1$ 的询问，直接输出 $x$ 即可。
+而当 $x\ge a_n$ 时，存在 $f(x)&#x3D;x+n$。因此当 $x$ 较大时，询问可以直接计算。又因为 $f(i)&gt;i$，所以在经...
+        </div>
+        <div class="ak-card-footer">
+            <a class="ak-read-more" href="/project/2022/03/18/CF1060G%20Balls%20and%20Pockets/">READ MORE +</a>
+        </div>
+    </div>
+</article>
+
+    
+        
+<article class="ak-card">
+    
+    <div class="ak-card-body">
+        <div class="ak-card-header">
+            <span style="color: var(--ak-blue);">POST</span>
+            <span>2022-03-07</span>
+        </div>
+        <h3 class="ak-card-title">
+            <a href="/project/2022/03/07/CF1322F%20Assigning%20Fares/">CF1322F Assigning Fares</a>
+        </h3>
+        <div class="ak-card-excerpt">
+            首先，如果存在一种分配方案，那么显然答案 $k$ 在 $[1,n]$ 中。
+而显然 $k$ 具有单调性，所以可以二分。
+接下来考虑判定对于一个给定的答案 $k$ 是否可行并且给出一组构造。
+考虑树上的每条边 $(u,p_u)$ ，如果它没有被任何路径覆盖，则可以不考虑这条边。
+否则，由于它被某几条路径覆盖，则它的两个端...
+        </div>
+        <div class="ak-card-footer">
+            <a class="ak-read-more" href="/project/2022/03/07/CF1322F%20Assigning%20Fares/">READ MORE +</a>
+        </div>
+    </div>
+</article>
+
+    
+        
+<article class="ak-card">
+    
+    <div class="ak-card-body">
+        <div class="ak-card-header">
+            <span style="color: var(--ak-blue);">POST</span>
+            <span>2022-01-07</span>
+        </div>
+        <h3 class="ak-card-title">
+            <a href="/project/2022/01/07/QwQcOrZ%20%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%A2%98%20VI/">QwQcOrZ 的数据结构题 VI</a>
+        </h3>
+        <div class="ak-card-excerpt">
+            题意：
+给出一个序列，支持区间加等差数列，区间查询平方和。
+需要计算的是$$\sum\limits_{i&#x3D;l}^r(a_i(s+(i-l)k)+(s+(i-l)k)^2)$$
+发现后一部分为等差数列平方和
+$$\begin{aligned}\sum\limits_{i&#x3D;1}^n(s+(i-1)k)^...
+        </div>
+        <div class="ak-card-footer">
+            <a class="ak-read-more" href="/project/2022/01/07/QwQcOrZ%20%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%A2%98%20VI/">READ MORE +</a>
+        </div>
+    </div>
+</article>
+
+    
+        
+<article class="ak-card">
+    
+    <div class="ak-card-body">
+        <div class="ak-card-header">
+            <span style="color: var(--ak-blue);">POST</span>
+            <span>2021-07-23</span>
+        </div>
+        <h3 class="ak-card-title">
+            <a href="/project/2021/07/23/%E6%A6%82%E7%8E%87%E4%B8%8E%E6%9C%9F%E6%9C%9B/">概率与期望</a>
+        </h3>
+        <div class="ak-card-excerpt">
+            1定义概率，就是某个随机事件出现的可能性大小。
+若$X$是一个离散型的随机变量，可能值为$x_1,x_2,\cdots $，对应的概率分别为$p_1,p_2,\cdots $，那么它的期望值为$$E(x)&#x3D;\sum\limits_{i}&#x3D;x_ip_i$$
+期望的线性性$$\begin{alignat...
+        </div>
+        <div class="ak-card-footer">
+            <a class="ak-read-more" href="/project/2021/07/23/%E6%A6%82%E7%8E%87%E4%B8%8E%E6%9C%9F%E6%9C%9B/">READ MORE +</a>
+        </div>
+    </div>
+</article>
+
+    
+        
+<article class="ak-card ak-card--banner">
+    
+    <a href="/project/2021/07/22/%E6%9D%82%E9%A2%983/" class="ak-card-banner-wrap" aria-hidden="true" tabindex="-1">
+        <img class="ak-card-banner-img" src="https://files.catbox.moe/c1ebmx.png" alt="" loading="lazy" decoding="async" data-cover-watch="1" />
+    </a>
+    
+    <div class="ak-card-body">
+        <div class="ak-card-header">
+            <span style="color: var(--ak-blue);">POST</span>
+            <span>2021-07-22</span>
+        </div>
+        <h3 class="ak-card-title ak-card-title--banner">
+            <a href="/project/2021/07/22/%E6%9D%82%E9%A2%983/">杂题3</a>
+        </h3>
+        <div class="ak-card-excerpt">
+            数数题题意从$0\sim n-1$这些正整数中恰好$k$个互不相同的数，使得它们的和是$n$的倍数。求方案数。
+$k\leq 1000,n\leq 10^9$
+sol单位根反演：$$[k\mid n]&#x3D;\frac{1}{k}\sum_{i&#x3D;0}^{k-1}\omega_{k}^{in}$$答案为：$...
+        </div>
+        <div class="ak-card-footer">
+            <a class="ak-read-more" href="/project/2021/07/22/%E6%9D%82%E9%A2%983/">READ MORE +</a>
+        </div>
+    </div>
+</article>
+
+    
+        
+<article class="ak-card">
+    
+    <div class="ak-card-body">
+        <div class="ak-card-header">
+            <span style="color: var(--ak-blue);">POST</span>
+            <span>2021-07-20</span>
+        </div>
+        <h3 class="ak-card-title">
+            <a href="/project/2021/07/20/%E4%BD%A0%E6%A0%A1noip%E6%A8%A1%E6%8B%9F%E8%B5%9B%E9%80%89%E5%81%9A/">你校noip模拟赛选做</a>
+        </h3>
+        <div class="ak-card-excerpt">
+            7.73 GPS（gpsduel)题意给定两张图，其中两张图所有点之前连的边相同但是边权不同。边分为两种，一种是无向且边权$\ge 0$，一种是有向边权可以$&lt;0$，且没有负环。
+然后分别求两张图上$S\to T$的最短路
+以及每次他走的路与一张图的最短路不同就会得到一次警告（两张就两次），求最少警告次数。每次会...
+        </div>
+        <div class="ak-card-footer">
+            <a class="ak-read-more" href="/project/2021/07/20/%E4%BD%A0%E6%A0%A1noip%E6%A8%A1%E6%8B%9F%E8%B5%9B%E9%80%89%E5%81%9A/">READ MORE +</a>
+        </div>
+    </div>
+</article>
+
+    
+        
+<article class="ak-card ak-card--banner">
+    
+    <a href="/project/2021/07/13/%E5%8F%8D%E6%BC%94%E4%B8%8E%E7%AD%9B%E6%B3%95/" class="ak-card-banner-wrap" aria-hidden="true" tabindex="-1">
+        <img class="ak-card-banner-img" src="https://files.catbox.moe/m0c3kc.png" alt="" loading="lazy" decoding="async" data-cover-watch="1" />
+    </a>
+    
+    <div class="ak-card-body">
+        <div class="ak-card-header">
+            <span style="color: var(--ak-blue);">POST</span>
+            <span>2021-07-13</span>
+        </div>
+        <h3 class="ak-card-title ak-card-title--banner">
+            <a href="/project/2021/07/13/%E5%8F%8D%E6%BC%94%E4%B8%8E%E7%AD%9B%E6%B3%95/">反演与筛法</a>
+        </h3>
+        <div class="ak-card-excerpt">
+            积性函数与反演积性函数如果一个数论函数$f(n)$满足$f(pq)&#x3D;f(p)f(q),\forall p\perp q$，则称$f(n)$是一个积性函数。（数论函数$f:\mathbb{N}^* \rightarrow \mathbb{R}$）
+特别的，如果不要求$p\perp q$且依然满足上述式子的话，则...
+        </div>
+        <div class="ak-card-footer">
+            <a class="ak-read-more" href="/project/2021/07/13/%E5%8F%8D%E6%BC%94%E4%B8%8E%E7%AD%9B%E6%B3%95/">READ MORE +</a>
+        </div>
+    </div>
+</article>
+
+    
+        
+<article class="ak-card">
+    
+    <div class="ak-card-body">
+        <div class="ak-card-header">
+            <span style="color: var(--ak-blue);">POST</span>
+            <span>2021-07-01</span>
+        </div>
+        <h3 class="ak-card-title">
+            <a href="/project/2021/07/01/%E3%80%8CJOISC%202021%20Day1%E3%80%8D%E9%A5%AE%E9%A3%9F%E5%8C%BA/">「JOISC 2021 Day1」饮食区</a>
+        </h3>
+        <div class="ak-card-excerpt">
+            考虑将所有所有修改和询问离线下来，并且将队列编号看成时刻。这样就可以将操作一二的修改拆开，变成在$L_i$时刻加入数据结构，在$R_i+1$时刻弹出数据结构。
+考虑使用一棵普通的线段树维护，下标为操作的顺序（因为操作也是有顺序的），每个节点维护当前区间元素的个数（可以是负数），区间最大元素子段和，区间加入元素的个数。
+...
+        </div>
+        <div class="ak-card-footer">
+            <a class="ak-read-more" href="/project/2021/07/01/%E3%80%8CJOISC%202021%20Day1%E3%80%8D%E9%A5%AE%E9%A3%9F%E5%8C%BA/">READ MORE +</a>
+        </div>
+    </div>
+</article>
+
+    
+</div>
+
+
+<nav class="pagination" aria-label="分页">
+    
+    <div class="pagination-nums">
+        
+        <a class="page-num current" href="/project/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">1</a>
+        
+        <a class="page-num" href="/project/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/page/2/">2</a>
+        
+        <a class="page-num" href="/project/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/page/3/">3</a>
+        
+    </div>
+    <a class="page-link page-link-next" href="/project/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/page/2/">下一页 →</a>
+</nav>
+
+
+
+</main>
+
+<div class="fab-container" id="fabContainer">
+    <div class="fab-menu">
+        <div class="fab-btn sub" id="btnTheme" title="切换环境感知">◐</div>
+        <div class="fab-btn sub" id="btnMusic" title="音频终端">♫</div>
+    </div>
+    <div class="fab-btn fab-main" id="btnMain">⧉</div>
+    <div class="music-panel" id="musicPanel">
+    <div class="mp-header">AUDIO TERMINAL //</div>
+    <div class="mp-title" id="mpTitle">选择曲目...</div>
+    
+    <div class="mp-progress-container">
+        <span id="mpTimeCurrent">00:00</span>
+        <input type="range" class="mp-progress-bar" id="mpProgressBar" value="0" min="0" max="100">
+        <span id="mpTimeTotal">00:00</span>
+    </div>
+    
+    <div class="mp-controls">
+        <button class="mp-btn" id="mpPrev">⏮</button>
+        <button class="mp-btn play-btn" id="mpPlayPause">▶</button>
+        <button class="mp-btn" id="mpNext">⏭</button>
+    </div>
+    
+    <ul class="mp-playlist" id="mpPlaylistUI">
+        </ul>
+</div> 
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("PRTS: System Booting...");
+
+    const hexoRoot = (document.body.getAttribute('data-hexo-root') || '/').replace(/\/?$/, '/');
+
+    // ================= 0. 侧栏本地搜索 =================
+    const searchInput = document.getElementById('local-search-input');
+    const searchBtn = document.getElementById('local-search-btn');
+    const searchForm = document.getElementById('sidebar-search-form');
+    const searchResults = document.getElementById('local-search-results');
+    let searchData = null;
+
+    function stripHtml(s) {
+        return (s || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    }
+
+    function escHtml(s) {
+        const d = document.createElement('div');
+        d.textContent = s == null ? '' : String(s);
+        return d.innerHTML;
+    }
+
+    function runSearch(q) {
+        if (!searchResults || !searchData) return;
+        const query = (q || '').trim().toLowerCase();
+        if (!query) {
+            searchResults.hidden = true;
+            searchResults.innerHTML = '';
+            return;
+        }
+        const hits = [];
+        for (let i = 0; i < searchData.length && hits.length < 40; i++) {
+            const item = searchData[i];
+            const title = (item.title || '').toLowerCase();
+            const body = stripHtml(item.content || '').toLowerCase();
+            if (title.includes(query) || body.includes(query)) hits.push(item);
+        }
+        searchResults.hidden = false;
+        if (!hits.length) {
+            searchResults.innerHTML = '<div class="search-empty">没有找到匹配的文章</div>';
+            return;
+        }
+        searchResults.innerHTML = hits.slice(0, 24).map(item => {
+            const u = String(item.url || '#').replace(/"/g, '');
+            const snip = escHtml(stripHtml(item.content || '').slice(0, 80));
+            const title = escHtml(item.title || '无标题');
+            return '<a class="search-hit" href="' + u + '">' + title +
+                (snip ? '<small>' + snip + '…</small>' : '') + '</a>';
+        }).join('');
+    }
+
+    fetch(hexoRoot + 'search.json').then(r => {
+        if (!r.ok) throw new Error('search.json');
+        return r.json();
+    }).then(data => {
+        searchData = data;
+    }).catch(() => {
+        if (searchResults) {
+            searchResults.hidden = false;
+            searchResults.innerHTML = '<div class="search-empty">搜索索引未生成，请先执行 hexo generate</div>';
+        }
+    });
+
+    let searchTimer;
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            clearTimeout(searchTimer);
+            searchTimer = setTimeout(() => runSearch(searchInput.value), 200);
+        });
+    }
+    if (searchForm) {
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            runSearch(searchInput ? searchInput.value : '');
+        });
+    }
+    if (searchBtn) {
+        searchBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            runSearch(searchInput ? searchInput.value : '');
+        });
+    }
+
+    // ================= 1. UI 中枢系统 (FAB 控制) =================
+    const fabContainer = document.getElementById('fabContainer');
+    const btnMain = document.getElementById('btnMain');
+    const musicPanel = document.getElementById('musicPanel');
+
+    if (btnMain && fabContainer) {
+        btnMain.addEventListener('click', () => {
+            fabContainer.classList.toggle('open');
+            btnMain.style.transform = fabContainer.classList.contains('open') ? 'rotate(45deg)' : 'rotate(0)';
+            if (!fabContainer.classList.contains('open') && musicPanel) {
+                musicPanel.classList.remove('active');
+            }
+        });
+    }
+
+    const btnTheme = document.getElementById('btnTheme');
+    let currentTheme = 'dark';
+    function setTheme(theme) {
+        currentTheme = theme;
+        document.body.setAttribute('data-theme', theme);
+    }
+    function autoTheme() {
+        const hour = new Date().getHours();
+        setTheme((hour >= 6 && hour < 18) ? 'light' : 'dark');
+    }
+    autoTheme();
+    if (btnTheme) btnTheme.addEventListener('click', () => { setTheme(currentTheme === 'dark' ? 'light' : 'dark'); });
+
+    // ================= 2. 音乐通讯终端 =================
+    const playlist = [
+        { name: "01. 生命流「熠曲丰碑」-2025音律联觉ver.", src: hexoRoot + "music/生命流「熠曲丰碑」-2025音律联觉.mp3" },
+        { name: "02. 櫂", src: hexoRoot + "music/ヨルシカ - 櫂.mp3" },
+        { name: "03. ヰ世界の宝石譚", src: hexoRoot + "music/ヰ世界の宝石譚.mp3" },
+        { name: "04. KAWAIIめたもる交響曲", src: hexoRoot + "music/KAWAIIめたもる交響曲.mp3" }
+    ];
+    let currentTrackIndex = 0;
+    const audio = new Audio();
+    const btnMusic = document.getElementById('btnMusic');
+    const mpPlayPause = document.getElementById('mpPlayPause');
+    const mpPlaylistUI = document.getElementById('mpPlaylistUI');
+
+    if (btnMusic && musicPanel) {
+        btnMusic.addEventListener('click', () => { musicPanel.classList.toggle('active'); });
+
+        if (mpPlaylistUI) {
+            playlist.forEach((track, index) => {
+                const li = document.createElement('li');
+                li.textContent = track.name;
+                li.onclick = () => loadTrack(index, true);
+                mpPlaylistUI.appendChild(li);
+            });
+        }
+
+        function loadTrack(index, autoPlay = false) {
+            if (playlist.length === 0) return;
+            currentTrackIndex = index;
+            audio.src = playlist[index].src;
+            const mpTitle = document.getElementById('mpTitle');
+            if (mpTitle) mpTitle.textContent = playlist[index].name;
+
+            if (mpPlaylistUI) {
+                const items = mpPlaylistUI.querySelectorAll('li');
+                items.forEach(item => item.classList.remove('playing'));
+                if (items[index]) items[index].classList.add('playing');
+            }
+            if (autoPlay) togglePlay(true);
+        }
+
+        function togglePlay(forcePlay = false) {
+            if (audio.paused || forcePlay) {
+                audio.play().then(() => {
+                    if (mpPlayPause) mpPlayPause.textContent = "⏸";
+                    btnMusic.classList.add('btn-playing');
+                }).catch(() => {
+                    if (mpPlayPause) mpPlayPause.textContent = "▶";
+                    btnMusic.classList.remove('btn-playing');
+                });
+            } else {
+                audio.pause();
+                if (mpPlayPause) mpPlayPause.textContent = "▶";
+                btnMusic.classList.remove('btn-playing');
+            }
+        }
+
+        if (mpPlayPause) mpPlayPause.addEventListener('click', () => togglePlay());
+        const mpPrev = document.getElementById('mpPrev');
+        const mpNext = document.getElementById('mpNext');
+        if (mpPrev) mpPrev.addEventListener('click', () => { let newIndex = currentTrackIndex - 1; if (newIndex < 0) newIndex = playlist.length - 1; loadTrack(newIndex, true); });
+        if (mpNext) mpNext.addEventListener('click', () => { let newIndex = currentTrackIndex + 1; if (newIndex >= playlist.length) newIndex = 0; loadTrack(newIndex, true); });
+        audio.addEventListener('ended', () => { if (mpNext) mpNext.click(); });
+
+        const mpProgressBar = document.getElementById('mpProgressBar');
+        const mpTimeCurrent = document.getElementById('mpTimeCurrent');
+        const mpTimeTotal = document.getElementById('mpTimeTotal');
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "00:00";
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60);
+            return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        }
+
+        audio.addEventListener('loadedmetadata', () => {
+            if (mpTimeTotal) mpTimeTotal.textContent = formatTime(audio.duration);
+            if (mpProgressBar) mpProgressBar.max = audio.duration;
+        });
+
+        let isDragging = false;
+        audio.addEventListener('timeupdate', () => {
+            if (mpTimeCurrent) mpTimeCurrent.textContent = formatTime(audio.currentTime);
+            if (!isDragging && mpProgressBar) mpProgressBar.value = audio.currentTime;
+        });
+
+        if (mpProgressBar) {
+            mpProgressBar.addEventListener('mousedown', () => { isDragging = true; });
+            mpProgressBar.addEventListener('mouseup', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+            mpProgressBar.addEventListener('touchstart', () => { isDragging = true; });
+            mpProgressBar.addEventListener('touchend', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+        }
+
+        loadTrack(0, false);
+    }
+
+    // ================= 3. 全屏背景飘浮粒子 =================
+    const bgCanvas = document.getElementById('global-bg-particles');
+    if (bgCanvas) {
+        const bctx = bgCanvas.getContext('2d');
+        const floats = [];
+        const N = 80;
+
+        function resizeBg() {
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+        }
+        resizeBg();
+        window.addEventListener('resize', resizeBg);
+
+        for (let i = 0; i < N; i++) {
+            floats.push({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                r: Math.random() * 1.6 + 0.35,
+                vx: (Math.random() - 0.5) * 0.28,
+                vy: (Math.random() - 0.5) * 0.28,
+                ph: Math.random() * Math.PI * 2,
+                a: Math.random() * 0.35 + 0.12
+            });
+        }
+
+        function tickBg() {
+            bctx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+            const light = document.body.getAttribute('data-theme') === 'light';
+            const t = Date.now() / 1000;
+            floats.forEach((p, i) => {
+                p.x += p.vx + Math.sin(t * 0.7 + p.ph + i) * 0.12;
+                p.y += p.vy + Math.cos(t * 0.55 + p.ph) * 0.1;
+                if (p.x < -20) p.x = bgCanvas.width + 20;
+                if (p.x > bgCanvas.width + 20) p.x = -20;
+                if (p.y < -20) p.y = bgCanvas.height + 20;
+                if (p.y > bgCanvas.height + 20) p.y = -20;
+                bctx.fillStyle = light ? 'rgba(0,100,200,' + p.a + ')' : 'rgba(0,195,255,' + p.a + ')';
+                bctx.beginPath();
+                bctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                bctx.fill();
+            });
+            requestAnimationFrame(tickBg);
+        }
+        tickBg();
+    }
+
+    // ================= 4. 侧栏 Logo 形状粒子（减轻抗锯齿杂点） =================
+    const canvas = document.getElementById('particle-canvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const mouse = { x: null, y: null, radius: 50 };
+        const sidebar = canvas.closest('.sidebar');
+
+        function initCanvas() {
+            if (sidebar) {
+                canvas.width = sidebar.clientWidth;
+                canvas.height = sidebar.clientHeight;
+            }
+        }
+        initCanvas();
+        window.addEventListener('resize', initCanvas);
+
+        function sampleLogoPoints(imageData, size, threshold, step) {
+            const out = [];
+            for (let y = 0; y < size; y += step) {
+                for (let x = 0; x < size; x += step) {
+                    const a = imageData[((y * size + x) * 4) + 3];
+                    if (a > threshold) out.push([x, y]);
+                }
+            }
+            return out;
+        }
+
+        function downsample(points, maxN) {
+            if (points.length <= maxN) return points;
+            const step = Math.ceil(points.length / maxN);
+            const res = [];
+            for (let i = 0; i < points.length; i += step) res.push(points[i]);
+            return res;
+        }
+
+        const logoImg = new Image();
+        logoImg.src = hexoRoot + 'logo.png';
+        logoImg.onload = function () {
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            const size = 200;
+            tempCanvas.width = size;
+            tempCanvas.height = size;
+            tempCtx.drawImage(logoImg, 0, 0, size, size);
+            const imageData = tempCtx.getImageData(0, 0, size, size).data;
+
+            const scale = 1.5;
+            const gap = 40;
+            const offsetX = sidebar ? (sidebar.clientWidth - size * scale) / 2 : 40;
+            const offsetY = sidebar ? (sidebar.clientHeight - size * scale - gap) : window.innerHeight - size * scale - gap;
+
+            let pts = sampleLogoPoints(imageData, size, 210, 4);
+            if (pts.length < 40) pts = sampleLogoPoints(imageData, size, 165, 5);
+            pts = downsample(pts, 850);
+
+            class Particle {
+                constructor(x, y) {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.baseX = x;
+                    this.baseY = y;
+                    this.density = (Math.random() * 30) + 1;
+                }
+                draw() {
+                    ctx.fillStyle = '#00c3ff';
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, 1.15, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                update() {
+                    const rect = canvas.getBoundingClientRect();
+                    const mouseX = mouse.x != null ? mouse.x - rect.left : null;
+                    const mouseY = mouse.y != null ? mouse.y - rect.top : null;
+
+                    if (mouseX != null && mouseY != null) {
+                        const dx = mouseX - this.x;
+                        const dy = mouseY - this.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < mouse.radius && distance > 0.01) {
+                            const force = (mouse.radius - distance) / mouse.radius;
+                            this.x -= (dx / distance) * force * this.density * 0.8;
+                            this.y -= (dy / distance) * force * this.density * 0.8;
+                        } else {
+                            this.x += (this.baseX - this.x) * 0.12;
+                            this.y += (this.baseY - this.y) * 0.12;
+                        }
+                    } else {
+                        this.x += (this.baseX - this.x) * 0.12;
+                        this.y += (this.baseY - this.y) * 0.12;
+                    }
+                }
+            }
+
+            particles = pts.map(([x, y]) => new Particle(x * scale + offsetX, y * scale + offsetY));
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => { p.update(); p.draw(); });
+                requestAnimationFrame(animate);
+            }
+            animate();
+            console.log('PRTS: Logo particles:', particles.length);
+        };
+        logoImg.onerror = function () {
+            console.warn('PRTS: logo.png 加载失败，跳过侧栏形状粒子');
+        };
+
+        window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+        window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+    }
+
+    // ================= 5. 首页封面图：极端尺寸则隐藏横幅 =================
+    document.querySelectorAll('img[data-cover-watch]').forEach(img => {
+        function check() {
+            const w = img.naturalWidth;
+            const h = img.naturalHeight;
+            if (!w || !h) return;
+            const ar = h / w;
+            if (w > 4400 || h > 3200 || ar > 2.25 || ar < 0.12) {
+                const wrap = img.closest('.ak-card-banner-wrap');
+                if (wrap) wrap.style.display = 'none';
+            }
+        }
+        if (img.complete) check();
+        else img.addEventListener('load', check, { once: true });
+        img.addEventListener('error', () => {
+            const wrap = img.closest('.ak-card-banner-wrap');
+            if (wrap) wrap.style.display = 'none';
+        }, { once: true });
+    });
+});
+</script>
+ 
+</body>
+</html>
