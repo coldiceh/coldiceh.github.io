@@ -20,14 +20,13 @@ window.MathJax = {
 <meta name="generator" content="Hexo 8.1.1"></head>
 <body>
 
+
 <header class="terminal-nav">
     <a href="/" class="nav-logo">QAQ</a>
     <nav class="nav-menu">
-        <a href="/" class="nav-item active"><span class="nav-en">INDEX</span><span class="nav-cn">首页</span></a>
-        <a href="#info" class="nav-item"><span class="nav-en">INFORMATION</span><span class="nav-cn">情报</span></a>
-        <a href="#operator" class="nav-item"><span class="nav-en">OPERATOR</span><span class="nav-cn">随笔</span></a>
-        <a href="#world" class="nav-item"><span class="nav-en">WORLD</span><span class="nav-cn">归档</span></a>
-        <a href="#media" class="nav-item"><span class="nav-en">MEDIA</span><span class="nav-cn">标签</span></a>
+        <a href="/" class="nav-item"><span class="nav-en">INDEX</span><span class="nav-cn">首页</span></a>
+        <a href="/archives/" class="nav-item active"><span class="nav-en">ARCHIVES</span><span class="nav-cn">归档</span></a>
+        <a href="/about/" class="nav-item"><span class="nav-en">PROFILE</span><span class="nav-cn">自述</span></a>
     </nav>
 </header>
 
@@ -45,52 +44,64 @@ window.MathJax = {
         
         <div class="sidebar-links">
             <div style="color: var(--ak-blue); font-weight: bold; margin-bottom: 10px; border-left: 3px solid var(--ak-blue); padding-left: 10px;">常用链接</div>
-            <a href="#">我的随笔</a>
-            <a href="#">我的评论</a>
-            <a href="#">我的参与</a>
-            <a href="#">最新评论</a>
-            <a href="#">我的标签</a>
+            <a href="/">首页</a>
+            <a href="/archives/">归档</a>
+            <a href="/about/">自我介绍</a>
+            
+            <a href="https://space.bilibili.com/398617002" target="_blank" rel="noopener noreferrer">哔哩哔哩空间</a>
+            
         </div>
     </div>
     
     <canvas id="particle-canvas"></canvas>
 </aside>
 
+
+<aside class="social-dock" aria-label="社交链接">
+    <a class="social-dock-link social-dock-bili" href="https://space.bilibili.com/398617002" target="_blank" rel="noopener noreferrer" title="哔哩哔哩">B</a>
+</aside>
+
+
 <main class="main-content">
-    <h2 class="archive-title">// DATA ARCHIVE</h2>
+    <h2 class="archive-title">
+    
+    // ARCHIVES
+    
+</h2>
 <div class="post-list">
     
-        <article class="ak-card">
+        
+<article class="ak-card">
+    
             <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
+                <span style="color: var(--ak-blue);">POST</span>
                 <span>2021-08-22</span>
             </div>
-            
             <h3 class="ak-card-title">
                 <a href="/2021/08/22/%E5%8F%AF%E8%83%BD%E5%8F%AF%E4%BB%A5%E6%90%AC%E7%9A%84%E9%A2%98%E7%9B%AE/">可能可以搬的题目</a>
             </h3>
-            
             <div class="ak-card-excerpt">
                 提高gym102956Dloj3412HDU 6796gym102460GHDU 6331
 提高+
 ...
             </div>
-            
             <div class="ak-card-footer">
                 <a class="ak-read-more" href="/2021/08/22/%E5%8F%AF%E8%83%BD%E5%8F%AF%E4%BB%A5%E6%90%AC%E7%9A%84%E9%A2%98%E7%9B%AE/">READ MORE +</a>
             </div>
-        </article>
     
-        <article class="ak-card">
+</article>
+
+    
+        
+<article class="ak-card">
+    
             <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
+                <span style="color: var(--ak-blue);">POST</span>
                 <span>2021-08-19</span>
             </div>
-            
             <h3 class="ak-card-title">
                 <a href="/2021/08/19/AGC033C/">AGC033C</a>
             </h3>
-            
             <div class="ak-card-excerpt">
                   考虑每一次任意拿走一枚硬币会发生什么
 
@@ -99,15 +110,21 @@ window.MathJax = {
 否则所有的叶子节点被删除。
 
 
-然后考虑直径的变化，若取直径的一端点，则会让直径长度减 $1$，否则直径长度减 $2...
+然后考虑直径的变化，若取直径的一端点，则会让直径长度减 $1$，否则直径长度减 $2$。
+然后就变成了给定直径 $L$​，每次可以使直积减 $1$​ 或 $2$​，（修改之后满足 $L\ge 0$）​。
+...
             </div>
-            
             <div class="ak-card-footer">
                 <a class="ak-read-more" href="/2021/08/19/AGC033C/">READ MORE +</a>
             </div>
-        </article>
+    
+</article>
+
     
 </div>
+
+
+
 </main>
 
 <div class="fab-container" id="fabContainer">

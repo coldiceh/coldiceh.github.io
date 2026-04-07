@@ -20,14 +20,13 @@ window.MathJax = {
 <meta name="generator" content="Hexo 8.1.1"></head>
 <body>
 
+
 <header class="terminal-nav">
     <a href="/" class="nav-logo">QAQ</a>
     <nav class="nav-menu">
         <a href="/" class="nav-item active"><span class="nav-en">INDEX</span><span class="nav-cn">首页</span></a>
-        <a href="#info" class="nav-item"><span class="nav-en">INFORMATION</span><span class="nav-cn">情报</span></a>
-        <a href="#operator" class="nav-item"><span class="nav-en">OPERATOR</span><span class="nav-cn">随笔</span></a>
-        <a href="#world" class="nav-item"><span class="nav-en">WORLD</span><span class="nav-cn">归档</span></a>
-        <a href="#media" class="nav-item"><span class="nav-en">MEDIA</span><span class="nav-cn">标签</span></a>
+        <a href="/archives/" class="nav-item"><span class="nav-en">ARCHIVES</span><span class="nav-cn">归档</span></a>
+        <a href="/about/" class="nav-item"><span class="nav-en">PROFILE</span><span class="nav-cn">自述</span></a>
     </nav>
 </header>
 
@@ -45,62 +44,81 @@ window.MathJax = {
         
         <div class="sidebar-links">
             <div style="color: var(--ak-blue); font-weight: bold; margin-bottom: 10px; border-left: 3px solid var(--ak-blue); padding-left: 10px;">常用链接</div>
-            <a href="#">我的随笔</a>
-            <a href="#">我的评论</a>
-            <a href="#">我的参与</a>
-            <a href="#">最新评论</a>
-            <a href="#">我的标签</a>
+            <a href="/">首页</a>
+            <a href="/archives/">归档</a>
+            <a href="/about/">自我介绍</a>
+            
+            <a href="https://space.bilibili.com/398617002" target="_blank" rel="noopener noreferrer">哔哩哔哩空间</a>
+            
         </div>
     </div>
     
     <canvas id="particle-canvas"></canvas>
 </aside>
 
+
+<aside class="social-dock" aria-label="社交链接">
+    <a class="social-dock-link social-dock-bili" href="https://space.bilibili.com/398617002" target="_blank" rel="noopener noreferrer" title="哔哩哔哩">B</a>
+</aside>
+
+
 <main class="main-content">
     <h2 class="archive-title">// DATA ARCHIVE</h2>
 <div class="post-list">
     
-        <article class="ak-card">
+        
+<article class="ak-card">
+    
             <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
+                <span style="color: var(--ak-blue);">POST</span>
                 <span>2021-06-12</span>
             </div>
-            
             <h3 class="ak-card-title">
                 <a href="/2021/06/12/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/">计算几何</a>
             </h3>
-            
             <div class="ak-card-excerpt">
                 闵可夫斯基和闵可夫斯基和就是给你两个凸多变形$A,B$，求$A+B&#x3D;{a+b|a\in A,b\in B}$；
-做法就是先找到两个凸包上$y$轴最小的点，然后将所有的边拿出来，按照斜率排序，...
+做法就是先找到两个凸包上$y$轴最小的点，然后将所有的边拿出来，按照斜率排序，直接串起来即可。
+为什么正确？
+一个简单的考虑就是如果对于每个方向如果都知道在这个方向上最远的点，那么就可以把整个凸多边...
             </div>
-            
             <div class="ak-card-footer">
                 <a class="ak-read-more" href="/2021/06/12/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/">READ MORE +</a>
             </div>
-        </article>
     
-        <article class="ak-card">
+</article>
+
+    
+        
+<article class="ak-card">
+    
             <div class="ak-card-header">
-                <span style="color: var(--ak-blue);">Example Code</span>
+                <span style="color: var(--ak-blue);">POST</span>
                 <span>2021-06-07</span>
             </div>
-            
             <h3 class="ak-card-title">
                 <a href="/2021/06/07/qwq/">qwq</a>
             </h3>
-            
             <div class="ak-card-excerpt">
                 $a+b&#x3D;c,1+1&#x3D;3\asasd$
 ...
             </div>
-            
             <div class="ak-card-footer">
                 <a class="ak-read-more" href="/2021/06/07/qwq/">READ MORE +</a>
             </div>
-        </article>
+    
+</article>
+
     
 </div>
+
+<nav class="pagination" aria-label="分页">
+    <a class="page-link" href="/page/7/">← 上一页</a>
+    
+</nav>
+
+
+
 </main>
 
 <div class="fab-container" id="fabContainer">
