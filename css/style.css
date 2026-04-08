@@ -75,6 +75,14 @@ html.prts-lowfx .sidebar { background: rgba(18, 20, 26, 0.96); }
 html.prts-lowfx body[data-theme='light'] .sidebar { background: rgba(255, 255, 255, 0.96); }
 html.prts-lowfx #global-bg-particles { display: none !important; }
 
+/* 手动关闭：背景粒子 + 左下 logo 粒子 + 略弱化底图 */
+html.prts-fx-off #global-bg-particles,
+html.prts-fx-off .logo-corner { display: none !important; }
+html.prts-fx-off body[data-theme="dark"]::before,
+html.prts-fx-off body[data-theme="light"]::before {
+  opacity: 0.08 !important;
+}
+
 h1, h2, h3, h4, h5, h6, .nav-en, .sidebar-subtitle, .mp-header, .ak-read-more {
   font-family: 'Orbitron', sans-serif; font-weight: 700; letter-spacing: 1px;
 }
@@ -173,6 +181,52 @@ h1, h2, h3, h4, h5, h6, .nav-en, .sidebar-subtitle, .mp-header, .ak-read-more {
   box-shadow: 0 0 20px rgba(251, 114, 153, 0.35);
 }
 .sidebar-bili-svg { display: block; }
+
+/* 罗德岛终端 · 游戏 ID 卡片 */
+.game-ids-list { display: flex; flex-direction: column; gap: 10px; }
+.game-id-card {
+  display: flex; flex-direction: row; align-items: stretch; gap: 12px;
+  padding: 12px 12px 12px 10px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+[data-theme='light'] .game-id-card {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(0, 120, 200, 0.15);
+}
+.game-id-icon {
+  flex: 0 0 44px; width: 44px; height: 44px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 212, 255, 0.1);
+  color: var(--ak-blue);
+}
+.game-id-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
+.game-id-icon svg { width: 30px; height: 30px; }
+.game-id-body { flex: 1; min-width: 0; }
+.game-id-title {
+  font-family: 'Orbitron', sans-serif; font-size: 10px; letter-spacing: 0.12em;
+  color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px;
+}
+.game-id-nick {
+  font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.35;
+  word-break: break-all;
+}
+.game-id-meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px;
+  margin-top: 6px; font-size: 11px; color: var(--text-muted);
+}
+.game-id-uid { font-family: 'Orbitron', sans-serif; letter-spacing: 0.03em; }
+.game-id-server { opacity: 0.85; }
+.game-id-copy {
+  padding: 2px 8px; font-size: 11px; border-radius: 6px; cursor: pointer;
+  border: 1px solid rgba(0, 212, 255, 0.35); background: rgba(0, 212, 255, 0.1);
+  color: var(--ak-blue); line-height: 1.2; font-family: 'Orbitron', sans-serif;
+}
+.game-id-copy:hover { background: rgba(0, 212, 255, 0.22); }
+
+.fab-btn.sub.fab-inactive { opacity: 0.42; filter: grayscale(0.4); }
 
 .sidebar-block { margin-bottom: 22px; }
 .sidebar-section-title {
