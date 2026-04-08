@@ -45,15 +45,38 @@ window.MathJax = {
     <h2 class="sidebar-title">COLDICEH</h2>
 
     
+    
+    <div class="sidebar-social-row">
+        
+        <a class="sidebar-bili-link" href="https://space.bilibili.com/398617002" target="_blank" rel="noopener noreferrer" title="哔哩哔哩空间" aria-label="哔哩哔哩空间">
+            <svg class="sidebar-bili-svg" viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect width="24" height="24" rx="5" fill="#FB7299"/>
+                <path fill="#fff" d="M8.5 9.2h7v5.6h-7V9.2zm1.3 1.3v3h4.4v-3H9.8z" opacity=".95"/>
+                <path fill="#fff" d="M9.2 7.3l.9 1.2h3.8l.9-1.2H12l-.4.6h-.8l-.4-.6H9.2z"/>
+            </svg>
+        </a>
+        
+        
+        <a class="sidebar-mail-link" href="mailto:h1195362230@gmail.com" title="发邮件" aria-label="发邮件到 h1195362230@gmail.com">
+            <svg class="sidebar-mail-svg" viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect width="24" height="24" rx="5" fill="rgba(0,212,255,0.25)"/>
+                <path fill="none" stroke="currentColor" stroke-width="1.4" d="M4.5 7.5h15v10h-15z"/>
+                <path fill="none" stroke="currentColor" stroke-width="1.4" d="M4.5 7.5L12 13l7.5-5.5"/>
+            </svg>
+        </a>
+        
+    </div>
+    
+
+    
 <section class="sidebar-block game-ids-block">
-    <h3 class="sidebar-section-title">罗德岛终端</h3>
     <div class="game-ids-list">
         
         
         <div class="game-id-card">
             <div class="game-id-icon" aria-hidden="true">
                 
-                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M16 4L4 26h24L16 4zm0 6l7.5 14h-15L16 10z" opacity=".95"/><path fill="currentColor" d="M16 14l-3 8h6l-3-8z" opacity=".5"/></svg>
+                <img src="/icons/arknights-icon.png" alt="" />
                 
             </div>
             <div class="game-id-body">
@@ -72,7 +95,7 @@ window.MathJax = {
         <div class="game-id-card">
             <div class="game-id-icon" aria-hidden="true">
                 
-                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="1.5"/><path fill="currentColor" d="M11 22V10l10 6-10 6z" opacity=".9"/></svg>
+                <img src="/icons/endfield-icon.png" alt="" />
                 
             </div>
             <div class="game-id-body">
@@ -92,18 +115,6 @@ window.MathJax = {
 </section>
 
 
-
-    
-    <div class="sidebar-bili-row">
-        <a class="sidebar-bili-link" href="https://space.bilibili.com/398617002" target="_blank" rel="noopener noreferrer" title="哔哩哔哩空间" aria-label="哔哩哔哩空间">
-            <svg class="sidebar-bili-svg" viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <rect width="24" height="24" rx="5" fill="#FB7299"/>
-                <path fill="#fff" d="M8.5 9.2h7v5.6h-7V9.2zm1.3 1.3v3h4.4v-3H9.8z" opacity=".95"/>
-                <path fill="#fff" d="M9.2 7.3l.9 1.2h3.8l.9-1.2H12l-.4.6h-.8l-.4-.6H9.2z"/>
-            </svg>
-        </a>
-    </div>
-    
 
     <section class="sidebar-block">
         <h3 class="sidebar-section-title">搜索</h3>
@@ -195,10 +206,7 @@ window.MathJax = {
 
 </main>
 
-<div class="logo-corner" id="logoCorner" aria-hidden="true">
-    <canvas id="particle-canvas"></canvas>
-</div>
-
+<div class="prts-fab-stack" id="prtsFabStack">
 <div class="fab-container open" id="fabContainer">
     <div class="fab-menu">
         <div class="fab-btn sub" id="btnTheme" title="切换环境感知">◐</div>
@@ -225,6 +233,10 @@ window.MathJax = {
     <ul class="mp-playlist" id="mpPlaylistUI">
         </ul>
 </div> 
+</div>
+<div class="logo-corner" id="logoCorner" aria-hidden="true">
+    <canvas id="particle-canvas"></canvas>
+</div>
 </div>
 
 <script>
@@ -483,7 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (bgCanvas && !fxOff && !prtsLowFx) {
         const bctx = bgCanvas.getContext('2d');
         const floats = [];
-        const N = prtsLowFx ? 36 : 64;
+        const N = prtsLowFx ? 52 : 96;
 
         function resizeBg() {
             bgCanvas.width = window.innerWidth;
@@ -530,13 +542,13 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(tickBg);
     }
 
-    // ================= 4. 左下角龙泡泡 Logo 粒子 =================
+    // ================= 4. 右下角 Logo 粒子（与 FAB 同栈） =================
     const canvas = document.getElementById('particle-canvas');
     const logoHolder = document.getElementById('logoCorner');
     if (canvas && logoHolder && !fxOff) {
         const ctx = canvas.getContext('2d');
         let particles = [];
-        const mouse = { x: null, y: null, radius: 28 };
+        const mouse = { x: null, y: null, radius: 18 };
 
         function initCanvas() {
             canvas.width = logoHolder.clientWidth;
@@ -581,15 +593,15 @@ document.addEventListener('DOMContentLoaded', () => {
             tempCtx.drawImage(logoImg, 0, 0, size, size);
             const imageData = tempCtx.getImageData(0, 0, size, size).data;
 
-            const scale = Math.min(1.35, (canvas.width / size) * 0.85);
+            const scale = Math.min(1.45, (canvas.width / size) * 0.92);
             const blockW = size * scale;
             const blockH = size * scale;
             const offsetX = (canvas.width - blockW) / 2;
             const offsetY = Math.max(8, canvas.height - blockH - 6);
 
-            const maxPts = prtsLowFx ? 720 : 1400;
-            let pts = sampleLogoPoints(imageData, size, 200, prtsLowFx ? 4 : 3);
-            if (pts.length < 80) pts = sampleLogoPoints(imageData, size, 160, prtsLowFx ? 4 : 3);
+            const maxPts = prtsLowFx ? 1100 : 2400;
+            let pts = sampleLogoPoints(imageData, size, 200, prtsLowFx ? 3 : 2);
+            if (pts.length < 120) pts = sampleLogoPoints(imageData, size, 160, prtsLowFx ? 3 : 2);
             pts = downsamplePoints(pts, maxPts);
 
             class Particle {
@@ -606,7 +618,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 draw() {
                     ctx.fillStyle = 'rgb(' + this.cr + ',' + this.cg + ',' + this.cb + ')';
                     ctx.beginPath();
-                    ctx.arc(this.x, this.y, prtsLowFx ? 1 : 1.1, 0, Math.PI * 2);
+                    ctx.arc(this.x, this.y, prtsLowFx ? 0.9 : 1, 0, Math.PI * 2);
                     ctx.fill();
                 }
                 update() {

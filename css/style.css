@@ -78,6 +78,7 @@ html.prts-lowfx #global-bg-particles { display: none !important; }
 /* 手动关闭：背景粒子 + 左下 logo 粒子 + 略弱化底图 */
 html.prts-fx-off #global-bg-particles,
 html.prts-fx-off .logo-corner { display: none !important; }
+html.prts-fx-off .prts-fab-stack { gap: 0; }
 html.prts-fx-off body[data-theme="dark"]::before,
 html.prts-fx-off body[data-theme="light"]::before {
   opacity: 0.08 !important;
@@ -132,14 +133,31 @@ h1, h2, h3, h4, h5, h6, .nav-en, .sidebar-subtitle, .mp-header, .ak-read-more {
   overflow: hidden;
 }
 
-/* 龙泡泡 Logo 粒子：视口左下角，更大展示区域 */
-.logo-corner {
+/* Logo 粒子：与右下角小工具纵向堆叠，区域更大 */
+.prts-fab-stack {
   position: fixed;
-  left: 12px;
-  bottom: 12px;
-  width: min(300px, 42vw);
-  height: min(300px, 42vw);
-  max-height: 38vh;
+  bottom: 36px;
+  right: 32px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  gap: 16px;
+  pointer-events: none;
+}
+.prts-fab-stack .fab-container {
+  position: relative;
+  bottom: auto;
+  right: auto;
+  pointer-events: auto;
+}
+.logo-corner {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  width: min(400px, 52vw);
+  height: min(400px, 52vw);
+  max-height: 52vh;
   z-index: 40;
   pointer-events: none;
   filter: drop-shadow(0 4px 24px rgba(0, 212, 255, 0.15));
@@ -168,7 +186,10 @@ h1, h2, h3, h4, h5, h6, .nav-en, .sidebar-subtitle, .mp-header, .ak-read-more {
 .sidebar-scroll::-webkit-scrollbar { width: 5px; }
 .sidebar-scroll::-webkit-scrollbar-thumb { background: var(--ak-blue); border-radius: 4px; }
 
-.sidebar-bili-row { display: flex; justify-content: center; margin: -8px 0 18px 0; }
+.sidebar-social-row {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 12px; margin: -4px 0 16px 0;
+}
 .sidebar-bili-link {
   display: inline-flex; align-items: center; justify-content: center;
   padding: 6px; border-radius: 12px; text-decoration: none;
@@ -181,8 +202,21 @@ h1, h2, h3, h4, h5, h6, .nav-en, .sidebar-subtitle, .mp-header, .ak-read-more {
   box-shadow: 0 0 20px rgba(251, 114, 153, 0.35);
 }
 .sidebar-bili-svg { display: block; }
+.sidebar-mail-link {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 6px; border-radius: 12px; text-decoration: none;
+  color: var(--ak-blue);
+  background: rgba(0, 212, 255, 0.1); border: 1px solid rgba(0, 212, 255, 0.45);
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.sidebar-mail-link:hover {
+  background: rgba(0, 212, 255, 0.22);
+  transform: scale(1.06);
+  box-shadow: 0 0 18px rgba(0, 212, 255, 0.3);
+}
+.sidebar-mail-svg { display: block; color: var(--ak-blue); }
 
-/* 罗德岛终端 · 游戏 ID 卡片 */
+/* 侧栏 · 游戏 ID 卡片 */
 .game-ids-list { display: flex; flex-direction: column; gap: 10px; }
 .game-id-card {
   display: flex; flex-direction: row; align-items: stretch; gap: 12px;
@@ -197,7 +231,7 @@ h1, h2, h3, h4, h5, h6, .nav-en, .sidebar-subtitle, .mp-header, .ak-read-more {
   border-color: rgba(0, 120, 200, 0.15);
 }
 .game-id-icon {
-  flex: 0 0 44px; width: 44px; height: 44px; border-radius: 10px;
+  flex: 0 0 52px; width: 52px; height: 52px; border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
   background: rgba(0, 212, 255, 0.1);
   color: var(--ak-blue);
@@ -284,7 +318,11 @@ h1, h2, h3, h4, h5, h6, .nav-en, .sidebar-subtitle, .mp-header, .ak-read-more {
 }
 
 /* --- 主内容区 --- */
-.main-content { margin-left: calc(var(--sidebar-width) + 50px); padding: 104px 48px 48px 40px; max-width: 920px; }
+.main-content {
+  margin-left: calc(var(--sidebar-width) + 50px);
+  padding: 104px max(48px, 4vw) clamp(72px, 30vh, 400px) 40px;
+  max-width: 920px;
+}
 .archive-title {
   color: var(--ak-blue);
   border-bottom: 2px solid var(--ak-blue);
@@ -441,7 +479,7 @@ h1, h2, h3, h4, h5, h6, .nav-en, .sidebar-subtitle, .mp-header, .ak-read-more {
 .tag-pill-count { font-size: 11px; color: var(--text-muted); opacity: 0.9; }
 .tag-pill:hover .tag-pill-count { color: var(--ak-blue); }
 
-/* --- 🌟 悬浮工具与音乐面板 --- */
+/* --- 🌟 悬浮工具与音乐面板（在 .prts-fab-stack 内时由父级定位） --- */
 .fab-container { position: fixed; bottom: 40px; right: 40px; z-index: 9999; display: flex; flex-direction: column-reverse; align-items: flex-end; gap: 15px; }
 .fab-btn { width: 50px; height: 50px; border-radius: 50%; background: var(--panel); border: 2px solid var(--text-muted); color: var(--text); display: flex; justify-content: center; align-items: center; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: all 0.3s ease; font-family: 'Orbitron', sans-serif; font-size: 20px; pointer-events: auto; }
 .fab-main { width: 60px; height: 60px; border-color: var(--ak-blue); color: var(--ak-blue); font-size: 24px; background: var(--bg); }
