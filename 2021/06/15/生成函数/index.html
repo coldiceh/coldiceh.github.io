@@ -958,6 +958,17 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        const MPK = { idx: 'prts-mp-idx', time: 'prts-mp-time', playing: 'prts-mp-playing' };
+        let persistMpTimer = 0;
+
+        function persistMp() {
+            try {
+                sessionStorage.setItem(MPK.idx, String(currentTrackIndex));
+                sessionStorage.setItem(MPK.time, String(audio.currentTime || 0));
+                sessionStorage.setItem(MPK.playing, audio.paused ? '0' : '1');
+            } catch (e) { /* ignore */ }
+        }
+
         function loadTrack(index, autoPlay = false) {
             if (playlist.length === 0) return;
             currentTrackIndex = index;
@@ -971,6 +982,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (items[index]) items[index].classList.add('playing');
             }
             if (autoPlay) togglePlay(true);
+            persistMp();
         }
 
         function togglePlay(forcePlay = false) {
@@ -978,14 +990,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 audio.play().then(() => {
                     if (mpPlayPause) mpPlayPause.textContent = "⏸";
                     btnMusic.classList.add('btn-playing');
+                    persistMp();
                 }).catch(() => {
                     if (mpPlayPause) mpPlayPause.textContent = "▶";
                     btnMusic.classList.remove('btn-playing');
+                    persistMp();
                 });
             } else {
                 audio.pause();
                 if (mpPlayPause) mpPlayPause.textContent = "▶";
                 btnMusic.classList.remove('btn-playing');
+                persistMp();
             }
         }
 
@@ -1016,16 +1031,51 @@ document.addEventListener('DOMContentLoaded', () => {
         audio.addEventListener('timeupdate', () => {
             if (mpTimeCurrent) mpTimeCurrent.textContent = formatTime(audio.currentTime);
             if (!isDragging && mpProgressBar) mpProgressBar.value = audio.currentTime;
+            const t = Date.now();
+            if (t - persistMpTimer > 900) {
+                persistMpTimer = t;
+                persistMp();
+            }
         });
+
+        audio.addEventListener('pause', persistMp);
+        audio.addEventListener('play', persistMp);
+        window.addEventListener('pagehide', persistMp);
 
         if (mpProgressBar) {
             mpProgressBar.addEventListener('mousedown', () => { isDragging = true; });
-            mpProgressBar.addEventListener('mouseup', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+            mpProgressBar.addEventListener('mouseup', () => { isDragging = false; audio.currentTime = mpProgressBar.value; persistMp(); });
             mpProgressBar.addEventListener('touchstart', () => { isDragging = true; });
-            mpProgressBar.addEventListener('touchend', () => { isDragging = false; audio.currentTime = mpProgressBar.value; });
+            mpProgressBar.addEventListener('touchend', () => { isDragging = false; audio.currentTime = mpProgressBar.value; persistMp(); });
         }
 
-        loadTrack(0, false);
+        let restored = false;
+        try {
+            const si = sessionStorage.getItem(MPK.idx);
+            const st = sessionStorage.getItem(MPK.time);
+            const sp = sessionStorage.getItem(MPK.playing);
+            if (si != null && si !== '') {
+                const idx = parseInt(si, 10);
+                if (idx >= 0 && idx < playlist.length) {
+                    loadTrack(idx, false);
+                    const seek = parseFloat(st);
+                    const applySeek = () => {
+                        if (!isNaN(seek) && seek > 0 && audio.duration && seek < audio.duration - 0.5) {
+                            audio.currentTime = seek;
+                        }
+                    };
+                    audio.addEventListener('loadedmetadata', applySeek, { once: true });
+                    applySeek();
+                    restored = true;
+                    if (sp === '1') {
+                        const tryResume = () => { togglePlay(true); };
+                        if (audio.readyState >= 2) tryResume();
+                        else audio.addEventListener('canplay', tryResume, { once: true });
+                    }
+                }
+            }
+        } catch (e) { /* ignore */ }
+        if (!restored) loadTrack(0, false);
     }
 
     // ================= 3. 全屏背景飘浮粒子 =================
@@ -1086,14 +1136,57 @@ document.addEventListener('DOMContentLoaded', () => {
     if (canvas && logoHolder && !fxOff) {
         const ctx = canvas.getContext('2d');
         let particles = [];
-        const mouse = { x: null, y: null, radius: 18 };
+        const mouse = { x: null, y: null };
+        const repelRadius = 22;
+        let trailX = null;
+        let trailY = null;
+        let prevTrailX = null;
+        let prevTrailY = null;
 
         function initCanvas() {
             canvas.width = logoHolder.clientWidth;
             canvas.height = logoHolder.clientHeight;
+            trailX = trailY = prevTrailX = prevTrailY = null;
         }
         initCanvas();
         window.addEventListener('resize', initCanvas);
+
+        function distParticleToSegment(px, py, ax, ay, bx, by) {
+            const abx = bx - ax;
+            const aby = by - ay;
+            const abLen2 = abx * abx + aby * aby;
+            if (abLen2 < 1e-8) {
+                const dx = px - ax;
+                const dy = py - ay;
+                const d = Math.sqrt(dx * dx + dy * dy);
+                return { d, nx: d > 1e-6 ? dx / d : 0, ny: d > 1e-6 ? dy / d : 0 };
+            }
+            let t = ((px - ax) * abx + (py - ay) * aby) / abLen2;
+            t = Math.max(0, Math.min(1, t));
+            const qx = ax + t * abx;
+            const qy = ay + t * aby;
+            const dx = px - qx;
+            const dy = py - qy;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            return { d, nx: d > 1e-6 ? dx / d : 0, ny: d > 1e-6 ? dy / d : 0 };
+        }
+
+        (function trailSmoothLoop() {
+            requestAnimationFrame(trailSmoothLoop);
+            if (document.hidden || fxOff) return;
+            const rect = canvas.getBoundingClientRect();
+            if (mouse.x != null && mouse.y != null) {
+                const tx = mouse.x - rect.left;
+                const ty = mouse.y - rect.top;
+                if (trailX == null || trailY == null) {
+                    trailX = tx;
+                    trailY = ty;
+                } else {
+                    trailX += (tx - trailX) * 0.18;
+                    trailY += (ty - trailY) * 0.18;
+                }
+            }
+        })();
 
         function sampleLogoPoints(imageData, size, threshold, step) {
             const out = [];
@@ -1151,7 +1244,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     this.cr = cr;
                     this.cg = cg;
                     this.cb = cb;
-                    this.density = (Math.random() * 26) + 1;
+                    this.density = (Math.random() * 6) + 14;
                 }
                 draw() {
                     ctx.fillStyle = 'rgb(' + this.cr + ',' + this.cg + ',' + this.cb + ')';
@@ -1159,23 +1252,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     ctx.arc(this.x, this.y, prtsLowFx ? 0.9 : 1, 0, Math.PI * 2);
                     ctx.fill();
                 }
-                update() {
-                    const rect = canvas.getBoundingClientRect();
-                    const mouseX = mouse.x != null ? mouse.x - rect.left : null;
-                    const mouseY = mouse.y != null ? mouse.y - rect.top : null;
-
-                    if (mouseX != null && mouseY != null) {
-                        const dx = mouseX - this.x;
-                        const dy = mouseY - this.y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-                        if (distance < mouse.radius && distance > 0.01) {
-                            const force = (mouse.radius - distance) / mouse.radius;
-                            this.x -= (dx / distance) * force * this.density * 0.75;
-                            this.y -= (dy / distance) * force * this.density * 0.75;
-                        } else {
-                            this.x += (this.baseX - this.x) * 0.11;
-                            this.y += (this.baseY - this.y) * 0.11;
-                        }
+                updateSeg(ax, ay, bx, by, R) {
+                    const { d, nx, ny } = distParticleToSegment(this.x, this.y, ax, ay, bx, by);
+                    if (d < R && d > 1e-4) {
+                        const force = (R - d) / R;
+                        const f = force * this.density * 0.38;
+                        this.x += nx * f;
+                        this.y += ny * f;
                     } else {
                         this.x += (this.baseX - this.x) * 0.11;
                         this.y += (this.baseY - this.y) * 0.11;
@@ -1196,8 +1279,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (document.hidden) return;
                 if (now - logoLast < logoFrameMs) return;
                 logoLast = now;
+                const bx = trailX;
+                const by = trailY;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                particles.forEach(p => { p.update(); p.draw(); });
+                if (bx == null || by == null) {
+                    particles.forEach(p => {
+                        p.x += (p.baseX - p.x) * 0.11;
+                        p.y += (p.baseY - p.y) * 0.11;
+                        p.draw();
+                    });
+                    return;
+                }
+                const ax = prevTrailX != null ? prevTrailX : bx;
+                const ay = prevTrailY != null ? prevTrailY : by;
+                prevTrailX = bx;
+                prevTrailY = by;
+                particles.forEach(p => {
+                    p.updateSeg(ax, ay, bx, by, repelRadius);
+                    p.draw();
+                });
             }
             requestAnimationFrame(animateLogo);
             console.log('PRTS: Logo particles (color):', particles.length);

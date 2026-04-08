@@ -49,7 +49,7 @@ body::before {
 
 body[data-theme="light"]::before {
   background: url('/1600px-Background_omatsuri_light.jpg') center/cover no-repeat fixed;
-  opacity: 0.22;
+  opacity: 0.4;
 }
 body[data-theme="dark"]::before {
   background: url('/Background_omatsuri_conflict.jpg') center/cover no-repeat fixed;
@@ -60,6 +60,9 @@ body[data-theme="dark"]::before {
 html.prts-lowfx body[data-theme="dark"]::before,
 html.prts-lowfx body[data-theme="light"]::before {
   opacity: 0.12;
+}
+html.prts-lowfx body[data-theme="light"]::before {
+  opacity: 0.26;
 }
 html.prts-lowfx .terminal-nav,
 html.prts-lowfx .sidebar,
