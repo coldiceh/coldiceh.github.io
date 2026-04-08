@@ -16,6 +16,7 @@ window.MathJax = {
 <title>CF1500F Cupboards Jumps | Hexo</title>
 <link rel="icon" href="/avatar.jpg" type="image/jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-dark.min.css" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/style.css">
 
 <meta name="generator" content="Hexo 8.1.1"></head>
@@ -46,14 +47,11 @@ window.MathJax = {
     
     <div class="sidebar-bili-row">
         <a class="sidebar-bili-link" href="https://space.bilibili.com/398617002" target="_blank" rel="noopener noreferrer" title="哔哩哔哩空间" aria-label="哔哩哔哩空间">
-            <span class="sidebar-bili-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="24" height="24" rx="5" fill="#FB7299"/>
-                    <path fill="#fff" d="M8.5 9.2h7v5.6h-7V9.2zm1.3 1.3v3h4.4v-3H9.8z" opacity=".95"/>
-                    <path fill="#fff" d="M9.2 7.3l.9 1.2h3.8l.9-1.2H12l-.4.6h-.8l-.4-.6H9.2z"/>
-                </svg>
-            </span>
-            <span class="sidebar-bili-text">哔哩哔哩</span>
+            <svg class="sidebar-bili-svg" viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect width="24" height="24" rx="5" fill="#FB7299"/>
+                <path fill="#fff" d="M8.5 9.2h7v5.6h-7V9.2zm1.3 1.3v3h4.4v-3H9.8z" opacity=".95"/>
+                <path fill="#fff" d="M9.2 7.3l.9 1.2h3.8l.9-1.2H12l-.4.6h-.8l-.4-.6H9.2z"/>
+            </svg>
         </a>
     </div>
     
@@ -74,7 +72,7 @@ window.MathJax = {
         <nav class="sidebar-links" aria-label="常用链接">
             <a href="/archives/">归档</a>
             <a href="/tags/">全部标签</a>
-            <a href="/essay-archive/">随笔档案（按月）</a>
+            <a href="/essay-archive/">随笔档案</a>
             <a href="/comments/">评论</a>
         </nav>
     </section>
@@ -113,10 +111,31 @@ window.MathJax = {
 <p>于是考虑不再翻转每个点而是翻转整个数轴。</p>
 <p>具体的，每次对数轴以零点为中心进行翻转，记录当前翻转次数和平移了多长即可。</p>
 <p>接下来直接倒着求出一个合法方案就行。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> R(i,a,b) for(int i=(a),i##E=(b);i&lt;=i##E;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> L(i,a,b) for(int i=(b),i##E=(a);i&gt;=i##E;i--)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="type">int</span> a[<span class="number">1111111</span>],d[<span class="number">1111111</span>],ans[<span class="number">1111111</span>];</span><br><span class="line"><span class="type">int</span> tag1,tag2;</span><br><span class="line">set&lt;<span class="type">int</span>&gt;st;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="literal">NULL</span>);</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="type">int</span> l=<span class="number">0</span>,r=m;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n<span class="number">-2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		cin&gt;&gt;a[i];</span><br><span class="line">		<span class="type">int</span> ll,rr,t;</span><br><span class="line">		<span class="keyword">if</span>(tag1&amp;<span class="number">1</span>) ll=tag2,rr=tag2-a[i];</span><br><span class="line">		<span class="keyword">else</span> ll=-tag2,rr=a[i]-tag2;</span><br><span class="line">		t=rr;</span><br><span class="line">		<span class="keyword">if</span>(ll&gt;rr) <span class="built_in">swap</span>(ll,rr);</span><br><span class="line">		l=<span class="built_in">max</span>(l,ll),r=<span class="built_in">min</span>(r,rr);</span><br><span class="line">		<span class="keyword">while</span>(st.<span class="built_in">size</span>()&amp;&amp;(*st.<span class="built_in">begin</span>())&lt;ll) st.<span class="built_in">erase</span>(st.<span class="built_in">begin</span>());</span><br><span class="line">		<span class="keyword">while</span>(st.<span class="built_in">size</span>()&amp;&amp;(*st.<span class="built_in">rbegin</span>())&gt;rr) st.<span class="built_in">erase</span>(*st.<span class="built_in">rbegin</span>());</span><br><span class="line">		<span class="keyword">if</span>(!st.<span class="built_in">size</span>()&amp;&amp;l&gt;r) </span><br><span class="line">		&#123;</span><br><span class="line">			cout&lt;&lt;<span class="string">&quot;NO\n&quot;</span>;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(st.<span class="built_in">count</span>(t)||(l&lt;=t&amp;&amp;t&lt;=r))</span><br><span class="line">		&#123;</span><br><span class="line">			l=<span class="number">0</span>,r=ans[i]=a[i];</span><br><span class="line">			st.<span class="built_in">clear</span>();</span><br><span class="line">			tag1=tag2=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(l&lt;=r)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(tag1) ans[i]=tag2-l;</span><br><span class="line">			<span class="keyword">else</span> ans[i]=tag2+l;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> tt=*st.<span class="built_in">begin</span>();</span><br><span class="line">			<span class="keyword">if</span>(tag1) ans[i]=tag2-tt;</span><br><span class="line">			<span class="keyword">else</span> ans[i]=tag2+tt;</span><br><span class="line">		&#125;</span><br><span class="line">		tag1^=<span class="number">1</span>;tag2=a[i]-tag2;</span><br><span class="line">		<span class="keyword">if</span>(tag1&amp;<span class="number">1</span>) t=tag2-a[i];</span><br><span class="line">		<span class="keyword">else</span> t=a[i]-tag2;</span><br><span class="line">		st.<span class="built_in">emplace</span>(t);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(l&lt;=r)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(tag1) d[n<span class="number">-1</span>]=tag2-l;</span><br><span class="line">		<span class="keyword">else</span> d[n<span class="number">-1</span>]=tag2+l;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> tt=*st.<span class="built_in">begin</span>();</span><br><span class="line">		<span class="keyword">if</span>(tag1) d[n<span class="number">-1</span>]=tag2-tt;</span><br><span class="line">		<span class="keyword">else</span> d[n<span class="number">-1</span>]=tag2+tt;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">L</span>(i,<span class="number">1</span>,n<span class="number">-2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(ans[i]==a[i]) </span><br><span class="line">		&#123;</span><br><span class="line">			d[i]=a[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(d[i<span class="number">+1</span>]==a[i]) d[i]=ans[i];</span><br><span class="line">		<span class="keyword">else</span> d[i]=a[i]-d[i<span class="number">+1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> ret=<span class="number">1</span>;</span><br><span class="line">	<span class="built_in">L</span>(i,<span class="number">1</span>,n<span class="number">-2</span>) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">abs</span>(d[i])+<span class="built_in">abs</span>(d[i<span class="number">+1</span>])!=a[i]) ret*=<span class="number">-1</span>;</span><br><span class="line">		d[i]=ret*d[i];</span><br><span class="line">	&#125;</span><br><span class="line">	ret=<span class="number">0</span>;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n<span class="number">-1</span>) d[i]+=d[i<span class="number">-1</span>],ret=<span class="built_in">min</span>(ret,d[i]);</span><br><span class="line">	cout&lt;&lt;<span class="string">&quot;YES\n&quot;</span>;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n) cout&lt;&lt;d[i<span class="number">-1</span>]-ret&lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> R(i,a,b) for(int i=(a),i##E=(b);i&lt;=i##E;i++)</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> L(i,a,b) for(int i=(b),i##E=(a);i&gt;=i##E;i--)</span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">int</span> n,m;<br><span class="hljs-type">int</span> a[<span class="hljs-number">1111111</span>],d[<span class="hljs-number">1111111</span>],ans[<span class="hljs-number">1111111</span>];<br><span class="hljs-type">int</span> tag1,tag2;<br>set&lt;<span class="hljs-type">int</span>&gt;st;<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>);<br>	cin.<span class="hljs-built_in">tie</span>(<span class="hljs-literal">NULL</span>);<br>	cin&gt;&gt;n&gt;&gt;m;<br>	<span class="hljs-type">int</span> l=<span class="hljs-number">0</span>,r=m;<br>	<span class="hljs-built_in">R</span>(i,<span class="hljs-number">1</span>,n<span class="hljs-number">-2</span>)<br>	&#123;<br>		cin&gt;&gt;a[i];<br>		<span class="hljs-type">int</span> ll,rr,t;<br>		<span class="hljs-keyword">if</span>(tag1&amp;<span class="hljs-number">1</span>) ll=tag2,rr=tag2-a[i];<br>		<span class="hljs-keyword">else</span> ll=-tag2,rr=a[i]-tag2;<br>		t=rr;<br>		<span class="hljs-keyword">if</span>(ll&gt;rr) <span class="hljs-built_in">swap</span>(ll,rr);<br>		l=<span class="hljs-built_in">max</span>(l,ll),r=<span class="hljs-built_in">min</span>(r,rr);<br>		<span class="hljs-keyword">while</span>(st.<span class="hljs-built_in">size</span>()&amp;&amp;(*st.<span class="hljs-built_in">begin</span>())&lt;ll) st.<span class="hljs-built_in">erase</span>(st.<span class="hljs-built_in">begin</span>());<br>		<span class="hljs-keyword">while</span>(st.<span class="hljs-built_in">size</span>()&amp;&amp;(*st.<span class="hljs-built_in">rbegin</span>())&gt;rr) st.<span class="hljs-built_in">erase</span>(*st.<span class="hljs-built_in">rbegin</span>());<br>		<span class="hljs-keyword">if</span>(!st.<span class="hljs-built_in">size</span>()&amp;&amp;l&gt;r) <br>		&#123;<br>			cout&lt;&lt;<span class="hljs-string">&quot;NO\n&quot;</span>;<br>			<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>		&#125;<br>		<span class="hljs-keyword">if</span>(st.<span class="hljs-built_in">count</span>(t)||(l&lt;=t&amp;&amp;t&lt;=r))<br>		&#123;<br>			l=<span class="hljs-number">0</span>,r=ans[i]=a[i];<br>			st.<span class="hljs-built_in">clear</span>();<br>			tag1=tag2=<span class="hljs-number">0</span>;<br>			<span class="hljs-keyword">continue</span>;<br>		&#125;<br>		<span class="hljs-keyword">if</span>(l&lt;=r)<br>		&#123;<br>			<span class="hljs-keyword">if</span>(tag1) ans[i]=tag2-l;<br>			<span class="hljs-keyword">else</span> ans[i]=tag2+l;<br>		&#125;<br>		<span class="hljs-keyword">else</span><br>		&#123;<br>			<span class="hljs-type">int</span> tt=*st.<span class="hljs-built_in">begin</span>();<br>			<span class="hljs-keyword">if</span>(tag1) ans[i]=tag2-tt;<br>			<span class="hljs-keyword">else</span> ans[i]=tag2+tt;<br>		&#125;<br>		tag1^=<span class="hljs-number">1</span>;tag2=a[i]-tag2;<br>		<span class="hljs-keyword">if</span>(tag1&amp;<span class="hljs-number">1</span>) t=tag2-a[i];<br>		<span class="hljs-keyword">else</span> t=a[i]-tag2;<br>		st.<span class="hljs-built_in">emplace</span>(t);<br>	&#125;<br>	<span class="hljs-keyword">if</span>(l&lt;=r)<br>	&#123;<br>		<span class="hljs-keyword">if</span>(tag1) d[n<span class="hljs-number">-1</span>]=tag2-l;<br>		<span class="hljs-keyword">else</span> d[n<span class="hljs-number">-1</span>]=tag2+l;<br>	&#125;<br>	<span class="hljs-keyword">else</span><br>	&#123;<br>		<span class="hljs-type">int</span> tt=*st.<span class="hljs-built_in">begin</span>();<br>		<span class="hljs-keyword">if</span>(tag1) d[n<span class="hljs-number">-1</span>]=tag2-tt;<br>		<span class="hljs-keyword">else</span> d[n<span class="hljs-number">-1</span>]=tag2+tt;<br>	&#125;<br>	<span class="hljs-built_in">L</span>(i,<span class="hljs-number">1</span>,n<span class="hljs-number">-2</span>)<br>	&#123;<br>		<span class="hljs-keyword">if</span>(ans[i]==a[i]) <br>		&#123;<br>			d[i]=a[i];<br>		&#125;<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(d[i<span class="hljs-number">+1</span>]==a[i]) d[i]=ans[i];<br>		<span class="hljs-keyword">else</span> d[i]=a[i]-d[i<span class="hljs-number">+1</span>];<br>	&#125;<br>	<span class="hljs-type">int</span> ret=<span class="hljs-number">1</span>;<br>	<span class="hljs-built_in">L</span>(i,<span class="hljs-number">1</span>,n<span class="hljs-number">-2</span>) <br>	&#123;<br>		<span class="hljs-keyword">if</span>(<span class="hljs-built_in">abs</span>(d[i])+<span class="hljs-built_in">abs</span>(d[i<span class="hljs-number">+1</span>])!=a[i]) ret*=<span class="hljs-number">-1</span>;<br>		d[i]=ret*d[i];<br>	&#125;<br>	ret=<span class="hljs-number">0</span>;<br>	<span class="hljs-built_in">R</span>(i,<span class="hljs-number">1</span>,n<span class="hljs-number">-1</span>) d[i]+=d[i<span class="hljs-number">-1</span>],ret=<span class="hljs-built_in">min</span>(ret,d[i]);<br>	cout&lt;&lt;<span class="hljs-string">&quot;YES\n&quot;</span>;<br>	<span class="hljs-built_in">R</span>(i,<span class="hljs-number">1</span>,n) cout&lt;&lt;d[i<span class="hljs-number">-1</span>]-ret&lt;&lt;<span class="hljs-string">&quot; &quot;</span>;<br>	cout&lt;&lt;endl;<br>&#125;<br></code></pre></td></tr></table></figure>
 
     </div>
     
+<section class="post-comments" aria-label="评论">
+    <h2 class="post-comments-title">评论</h2>
+    <div class="giscus"></div>
+</section>
+<script src="https://giscus.app/client.js"
+        data-repo="coldiceh/coldiceh.github.io"
+        data-repo-id="R_kgDOR6e6PA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOR6e6PM4C6V73"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
 
 </article>
 
@@ -160,6 +179,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let hexoRoot = (document.body.getAttribute('data-hexo-root') || '/').trim();
     if (!hexoRoot.startsWith('/')) hexoRoot = '/' + hexoRoot;
     if (!hexoRoot.endsWith('/')) hexoRoot += '/';
+
+    (function markLowFx() {
+        const u = navigator.userAgent || '';
+        const safari = /safari/i.test(u) && !/chrome|android|crios|fxios|edgios/i.test(u);
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (safari || reduced) document.documentElement.classList.add('prts-lowfx');
+    })();
+
+    const prtsLowFx = document.documentElement.classList.contains('prts-lowfx');
 
     // ================= 0. 侧栏本地搜索 =================
     const searchInput = document.getElementById('local-search-input');
@@ -362,12 +390,12 @@ document.addEventListener('DOMContentLoaded', () => {
         loadTrack(0, false);
     }
 
-    // ================= 3. 全屏背景飘浮粒子 =================
+    // ================= 3. 全屏背景飘浮粒子（Safari / 省电动效下降频） =================
     const bgCanvas = document.getElementById('global-bg-particles');
-    if (bgCanvas) {
+    if (bgCanvas && !prtsLowFx) {
         const bctx = bgCanvas.getContext('2d');
         const floats = [];
-        const N = 80;
+        const N = 48;
 
         function resizeBg() {
             bgCanvas.width = window.innerWidth;
@@ -380,33 +408,38 @@ document.addEventListener('DOMContentLoaded', () => {
             floats.push({
                 x: Math.random() * window.innerWidth,
                 y: Math.random() * window.innerHeight,
-                r: Math.random() * 1.6 + 0.35,
-                vx: (Math.random() - 0.5) * 0.28,
-                vy: (Math.random() - 0.5) * 0.28,
+                r: Math.random() * 1.4 + 0.3,
+                vx: (Math.random() - 0.5) * 0.22,
+                vy: (Math.random() - 0.5) * 0.22,
                 ph: Math.random() * Math.PI * 2,
-                a: Math.random() * 0.35 + 0.12
+                a: Math.random() * 0.28 + 0.1
             });
         }
 
-        function tickBg() {
+        let bgLast = 0;
+        const bgFrameMs = prtsLowFx ? 70 : 28;
+        function tickBg(now) {
+            requestAnimationFrame(tickBg);
+            if (document.hidden) return;
+            if (now - bgLast < bgFrameMs) return;
+            bgLast = now;
             bctx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
             const light = document.body.getAttribute('data-theme') === 'light';
-            const t = Date.now() / 1000;
+            const t = now / 1000;
             floats.forEach((p, i) => {
-                p.x += p.vx + Math.sin(t * 0.7 + p.ph + i) * 0.12;
-                p.y += p.vy + Math.cos(t * 0.55 + p.ph) * 0.1;
+                p.x += p.vx + Math.sin(t * 0.65 + p.ph + i) * 0.1;
+                p.y += p.vy + Math.cos(t * 0.5 + p.ph) * 0.08;
                 if (p.x < -20) p.x = bgCanvas.width + 20;
                 if (p.x > bgCanvas.width + 20) p.x = -20;
                 if (p.y < -20) p.y = bgCanvas.height + 20;
                 if (p.y > bgCanvas.height + 20) p.y = -20;
-                bctx.fillStyle = light ? 'rgba(0,100,200,' + p.a + ')' : 'rgba(0,195,255,' + p.a + ')';
+                bctx.fillStyle = light ? 'rgba(0,100,200,' + p.a + ')' : 'rgba(0,212,255,' + p.a + ')';
                 bctx.beginPath();
                 bctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
                 bctx.fill();
             });
-            requestAnimationFrame(tickBg);
         }
-        tickBg();
+        requestAnimationFrame(tickBg);
     }
 
     // ================= 4. 左下角龙泡泡 Logo 粒子 =================
@@ -428,14 +461,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const out = [];
             for (let y = 0; y < size; y += step) {
                 for (let x = 0; x < size; x += step) {
-                    const a = imageData[((y * size + x) * 4) + 3];
-                    if (a > threshold) out.push([x, y]);
+                    const i = ((y * size + x) * 4);
+                    const a = imageData[i + 3];
+                    if (a > threshold) {
+                        const r = imageData[i];
+                        const g = imageData[i + 1];
+                        const b = imageData[i + 2];
+                        out.push({ x, y, r, g, b });
+                    }
                 }
             }
             return out;
         }
 
-        function downsample(points, maxN) {
+        function downsamplePoints(points, maxN) {
             if (points.length <= maxN) return points;
             const step = Math.ceil(points.length / maxN);
             const res = [];
@@ -455,27 +494,31 @@ document.addEventListener('DOMContentLoaded', () => {
             const imageData = tempCtx.getImageData(0, 0, size, size).data;
 
             const scale = Math.min(1.35, (canvas.width / size) * 0.85);
-            const blockH = size * scale;
             const blockW = size * scale;
+            const blockH = size * scale;
             const offsetX = (canvas.width - blockW) / 2;
             const offsetY = Math.max(8, canvas.height - blockH - 6);
 
-            let pts = sampleLogoPoints(imageData, size, 210, 4);
+            const maxPts = prtsLowFx ? 420 : 780;
+            let pts = sampleLogoPoints(imageData, size, 210, prtsLowFx ? 5 : 4);
             if (pts.length < 40) pts = sampleLogoPoints(imageData, size, 165, 5);
-            pts = downsample(pts, 850);
+            pts = downsamplePoints(pts, maxPts);
 
             class Particle {
-                constructor(x, y) {
+                constructor(px, py, cr, cg, cb) {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
-                    this.baseX = x;
-                    this.baseY = y;
-                    this.density = (Math.random() * 30) + 1;
+                    this.baseX = px;
+                    this.baseY = py;
+                    this.cr = cr;
+                    this.cg = cg;
+                    this.cb = cb;
+                    this.density = (Math.random() * 26) + 1;
                 }
                 draw() {
-                    ctx.fillStyle = '#00c3ff';
+                    ctx.fillStyle = 'rgb(' + this.cr + ',' + this.cg + ',' + this.cb + ')';
                     ctx.beginPath();
-                    ctx.arc(this.x, this.y, 1.15, 0, Math.PI * 2);
+                    ctx.arc(this.x, this.y, prtsLowFx ? 1 : 1.1, 0, Math.PI * 2);
                     ctx.fill();
                 }
                 update() {
@@ -489,28 +532,37 @@ document.addEventListener('DOMContentLoaded', () => {
                         const distance = Math.sqrt(dx * dx + dy * dy);
                         if (distance < mouse.radius && distance > 0.01) {
                             const force = (mouse.radius - distance) / mouse.radius;
-                            this.x -= (dx / distance) * force * this.density * 0.8;
-                            this.y -= (dy / distance) * force * this.density * 0.8;
+                            this.x -= (dx / distance) * force * this.density * 0.75;
+                            this.y -= (dy / distance) * force * this.density * 0.75;
                         } else {
-                            this.x += (this.baseX - this.x) * 0.12;
-                            this.y += (this.baseY - this.y) * 0.12;
+                            this.x += (this.baseX - this.x) * 0.11;
+                            this.y += (this.baseY - this.y) * 0.11;
                         }
                     } else {
-                        this.x += (this.baseX - this.x) * 0.12;
-                        this.y += (this.baseY - this.y) * 0.12;
+                        this.x += (this.baseX - this.x) * 0.11;
+                        this.y += (this.baseY - this.y) * 0.11;
                     }
                 }
             }
 
-            particles = pts.map(([x, y]) => new Particle(x * scale + offsetX, y * scale + offsetY));
+            particles = pts.map(p => new Particle(
+                p.x * scale + offsetX,
+                p.y * scale + offsetY,
+                p.r, p.g, p.b
+            ));
 
-            function animate() {
+            let logoLast = 0;
+            const logoFrameMs = prtsLowFx ? 55 : 24;
+            function animateLogo(now) {
+                requestAnimationFrame(animateLogo);
+                if (document.hidden) return;
+                if (now - logoLast < logoFrameMs) return;
+                logoLast = now;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 particles.forEach(p => { p.update(); p.draw(); });
-                requestAnimationFrame(animate);
             }
-            animate();
-            console.log('PRTS: Logo particles:', particles.length);
+            requestAnimationFrame(animateLogo);
+            console.log('PRTS: Logo particles (color):', particles.length);
         };
         logoImg.onerror = function () {
             console.warn('PRTS: logo.png 加载失败，跳过侧栏形状粒子');
@@ -520,7 +572,57 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
     }
 
-    // ================= 5. 首页封面图：极端尺寸则隐藏横幅 =================
+    // ================= 5. 代码块：复制 + 横向滚动（兼容 figure.highlight） =================
+    function enhanceCodeBlocks(root) {
+        const scope = root || document;
+        scope.querySelectorAll('.post-content figure.highlight').forEach(fig => {
+            if (fig.closest('.code-block-wrap')) return;
+            const wrap = document.createElement('div');
+            wrap.className = 'code-block-wrap';
+            const bar = document.createElement('div');
+            bar.className = 'code-toolbar';
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'code-copy-btn';
+            btn.textContent = '复制';
+            btn.addEventListener('click', () => {
+                const t = (fig.innerText || '').replace(/\n+$/, '');
+                navigator.clipboard.writeText(t).then(() => {
+                    btn.textContent = '已复制';
+                    setTimeout(() => { btn.textContent = '复制'; }, 1400);
+                }).catch(() => { btn.textContent = '失败'; });
+            });
+            bar.appendChild(btn);
+            fig.parentNode.insertBefore(wrap, fig);
+            wrap.appendChild(bar);
+            wrap.appendChild(fig);
+        });
+        scope.querySelectorAll('.post-content > pre').forEach(pre => {
+            if (pre.closest('.code-block-wrap') || pre.closest('figure.highlight')) return;
+            const wrap = document.createElement('div');
+            wrap.className = 'code-block-wrap';
+            const bar = document.createElement('div');
+            bar.className = 'code-toolbar';
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'code-copy-btn';
+            btn.textContent = '复制';
+            btn.addEventListener('click', () => {
+                const t = (pre.innerText || '').replace(/\n+$/, '');
+                navigator.clipboard.writeText(t).then(() => {
+                    btn.textContent = '已复制';
+                    setTimeout(() => { btn.textContent = '复制'; }, 1400);
+                }).catch(() => { btn.textContent = '失败'; });
+            });
+            bar.appendChild(btn);
+            pre.parentNode.insertBefore(wrap, pre);
+            wrap.appendChild(bar);
+            wrap.appendChild(pre);
+        });
+    }
+    enhanceCodeBlocks(document);
+
+    // ================= 6. 首页封面图：极端尺寸则隐藏横幅 =================
     document.querySelectorAll('img[data-cover-watch]').forEach(img => {
         function check() {
             const w = img.naturalWidth;

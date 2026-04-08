@@ -16,6 +16,7 @@ window.MathJax = {
 <title>CRT与exCRT | Hexo</title>
 <link rel="icon" href="/avatar.jpg" type="image/jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-dark.min.css" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/style.css">
 
 <meta name="generator" content="Hexo 8.1.1"></head>
@@ -46,14 +47,11 @@ window.MathJax = {
     
     <div class="sidebar-bili-row">
         <a class="sidebar-bili-link" href="https://space.bilibili.com/398617002" target="_blank" rel="noopener noreferrer" title="哔哩哔哩空间" aria-label="哔哩哔哩空间">
-            <span class="sidebar-bili-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="24" height="24" rx="5" fill="#FB7299"/>
-                    <path fill="#fff" d="M8.5 9.2h7v5.6h-7V9.2zm1.3 1.3v3h4.4v-3H9.8z" opacity=".95"/>
-                    <path fill="#fff" d="M9.2 7.3l.9 1.2h3.8l.9-1.2H12l-.4.6h-.8l-.4-.6H9.2z"/>
-                </svg>
-            </span>
-            <span class="sidebar-bili-text">哔哩哔哩</span>
+            <svg class="sidebar-bili-svg" viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect width="24" height="24" rx="5" fill="#FB7299"/>
+                <path fill="#fff" d="M8.5 9.2h7v5.6h-7V9.2zm1.3 1.3v3h4.4v-3H9.8z" opacity=".95"/>
+                <path fill="#fff" d="M9.2 7.3l.9 1.2h3.8l.9-1.2H12l-.4.6h-.8l-.4-.6H9.2z"/>
+            </svg>
         </a>
     </div>
     
@@ -74,7 +72,7 @@ window.MathJax = {
         <nav class="sidebar-links" aria-label="常用链接">
             <a href="/archives/">归档</a>
             <a href="/tags/">全部标签</a>
-            <a href="/essay-archive/">随笔档案（按月）</a>
+            <a href="/essay-archive/">随笔档案</a>
             <a href="/comments/">评论</a>
         </nav>
     </section>
@@ -113,10 +111,31 @@ window.MathJax = {
 <p>同样需要用扩展欧几里得算法求逆元。</p>
 <h2 id="NOI2018-屠龙勇士"><a href="#NOI2018-屠龙勇士" class="headerlink" title="[NOI2018] 屠龙勇士"></a>[NOI2018] 屠龙勇士</h2><h3 id="sol"><a href="#sol" class="headerlink" title="sol"></a>sol</h3><p>其实就是给了一堆<br>$$<br>x\cdot ATK_i\equiv a_i \pmod {p_i}<br>$$<br>但这不是一个标准的同余方程，所以要把它先转成一个标准的形式。</p>
 <p>具体就省略了</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n,m;</span><br><span class="line"><span class="type">int</span> a[<span class="number">111111</span>],p[<span class="number">111111</span>];</span><br><span class="line"><span class="type">int</span> f[<span class="number">111111</span>],b[<span class="number">111111</span>];</span><br><span class="line"><span class="type">int</span> v[<span class="number">111111</span>];</span><br><span class="line"><span class="type">int</span> M,ans;</span><br><span class="line"></span><br><span class="line">multiset&lt;<span class="type">int</span>&gt;st;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> &amp;x,<span class="type">int</span> y,<span class="type">int</span> p=mod)</span></span>&#123;x+=y,x&gt;=p?x-=p:<span class="number">1</span>;&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">gcd</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span></span>&#123;<span class="keyword">return</span> !b?a:<span class="built_in">gcd</span>(b,a%b);&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">exgcd</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b,<span class="type">int</span> &amp;x,<span class="type">int</span> &amp;y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!b) &#123;x=<span class="number">1</span>;y=<span class="number">0</span>;<span class="keyword">return</span> a;&#125;</span><br><span class="line">    <span class="type">int</span> ret=<span class="built_in">exgcd</span>(b,a%b,y,x);</span><br><span class="line">    y-=x*(a/b);</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">ginv</span><span class="params">(<span class="type">int</span> n,<span class="type">int</span> p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> x,y,ret;</span><br><span class="line">    ret=<span class="built_in">exgcd</span>(n,p,x,y);</span><br><span class="line">    <span class="keyword">if</span>(ret&lt;=<span class="number">1</span>) <span class="keyword">return</span> (x+p)%p;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">smul</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y,<span class="type">int</span> p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    x=(x%p+p)%p,y=(y%p+p)%p;</span><br><span class="line">    <span class="type">int</span> ret=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(y&amp;<span class="number">1</span>) <span class="built_in">add</span>(ret,x,p);</span><br><span class="line">        <span class="built_in">add</span>(x,x,p);</span><br><span class="line">        y&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">excrt</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    M=p[<span class="number">1</span>];ans=b[<span class="number">1</span>];</span><br><span class="line">    <span class="type">int</span> x,y;</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">2</span>,n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> A=M,B=p[i],C=(b[i]-ans%B+B)%B,D=<span class="built_in">exgcd</span>(A,B,x,y),BG=B/D;</span><br><span class="line">        <span class="keyword">if</span>(C%D) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        x=<span class="built_in">smul</span>(x,C/D,BG);</span><br><span class="line">        ans+=x*M;</span><br><span class="line">        M*=BG;</span><br><span class="line">        ans=(ans%M+M)%M;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    st.<span class="built_in">clear</span>();</span><br><span class="line">    n=<span class="built_in">read</span>(),m=<span class="built_in">read</span>();</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,n) a[i]=<span class="built_in">read</span>();</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,n) p[i]=<span class="built_in">read</span>();</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,n) f[i]=<span class="built_in">read</span>();</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,m) st.<span class="built_in">insert</span>(<span class="built_in">read</span>());</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,n) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">auto</span> it=st.<span class="built_in">begin</span>();</span><br><span class="line">        <span class="keyword">if</span>((*it)&lt;a[i]) it=--st.<span class="built_in">upper_bound</span>(a[i]);</span><br><span class="line">        v[i]=*it;st.<span class="built_in">erase</span>(it);</span><br><span class="line">        st.<span class="built_in">insert</span>(f[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> g,iv;</span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,n)</span><br><span class="line">    &#123;</span><br><span class="line">        g=<span class="built_in">gcd</span>(a[i],<span class="built_in">gcd</span>(v[i],p[i]));</span><br><span class="line">        a[i]/=g,v[i]/=g,p[i]/=g;</span><br><span class="line">        iv=<span class="built_in">ginv</span>(v[i],p[i]);</span><br><span class="line">        <span class="keyword">if</span>(!~iv) &#123;<span class="built_in">puts</span>(<span class="string">&quot;-1&quot;</span>);<span class="keyword">return</span>;&#125;</span><br><span class="line">        b[i]=<span class="built_in">smul</span>(a[i],iv,p[i]);</span><br><span class="line">        <span class="comment">//printf(&quot;a:%lld b:%lld v:%lld p:%lld\n&quot;,a[i],b[i],v[i],p[i]);</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!~<span class="built_in">excrt</span>()) &#123;<span class="built_in">puts</span>(<span class="string">&quot;-1&quot;</span>);<span class="keyword">return</span>;&#125;</span><br><span class="line">	<span class="comment">//x=ans(mod M)</span></span><br><span class="line">    <span class="built_in">R</span>(i,<span class="number">1</span>,n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> vl=(a[i]+v[i]<span class="number">-1</span>)/v[i];</span><br><span class="line">        <span class="keyword">if</span>(vl&lt;=ans) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="type">int</span> k=(vl-ans+M<span class="number">-1</span>)/M;</span><br><span class="line">        ans+=k*M;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">writeln</span>(ans);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> _=<span class="built_in">read</span>();_--;) <span class="built_in">solve</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> n,m;<br><span class="hljs-type">int</span> a[<span class="hljs-number">111111</span>],p[<span class="hljs-number">111111</span>];<br><span class="hljs-type">int</span> f[<span class="hljs-number">111111</span>],b[<span class="hljs-number">111111</span>];<br><span class="hljs-type">int</span> v[<span class="hljs-number">111111</span>];<br><span class="hljs-type">int</span> M,ans;<br><br>multiset&lt;<span class="hljs-type">int</span>&gt;st;<br><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-type">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-type">int</span> &amp;x,<span class="hljs-type">int</span> y,<span class="hljs-type">int</span> p=mod)</span></span>&#123;x+=y,x&gt;=p?x-=p:<span class="hljs-number">1</span>;&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">gcd</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b)</span></span>&#123;<span class="hljs-keyword">return</span> !b?a:<span class="hljs-built_in">gcd</span>(b,a%b);&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">exgcd</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b,<span class="hljs-type">int</span> &amp;x,<span class="hljs-type">int</span> &amp;y)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span>(!b) &#123;x=<span class="hljs-number">1</span>;y=<span class="hljs-number">0</span>;<span class="hljs-keyword">return</span> a;&#125;<br>    <span class="hljs-type">int</span> ret=<span class="hljs-built_in">exgcd</span>(b,a%b,y,x);<br>    y-=x*(a/b);<br>    <span class="hljs-keyword">return</span> ret;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-type">int</span> <span class="hljs-title">ginv</span><span class="hljs-params">(<span class="hljs-type">int</span> n,<span class="hljs-type">int</span> p)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">static</span> <span class="hljs-type">int</span> x,y,ret;<br>    ret=<span class="hljs-built_in">exgcd</span>(n,p,x,y);<br>    <span class="hljs-keyword">if</span>(ret&lt;=<span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> (x+p)%p;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-type">int</span> <span class="hljs-title">smul</span><span class="hljs-params">(<span class="hljs-type">int</span> x,<span class="hljs-type">int</span> y,<span class="hljs-type">int</span> p)</span></span><br><span class="hljs-function"></span>&#123;<br>    x=(x%p+p)%p,y=(y%p+p)%p;<br>    <span class="hljs-type">int</span> ret=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span>(y)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(y&amp;<span class="hljs-number">1</span>) <span class="hljs-built_in">add</span>(ret,x,p);<br>        <span class="hljs-built_in">add</span>(x,x,p);<br>        y&gt;&gt;=<span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> ret;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-type">int</span> <span class="hljs-title">excrt</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    M=p[<span class="hljs-number">1</span>];ans=b[<span class="hljs-number">1</span>];<br>    <span class="hljs-type">int</span> x,y;<br>    <span class="hljs-built_in">R</span>(i,<span class="hljs-number">2</span>,n)<br>    &#123;<br>        <span class="hljs-type">int</span> A=M,B=p[i],C=(b[i]-ans%B+B)%B,D=<span class="hljs-built_in">exgcd</span>(A,B,x,y),BG=B/D;<br>        <span class="hljs-keyword">if</span>(C%D) <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>        x=<span class="hljs-built_in">smul</span>(x,C/D,BG);<br>        ans+=x*M;<br>        M*=BG;<br>        ans=(ans%M+M)%M;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    st.<span class="hljs-built_in">clear</span>();<br>    n=<span class="hljs-built_in">read</span>(),m=<span class="hljs-built_in">read</span>();<br>    <span class="hljs-built_in">R</span>(i,<span class="hljs-number">1</span>,n) a[i]=<span class="hljs-built_in">read</span>();<br>    <span class="hljs-built_in">R</span>(i,<span class="hljs-number">1</span>,n) p[i]=<span class="hljs-built_in">read</span>();<br>    <span class="hljs-built_in">R</span>(i,<span class="hljs-number">1</span>,n) f[i]=<span class="hljs-built_in">read</span>();<br>    <span class="hljs-built_in">R</span>(i,<span class="hljs-number">1</span>,m) st.<span class="hljs-built_in">insert</span>(<span class="hljs-built_in">read</span>());<br>    <span class="hljs-built_in">R</span>(i,<span class="hljs-number">1</span>,n) <br>    &#123;<br>        <span class="hljs-keyword">auto</span> it=st.<span class="hljs-built_in">begin</span>();<br>        <span class="hljs-keyword">if</span>((*it)&lt;a[i]) it=--st.<span class="hljs-built_in">upper_bound</span>(a[i]);<br>        v[i]=*it;st.<span class="hljs-built_in">erase</span>(it);<br>        st.<span class="hljs-built_in">insert</span>(f[i]);<br>    &#125;<br>    <span class="hljs-type">int</span> g,iv;<br>    <span class="hljs-built_in">R</span>(i,<span class="hljs-number">1</span>,n)<br>    &#123;<br>        g=<span class="hljs-built_in">gcd</span>(a[i],<span class="hljs-built_in">gcd</span>(v[i],p[i]));<br>        a[i]/=g,v[i]/=g,p[i]/=g;<br>        iv=<span class="hljs-built_in">ginv</span>(v[i],p[i]);<br>        <span class="hljs-keyword">if</span>(!~iv) &#123;<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;-1&quot;</span>);<span class="hljs-keyword">return</span>;&#125;<br>        b[i]=<span class="hljs-built_in">smul</span>(a[i],iv,p[i]);<br>        <span class="hljs-comment">//printf(&quot;a:%lld b:%lld v:%lld p:%lld\n&quot;,a[i],b[i],v[i],p[i]);</span><br>    &#125;<br>    <span class="hljs-keyword">if</span>(!~<span class="hljs-built_in">excrt</span>()) &#123;<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;-1&quot;</span>);<span class="hljs-keyword">return</span>;&#125;<br>	<span class="hljs-comment">//x=ans(mod M)</span><br>    <span class="hljs-built_in">R</span>(i,<span class="hljs-number">1</span>,n)<br>    &#123;<br>        <span class="hljs-type">int</span> vl=(a[i]+v[i]<span class="hljs-number">-1</span>)/v[i];<br>        <span class="hljs-keyword">if</span>(vl&lt;=ans) <span class="hljs-keyword">continue</span>;<br>        <span class="hljs-type">int</span> k=(vl-ans+M<span class="hljs-number">-1</span>)/M;<br>        ans+=k*M;<br>    &#125;<br>    <span class="hljs-built_in">writeln</span>(ans);<br>&#125;<br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> _=<span class="hljs-built_in">read</span>();_--;) <span class="hljs-built_in">solve</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
 
     </div>
     
+<section class="post-comments" aria-label="评论">
+    <h2 class="post-comments-title">评论</h2>
+    <div class="giscus"></div>
+</section>
+<script src="https://giscus.app/client.js"
+        data-repo="coldiceh/coldiceh.github.io"
+        data-repo-id="R_kgDOR6e6PA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOR6e6PM4C6V73"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
 
 </article>
 
@@ -160,6 +179,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let hexoRoot = (document.body.getAttribute('data-hexo-root') || '/').trim();
     if (!hexoRoot.startsWith('/')) hexoRoot = '/' + hexoRoot;
     if (!hexoRoot.endsWith('/')) hexoRoot += '/';
+
+    (function markLowFx() {
+        const u = navigator.userAgent || '';
+        const safari = /safari/i.test(u) && !/chrome|android|crios|fxios|edgios/i.test(u);
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (safari || reduced) document.documentElement.classList.add('prts-lowfx');
+    })();
+
+    const prtsLowFx = document.documentElement.classList.contains('prts-lowfx');
 
     // ================= 0. 侧栏本地搜索 =================
     const searchInput = document.getElementById('local-search-input');
@@ -362,12 +390,12 @@ document.addEventListener('DOMContentLoaded', () => {
         loadTrack(0, false);
     }
 
-    // ================= 3. 全屏背景飘浮粒子 =================
+    // ================= 3. 全屏背景飘浮粒子（Safari / 省电动效下降频） =================
     const bgCanvas = document.getElementById('global-bg-particles');
-    if (bgCanvas) {
+    if (bgCanvas && !prtsLowFx) {
         const bctx = bgCanvas.getContext('2d');
         const floats = [];
-        const N = 80;
+        const N = 48;
 
         function resizeBg() {
             bgCanvas.width = window.innerWidth;
@@ -380,33 +408,38 @@ document.addEventListener('DOMContentLoaded', () => {
             floats.push({
                 x: Math.random() * window.innerWidth,
                 y: Math.random() * window.innerHeight,
-                r: Math.random() * 1.6 + 0.35,
-                vx: (Math.random() - 0.5) * 0.28,
-                vy: (Math.random() - 0.5) * 0.28,
+                r: Math.random() * 1.4 + 0.3,
+                vx: (Math.random() - 0.5) * 0.22,
+                vy: (Math.random() - 0.5) * 0.22,
                 ph: Math.random() * Math.PI * 2,
-                a: Math.random() * 0.35 + 0.12
+                a: Math.random() * 0.28 + 0.1
             });
         }
 
-        function tickBg() {
+        let bgLast = 0;
+        const bgFrameMs = prtsLowFx ? 70 : 28;
+        function tickBg(now) {
+            requestAnimationFrame(tickBg);
+            if (document.hidden) return;
+            if (now - bgLast < bgFrameMs) return;
+            bgLast = now;
             bctx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
             const light = document.body.getAttribute('data-theme') === 'light';
-            const t = Date.now() / 1000;
+            const t = now / 1000;
             floats.forEach((p, i) => {
-                p.x += p.vx + Math.sin(t * 0.7 + p.ph + i) * 0.12;
-                p.y += p.vy + Math.cos(t * 0.55 + p.ph) * 0.1;
+                p.x += p.vx + Math.sin(t * 0.65 + p.ph + i) * 0.1;
+                p.y += p.vy + Math.cos(t * 0.5 + p.ph) * 0.08;
                 if (p.x < -20) p.x = bgCanvas.width + 20;
                 if (p.x > bgCanvas.width + 20) p.x = -20;
                 if (p.y < -20) p.y = bgCanvas.height + 20;
                 if (p.y > bgCanvas.height + 20) p.y = -20;
-                bctx.fillStyle = light ? 'rgba(0,100,200,' + p.a + ')' : 'rgba(0,195,255,' + p.a + ')';
+                bctx.fillStyle = light ? 'rgba(0,100,200,' + p.a + ')' : 'rgba(0,212,255,' + p.a + ')';
                 bctx.beginPath();
                 bctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
                 bctx.fill();
             });
-            requestAnimationFrame(tickBg);
         }
-        tickBg();
+        requestAnimationFrame(tickBg);
     }
 
     // ================= 4. 左下角龙泡泡 Logo 粒子 =================
@@ -428,14 +461,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const out = [];
             for (let y = 0; y < size; y += step) {
                 for (let x = 0; x < size; x += step) {
-                    const a = imageData[((y * size + x) * 4) + 3];
-                    if (a > threshold) out.push([x, y]);
+                    const i = ((y * size + x) * 4);
+                    const a = imageData[i + 3];
+                    if (a > threshold) {
+                        const r = imageData[i];
+                        const g = imageData[i + 1];
+                        const b = imageData[i + 2];
+                        out.push({ x, y, r, g, b });
+                    }
                 }
             }
             return out;
         }
 
-        function downsample(points, maxN) {
+        function downsamplePoints(points, maxN) {
             if (points.length <= maxN) return points;
             const step = Math.ceil(points.length / maxN);
             const res = [];
@@ -455,27 +494,31 @@ document.addEventListener('DOMContentLoaded', () => {
             const imageData = tempCtx.getImageData(0, 0, size, size).data;
 
             const scale = Math.min(1.35, (canvas.width / size) * 0.85);
-            const blockH = size * scale;
             const blockW = size * scale;
+            const blockH = size * scale;
             const offsetX = (canvas.width - blockW) / 2;
             const offsetY = Math.max(8, canvas.height - blockH - 6);
 
-            let pts = sampleLogoPoints(imageData, size, 210, 4);
+            const maxPts = prtsLowFx ? 420 : 780;
+            let pts = sampleLogoPoints(imageData, size, 210, prtsLowFx ? 5 : 4);
             if (pts.length < 40) pts = sampleLogoPoints(imageData, size, 165, 5);
-            pts = downsample(pts, 850);
+            pts = downsamplePoints(pts, maxPts);
 
             class Particle {
-                constructor(x, y) {
+                constructor(px, py, cr, cg, cb) {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
-                    this.baseX = x;
-                    this.baseY = y;
-                    this.density = (Math.random() * 30) + 1;
+                    this.baseX = px;
+                    this.baseY = py;
+                    this.cr = cr;
+                    this.cg = cg;
+                    this.cb = cb;
+                    this.density = (Math.random() * 26) + 1;
                 }
                 draw() {
-                    ctx.fillStyle = '#00c3ff';
+                    ctx.fillStyle = 'rgb(' + this.cr + ',' + this.cg + ',' + this.cb + ')';
                     ctx.beginPath();
-                    ctx.arc(this.x, this.y, 1.15, 0, Math.PI * 2);
+                    ctx.arc(this.x, this.y, prtsLowFx ? 1 : 1.1, 0, Math.PI * 2);
                     ctx.fill();
                 }
                 update() {
@@ -489,28 +532,37 @@ document.addEventListener('DOMContentLoaded', () => {
                         const distance = Math.sqrt(dx * dx + dy * dy);
                         if (distance < mouse.radius && distance > 0.01) {
                             const force = (mouse.radius - distance) / mouse.radius;
-                            this.x -= (dx / distance) * force * this.density * 0.8;
-                            this.y -= (dy / distance) * force * this.density * 0.8;
+                            this.x -= (dx / distance) * force * this.density * 0.75;
+                            this.y -= (dy / distance) * force * this.density * 0.75;
                         } else {
-                            this.x += (this.baseX - this.x) * 0.12;
-                            this.y += (this.baseY - this.y) * 0.12;
+                            this.x += (this.baseX - this.x) * 0.11;
+                            this.y += (this.baseY - this.y) * 0.11;
                         }
                     } else {
-                        this.x += (this.baseX - this.x) * 0.12;
-                        this.y += (this.baseY - this.y) * 0.12;
+                        this.x += (this.baseX - this.x) * 0.11;
+                        this.y += (this.baseY - this.y) * 0.11;
                     }
                 }
             }
 
-            particles = pts.map(([x, y]) => new Particle(x * scale + offsetX, y * scale + offsetY));
+            particles = pts.map(p => new Particle(
+                p.x * scale + offsetX,
+                p.y * scale + offsetY,
+                p.r, p.g, p.b
+            ));
 
-            function animate() {
+            let logoLast = 0;
+            const logoFrameMs = prtsLowFx ? 55 : 24;
+            function animateLogo(now) {
+                requestAnimationFrame(animateLogo);
+                if (document.hidden) return;
+                if (now - logoLast < logoFrameMs) return;
+                logoLast = now;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 particles.forEach(p => { p.update(); p.draw(); });
-                requestAnimationFrame(animate);
             }
-            animate();
-            console.log('PRTS: Logo particles:', particles.length);
+            requestAnimationFrame(animateLogo);
+            console.log('PRTS: Logo particles (color):', particles.length);
         };
         logoImg.onerror = function () {
             console.warn('PRTS: logo.png 加载失败，跳过侧栏形状粒子');
@@ -520,7 +572,57 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
     }
 
-    // ================= 5. 首页封面图：极端尺寸则隐藏横幅 =================
+    // ================= 5. 代码块：复制 + 横向滚动（兼容 figure.highlight） =================
+    function enhanceCodeBlocks(root) {
+        const scope = root || document;
+        scope.querySelectorAll('.post-content figure.highlight').forEach(fig => {
+            if (fig.closest('.code-block-wrap')) return;
+            const wrap = document.createElement('div');
+            wrap.className = 'code-block-wrap';
+            const bar = document.createElement('div');
+            bar.className = 'code-toolbar';
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'code-copy-btn';
+            btn.textContent = '复制';
+            btn.addEventListener('click', () => {
+                const t = (fig.innerText || '').replace(/\n+$/, '');
+                navigator.clipboard.writeText(t).then(() => {
+                    btn.textContent = '已复制';
+                    setTimeout(() => { btn.textContent = '复制'; }, 1400);
+                }).catch(() => { btn.textContent = '失败'; });
+            });
+            bar.appendChild(btn);
+            fig.parentNode.insertBefore(wrap, fig);
+            wrap.appendChild(bar);
+            wrap.appendChild(fig);
+        });
+        scope.querySelectorAll('.post-content > pre').forEach(pre => {
+            if (pre.closest('.code-block-wrap') || pre.closest('figure.highlight')) return;
+            const wrap = document.createElement('div');
+            wrap.className = 'code-block-wrap';
+            const bar = document.createElement('div');
+            bar.className = 'code-toolbar';
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'code-copy-btn';
+            btn.textContent = '复制';
+            btn.addEventListener('click', () => {
+                const t = (pre.innerText || '').replace(/\n+$/, '');
+                navigator.clipboard.writeText(t).then(() => {
+                    btn.textContent = '已复制';
+                    setTimeout(() => { btn.textContent = '复制'; }, 1400);
+                }).catch(() => { btn.textContent = '失败'; });
+            });
+            bar.appendChild(btn);
+            pre.parentNode.insertBefore(wrap, pre);
+            wrap.appendChild(bar);
+            wrap.appendChild(pre);
+        });
+    }
+    enhanceCodeBlocks(document);
+
+    // ================= 6. 首页封面图：极端尺寸则隐藏横幅 =================
     document.querySelectorAll('img[data-cover-watch]').forEach(img => {
         function check() {
             const w = img.naturalWidth;

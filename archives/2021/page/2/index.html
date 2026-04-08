@@ -16,6 +16,7 @@ window.MathJax = {
 <title>Hexo</title>
 <link rel="icon" href="/avatar.jpg" type="image/jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-dark.min.css" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/style.css">
 
 <meta name="generator" content="Hexo 8.1.1"></head>
@@ -46,14 +47,11 @@ window.MathJax = {
     
     <div class="sidebar-bili-row">
         <a class="sidebar-bili-link" href="https://space.bilibili.com/398617002" target="_blank" rel="noopener noreferrer" title="哔哩哔哩空间" aria-label="哔哩哔哩空间">
-            <span class="sidebar-bili-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="24" height="24" rx="5" fill="#FB7299"/>
-                    <path fill="#fff" d="M8.5 9.2h7v5.6h-7V9.2zm1.3 1.3v3h4.4v-3H9.8z" opacity=".95"/>
-                    <path fill="#fff" d="M9.2 7.3l.9 1.2h3.8l.9-1.2H12l-.4.6h-.8l-.4-.6H9.2z"/>
-                </svg>
-            </span>
-            <span class="sidebar-bili-text">哔哩哔哩</span>
+            <svg class="sidebar-bili-svg" viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect width="24" height="24" rx="5" fill="#FB7299"/>
+                <path fill="#fff" d="M8.5 9.2h7v5.6h-7V9.2zm1.3 1.3v3h4.4v-3H9.8z" opacity=".95"/>
+                <path fill="#fff" d="M9.2 7.3l.9 1.2h3.8l.9-1.2H12l-.4.6h-.8l-.4-.6H9.2z"/>
+            </svg>
         </a>
     </div>
     
@@ -74,7 +72,7 @@ window.MathJax = {
         <nav class="sidebar-links" aria-label="常用链接">
             <a href="/archives/">归档</a>
             <a href="/tags/">全部标签</a>
-            <a href="/essay-archive/">随笔档案（按月）</a>
+            <a href="/essay-archive/">随笔档案</a>
             <a href="/comments/">评论</a>
         </nav>
     </section>
@@ -93,15 +91,15 @@ window.MathJax = {
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2021-07-07</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2021/07/07/CRT%E4%B8%8EexCRT/">CRT与exCRT</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             无关：$$ax\equiv b \pmod c\x\equiv x_0\pmod{c’}\c’&#x3D;\frac{c}{\gcd(a,c)}$$
 CRT对若干互质整数解线性同余方程组：$$\begin{cases} x&amp;\equiv a_1 \pmod {n_1} \ x&amp;\equiv a_2 \p...
@@ -115,15 +113,15 @@ CRT对若干互质整数解线性同余方程组：$$\begin{cases} x&amp;\equiv 
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2021-07-05</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2021/07/05/%E5%92%95/">咕</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             猫树
 ETT
@@ -155,15 +153,15 @@ CF724F
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2021-07-01</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2021/07/01/%E3%80%8CJOISC%202021%20Day1%E3%80%8D%E9%A5%AE%E9%A3%9F%E5%8C%BA/">「JOISC 2021 Day1」饮食区</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             考虑将所有所有修改和询问离线下来，并且将队列编号看成时刻。这样就可以将操作一二的修改拆开，变成在$L_i$时刻加入数据结构，在$R_i+1$时刻弹出数据结构。
 考虑使用一棵普通的线段树维护，下标为操作的顺序（因为操作也是有顺序的），每个节点维护当前区间元素的个数（可以是负数），区间最大元素子段和，区间加入元素的个数。
@@ -178,19 +176,19 @@ CF724F
     
         
 <article class="ak-card ak-card--banner">
-    
-    <a href="/2021/07/01/%E7%BB%84%E5%90%88%E8%AE%A1%E6%95%B0/" class="ak-card-banner-wrap" aria-hidden="true" tabindex="-1">
-        <img class="ak-card-banner-img" src="https://files.catbox.moe/o883ah.png" alt="" loading="lazy" decoding="async" data-cover-watch="1" />
-    </a>
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2021-07-01</span>
         </div>
         <h3 class="ak-card-title ak-card-title--banner">
             <a href="/2021/07/01/%E7%BB%84%E5%90%88%E8%AE%A1%E6%95%B0/">组合计数</a>
         </h3>
+        
+        <a href="/2021/07/01/%E7%BB%84%E5%90%88%E8%AE%A1%E6%95%B0/" class="ak-card-banner-wrap" aria-hidden="true" tabindex="-1">
+            <img class="ak-card-banner-img" src="https://files.catbox.moe/o883ah.png" alt="" loading="lazy" decoding="async" data-cover-watch="1" />
+        </a>
+        
         <div class="ak-card-excerpt">
             CF838D题意有$n$个位置排成一排，有$m$个人依次进场选位置，每个人一开始会选择一个方向，从左到右或从右向左，并选择一个位置，然后按他选择的方向入场并走到这个位置，从这个位置开始继续按他选择的方向走，直到遇到一个空位并坐下。如果一直找不到空位，他就会生气。求有多少种情况没有人生气。
 $1\leq m\leq n\...
@@ -204,15 +202,15 @@ $1\leq m\leq n\...
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2021-06-29</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2021/06/29/CF1039A%E9%A2%98%E8%A7%A3/">CF1039A题解</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             首先可以发现一定有一个合法的排列为$p_i&#x3D;i$，因此如果对于某个$i$出现了$x_i&lt;i$，显然此时一定无解。此外还可以得出$b_i\ge a_i+t$。
 考虑$x_i&#x3D;c$代表什么，这意味着存在一个排列$p$，其中第$i$辆公交车的出现时刻为$b_c$，而此时$i+1\sim c$的公交车...
@@ -226,15 +224,15 @@ $1\leq m\leq n\...
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2021-06-29</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2021/06/29/CF847L%E9%A2%98%E8%A7%A3/">CF847L题解</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             在树上$a,b$两点存在边当且仅当包含$b$的$a$集合大小与包含$a$的$b$集合大小之和为$n$。因此直接暴力找出所有的边然后一堆判断是否是一棵树即可。
 稍微讲一下怎么判：
@@ -254,15 +252,15 @@ dfs一遍判断这是否是一棵树，具体为看一个点是否被多次访�
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2021-06-29</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2021/06/29/CF1028E%E9%A2%98%E8%A7%A3/">CF1028E题解</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             首先考虑$\forall i,b_i&#x3D;M(1\leq i\leq n)$这种特殊的情况，显然当且仅当$M&#x3D;0$时有解，证明可以考虑因为是一个环，所以总会存在一个$a_{i\bmod n}&#x3D;kM,a_{(i \bmod n)+1}&#x3D;M(1\leq i &lt; n)$此时$b_i&...
         </div>
@@ -275,19 +273,19 @@ dfs一遍判断这是否是一棵树，具体为看一个点是否被多次访�
     
         
 <article class="ak-card ak-card--banner">
-    
-    <a href="/2021/06/24/%E6%9E%84%E9%80%A0/" class="ak-card-banner-wrap" aria-hidden="true" tabindex="-1">
-        <img class="ak-card-banner-img" src="https://files.catbox.moe/s5iovy.png" alt="" loading="lazy" decoding="async" data-cover-watch="1" />
-    </a>
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2021-06-24</span>
         </div>
         <h3 class="ak-card-title ak-card-title--banner">
             <a href="/2021/06/24/%E6%9E%84%E9%80%A0/">构造</a>
         </h3>
+        
+        <a href="/2021/06/24/%E6%9E%84%E9%80%A0/" class="ak-card-banner-wrap" aria-hidden="true" tabindex="-1">
+            <img class="ak-card-banner-img" src="https://files.catbox.moe/s5iovy.png" alt="" loading="lazy" decoding="async" data-cover-watch="1" />
+        </a>
+        
         <div class="ak-card-excerpt">
             一是否存在三个长度为$n$的$0\sim n-1$的排列$a,b,c$，使得$a_i+b_i&#x3D;c_i \pmod n$。如果是则请给出构造。
 显然$n$为偶数时，左边的和为$(n-1)n$，而右边的和为$\frac{(n-1)n}{2}$，在$\bmod n$意义下左边是$0$，右边是$\frac{n}{2}...
@@ -301,15 +299,15 @@ dfs一遍判断这是否是一棵树，具体为看一个点是否被多次访�
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2021-06-22</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2021/06/22/%E6%9D%82%E9%A2%98%E9%80%89%E5%81%9A2/">杂题选做2</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             CF533D Landmarkssolution只考虑最后剩下来的柱子，假设柱子$i$两边分别为柱子$j$和柱子$k$，需要满足$d_i\ge \frac{x_k+x_j}{2}$。考虑在不加仍何柱子的情况下，如何判断会不会塌。
 设$dp_i$表示考虑前$i$个柱子，在第$i$个柱子选做最后保留的柱子的情况下，前一个选...
@@ -323,19 +321,19 @@ dfs一遍判断这是否是一棵树，具体为看一个点是否被多次访�
     
         
 <article class="ak-card ak-card--banner">
-    
-    <a href="/2021/06/20/%E4%B8%80%E9%81%93%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E9%A2%98%E7%9B%AE/" class="ak-card-banner-wrap" aria-hidden="true" tabindex="-1">
-        <img class="ak-card-banner-img" src="https://i.loli.net/2021/05/16/qFhBu2Zz8K1g7Wv.png" alt="" loading="lazy" decoding="async" data-cover-watch="1" />
-    </a>
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2021-06-20</span>
         </div>
         <h3 class="ak-card-title ak-card-title--banner">
             <a href="/2021/06/20/%E4%B8%80%E9%81%93%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E9%A2%98%E7%9B%AE/">一道生成函数题目</a>
         </h3>
+        
+        <a href="/2021/06/20/%E4%B8%80%E9%81%93%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0%E9%A2%98%E7%9B%AE/" class="ak-card-banner-wrap" aria-hidden="true" tabindex="-1">
+            <img class="ak-card-banner-img" src="https://i.loli.net/2021/05/16/qFhBu2Zz8K1g7Wv.png" alt="" loading="lazy" decoding="async" data-cover-watch="1" />
+        </a>
+        
         <div class="ak-card-excerpt">
             对于集合$S$，定义$w(S)&#x3D;\prod\limits_{x\in S} x$。
 定义$F(n,k)&#x3D;\sum\limits_{S\subseteq [n],|S|&#x3D;k} w(S), (0\leq k\leq n)$
@@ -411,6 +409,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let hexoRoot = (document.body.getAttribute('data-hexo-root') || '/').trim();
     if (!hexoRoot.startsWith('/')) hexoRoot = '/' + hexoRoot;
     if (!hexoRoot.endsWith('/')) hexoRoot += '/';
+
+    (function markLowFx() {
+        const u = navigator.userAgent || '';
+        const safari = /safari/i.test(u) && !/chrome|android|crios|fxios|edgios/i.test(u);
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (safari || reduced) document.documentElement.classList.add('prts-lowfx');
+    })();
+
+    const prtsLowFx = document.documentElement.classList.contains('prts-lowfx');
 
     // ================= 0. 侧栏本地搜索 =================
     const searchInput = document.getElementById('local-search-input');
@@ -613,12 +620,12 @@ document.addEventListener('DOMContentLoaded', () => {
         loadTrack(0, false);
     }
 
-    // ================= 3. 全屏背景飘浮粒子 =================
+    // ================= 3. 全屏背景飘浮粒子（Safari / 省电动效下降频） =================
     const bgCanvas = document.getElementById('global-bg-particles');
-    if (bgCanvas) {
+    if (bgCanvas && !prtsLowFx) {
         const bctx = bgCanvas.getContext('2d');
         const floats = [];
-        const N = 80;
+        const N = 48;
 
         function resizeBg() {
             bgCanvas.width = window.innerWidth;
@@ -631,33 +638,38 @@ document.addEventListener('DOMContentLoaded', () => {
             floats.push({
                 x: Math.random() * window.innerWidth,
                 y: Math.random() * window.innerHeight,
-                r: Math.random() * 1.6 + 0.35,
-                vx: (Math.random() - 0.5) * 0.28,
-                vy: (Math.random() - 0.5) * 0.28,
+                r: Math.random() * 1.4 + 0.3,
+                vx: (Math.random() - 0.5) * 0.22,
+                vy: (Math.random() - 0.5) * 0.22,
                 ph: Math.random() * Math.PI * 2,
-                a: Math.random() * 0.35 + 0.12
+                a: Math.random() * 0.28 + 0.1
             });
         }
 
-        function tickBg() {
+        let bgLast = 0;
+        const bgFrameMs = prtsLowFx ? 70 : 28;
+        function tickBg(now) {
+            requestAnimationFrame(tickBg);
+            if (document.hidden) return;
+            if (now - bgLast < bgFrameMs) return;
+            bgLast = now;
             bctx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
             const light = document.body.getAttribute('data-theme') === 'light';
-            const t = Date.now() / 1000;
+            const t = now / 1000;
             floats.forEach((p, i) => {
-                p.x += p.vx + Math.sin(t * 0.7 + p.ph + i) * 0.12;
-                p.y += p.vy + Math.cos(t * 0.55 + p.ph) * 0.1;
+                p.x += p.vx + Math.sin(t * 0.65 + p.ph + i) * 0.1;
+                p.y += p.vy + Math.cos(t * 0.5 + p.ph) * 0.08;
                 if (p.x < -20) p.x = bgCanvas.width + 20;
                 if (p.x > bgCanvas.width + 20) p.x = -20;
                 if (p.y < -20) p.y = bgCanvas.height + 20;
                 if (p.y > bgCanvas.height + 20) p.y = -20;
-                bctx.fillStyle = light ? 'rgba(0,100,200,' + p.a + ')' : 'rgba(0,195,255,' + p.a + ')';
+                bctx.fillStyle = light ? 'rgba(0,100,200,' + p.a + ')' : 'rgba(0,212,255,' + p.a + ')';
                 bctx.beginPath();
                 bctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
                 bctx.fill();
             });
-            requestAnimationFrame(tickBg);
         }
-        tickBg();
+        requestAnimationFrame(tickBg);
     }
 
     // ================= 4. 左下角龙泡泡 Logo 粒子 =================
@@ -679,14 +691,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const out = [];
             for (let y = 0; y < size; y += step) {
                 for (let x = 0; x < size; x += step) {
-                    const a = imageData[((y * size + x) * 4) + 3];
-                    if (a > threshold) out.push([x, y]);
+                    const i = ((y * size + x) * 4);
+                    const a = imageData[i + 3];
+                    if (a > threshold) {
+                        const r = imageData[i];
+                        const g = imageData[i + 1];
+                        const b = imageData[i + 2];
+                        out.push({ x, y, r, g, b });
+                    }
                 }
             }
             return out;
         }
 
-        function downsample(points, maxN) {
+        function downsamplePoints(points, maxN) {
             if (points.length <= maxN) return points;
             const step = Math.ceil(points.length / maxN);
             const res = [];
@@ -706,27 +724,31 @@ document.addEventListener('DOMContentLoaded', () => {
             const imageData = tempCtx.getImageData(0, 0, size, size).data;
 
             const scale = Math.min(1.35, (canvas.width / size) * 0.85);
-            const blockH = size * scale;
             const blockW = size * scale;
+            const blockH = size * scale;
             const offsetX = (canvas.width - blockW) / 2;
             const offsetY = Math.max(8, canvas.height - blockH - 6);
 
-            let pts = sampleLogoPoints(imageData, size, 210, 4);
+            const maxPts = prtsLowFx ? 420 : 780;
+            let pts = sampleLogoPoints(imageData, size, 210, prtsLowFx ? 5 : 4);
             if (pts.length < 40) pts = sampleLogoPoints(imageData, size, 165, 5);
-            pts = downsample(pts, 850);
+            pts = downsamplePoints(pts, maxPts);
 
             class Particle {
-                constructor(x, y) {
+                constructor(px, py, cr, cg, cb) {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
-                    this.baseX = x;
-                    this.baseY = y;
-                    this.density = (Math.random() * 30) + 1;
+                    this.baseX = px;
+                    this.baseY = py;
+                    this.cr = cr;
+                    this.cg = cg;
+                    this.cb = cb;
+                    this.density = (Math.random() * 26) + 1;
                 }
                 draw() {
-                    ctx.fillStyle = '#00c3ff';
+                    ctx.fillStyle = 'rgb(' + this.cr + ',' + this.cg + ',' + this.cb + ')';
                     ctx.beginPath();
-                    ctx.arc(this.x, this.y, 1.15, 0, Math.PI * 2);
+                    ctx.arc(this.x, this.y, prtsLowFx ? 1 : 1.1, 0, Math.PI * 2);
                     ctx.fill();
                 }
                 update() {
@@ -740,28 +762,37 @@ document.addEventListener('DOMContentLoaded', () => {
                         const distance = Math.sqrt(dx * dx + dy * dy);
                         if (distance < mouse.radius && distance > 0.01) {
                             const force = (mouse.radius - distance) / mouse.radius;
-                            this.x -= (dx / distance) * force * this.density * 0.8;
-                            this.y -= (dy / distance) * force * this.density * 0.8;
+                            this.x -= (dx / distance) * force * this.density * 0.75;
+                            this.y -= (dy / distance) * force * this.density * 0.75;
                         } else {
-                            this.x += (this.baseX - this.x) * 0.12;
-                            this.y += (this.baseY - this.y) * 0.12;
+                            this.x += (this.baseX - this.x) * 0.11;
+                            this.y += (this.baseY - this.y) * 0.11;
                         }
                     } else {
-                        this.x += (this.baseX - this.x) * 0.12;
-                        this.y += (this.baseY - this.y) * 0.12;
+                        this.x += (this.baseX - this.x) * 0.11;
+                        this.y += (this.baseY - this.y) * 0.11;
                     }
                 }
             }
 
-            particles = pts.map(([x, y]) => new Particle(x * scale + offsetX, y * scale + offsetY));
+            particles = pts.map(p => new Particle(
+                p.x * scale + offsetX,
+                p.y * scale + offsetY,
+                p.r, p.g, p.b
+            ));
 
-            function animate() {
+            let logoLast = 0;
+            const logoFrameMs = prtsLowFx ? 55 : 24;
+            function animateLogo(now) {
+                requestAnimationFrame(animateLogo);
+                if (document.hidden) return;
+                if (now - logoLast < logoFrameMs) return;
+                logoLast = now;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 particles.forEach(p => { p.update(); p.draw(); });
-                requestAnimationFrame(animate);
             }
-            animate();
-            console.log('PRTS: Logo particles:', particles.length);
+            requestAnimationFrame(animateLogo);
+            console.log('PRTS: Logo particles (color):', particles.length);
         };
         logoImg.onerror = function () {
             console.warn('PRTS: logo.png 加载失败，跳过侧栏形状粒子');
@@ -771,7 +802,57 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
     }
 
-    // ================= 5. 首页封面图：极端尺寸则隐藏横幅 =================
+    // ================= 5. 代码块：复制 + 横向滚动（兼容 figure.highlight） =================
+    function enhanceCodeBlocks(root) {
+        const scope = root || document;
+        scope.querySelectorAll('.post-content figure.highlight').forEach(fig => {
+            if (fig.closest('.code-block-wrap')) return;
+            const wrap = document.createElement('div');
+            wrap.className = 'code-block-wrap';
+            const bar = document.createElement('div');
+            bar.className = 'code-toolbar';
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'code-copy-btn';
+            btn.textContent = '复制';
+            btn.addEventListener('click', () => {
+                const t = (fig.innerText || '').replace(/\n+$/, '');
+                navigator.clipboard.writeText(t).then(() => {
+                    btn.textContent = '已复制';
+                    setTimeout(() => { btn.textContent = '复制'; }, 1400);
+                }).catch(() => { btn.textContent = '失败'; });
+            });
+            bar.appendChild(btn);
+            fig.parentNode.insertBefore(wrap, fig);
+            wrap.appendChild(bar);
+            wrap.appendChild(fig);
+        });
+        scope.querySelectorAll('.post-content > pre').forEach(pre => {
+            if (pre.closest('.code-block-wrap') || pre.closest('figure.highlight')) return;
+            const wrap = document.createElement('div');
+            wrap.className = 'code-block-wrap';
+            const bar = document.createElement('div');
+            bar.className = 'code-toolbar';
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'code-copy-btn';
+            btn.textContent = '复制';
+            btn.addEventListener('click', () => {
+                const t = (pre.innerText || '').replace(/\n+$/, '');
+                navigator.clipboard.writeText(t).then(() => {
+                    btn.textContent = '已复制';
+                    setTimeout(() => { btn.textContent = '复制'; }, 1400);
+                }).catch(() => { btn.textContent = '失败'; });
+            });
+            bar.appendChild(btn);
+            pre.parentNode.insertBefore(wrap, pre);
+            wrap.appendChild(bar);
+            wrap.appendChild(pre);
+        });
+    }
+    enhanceCodeBlocks(document);
+
+    // ================= 6. 首页封面图：极端尺寸则隐藏横幅 =================
     document.querySelectorAll('img[data-cover-watch]').forEach(img => {
         function check() {
             const w = img.naturalWidth;

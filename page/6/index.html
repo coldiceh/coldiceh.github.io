@@ -16,6 +16,7 @@ window.MathJax = {
 <title>Hexo</title>
 <link rel="icon" href="/avatar.jpg" type="image/jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-dark.min.css" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/style.css">
 
 <meta name="generator" content="Hexo 8.1.1"></head>
@@ -46,14 +47,11 @@ window.MathJax = {
     
     <div class="sidebar-bili-row">
         <a class="sidebar-bili-link" href="https://space.bilibili.com/398617002" target="_blank" rel="noopener noreferrer" title="哔哩哔哩空间" aria-label="哔哩哔哩空间">
-            <span class="sidebar-bili-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="24" height="24" rx="5" fill="#FB7299"/>
-                    <path fill="#fff" d="M8.5 9.2h7v5.6h-7V9.2zm1.3 1.3v3h4.4v-3H9.8z" opacity=".95"/>
-                    <path fill="#fff" d="M9.2 7.3l.9 1.2h3.8l.9-1.2H12l-.4.6h-.8l-.4-.6H9.2z"/>
-                </svg>
-            </span>
-            <span class="sidebar-bili-text">哔哩哔哩</span>
+            <svg class="sidebar-bili-svg" viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect width="24" height="24" rx="5" fill="#FB7299"/>
+                <path fill="#fff" d="M8.5 9.2h7v5.6h-7V9.2zm1.3 1.3v3h4.4v-3H9.8z" opacity=".95"/>
+                <path fill="#fff" d="M9.2 7.3l.9 1.2h3.8l.9-1.2H12l-.4.6h-.8l-.4-.6H9.2z"/>
+            </svg>
         </a>
     </div>
     
@@ -74,7 +72,7 @@ window.MathJax = {
         <nav class="sidebar-links" aria-label="常用链接">
             <a href="/archives/">归档</a>
             <a href="/tags/">全部标签</a>
-            <a href="/essay-archive/">随笔档案（按月）</a>
+            <a href="/essay-archive/">随笔档案</a>
             <a href="/comments/">评论</a>
         </nav>
     </section>
@@ -89,15 +87,15 @@ window.MathJax = {
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2021-06-15</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2021/06/15/%5BWC2018%5D%E9%80%9A%E9%81%93%E9%A2%98%E8%A7%A3/">[WC2018]通道题解</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             考虑两个树的时候，直接在第二棵树的每个节点下面挂上一个新点，之间的边权为它在第一棵树上的深度。然后考虑枚举第一棵树上的$lca$动态维护直径即可.(经典结论,两个直径合并起来最长直径就在这$4$个点选,边权为正).总结一下就是把两棵树合并起来,$dfs$枚举$lca$,顺便合并,然后在合并时顺便求一下贡献就行了.
 然后...
@@ -111,15 +109,15 @@ window.MathJax = {
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2021-06-15</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2021/06/15/%E5%85%B3%E4%BA%8E%E7%BB%B4%E6%8A%A4%E5%8A%A8%E6%80%81%E7%9A%84%E6%A0%91%E7%9A%84%E7%9B%B4%E5%BE%84/">关于维护动态的树的直径</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             单纯想记录一些动态维护树的直径的方法。
 以下初始例题都是CF1192B Dynamic Diameter
@@ -138,15 +136,15 @@ window.MathJax = {
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2021-06-15</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2021/06/15/AGC020E%E9%A2%98%E8%A7%A3/">AGC020E题解</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             由于直接对S的所有子集求和并不是很好弄，所以考虑计算在“解码”时成为S的子集的数量。
 令$f(S)$表示字符串为S时的答案。
@@ -163,15 +161,15 @@ window.MathJax = {
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2021-06-15</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2021/06/15/%E5%8E%9F%E6%A0%B9&%E7%A6%BB%E6%95%A3%E5%AF%B9%E6%95%B0%E7%9B%B8%E5%85%B3/">原根&amp;离散对数相关</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             原根与整数模$n$乘法群对于一个正整数$n$，$1\sim n$有$\varphi(n)$（这里$\varphi$指欧拉函数）个与它互质的整数，形成了集合
 
@@ -189,15 +187,15 @@ $\mathbb{Z_n^{*}}$
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2021-06-15</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2021/06/15/AGC046B%E9%A2%98%E8%A7%A3/">AGC046B题解</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             题意：
 给你一个初始为$A\times B$的方格矩阵，每次往上铺一行或者往右铺一列格子，并在铺的格子上选一个涂黑，直到矩阵大小到$C\times D$为止，求最终染色的方案数，对$998244353$取模。
@@ -212,15 +210,15 @@ $1\leq A\leq C\leq 3000,1\leq B\leq D \leq 3000,A,B,C,D...
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2021-06-15</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2021/06/15/AGC043D%E9%A2%98%E8%A7%A3/">AGC043D题解</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             首先，假设我们已经知道了$A_1,A_2,\ldots,A_n$，然后考虑一下最后的$P$大概会长什么样子。
 比如现在假设有一个序列$x&#x3D;{x_1,x_2,x_3 }$，如果$x_i&gt;x_{i+1}$，那么在选择了$x_i$之后一定会选择$x_{i+1}$。因此按从前往后的顺序看$x$，如果$x_i$比...
@@ -234,15 +232,15 @@ $1\leq A\leq C\leq 3000,1\leq B\leq D \leq 3000,A,B,C,D...
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2021-06-15</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2021/06/15/AGC030D%E9%A2%98%E8%A7%A3/">AGC030D题解</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             令$dp[T][i][j]$表示在$T$次运算之后$a_i\ge a_j$的概率。我们可以从初始数组信息获得$dp[0][i][j]$的值。
 然后考虑每次运算之后的转移，虽然这看上去每次是$O(N^2)$的，但由于每次只会更改两个位置，所以可以在$O(N)$时间复杂度内完成转移。
@@ -257,15 +255,15 @@ $1\leq A\leq C\leq 3000,1\leq B\leq D \leq 3000,A,B,C,D...
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2021-06-15</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2021/06/15/AGC033D%E9%A2%98%E8%A7%A3/">AGC033D题解</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             题意：
 给你一个长度为$N$的一个字符串$S$，初始时每个字符均为$0$。
@@ -286,15 +284,15 @@ $1\leq A, B\leq  N\leq ...
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2021-06-15</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2021/06/15/AGC045D/">AGC045D</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             题意：
 给你一个长度为$N$的一个字符串$S$，初始时每个字符均为$0$。
@@ -315,15 +313,15 @@ $1\leq A, B\leq  N\leq ...
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2021-06-15</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2021/06/15/AGC028D%E9%A2%98%E8%A7%A3/">AGC028D题解</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             由于是一个圆不太好考虑，所以先切开这个环看作一条直线。
 令$dp[i][j]$表示$i,j$在同一个连通块且满足$[i,j]$内部互相连边的方案数。
@@ -407,6 +405,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let hexoRoot = (document.body.getAttribute('data-hexo-root') || '/').trim();
     if (!hexoRoot.startsWith('/')) hexoRoot = '/' + hexoRoot;
     if (!hexoRoot.endsWith('/')) hexoRoot += '/';
+
+    (function markLowFx() {
+        const u = navigator.userAgent || '';
+        const safari = /safari/i.test(u) && !/chrome|android|crios|fxios|edgios/i.test(u);
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (safari || reduced) document.documentElement.classList.add('prts-lowfx');
+    })();
+
+    const prtsLowFx = document.documentElement.classList.contains('prts-lowfx');
 
     // ================= 0. 侧栏本地搜索 =================
     const searchInput = document.getElementById('local-search-input');
@@ -609,12 +616,12 @@ document.addEventListener('DOMContentLoaded', () => {
         loadTrack(0, false);
     }
 
-    // ================= 3. 全屏背景飘浮粒子 =================
+    // ================= 3. 全屏背景飘浮粒子（Safari / 省电动效下降频） =================
     const bgCanvas = document.getElementById('global-bg-particles');
-    if (bgCanvas) {
+    if (bgCanvas && !prtsLowFx) {
         const bctx = bgCanvas.getContext('2d');
         const floats = [];
-        const N = 80;
+        const N = 48;
 
         function resizeBg() {
             bgCanvas.width = window.innerWidth;
@@ -627,33 +634,38 @@ document.addEventListener('DOMContentLoaded', () => {
             floats.push({
                 x: Math.random() * window.innerWidth,
                 y: Math.random() * window.innerHeight,
-                r: Math.random() * 1.6 + 0.35,
-                vx: (Math.random() - 0.5) * 0.28,
-                vy: (Math.random() - 0.5) * 0.28,
+                r: Math.random() * 1.4 + 0.3,
+                vx: (Math.random() - 0.5) * 0.22,
+                vy: (Math.random() - 0.5) * 0.22,
                 ph: Math.random() * Math.PI * 2,
-                a: Math.random() * 0.35 + 0.12
+                a: Math.random() * 0.28 + 0.1
             });
         }
 
-        function tickBg() {
+        let bgLast = 0;
+        const bgFrameMs = prtsLowFx ? 70 : 28;
+        function tickBg(now) {
+            requestAnimationFrame(tickBg);
+            if (document.hidden) return;
+            if (now - bgLast < bgFrameMs) return;
+            bgLast = now;
             bctx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
             const light = document.body.getAttribute('data-theme') === 'light';
-            const t = Date.now() / 1000;
+            const t = now / 1000;
             floats.forEach((p, i) => {
-                p.x += p.vx + Math.sin(t * 0.7 + p.ph + i) * 0.12;
-                p.y += p.vy + Math.cos(t * 0.55 + p.ph) * 0.1;
+                p.x += p.vx + Math.sin(t * 0.65 + p.ph + i) * 0.1;
+                p.y += p.vy + Math.cos(t * 0.5 + p.ph) * 0.08;
                 if (p.x < -20) p.x = bgCanvas.width + 20;
                 if (p.x > bgCanvas.width + 20) p.x = -20;
                 if (p.y < -20) p.y = bgCanvas.height + 20;
                 if (p.y > bgCanvas.height + 20) p.y = -20;
-                bctx.fillStyle = light ? 'rgba(0,100,200,' + p.a + ')' : 'rgba(0,195,255,' + p.a + ')';
+                bctx.fillStyle = light ? 'rgba(0,100,200,' + p.a + ')' : 'rgba(0,212,255,' + p.a + ')';
                 bctx.beginPath();
                 bctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
                 bctx.fill();
             });
-            requestAnimationFrame(tickBg);
         }
-        tickBg();
+        requestAnimationFrame(tickBg);
     }
 
     // ================= 4. 左下角龙泡泡 Logo 粒子 =================
@@ -675,14 +687,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const out = [];
             for (let y = 0; y < size; y += step) {
                 for (let x = 0; x < size; x += step) {
-                    const a = imageData[((y * size + x) * 4) + 3];
-                    if (a > threshold) out.push([x, y]);
+                    const i = ((y * size + x) * 4);
+                    const a = imageData[i + 3];
+                    if (a > threshold) {
+                        const r = imageData[i];
+                        const g = imageData[i + 1];
+                        const b = imageData[i + 2];
+                        out.push({ x, y, r, g, b });
+                    }
                 }
             }
             return out;
         }
 
-        function downsample(points, maxN) {
+        function downsamplePoints(points, maxN) {
             if (points.length <= maxN) return points;
             const step = Math.ceil(points.length / maxN);
             const res = [];
@@ -702,27 +720,31 @@ document.addEventListener('DOMContentLoaded', () => {
             const imageData = tempCtx.getImageData(0, 0, size, size).data;
 
             const scale = Math.min(1.35, (canvas.width / size) * 0.85);
-            const blockH = size * scale;
             const blockW = size * scale;
+            const blockH = size * scale;
             const offsetX = (canvas.width - blockW) / 2;
             const offsetY = Math.max(8, canvas.height - blockH - 6);
 
-            let pts = sampleLogoPoints(imageData, size, 210, 4);
+            const maxPts = prtsLowFx ? 420 : 780;
+            let pts = sampleLogoPoints(imageData, size, 210, prtsLowFx ? 5 : 4);
             if (pts.length < 40) pts = sampleLogoPoints(imageData, size, 165, 5);
-            pts = downsample(pts, 850);
+            pts = downsamplePoints(pts, maxPts);
 
             class Particle {
-                constructor(x, y) {
+                constructor(px, py, cr, cg, cb) {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
-                    this.baseX = x;
-                    this.baseY = y;
-                    this.density = (Math.random() * 30) + 1;
+                    this.baseX = px;
+                    this.baseY = py;
+                    this.cr = cr;
+                    this.cg = cg;
+                    this.cb = cb;
+                    this.density = (Math.random() * 26) + 1;
                 }
                 draw() {
-                    ctx.fillStyle = '#00c3ff';
+                    ctx.fillStyle = 'rgb(' + this.cr + ',' + this.cg + ',' + this.cb + ')';
                     ctx.beginPath();
-                    ctx.arc(this.x, this.y, 1.15, 0, Math.PI * 2);
+                    ctx.arc(this.x, this.y, prtsLowFx ? 1 : 1.1, 0, Math.PI * 2);
                     ctx.fill();
                 }
                 update() {
@@ -736,28 +758,37 @@ document.addEventListener('DOMContentLoaded', () => {
                         const distance = Math.sqrt(dx * dx + dy * dy);
                         if (distance < mouse.radius && distance > 0.01) {
                             const force = (mouse.radius - distance) / mouse.radius;
-                            this.x -= (dx / distance) * force * this.density * 0.8;
-                            this.y -= (dy / distance) * force * this.density * 0.8;
+                            this.x -= (dx / distance) * force * this.density * 0.75;
+                            this.y -= (dy / distance) * force * this.density * 0.75;
                         } else {
-                            this.x += (this.baseX - this.x) * 0.12;
-                            this.y += (this.baseY - this.y) * 0.12;
+                            this.x += (this.baseX - this.x) * 0.11;
+                            this.y += (this.baseY - this.y) * 0.11;
                         }
                     } else {
-                        this.x += (this.baseX - this.x) * 0.12;
-                        this.y += (this.baseY - this.y) * 0.12;
+                        this.x += (this.baseX - this.x) * 0.11;
+                        this.y += (this.baseY - this.y) * 0.11;
                     }
                 }
             }
 
-            particles = pts.map(([x, y]) => new Particle(x * scale + offsetX, y * scale + offsetY));
+            particles = pts.map(p => new Particle(
+                p.x * scale + offsetX,
+                p.y * scale + offsetY,
+                p.r, p.g, p.b
+            ));
 
-            function animate() {
+            let logoLast = 0;
+            const logoFrameMs = prtsLowFx ? 55 : 24;
+            function animateLogo(now) {
+                requestAnimationFrame(animateLogo);
+                if (document.hidden) return;
+                if (now - logoLast < logoFrameMs) return;
+                logoLast = now;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 particles.forEach(p => { p.update(); p.draw(); });
-                requestAnimationFrame(animate);
             }
-            animate();
-            console.log('PRTS: Logo particles:', particles.length);
+            requestAnimationFrame(animateLogo);
+            console.log('PRTS: Logo particles (color):', particles.length);
         };
         logoImg.onerror = function () {
             console.warn('PRTS: logo.png 加载失败，跳过侧栏形状粒子');
@@ -767,7 +798,57 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
     }
 
-    // ================= 5. 首页封面图：极端尺寸则隐藏横幅 =================
+    // ================= 5. 代码块：复制 + 横向滚动（兼容 figure.highlight） =================
+    function enhanceCodeBlocks(root) {
+        const scope = root || document;
+        scope.querySelectorAll('.post-content figure.highlight').forEach(fig => {
+            if (fig.closest('.code-block-wrap')) return;
+            const wrap = document.createElement('div');
+            wrap.className = 'code-block-wrap';
+            const bar = document.createElement('div');
+            bar.className = 'code-toolbar';
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'code-copy-btn';
+            btn.textContent = '复制';
+            btn.addEventListener('click', () => {
+                const t = (fig.innerText || '').replace(/\n+$/, '');
+                navigator.clipboard.writeText(t).then(() => {
+                    btn.textContent = '已复制';
+                    setTimeout(() => { btn.textContent = '复制'; }, 1400);
+                }).catch(() => { btn.textContent = '失败'; });
+            });
+            bar.appendChild(btn);
+            fig.parentNode.insertBefore(wrap, fig);
+            wrap.appendChild(bar);
+            wrap.appendChild(fig);
+        });
+        scope.querySelectorAll('.post-content > pre').forEach(pre => {
+            if (pre.closest('.code-block-wrap') || pre.closest('figure.highlight')) return;
+            const wrap = document.createElement('div');
+            wrap.className = 'code-block-wrap';
+            const bar = document.createElement('div');
+            bar.className = 'code-toolbar';
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'code-copy-btn';
+            btn.textContent = '复制';
+            btn.addEventListener('click', () => {
+                const t = (pre.innerText || '').replace(/\n+$/, '');
+                navigator.clipboard.writeText(t).then(() => {
+                    btn.textContent = '已复制';
+                    setTimeout(() => { btn.textContent = '复制'; }, 1400);
+                }).catch(() => { btn.textContent = '失败'; });
+            });
+            bar.appendChild(btn);
+            pre.parentNode.insertBefore(wrap, pre);
+            wrap.appendChild(bar);
+            wrap.appendChild(pre);
+        });
+    }
+    enhanceCodeBlocks(document);
+
+    // ================= 6. 首页封面图：极端尺寸则隐藏横幅 =================
     document.querySelectorAll('img[data-cover-watch]').forEach(img => {
         function check() {
             const w = img.naturalWidth;

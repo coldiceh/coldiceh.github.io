@@ -16,6 +16,7 @@ window.MathJax = {
 <title>CF1148H Holy Diver | Hexo</title>
 <link rel="icon" href="/avatar.jpg" type="image/jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-dark.min.css" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/style.css">
 
 <meta name="generator" content="Hexo 8.1.1"></head>
@@ -46,14 +47,11 @@ window.MathJax = {
     
     <div class="sidebar-bili-row">
         <a class="sidebar-bili-link" href="https://space.bilibili.com/398617002" target="_blank" rel="noopener noreferrer" title="哔哩哔哩空间" aria-label="哔哩哔哩空间">
-            <span class="sidebar-bili-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="24" height="24" rx="5" fill="#FB7299"/>
-                    <path fill="#fff" d="M8.5 9.2h7v5.6h-7V9.2zm1.3 1.3v3h4.4v-3H9.8z" opacity=".95"/>
-                    <path fill="#fff" d="M9.2 7.3l.9 1.2h3.8l.9-1.2H12l-.4.6h-.8l-.4-.6H9.2z"/>
-                </svg>
-            </span>
-            <span class="sidebar-bili-text">哔哩哔哩</span>
+            <svg class="sidebar-bili-svg" viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect width="24" height="24" rx="5" fill="#FB7299"/>
+                <path fill="#fff" d="M8.5 9.2h7v5.6h-7V9.2zm1.3 1.3v3h4.4v-3H9.8z" opacity=".95"/>
+                <path fill="#fff" d="M9.2 7.3l.9 1.2h3.8l.9-1.2H12l-.4.6h-.8l-.4-.6H9.2z"/>
+            </svg>
         </a>
     </div>
     
@@ -74,7 +72,7 @@ window.MathJax = {
         <nav class="sidebar-links" aria-label="常用链接">
             <a href="/archives/">归档</a>
             <a href="/tags/">全部标签</a>
-            <a href="/essay-archive/">随笔档案（按月）</a>
+            <a href="/essay-archive/">随笔档案</a>
             <a href="/comments/">评论</a>
         </nav>
     </section>
@@ -120,9 +118,30 @@ window.MathJax = {
 <p>证明考虑倒着分析，每次操作相当于将若干个连续端合并成一个，而初始状态和末状态的连续段数均为 $\mathcal O(n)$，类似于珂朵莉树复杂度分析可知总共出现段数就是 $\mathcal O(n)$ 的。</p>
 <p>然后找到最小的 $A$ 满足 $p_A&lt;y$ 是一个二维数点，弄棵主席树就行了</p>
 <p>总时间复杂度 $\mathcal O(n\log n)$。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> R(i,a,b) for(int i=(a),i##E=(b);i&lt;=i##E;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> L(i,a,b) for(int i=(b),i##E=(a);i&gt;=i##E;i--)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n;</span><br><span class="line">ll la;</span><br><span class="line"><span class="type">int</span> a[<span class="number">222222</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">sgt</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> val[<span class="number">888888</span>];</span><br><span class="line">	<span class="function"><span class="type">void</span> <span class="title">modify</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x,<span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(l==r)</span><br><span class="line">		&#123;</span><br><span class="line">			val[x]=k;</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(p&lt;=mid) <span class="built_in">modify</span>(p,l,mid,x&lt;&lt;<span class="number">1</span>,k);</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">modify</span>(p,mid<span class="number">+1</span>,r,x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>,k);</span><br><span class="line">		val[x]=<span class="built_in">min</span>(val[x&lt;&lt;<span class="number">1</span>],val[x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(l==r) <span class="keyword">return</span> l;</span><br><span class="line">		<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(val[x&lt;&lt;<span class="number">1</span>]&lt;p) <span class="keyword">return</span> <span class="built_in">query</span>(p,l,mid,x&lt;&lt;<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">query</span>(p,mid<span class="number">+1</span>,r,x&lt;&lt;<span class="number">1</span>|<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;st;</span><br><span class="line">map&lt;<span class="type">int</span>,<span class="type">int</span>&gt;rt[<span class="number">222222</span>];</span><br><span class="line"><span class="type">int</span> cnt,ls[<span class="number">28888888</span>],rs[<span class="number">28888888</span>];</span><br><span class="line">ll val[<span class="number">28888888</span>],lz[<span class="number">28888888</span>];</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">node</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> x,y,xx,yy;</span><br><span class="line">	<span class="keyword">inline</span> <span class="type">int</span> <span class="keyword">operator</span> &lt;(<span class="type">const</span> node &amp;A)<span class="type">const</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> xx&lt;A.xx;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Node</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> x,y;</span><br><span class="line">	node v;</span><br><span class="line">	<span class="keyword">inline</span> <span class="type">int</span> <span class="keyword">operator</span> &lt;(<span class="type">const</span> Node &amp;A)<span class="type">const</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> x&lt;A.x;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">set&lt;node&gt;s;</span><br><span class="line">set&lt;Node&gt;vis[<span class="number">222222</span>];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">modify</span><span class="params">(<span class="type">int</span> L,<span class="type">int</span> R,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> &amp;x,<span class="type">int</span> lt,ll k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	x=++cnt;</span><br><span class="line">	ls[x]=ls[lt],rs[x]=rs[lt],val[x]=val[lt],lz[x]=lz[lt];</span><br><span class="line">	<span class="keyword">if</span>(L&lt;=l&amp;&amp;r&lt;=R) </span><br><span class="line">	&#123;</span><br><span class="line">		val[x]+=k*(r-l<span class="number">+1</span>);</span><br><span class="line">		lz[x]+=k;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(L&lt;=mid) <span class="built_in">modify</span>(L,R,l,mid,ls[x],ls[lt],k);</span><br><span class="line">	<span class="keyword">if</span>(mid&lt;R) <span class="built_in">modify</span>(L,R,mid<span class="number">+1</span>,r,rs[x],rs[lt],k);</span><br><span class="line">	val[x]=val[ls[x]]+val[rs[x]];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">query</span><span class="params">(<span class="type">int</span> L,<span class="type">int</span> R,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(L&lt;=l&amp;&amp;r&lt;=R) <span class="keyword">return</span> val[x];</span><br><span class="line">	<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	ll ret=lz[x]*(<span class="built_in">min</span>(R,r)-<span class="built_in">max</span>(l,L)<span class="number">+1</span>);</span><br><span class="line">	<span class="keyword">if</span>(L&lt;=mid&amp;&amp;ls[x]) ret+=<span class="built_in">query</span>(L,R,l,mid,ls[x]);</span><br><span class="line">	<span class="keyword">if</span>(mid&lt;R&amp;&amp;rs[x]) ret+=<span class="built_in">query</span>(L,R,mid<span class="number">+1</span>,r,rs[x]);</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">pop</span><span class="params">(node x,<span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> t=x.xx;</span><br><span class="line">	s.<span class="built_in">erase</span>(x);</span><br><span class="line">	<span class="keyword">if</span>(x.yy!=k) vis[t].<span class="built_in">insert</span>((Node)&#123;x.yy,k<span class="number">-1</span>,x&#125;);</span><br><span class="line">	<span class="type">int</span> lst=(rt[t].<span class="built_in">size</span>()?rt[t].<span class="built_in">rbegin</span>()-&gt;second:<span class="number">0</span>);</span><br><span class="line">	<span class="type">int</span> R;</span><br><span class="line">	<span class="built_in">modify</span>(x.x,x.y,<span class="number">1</span>,n,R,lst,k-x.yy);</span><br><span class="line">	<span class="keyword">if</span>(rt[t].<span class="built_in">size</span>()&amp;&amp;rt[t].<span class="built_in">rbegin</span>()-&gt;first==k) rt[t].<span class="built_in">erase</span>(<span class="built_in">prev</span>(rt[t].<span class="built_in">end</span>()));</span><br><span class="line">	rt[t][k]=R;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">push</span><span class="params">(node x,<span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">auto</span> it=s.<span class="built_in">find</span>(x);</span><br><span class="line">	<span class="keyword">if</span>(it!=s.<span class="built_in">end</span>()) x.x=(*it).x,<span class="built_in">pop</span>(*it,k);</span><br><span class="line">	s.<span class="built_in">insert</span>(x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">solve</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ll ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(rt[k].<span class="built_in">size</span>())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">auto</span> it=rt[k].<span class="built_in">upper_bound</span>(r);</span><br><span class="line">		<span class="keyword">if</span>(it!=rt[k].<span class="built_in">begin</span>())</span><br><span class="line">		&#123;</span><br><span class="line">			--it;</span><br><span class="line">			ans+=<span class="built_in">query</span>(l,r,<span class="number">1</span>,n,(*it).second);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">auto</span> it=s.<span class="built_in">find</span>((node)&#123;<span class="number">0</span>,<span class="number">0</span>,k,<span class="number">0</span>&#125;);</span><br><span class="line">	<span class="keyword">if</span>(it!=s.<span class="built_in">end</span>()&amp;&amp;(*it).yy&lt;=r) ans+=<span class="number">1ll</span>*(r-(*it).yy<span class="number">+1</span>)*(<span class="built_in">max</span>(l<span class="number">-1</span>,(*it).y)-<span class="built_in">max</span>(l,(*it).x)<span class="number">+1</span>);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">auto</span> itt=vis[k].<span class="built_in">upper_bound</span>((Node)&#123;r,<span class="number">0</span>,(node)&#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;&#125;);</span><br><span class="line">		<span class="keyword">if</span>(itt==vis[k].<span class="built_in">begin</span>()) <span class="keyword">return</span> ans;</span><br><span class="line">		--itt;</span><br><span class="line">		<span class="keyword">if</span>((*itt).y&lt;r) <span class="keyword">return</span> ans;</span><br><span class="line">		node t=(*itt).v;</span><br><span class="line">		ans+=<span class="number">1ll</span>*(r-t.yy<span class="number">+1</span>)*(<span class="built_in">max</span>(l<span class="number">-1</span>,t.y)-<span class="built_in">max</span>(l,t.x)<span class="number">+1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="literal">NULL</span>);</span><br><span class="line">	cin&gt;&gt;n;		</span><br><span class="line">	<span class="type">int</span> x,l,r,k;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n)</span><br><span class="line">	&#123;</span><br><span class="line">		cin&gt;&gt;x&gt;&gt;l&gt;&gt;r&gt;&gt;k;</span><br><span class="line">		x=(x+la)%(n<span class="number">+1</span>),l=(l+la)%i<span class="number">+1</span>,r=(r+la)%i<span class="number">+1</span>,k=(k+la)%(n<span class="number">+1</span>);</span><br><span class="line">		<span class="keyword">if</span>(l&gt;r) <span class="built_in">swap</span>(l,r);</span><br><span class="line">		a[x]=i;</span><br><span class="line">		st.<span class="built_in">modify</span>(x,<span class="number">0</span>,n,<span class="number">1</span>,i);</span><br><span class="line">		<span class="keyword">auto</span> it=s.<span class="built_in">find</span>((node)&#123;<span class="number">0</span>,<span class="number">0</span>,x,<span class="number">0</span>&#125;);</span><br><span class="line">		<span class="keyword">if</span>(it!=s.<span class="built_in">end</span>())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> l=(*it).x,r=(*it).y;</span><br><span class="line">			<span class="built_in">pop</span>(*it,i);</span><br><span class="line">			<span class="keyword">while</span>(l&lt;=r)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="type">int</span> t=st.<span class="built_in">query</span>(r,<span class="number">0</span>,n,<span class="number">1</span>);</span><br><span class="line">				<span class="built_in">push</span>((node)&#123;<span class="built_in">max</span>(l,a[t]<span class="number">+1</span>),r,t,i&#125;,i);</span><br><span class="line">				r=a[t];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">push</span>((node)&#123;i,i,!x,i&#125;,i);</span><br><span class="line">		cout&lt;&lt;(la=<span class="built_in">solve</span>(l,r,k))&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> R(i,a,b) for(int i=(a),i##E=(b);i&lt;=i##E;i++)</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> L(i,a,b) for(int i=(b),i##E=(a);i&gt;=i##E;i--)</span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br><br><span class="hljs-type">int</span> n;<br>ll la;<br><span class="hljs-type">int</span> a[<span class="hljs-number">222222</span>];<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">sgt</span><br>&#123;<br>	<span class="hljs-type">int</span> val[<span class="hljs-number">888888</span>];<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">modify</span><span class="hljs-params">(<span class="hljs-type">int</span> p,<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r,<span class="hljs-type">int</span> x,<span class="hljs-type">int</span> k)</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-keyword">if</span>(l==r)<br>		&#123;<br>			val[x]=k;<br>			<span class="hljs-keyword">return</span>;<br>		&#125;<br>		<span class="hljs-type">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">if</span>(p&lt;=mid) <span class="hljs-built_in">modify</span>(p,l,mid,x&lt;&lt;<span class="hljs-number">1</span>,k);<br>		<span class="hljs-keyword">else</span> <span class="hljs-built_in">modify</span>(p,mid<span class="hljs-number">+1</span>,r,x&lt;&lt;<span class="hljs-number">1</span>|<span class="hljs-number">1</span>,k);<br>		val[x]=<span class="hljs-built_in">min</span>(val[x&lt;&lt;<span class="hljs-number">1</span>],val[x&lt;&lt;<span class="hljs-number">1</span>|<span class="hljs-number">1</span>]);<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">query</span><span class="hljs-params">(<span class="hljs-type">int</span> p,<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r,<span class="hljs-type">int</span> x)</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-keyword">if</span>(l==r) <span class="hljs-keyword">return</span> l;<br>		<span class="hljs-type">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">if</span>(val[x&lt;&lt;<span class="hljs-number">1</span>]&lt;p) <span class="hljs-keyword">return</span> <span class="hljs-built_in">query</span>(p,l,mid,x&lt;&lt;<span class="hljs-number">1</span>);<br>		<span class="hljs-keyword">return</span> <span class="hljs-built_in">query</span>(p,mid<span class="hljs-number">+1</span>,r,x&lt;&lt;<span class="hljs-number">1</span>|<span class="hljs-number">1</span>);<br>	&#125;<br>&#125;st;<br>map&lt;<span class="hljs-type">int</span>,<span class="hljs-type">int</span>&gt;rt[<span class="hljs-number">222222</span>];<br><span class="hljs-type">int</span> cnt,ls[<span class="hljs-number">28888888</span>],rs[<span class="hljs-number">28888888</span>];<br>ll val[<span class="hljs-number">28888888</span>],lz[<span class="hljs-number">28888888</span>];<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">node</span><br>&#123;<br>	<span class="hljs-type">int</span> x,y,xx,yy;<br>	<span class="hljs-keyword">inline</span> <span class="hljs-type">int</span> <span class="hljs-keyword">operator</span> &lt;(<span class="hljs-type">const</span> node &amp;A)<span class="hljs-type">const</span><br>	&#123;<br>		<span class="hljs-keyword">return</span> xx&lt;A.xx;<br>	&#125;<br>&#125;;<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Node</span><br>&#123;<br>	<span class="hljs-type">int</span> x,y;<br>	node v;<br>	<span class="hljs-keyword">inline</span> <span class="hljs-type">int</span> <span class="hljs-keyword">operator</span> &lt;(<span class="hljs-type">const</span> Node &amp;A)<span class="hljs-type">const</span><br>	&#123;<br>		<span class="hljs-keyword">return</span> x&lt;A.x;<br>	&#125;<br>&#125;;<br>set&lt;node&gt;s;<br>set&lt;Node&gt;vis[<span class="hljs-number">222222</span>];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">modify</span><span class="hljs-params">(<span class="hljs-type">int</span> L,<span class="hljs-type">int</span> R,<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r,<span class="hljs-type">int</span> &amp;x,<span class="hljs-type">int</span> lt,ll k)</span></span><br><span class="hljs-function"></span>&#123;<br>	x=++cnt;<br>	ls[x]=ls[lt],rs[x]=rs[lt],val[x]=val[lt],lz[x]=lz[lt];<br>	<span class="hljs-keyword">if</span>(L&lt;=l&amp;&amp;r&lt;=R) <br>	&#123;<br>		val[x]+=k*(r-l<span class="hljs-number">+1</span>);<br>		lz[x]+=k;<br>		<span class="hljs-keyword">return</span>;<br>	&#125;<br>	<span class="hljs-type">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">if</span>(L&lt;=mid) <span class="hljs-built_in">modify</span>(L,R,l,mid,ls[x],ls[lt],k);<br>	<span class="hljs-keyword">if</span>(mid&lt;R) <span class="hljs-built_in">modify</span>(L,R,mid<span class="hljs-number">+1</span>,r,rs[x],rs[lt],k);<br>	val[x]=val[ls[x]]+val[rs[x]];<br>&#125;<br><span class="hljs-function">ll <span class="hljs-title">query</span><span class="hljs-params">(<span class="hljs-type">int</span> L,<span class="hljs-type">int</span> R,<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r,<span class="hljs-type">int</span> x)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span>(L&lt;=l&amp;&amp;r&lt;=R) <span class="hljs-keyword">return</span> val[x];<br>	<span class="hljs-type">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;<br>	ll ret=lz[x]*(<span class="hljs-built_in">min</span>(R,r)-<span class="hljs-built_in">max</span>(l,L)<span class="hljs-number">+1</span>);<br>	<span class="hljs-keyword">if</span>(L&lt;=mid&amp;&amp;ls[x]) ret+=<span class="hljs-built_in">query</span>(L,R,l,mid,ls[x]);<br>	<span class="hljs-keyword">if</span>(mid&lt;R&amp;&amp;rs[x]) ret+=<span class="hljs-built_in">query</span>(L,R,mid<span class="hljs-number">+1</span>,r,rs[x]);<br>	<span class="hljs-keyword">return</span> ret;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-type">void</span> <span class="hljs-title">pop</span><span class="hljs-params">(node x,<span class="hljs-type">int</span> k)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">int</span> t=x.xx;<br>	s.<span class="hljs-built_in">erase</span>(x);<br>	<span class="hljs-keyword">if</span>(x.yy!=k) vis[t].<span class="hljs-built_in">insert</span>((Node)&#123;x.yy,k<span class="hljs-number">-1</span>,x&#125;);<br>	<span class="hljs-type">int</span> lst=(rt[t].<span class="hljs-built_in">size</span>()?rt[t].<span class="hljs-built_in">rbegin</span>()-&gt;second:<span class="hljs-number">0</span>);<br>	<span class="hljs-type">int</span> R;<br>	<span class="hljs-built_in">modify</span>(x.x,x.y,<span class="hljs-number">1</span>,n,R,lst,k-x.yy);<br>	<span class="hljs-keyword">if</span>(rt[t].<span class="hljs-built_in">size</span>()&amp;&amp;rt[t].<span class="hljs-built_in">rbegin</span>()-&gt;first==k) rt[t].<span class="hljs-built_in">erase</span>(<span class="hljs-built_in">prev</span>(rt[t].<span class="hljs-built_in">end</span>()));<br>	rt[t][k]=R;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-type">void</span> <span class="hljs-title">push</span><span class="hljs-params">(node x,<span class="hljs-type">int</span> k)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">auto</span> it=s.<span class="hljs-built_in">find</span>(x);<br>	<span class="hljs-keyword">if</span>(it!=s.<span class="hljs-built_in">end</span>()) x.x=(*it).x,<span class="hljs-built_in">pop</span>(*it,k);<br>	s.<span class="hljs-built_in">insert</span>(x);<br>&#125;<br><span class="hljs-function">ll <span class="hljs-title">solve</span><span class="hljs-params">(<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r,<span class="hljs-type">int</span> k)</span></span><br><span class="hljs-function"></span>&#123;<br>	ll ans=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">if</span>(rt[k].<span class="hljs-built_in">size</span>())<br>	&#123;<br>		<span class="hljs-keyword">auto</span> it=rt[k].<span class="hljs-built_in">upper_bound</span>(r);<br>		<span class="hljs-keyword">if</span>(it!=rt[k].<span class="hljs-built_in">begin</span>())<br>		&#123;<br>			--it;<br>			ans+=<span class="hljs-built_in">query</span>(l,r,<span class="hljs-number">1</span>,n,(*it).second);<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">auto</span> it=s.<span class="hljs-built_in">find</span>((node)&#123;<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,k,<span class="hljs-number">0</span>&#125;);<br>	<span class="hljs-keyword">if</span>(it!=s.<span class="hljs-built_in">end</span>()&amp;&amp;(*it).yy&lt;=r) ans+=<span class="hljs-number">1ll</span>*(r-(*it).yy<span class="hljs-number">+1</span>)*(<span class="hljs-built_in">max</span>(l<span class="hljs-number">-1</span>,(*it).y)-<span class="hljs-built_in">max</span>(l,(*it).x)<span class="hljs-number">+1</span>);<br>	<span class="hljs-keyword">else</span><br>	&#123;<br>		<span class="hljs-keyword">auto</span> itt=vis[k].<span class="hljs-built_in">upper_bound</span>((Node)&#123;r,<span class="hljs-number">0</span>,(node)&#123;<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>&#125;&#125;);<br>		<span class="hljs-keyword">if</span>(itt==vis[k].<span class="hljs-built_in">begin</span>()) <span class="hljs-keyword">return</span> ans;<br>		--itt;<br>		<span class="hljs-keyword">if</span>((*itt).y&lt;r) <span class="hljs-keyword">return</span> ans;<br>		node t=(*itt).v;<br>		ans+=<span class="hljs-number">1ll</span>*(r-t.yy<span class="hljs-number">+1</span>)*(<span class="hljs-built_in">max</span>(l<span class="hljs-number">-1</span>,t.y)-<span class="hljs-built_in">max</span>(l,t.x)<span class="hljs-number">+1</span>);<br>	&#125;<br>	<span class="hljs-keyword">return</span> ans;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>);<br>	cin.<span class="hljs-built_in">tie</span>(<span class="hljs-literal">NULL</span>);<br>	cin&gt;&gt;n;		<br>	<span class="hljs-type">int</span> x,l,r,k;<br><br>	<span class="hljs-built_in">R</span>(i,<span class="hljs-number">1</span>,n)<br>	&#123;<br>		cin&gt;&gt;x&gt;&gt;l&gt;&gt;r&gt;&gt;k;<br>		x=(x+la)%(n<span class="hljs-number">+1</span>),l=(l+la)%i<span class="hljs-number">+1</span>,r=(r+la)%i<span class="hljs-number">+1</span>,k=(k+la)%(n<span class="hljs-number">+1</span>);<br>		<span class="hljs-keyword">if</span>(l&gt;r) <span class="hljs-built_in">swap</span>(l,r);<br>		a[x]=i;<br>		st.<span class="hljs-built_in">modify</span>(x,<span class="hljs-number">0</span>,n,<span class="hljs-number">1</span>,i);<br>		<span class="hljs-keyword">auto</span> it=s.<span class="hljs-built_in">find</span>((node)&#123;<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,x,<span class="hljs-number">0</span>&#125;);<br>		<span class="hljs-keyword">if</span>(it!=s.<span class="hljs-built_in">end</span>())<br>		&#123;<br>			<span class="hljs-type">int</span> l=(*it).x,r=(*it).y;<br>			<span class="hljs-built_in">pop</span>(*it,i);<br>			<span class="hljs-keyword">while</span>(l&lt;=r)<br>			&#123;<br>				<span class="hljs-type">int</span> t=st.<span class="hljs-built_in">query</span>(r,<span class="hljs-number">0</span>,n,<span class="hljs-number">1</span>);<br>				<span class="hljs-built_in">push</span>((node)&#123;<span class="hljs-built_in">max</span>(l,a[t]<span class="hljs-number">+1</span>),r,t,i&#125;,i);<br>				r=a[t];<br>			&#125;<br>		&#125;<br>		<span class="hljs-built_in">push</span>((node)&#123;i,i,!x,i&#125;,i);<br>		cout&lt;&lt;(la=<span class="hljs-built_in">solve</span>(l,r,k))&lt;&lt;<span class="hljs-string">&#x27;\n&#x27;</span>;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
     </div>
     
+<section class="post-comments" aria-label="评论">
+    <h2 class="post-comments-title">评论</h2>
+    <div class="giscus"></div>
+</section>
+<script src="https://giscus.app/client.js"
+        data-repo="coldiceh/coldiceh.github.io"
+        data-repo-id="R_kgDOR6e6PA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOR6e6PM4C6V73"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
 
 </article>
 
@@ -166,6 +185,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let hexoRoot = (document.body.getAttribute('data-hexo-root') || '/').trim();
     if (!hexoRoot.startsWith('/')) hexoRoot = '/' + hexoRoot;
     if (!hexoRoot.endsWith('/')) hexoRoot += '/';
+
+    (function markLowFx() {
+        const u = navigator.userAgent || '';
+        const safari = /safari/i.test(u) && !/chrome|android|crios|fxios|edgios/i.test(u);
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (safari || reduced) document.documentElement.classList.add('prts-lowfx');
+    })();
+
+    const prtsLowFx = document.documentElement.classList.contains('prts-lowfx');
 
     // ================= 0. 侧栏本地搜索 =================
     const searchInput = document.getElementById('local-search-input');
@@ -368,12 +396,12 @@ document.addEventListener('DOMContentLoaded', () => {
         loadTrack(0, false);
     }
 
-    // ================= 3. 全屏背景飘浮粒子 =================
+    // ================= 3. 全屏背景飘浮粒子（Safari / 省电动效下降频） =================
     const bgCanvas = document.getElementById('global-bg-particles');
-    if (bgCanvas) {
+    if (bgCanvas && !prtsLowFx) {
         const bctx = bgCanvas.getContext('2d');
         const floats = [];
-        const N = 80;
+        const N = 48;
 
         function resizeBg() {
             bgCanvas.width = window.innerWidth;
@@ -386,33 +414,38 @@ document.addEventListener('DOMContentLoaded', () => {
             floats.push({
                 x: Math.random() * window.innerWidth,
                 y: Math.random() * window.innerHeight,
-                r: Math.random() * 1.6 + 0.35,
-                vx: (Math.random() - 0.5) * 0.28,
-                vy: (Math.random() - 0.5) * 0.28,
+                r: Math.random() * 1.4 + 0.3,
+                vx: (Math.random() - 0.5) * 0.22,
+                vy: (Math.random() - 0.5) * 0.22,
                 ph: Math.random() * Math.PI * 2,
-                a: Math.random() * 0.35 + 0.12
+                a: Math.random() * 0.28 + 0.1
             });
         }
 
-        function tickBg() {
+        let bgLast = 0;
+        const bgFrameMs = prtsLowFx ? 70 : 28;
+        function tickBg(now) {
+            requestAnimationFrame(tickBg);
+            if (document.hidden) return;
+            if (now - bgLast < bgFrameMs) return;
+            bgLast = now;
             bctx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
             const light = document.body.getAttribute('data-theme') === 'light';
-            const t = Date.now() / 1000;
+            const t = now / 1000;
             floats.forEach((p, i) => {
-                p.x += p.vx + Math.sin(t * 0.7 + p.ph + i) * 0.12;
-                p.y += p.vy + Math.cos(t * 0.55 + p.ph) * 0.1;
+                p.x += p.vx + Math.sin(t * 0.65 + p.ph + i) * 0.1;
+                p.y += p.vy + Math.cos(t * 0.5 + p.ph) * 0.08;
                 if (p.x < -20) p.x = bgCanvas.width + 20;
                 if (p.x > bgCanvas.width + 20) p.x = -20;
                 if (p.y < -20) p.y = bgCanvas.height + 20;
                 if (p.y > bgCanvas.height + 20) p.y = -20;
-                bctx.fillStyle = light ? 'rgba(0,100,200,' + p.a + ')' : 'rgba(0,195,255,' + p.a + ')';
+                bctx.fillStyle = light ? 'rgba(0,100,200,' + p.a + ')' : 'rgba(0,212,255,' + p.a + ')';
                 bctx.beginPath();
                 bctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
                 bctx.fill();
             });
-            requestAnimationFrame(tickBg);
         }
-        tickBg();
+        requestAnimationFrame(tickBg);
     }
 
     // ================= 4. 左下角龙泡泡 Logo 粒子 =================
@@ -434,14 +467,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const out = [];
             for (let y = 0; y < size; y += step) {
                 for (let x = 0; x < size; x += step) {
-                    const a = imageData[((y * size + x) * 4) + 3];
-                    if (a > threshold) out.push([x, y]);
+                    const i = ((y * size + x) * 4);
+                    const a = imageData[i + 3];
+                    if (a > threshold) {
+                        const r = imageData[i];
+                        const g = imageData[i + 1];
+                        const b = imageData[i + 2];
+                        out.push({ x, y, r, g, b });
+                    }
                 }
             }
             return out;
         }
 
-        function downsample(points, maxN) {
+        function downsamplePoints(points, maxN) {
             if (points.length <= maxN) return points;
             const step = Math.ceil(points.length / maxN);
             const res = [];
@@ -461,27 +500,31 @@ document.addEventListener('DOMContentLoaded', () => {
             const imageData = tempCtx.getImageData(0, 0, size, size).data;
 
             const scale = Math.min(1.35, (canvas.width / size) * 0.85);
-            const blockH = size * scale;
             const blockW = size * scale;
+            const blockH = size * scale;
             const offsetX = (canvas.width - blockW) / 2;
             const offsetY = Math.max(8, canvas.height - blockH - 6);
 
-            let pts = sampleLogoPoints(imageData, size, 210, 4);
+            const maxPts = prtsLowFx ? 420 : 780;
+            let pts = sampleLogoPoints(imageData, size, 210, prtsLowFx ? 5 : 4);
             if (pts.length < 40) pts = sampleLogoPoints(imageData, size, 165, 5);
-            pts = downsample(pts, 850);
+            pts = downsamplePoints(pts, maxPts);
 
             class Particle {
-                constructor(x, y) {
+                constructor(px, py, cr, cg, cb) {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
-                    this.baseX = x;
-                    this.baseY = y;
-                    this.density = (Math.random() * 30) + 1;
+                    this.baseX = px;
+                    this.baseY = py;
+                    this.cr = cr;
+                    this.cg = cg;
+                    this.cb = cb;
+                    this.density = (Math.random() * 26) + 1;
                 }
                 draw() {
-                    ctx.fillStyle = '#00c3ff';
+                    ctx.fillStyle = 'rgb(' + this.cr + ',' + this.cg + ',' + this.cb + ')';
                     ctx.beginPath();
-                    ctx.arc(this.x, this.y, 1.15, 0, Math.PI * 2);
+                    ctx.arc(this.x, this.y, prtsLowFx ? 1 : 1.1, 0, Math.PI * 2);
                     ctx.fill();
                 }
                 update() {
@@ -495,28 +538,37 @@ document.addEventListener('DOMContentLoaded', () => {
                         const distance = Math.sqrt(dx * dx + dy * dy);
                         if (distance < mouse.radius && distance > 0.01) {
                             const force = (mouse.radius - distance) / mouse.radius;
-                            this.x -= (dx / distance) * force * this.density * 0.8;
-                            this.y -= (dy / distance) * force * this.density * 0.8;
+                            this.x -= (dx / distance) * force * this.density * 0.75;
+                            this.y -= (dy / distance) * force * this.density * 0.75;
                         } else {
-                            this.x += (this.baseX - this.x) * 0.12;
-                            this.y += (this.baseY - this.y) * 0.12;
+                            this.x += (this.baseX - this.x) * 0.11;
+                            this.y += (this.baseY - this.y) * 0.11;
                         }
                     } else {
-                        this.x += (this.baseX - this.x) * 0.12;
-                        this.y += (this.baseY - this.y) * 0.12;
+                        this.x += (this.baseX - this.x) * 0.11;
+                        this.y += (this.baseY - this.y) * 0.11;
                     }
                 }
             }
 
-            particles = pts.map(([x, y]) => new Particle(x * scale + offsetX, y * scale + offsetY));
+            particles = pts.map(p => new Particle(
+                p.x * scale + offsetX,
+                p.y * scale + offsetY,
+                p.r, p.g, p.b
+            ));
 
-            function animate() {
+            let logoLast = 0;
+            const logoFrameMs = prtsLowFx ? 55 : 24;
+            function animateLogo(now) {
+                requestAnimationFrame(animateLogo);
+                if (document.hidden) return;
+                if (now - logoLast < logoFrameMs) return;
+                logoLast = now;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 particles.forEach(p => { p.update(); p.draw(); });
-                requestAnimationFrame(animate);
             }
-            animate();
-            console.log('PRTS: Logo particles:', particles.length);
+            requestAnimationFrame(animateLogo);
+            console.log('PRTS: Logo particles (color):', particles.length);
         };
         logoImg.onerror = function () {
             console.warn('PRTS: logo.png 加载失败，跳过侧栏形状粒子');
@@ -526,7 +578,57 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
     }
 
-    // ================= 5. 首页封面图：极端尺寸则隐藏横幅 =================
+    // ================= 5. 代码块：复制 + 横向滚动（兼容 figure.highlight） =================
+    function enhanceCodeBlocks(root) {
+        const scope = root || document;
+        scope.querySelectorAll('.post-content figure.highlight').forEach(fig => {
+            if (fig.closest('.code-block-wrap')) return;
+            const wrap = document.createElement('div');
+            wrap.className = 'code-block-wrap';
+            const bar = document.createElement('div');
+            bar.className = 'code-toolbar';
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'code-copy-btn';
+            btn.textContent = '复制';
+            btn.addEventListener('click', () => {
+                const t = (fig.innerText || '').replace(/\n+$/, '');
+                navigator.clipboard.writeText(t).then(() => {
+                    btn.textContent = '已复制';
+                    setTimeout(() => { btn.textContent = '复制'; }, 1400);
+                }).catch(() => { btn.textContent = '失败'; });
+            });
+            bar.appendChild(btn);
+            fig.parentNode.insertBefore(wrap, fig);
+            wrap.appendChild(bar);
+            wrap.appendChild(fig);
+        });
+        scope.querySelectorAll('.post-content > pre').forEach(pre => {
+            if (pre.closest('.code-block-wrap') || pre.closest('figure.highlight')) return;
+            const wrap = document.createElement('div');
+            wrap.className = 'code-block-wrap';
+            const bar = document.createElement('div');
+            bar.className = 'code-toolbar';
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'code-copy-btn';
+            btn.textContent = '复制';
+            btn.addEventListener('click', () => {
+                const t = (pre.innerText || '').replace(/\n+$/, '');
+                navigator.clipboard.writeText(t).then(() => {
+                    btn.textContent = '已复制';
+                    setTimeout(() => { btn.textContent = '复制'; }, 1400);
+                }).catch(() => { btn.textContent = '失败'; });
+            });
+            bar.appendChild(btn);
+            pre.parentNode.insertBefore(wrap, pre);
+            wrap.appendChild(bar);
+            wrap.appendChild(pre);
+        });
+    }
+    enhanceCodeBlocks(document);
+
+    // ================= 6. 首页封面图：极端尺寸则隐藏横幅 =================
     document.querySelectorAll('img[data-cover-watch]').forEach(img => {
         function check() {
             const w = img.naturalWidth;

@@ -16,6 +16,7 @@ window.MathJax = {
 <title>CF1060G Balls and Pockets | Hexo</title>
 <link rel="icon" href="/avatar.jpg" type="image/jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-dark.min.css" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/style.css">
 
 <meta name="generator" content="Hexo 8.1.1"></head>
@@ -46,14 +47,11 @@ window.MathJax = {
     
     <div class="sidebar-bili-row">
         <a class="sidebar-bili-link" href="https://space.bilibili.com/398617002" target="_blank" rel="noopener noreferrer" title="哔哩哔哩空间" aria-label="哔哩哔哩空间">
-            <span class="sidebar-bili-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="24" height="24" rx="5" fill="#FB7299"/>
-                    <path fill="#fff" d="M8.5 9.2h7v5.6h-7V9.2zm1.3 1.3v3h4.4v-3H9.8z" opacity=".95"/>
-                    <path fill="#fff" d="M9.2 7.3l.9 1.2h3.8l.9-1.2H12l-.4.6h-.8l-.4-.6H9.2z"/>
-                </svg>
-            </span>
-            <span class="sidebar-bili-text">哔哩哔哩</span>
+            <svg class="sidebar-bili-svg" viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect width="24" height="24" rx="5" fill="#FB7299"/>
+                <path fill="#fff" d="M8.5 9.2h7v5.6h-7V9.2zm1.3 1.3v3h4.4v-3H9.8z" opacity=".95"/>
+                <path fill="#fff" d="M9.2 7.3l.9 1.2h3.8l.9-1.2H12l-.4.6h-.8l-.4-.6H9.2z"/>
+            </svg>
         </a>
     </div>
     
@@ -74,7 +72,7 @@ window.MathJax = {
         <nav class="sidebar-links" aria-label="常用链接">
             <a href="/archives/">归档</a>
             <a href="/tags/">全部标签</a>
-            <a href="/essay-archive/">随笔档案（按月）</a>
+            <a href="/essay-archive/">随笔档案</a>
             <a href="/comments/">评论</a>
         </nav>
     </section>
@@ -119,10 +117,31 @@ window.MathJax = {
 <p>而第 $x$ 小显然可以直接树状数组。</p>
 <p>计算并维护 $S_d$ 时间复杂度为 $\mathcal O(n\log n)$，对于单次询问，找到它在第几项需要一个二分，里面计算还要一个二分，时间复杂度 $\mathcal O(\log x_i\log n)$。最后计算答案，需要计算集合指定项和线段树二分，时间复杂度 $\mathcal O(log n)$ 。</p>
 <p>因此总时间复杂度为 $\mathcal O(n\log n+m\log x_i\log n)$。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> R(i,a,b) for(int i=(a),i##E=(b);i&lt;=i##E;i++)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> L(i,a,b) for(int i=(b),i##E=(a);i&gt;=i##E;i--)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">int</span> n,q;</span><br><span class="line"><span class="type">int</span> a[<span class="number">111111</span>];</span><br><span class="line"><span class="type">int</span> rnd[<span class="number">111111</span>],sum[<span class="number">111111</span>],en[<span class="number">111111</span>];</span><br><span class="line"><span class="type">int</span> mod[<span class="number">111111</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">bit</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> v[<span class="number">111111</span>];</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">modify</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(;x&lt;=n;x+=x&amp;(-x)) v[x]+=k;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">query_sum</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="type">int</span> ret=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(;x;x-=x&amp;(-x))ret+=v[x];</span><br><span class="line">			<span class="keyword">return</span> ret;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">query_kth</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="type">int</span> l=<span class="number">1</span>,r=n,best=n<span class="number">+1</span>;</span><br><span class="line">		<span class="keyword">while</span>(l&lt;=r)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span>(<span class="built_in">query_sum</span>(mid)&gt;=x) best=mid,r=mid<span class="number">-1</span>;</span><br><span class="line">			<span class="keyword">else</span> l=mid<span class="number">+1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">modify</span>(best,<span class="number">-1</span>);</span><br><span class="line">		<span class="keyword">return</span> best<span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;bit;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">clsgt</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> tim;</span><br><span class="line">	<span class="type">int</span> siz[<span class="number">3333333</span>],ls[<span class="number">3333333</span>],rs[<span class="number">3333333</span>],rt[<span class="number">111111</span>];</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">modify</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> lst,<span class="type">int</span> &amp;x)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		x=++tim;</span><br><span class="line">		siz[x]=siz[lst]<span class="number">+1</span>;ls[x]=ls[lst],rs[x]=rs[lst];</span><br><span class="line">		<span class="keyword">if</span>(l==r) <span class="keyword">return</span>;</span><br><span class="line">		<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(p&lt;=mid) <span class="built_in">modify</span>(p,l,mid,ls[lst],ls[x]);</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">modify</span>(p,mid<span class="number">+1</span>,r,rs[lst],rs[x]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">find_kth</span><span class="params">(<span class="type">int</span> k,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(l==r) <span class="keyword">return</span> l;</span><br><span class="line">		<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(k&lt;siz[ls[x]]) <span class="keyword">return</span> <span class="built_in">find_kth</span>(k,l,mid,ls[x]);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">return</span> <span class="built_in">find_kth</span>(k-siz[ls[x]],mid<span class="number">+1</span>,r,rs[x]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">inline</span> <span class="type">int</span> <span class="title">query_sum</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(r==p||!x) <span class="keyword">return</span> siz[x];</span><br><span class="line">		<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(p&lt;=mid) <span class="keyword">return</span> <span class="built_in">query_sum</span>(p,l,mid,ls[x]);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">return</span> <span class="built_in">query_sum</span>(p,mid<span class="number">+1</span>,r,rs[x])+siz[ls[x]];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;st;</span><br><span class="line"><span class="function">pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt; <span class="title">check</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> x,<span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	k+=rnd[p]-x;</span><br><span class="line">	<span class="type">int</span> t=<span class="built_in">upper_bound</span>(rnd,rnd+n,k)-rnd;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">make_pair</span>(<span class="number">1ll</span>*k*t-sum[t],t);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find1</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> l=<span class="number">1</span>,r=n<span class="number">-1</span>,best=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(l&lt;=r)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">check</span>(mid,k,<span class="number">0</span>).first&lt;=x) best=mid,l=mid<span class="number">+1</span>;</span><br><span class="line">		<span class="keyword">else</span> r=mid<span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> best;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">find2</span><span class="params">(<span class="type">int</span> p,<span class="type">int</span> x,<span class="type">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">int</span> l=<span class="number">1</span>,r=rnd[p<span class="number">+1</span>]-rnd[p],best=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(p==n<span class="number">-1</span>) r=x/n+k<span class="number">+1</span>;</span><br><span class="line">	<span class="keyword">while</span>(l&lt;=r)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> mid=(l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(<span class="built_in">check</span>(p,k,mid).first&lt;=x) best=mid,l=mid<span class="number">+1</span>;</span><br><span class="line">		<span class="keyword">else</span> r=mid<span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> best;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">	cin.<span class="built_in">tie</span>(<span class="literal">NULL</span>);	</span><br><span class="line">	<span class="type">int</span> a0;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;q&gt;&gt;a[<span class="number">0</span>];a0=a[<span class="number">0</span>];</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n<span class="number">-1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		cin&gt;&gt;a[i];</span><br><span class="line">		a[i]-=a[<span class="number">0</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	a[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n<span class="number">-1</span>) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> x=(a[i]-en[i<span class="number">-1</span>])/i;</span><br><span class="line">		rnd[i]=rnd[i<span class="number">-1</span>]+x,en[i]=en[i<span class="number">-1</span>]+x*i,sum[i<span class="number">+1</span>]=sum[i]+rnd[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">1</span>,n) bit.<span class="built_in">modify</span>(i,<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">L</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) mod[i]=bit.<span class="built_in">query_kth</span>(a[i]-en[i]<span class="number">+1</span>);</span><br><span class="line">	<span class="built_in">R</span>(i,<span class="number">0</span>,n<span class="number">-1</span>) st.<span class="built_in">modify</span>(mod[i],<span class="number">0</span>,n<span class="number">-1</span>,st.rt[i],st.rt[i<span class="number">+1</span>]);</span><br><span class="line">	<span class="keyword">while</span>(q--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="type">int</span> x,k;</span><br><span class="line">		cin&gt;&gt;x&gt;&gt;k;</span><br><span class="line">		<span class="keyword">if</span>(x&lt;a0)</span><br><span class="line">		&#123;</span><br><span class="line">			cout&lt;&lt;x&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		x-=a0;</span><br><span class="line">		<span class="type">int</span> fi=<span class="built_in">find1</span>(x,k),se=<span class="built_in">find2</span>(fi,x,k);</span><br><span class="line">		<span class="keyword">auto</span> ret=<span class="built_in">check</span>(fi,k,se);</span><br><span class="line">		<span class="type">int</span> rk=st.<span class="built_in">find_kth</span>(x-ret.first,<span class="number">0</span>,n<span class="number">-1</span>,st.rt[ret.second]);</span><br><span class="line">		<span class="type">int</span> ans=en[fi]+se*(fi<span class="number">+1</span>)+a0+((rk&gt;<span class="number">0</span>)?st.<span class="built_in">query_sum</span>(rk<span class="number">-1</span>,<span class="number">0</span>,n<span class="number">-1</span>,st.rt[fi<span class="number">+1</span>]):<span class="number">0</span>);</span><br><span class="line">		cout&lt;&lt;ans&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> R(i,a,b) for(int i=(a),i##E=(b);i&lt;=i##E;i++)</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> L(i,a,b) for(int i=(b),i##E=(a);i&gt;=i##E;i--)</span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">int</span> n,q;<br><span class="hljs-type">int</span> a[<span class="hljs-number">111111</span>];<br><span class="hljs-type">int</span> rnd[<span class="hljs-number">111111</span>],sum[<span class="hljs-number">111111</span>],en[<span class="hljs-number">111111</span>];<br><span class="hljs-type">int</span> mod[<span class="hljs-number">111111</span>];<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">bit</span><br>&#123;<br>	<span class="hljs-type">int</span> v[<span class="hljs-number">111111</span>];<br>	<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-type">void</span> <span class="hljs-title">modify</span><span class="hljs-params">(<span class="hljs-type">int</span> x,<span class="hljs-type">int</span> k)</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-keyword">for</span>(;x&lt;=n;x+=x&amp;(-x)) v[x]+=k;<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-type">int</span> <span class="hljs-title">query_sum</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-type">int</span> ret=<span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">for</span>(;x;x-=x&amp;(-x))ret+=v[x];<br>			<span class="hljs-keyword">return</span> ret;<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-type">int</span> <span class="hljs-title">query_kth</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-type">int</span> l=<span class="hljs-number">1</span>,r=n,best=n<span class="hljs-number">+1</span>;<br>		<span class="hljs-keyword">while</span>(l&lt;=r)<br>		&#123;<br>			<span class="hljs-type">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;<br>			<span class="hljs-keyword">if</span>(<span class="hljs-built_in">query_sum</span>(mid)&gt;=x) best=mid,r=mid<span class="hljs-number">-1</span>;<br>			<span class="hljs-keyword">else</span> l=mid<span class="hljs-number">+1</span>;<br>		&#125;<br>		<span class="hljs-built_in">modify</span>(best,<span class="hljs-number">-1</span>);<br>		<span class="hljs-keyword">return</span> best<span class="hljs-number">-1</span>;<br>	&#125;<br>&#125;bit;<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">clsgt</span><br>&#123;<br>	<span class="hljs-type">int</span> tim;<br>	<span class="hljs-type">int</span> siz[<span class="hljs-number">3333333</span>],ls[<span class="hljs-number">3333333</span>],rs[<span class="hljs-number">3333333</span>],rt[<span class="hljs-number">111111</span>];<br>	<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-type">void</span> <span class="hljs-title">modify</span><span class="hljs-params">(<span class="hljs-type">int</span> p,<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r,<span class="hljs-type">int</span> lst,<span class="hljs-type">int</span> &amp;x)</span></span><br><span class="hljs-function">	</span>&#123;<br>		x=++tim;<br>		siz[x]=siz[lst]<span class="hljs-number">+1</span>;ls[x]=ls[lst],rs[x]=rs[lst];<br>		<span class="hljs-keyword">if</span>(l==r) <span class="hljs-keyword">return</span>;<br>		<span class="hljs-type">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">if</span>(p&lt;=mid) <span class="hljs-built_in">modify</span>(p,l,mid,ls[lst],ls[x]);<br>		<span class="hljs-keyword">else</span> <span class="hljs-built_in">modify</span>(p,mid<span class="hljs-number">+1</span>,r,rs[lst],rs[x]);<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-type">int</span> <span class="hljs-title">find_kth</span><span class="hljs-params">(<span class="hljs-type">int</span> k,<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r,<span class="hljs-type">int</span> x)</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-keyword">if</span>(l==r) <span class="hljs-keyword">return</span> l;<br>		<span class="hljs-type">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">if</span>(k&lt;siz[ls[x]]) <span class="hljs-keyword">return</span> <span class="hljs-built_in">find_kth</span>(k,l,mid,ls[x]);<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-built_in">find_kth</span>(k-siz[ls[x]],mid<span class="hljs-number">+1</span>,r,rs[x]);<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-type">int</span> <span class="hljs-title">query_sum</span><span class="hljs-params">(<span class="hljs-type">int</span> p,<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r,<span class="hljs-type">int</span> x)</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-keyword">if</span>(r==p||!x) <span class="hljs-keyword">return</span> siz[x];<br>		<span class="hljs-type">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">if</span>(p&lt;=mid) <span class="hljs-keyword">return</span> <span class="hljs-built_in">query_sum</span>(p,l,mid,ls[x]);<br>		<span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-built_in">query_sum</span>(p,mid<span class="hljs-number">+1</span>,r,rs[x])+siz[ls[x]];<br>	&#125;<br>&#125;st;<br><span class="hljs-function">pair&lt;<span class="hljs-type">int</span>,<span class="hljs-type">int</span>&gt; <span class="hljs-title">check</span><span class="hljs-params">(<span class="hljs-type">int</span> p,<span class="hljs-type">int</span> x,<span class="hljs-type">int</span> k)</span></span><br><span class="hljs-function"></span>&#123;<br>	k+=rnd[p]-x;<br>	<span class="hljs-type">int</span> t=<span class="hljs-built_in">upper_bound</span>(rnd,rnd+n,k)-rnd;<br>	<span class="hljs-keyword">return</span> <span class="hljs-built_in">make_pair</span>(<span class="hljs-number">1ll</span>*k*t-sum[t],t);<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">find1</span><span class="hljs-params">(<span class="hljs-type">int</span> x,<span class="hljs-type">int</span> k)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">int</span> l=<span class="hljs-number">1</span>,r=n<span class="hljs-number">-1</span>,best=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span>(l&lt;=r)<br>	&#123;<br>		<span class="hljs-type">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">if</span>(<span class="hljs-built_in">check</span>(mid,k,<span class="hljs-number">0</span>).first&lt;=x) best=mid,l=mid<span class="hljs-number">+1</span>;<br>		<span class="hljs-keyword">else</span> r=mid<span class="hljs-number">-1</span>;<br>	&#125;<br>	<span class="hljs-keyword">return</span> best;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">find2</span><span class="hljs-params">(<span class="hljs-type">int</span> p,<span class="hljs-type">int</span> x,<span class="hljs-type">int</span> k)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">int</span> l=<span class="hljs-number">1</span>,r=rnd[p<span class="hljs-number">+1</span>]-rnd[p],best=<span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">if</span>(p==n<span class="hljs-number">-1</span>) r=x/n+k<span class="hljs-number">+1</span>;<br>	<span class="hljs-keyword">while</span>(l&lt;=r)<br>	&#123;<br>		<span class="hljs-type">int</span> mid=(l+r)&gt;&gt;<span class="hljs-number">1</span>;<br>		<span class="hljs-keyword">if</span>(<span class="hljs-built_in">check</span>(p,k,mid).first&lt;=x) best=mid,l=mid<span class="hljs-number">+1</span>;<br>		<span class="hljs-keyword">else</span> r=mid<span class="hljs-number">-1</span>;<br>	&#125;<br>	<span class="hljs-keyword">return</span> best;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>);<br>	cin.<span class="hljs-built_in">tie</span>(<span class="hljs-literal">NULL</span>);	<br>	<span class="hljs-type">int</span> a0;<br>	cin&gt;&gt;n&gt;&gt;q&gt;&gt;a[<span class="hljs-number">0</span>];a0=a[<span class="hljs-number">0</span>];<br>	<span class="hljs-built_in">R</span>(i,<span class="hljs-number">1</span>,n<span class="hljs-number">-1</span>)<br>	&#123;<br>		cin&gt;&gt;a[i];<br>		a[i]-=a[<span class="hljs-number">0</span>];<br>	&#125;<br>	a[<span class="hljs-number">0</span>]=<span class="hljs-number">0</span>;<br>	<span class="hljs-built_in">R</span>(i,<span class="hljs-number">1</span>,n<span class="hljs-number">-1</span>) <br>	&#123;<br>		<span class="hljs-type">int</span> x=(a[i]-en[i<span class="hljs-number">-1</span>])/i;<br>		rnd[i]=rnd[i<span class="hljs-number">-1</span>]+x,en[i]=en[i<span class="hljs-number">-1</span>]+x*i,sum[i<span class="hljs-number">+1</span>]=sum[i]+rnd[i];<br>	&#125;<br>	<span class="hljs-built_in">R</span>(i,<span class="hljs-number">1</span>,n) bit.<span class="hljs-built_in">modify</span>(i,<span class="hljs-number">1</span>);<br>	<span class="hljs-built_in">L</span>(i,<span class="hljs-number">0</span>,n<span class="hljs-number">-1</span>) mod[i]=bit.<span class="hljs-built_in">query_kth</span>(a[i]-en[i]<span class="hljs-number">+1</span>);<br>	<span class="hljs-built_in">R</span>(i,<span class="hljs-number">0</span>,n<span class="hljs-number">-1</span>) st.<span class="hljs-built_in">modify</span>(mod[i],<span class="hljs-number">0</span>,n<span class="hljs-number">-1</span>,st.rt[i],st.rt[i<span class="hljs-number">+1</span>]);<br>	<span class="hljs-keyword">while</span>(q--)<br>	&#123;<br>		<span class="hljs-type">int</span> x,k;<br>		cin&gt;&gt;x&gt;&gt;k;<br>		<span class="hljs-keyword">if</span>(x&lt;a0)<br>		&#123;<br>			cout&lt;&lt;x&lt;&lt;<span class="hljs-string">&#x27;\n&#x27;</span>;<br>			<span class="hljs-keyword">continue</span>;<br>		&#125;<br>		x-=a0;<br>		<span class="hljs-type">int</span> fi=<span class="hljs-built_in">find1</span>(x,k),se=<span class="hljs-built_in">find2</span>(fi,x,k);<br>		<span class="hljs-keyword">auto</span> ret=<span class="hljs-built_in">check</span>(fi,k,se);<br>		<span class="hljs-type">int</span> rk=st.<span class="hljs-built_in">find_kth</span>(x-ret.first,<span class="hljs-number">0</span>,n<span class="hljs-number">-1</span>,st.rt[ret.second]);<br>		<span class="hljs-type">int</span> ans=en[fi]+se*(fi<span class="hljs-number">+1</span>)+a0+((rk&gt;<span class="hljs-number">0</span>)?st.<span class="hljs-built_in">query_sum</span>(rk<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,n<span class="hljs-number">-1</span>,st.rt[fi<span class="hljs-number">+1</span>]):<span class="hljs-number">0</span>);<br>		cout&lt;&lt;ans&lt;&lt;<span class="hljs-string">&#x27;\n&#x27;</span>;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
     </div>
     
+<section class="post-comments" aria-label="评论">
+    <h2 class="post-comments-title">评论</h2>
+    <div class="giscus"></div>
+</section>
+<script src="https://giscus.app/client.js"
+        data-repo="coldiceh/coldiceh.github.io"
+        data-repo-id="R_kgDOR6e6PA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOR6e6PM4C6V73"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
 
 </article>
 
@@ -166,6 +185,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let hexoRoot = (document.body.getAttribute('data-hexo-root') || '/').trim();
     if (!hexoRoot.startsWith('/')) hexoRoot = '/' + hexoRoot;
     if (!hexoRoot.endsWith('/')) hexoRoot += '/';
+
+    (function markLowFx() {
+        const u = navigator.userAgent || '';
+        const safari = /safari/i.test(u) && !/chrome|android|crios|fxios|edgios/i.test(u);
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (safari || reduced) document.documentElement.classList.add('prts-lowfx');
+    })();
+
+    const prtsLowFx = document.documentElement.classList.contains('prts-lowfx');
 
     // ================= 0. 侧栏本地搜索 =================
     const searchInput = document.getElementById('local-search-input');
@@ -368,12 +396,12 @@ document.addEventListener('DOMContentLoaded', () => {
         loadTrack(0, false);
     }
 
-    // ================= 3. 全屏背景飘浮粒子 =================
+    // ================= 3. 全屏背景飘浮粒子（Safari / 省电动效下降频） =================
     const bgCanvas = document.getElementById('global-bg-particles');
-    if (bgCanvas) {
+    if (bgCanvas && !prtsLowFx) {
         const bctx = bgCanvas.getContext('2d');
         const floats = [];
-        const N = 80;
+        const N = 48;
 
         function resizeBg() {
             bgCanvas.width = window.innerWidth;
@@ -386,33 +414,38 @@ document.addEventListener('DOMContentLoaded', () => {
             floats.push({
                 x: Math.random() * window.innerWidth,
                 y: Math.random() * window.innerHeight,
-                r: Math.random() * 1.6 + 0.35,
-                vx: (Math.random() - 0.5) * 0.28,
-                vy: (Math.random() - 0.5) * 0.28,
+                r: Math.random() * 1.4 + 0.3,
+                vx: (Math.random() - 0.5) * 0.22,
+                vy: (Math.random() - 0.5) * 0.22,
                 ph: Math.random() * Math.PI * 2,
-                a: Math.random() * 0.35 + 0.12
+                a: Math.random() * 0.28 + 0.1
             });
         }
 
-        function tickBg() {
+        let bgLast = 0;
+        const bgFrameMs = prtsLowFx ? 70 : 28;
+        function tickBg(now) {
+            requestAnimationFrame(tickBg);
+            if (document.hidden) return;
+            if (now - bgLast < bgFrameMs) return;
+            bgLast = now;
             bctx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
             const light = document.body.getAttribute('data-theme') === 'light';
-            const t = Date.now() / 1000;
+            const t = now / 1000;
             floats.forEach((p, i) => {
-                p.x += p.vx + Math.sin(t * 0.7 + p.ph + i) * 0.12;
-                p.y += p.vy + Math.cos(t * 0.55 + p.ph) * 0.1;
+                p.x += p.vx + Math.sin(t * 0.65 + p.ph + i) * 0.1;
+                p.y += p.vy + Math.cos(t * 0.5 + p.ph) * 0.08;
                 if (p.x < -20) p.x = bgCanvas.width + 20;
                 if (p.x > bgCanvas.width + 20) p.x = -20;
                 if (p.y < -20) p.y = bgCanvas.height + 20;
                 if (p.y > bgCanvas.height + 20) p.y = -20;
-                bctx.fillStyle = light ? 'rgba(0,100,200,' + p.a + ')' : 'rgba(0,195,255,' + p.a + ')';
+                bctx.fillStyle = light ? 'rgba(0,100,200,' + p.a + ')' : 'rgba(0,212,255,' + p.a + ')';
                 bctx.beginPath();
                 bctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
                 bctx.fill();
             });
-            requestAnimationFrame(tickBg);
         }
-        tickBg();
+        requestAnimationFrame(tickBg);
     }
 
     // ================= 4. 左下角龙泡泡 Logo 粒子 =================
@@ -434,14 +467,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const out = [];
             for (let y = 0; y < size; y += step) {
                 for (let x = 0; x < size; x += step) {
-                    const a = imageData[((y * size + x) * 4) + 3];
-                    if (a > threshold) out.push([x, y]);
+                    const i = ((y * size + x) * 4);
+                    const a = imageData[i + 3];
+                    if (a > threshold) {
+                        const r = imageData[i];
+                        const g = imageData[i + 1];
+                        const b = imageData[i + 2];
+                        out.push({ x, y, r, g, b });
+                    }
                 }
             }
             return out;
         }
 
-        function downsample(points, maxN) {
+        function downsamplePoints(points, maxN) {
             if (points.length <= maxN) return points;
             const step = Math.ceil(points.length / maxN);
             const res = [];
@@ -461,27 +500,31 @@ document.addEventListener('DOMContentLoaded', () => {
             const imageData = tempCtx.getImageData(0, 0, size, size).data;
 
             const scale = Math.min(1.35, (canvas.width / size) * 0.85);
-            const blockH = size * scale;
             const blockW = size * scale;
+            const blockH = size * scale;
             const offsetX = (canvas.width - blockW) / 2;
             const offsetY = Math.max(8, canvas.height - blockH - 6);
 
-            let pts = sampleLogoPoints(imageData, size, 210, 4);
+            const maxPts = prtsLowFx ? 420 : 780;
+            let pts = sampleLogoPoints(imageData, size, 210, prtsLowFx ? 5 : 4);
             if (pts.length < 40) pts = sampleLogoPoints(imageData, size, 165, 5);
-            pts = downsample(pts, 850);
+            pts = downsamplePoints(pts, maxPts);
 
             class Particle {
-                constructor(x, y) {
+                constructor(px, py, cr, cg, cb) {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
-                    this.baseX = x;
-                    this.baseY = y;
-                    this.density = (Math.random() * 30) + 1;
+                    this.baseX = px;
+                    this.baseY = py;
+                    this.cr = cr;
+                    this.cg = cg;
+                    this.cb = cb;
+                    this.density = (Math.random() * 26) + 1;
                 }
                 draw() {
-                    ctx.fillStyle = '#00c3ff';
+                    ctx.fillStyle = 'rgb(' + this.cr + ',' + this.cg + ',' + this.cb + ')';
                     ctx.beginPath();
-                    ctx.arc(this.x, this.y, 1.15, 0, Math.PI * 2);
+                    ctx.arc(this.x, this.y, prtsLowFx ? 1 : 1.1, 0, Math.PI * 2);
                     ctx.fill();
                 }
                 update() {
@@ -495,28 +538,37 @@ document.addEventListener('DOMContentLoaded', () => {
                         const distance = Math.sqrt(dx * dx + dy * dy);
                         if (distance < mouse.radius && distance > 0.01) {
                             const force = (mouse.radius - distance) / mouse.radius;
-                            this.x -= (dx / distance) * force * this.density * 0.8;
-                            this.y -= (dy / distance) * force * this.density * 0.8;
+                            this.x -= (dx / distance) * force * this.density * 0.75;
+                            this.y -= (dy / distance) * force * this.density * 0.75;
                         } else {
-                            this.x += (this.baseX - this.x) * 0.12;
-                            this.y += (this.baseY - this.y) * 0.12;
+                            this.x += (this.baseX - this.x) * 0.11;
+                            this.y += (this.baseY - this.y) * 0.11;
                         }
                     } else {
-                        this.x += (this.baseX - this.x) * 0.12;
-                        this.y += (this.baseY - this.y) * 0.12;
+                        this.x += (this.baseX - this.x) * 0.11;
+                        this.y += (this.baseY - this.y) * 0.11;
                     }
                 }
             }
 
-            particles = pts.map(([x, y]) => new Particle(x * scale + offsetX, y * scale + offsetY));
+            particles = pts.map(p => new Particle(
+                p.x * scale + offsetX,
+                p.y * scale + offsetY,
+                p.r, p.g, p.b
+            ));
 
-            function animate() {
+            let logoLast = 0;
+            const logoFrameMs = prtsLowFx ? 55 : 24;
+            function animateLogo(now) {
+                requestAnimationFrame(animateLogo);
+                if (document.hidden) return;
+                if (now - logoLast < logoFrameMs) return;
+                logoLast = now;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 particles.forEach(p => { p.update(); p.draw(); });
-                requestAnimationFrame(animate);
             }
-            animate();
-            console.log('PRTS: Logo particles:', particles.length);
+            requestAnimationFrame(animateLogo);
+            console.log('PRTS: Logo particles (color):', particles.length);
         };
         logoImg.onerror = function () {
             console.warn('PRTS: logo.png 加载失败，跳过侧栏形状粒子');
@@ -526,7 +578,57 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
     }
 
-    // ================= 5. 首页封面图：极端尺寸则隐藏横幅 =================
+    // ================= 5. 代码块：复制 + 横向滚动（兼容 figure.highlight） =================
+    function enhanceCodeBlocks(root) {
+        const scope = root || document;
+        scope.querySelectorAll('.post-content figure.highlight').forEach(fig => {
+            if (fig.closest('.code-block-wrap')) return;
+            const wrap = document.createElement('div');
+            wrap.className = 'code-block-wrap';
+            const bar = document.createElement('div');
+            bar.className = 'code-toolbar';
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'code-copy-btn';
+            btn.textContent = '复制';
+            btn.addEventListener('click', () => {
+                const t = (fig.innerText || '').replace(/\n+$/, '');
+                navigator.clipboard.writeText(t).then(() => {
+                    btn.textContent = '已复制';
+                    setTimeout(() => { btn.textContent = '复制'; }, 1400);
+                }).catch(() => { btn.textContent = '失败'; });
+            });
+            bar.appendChild(btn);
+            fig.parentNode.insertBefore(wrap, fig);
+            wrap.appendChild(bar);
+            wrap.appendChild(fig);
+        });
+        scope.querySelectorAll('.post-content > pre').forEach(pre => {
+            if (pre.closest('.code-block-wrap') || pre.closest('figure.highlight')) return;
+            const wrap = document.createElement('div');
+            wrap.className = 'code-block-wrap';
+            const bar = document.createElement('div');
+            bar.className = 'code-toolbar';
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'code-copy-btn';
+            btn.textContent = '复制';
+            btn.addEventListener('click', () => {
+                const t = (pre.innerText || '').replace(/\n+$/, '');
+                navigator.clipboard.writeText(t).then(() => {
+                    btn.textContent = '已复制';
+                    setTimeout(() => { btn.textContent = '复制'; }, 1400);
+                }).catch(() => { btn.textContent = '失败'; });
+            });
+            bar.appendChild(btn);
+            pre.parentNode.insertBefore(wrap, pre);
+            wrap.appendChild(bar);
+            wrap.appendChild(pre);
+        });
+    }
+    enhanceCodeBlocks(document);
+
+    // ================= 6. 首页封面图：极端尺寸则隐藏横幅 =================
     document.querySelectorAll('img[data-cover-watch]').forEach(img => {
         function check() {
             const w = img.naturalWidth;

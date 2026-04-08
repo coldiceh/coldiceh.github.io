@@ -16,6 +16,7 @@ window.MathJax = {
 <title>Hexo</title>
 <link rel="icon" href="/avatar.jpg" type="image/jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-dark.min.css" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/style.css">
 
 <meta name="generator" content="Hexo 8.1.1"></head>
@@ -46,14 +47,11 @@ window.MathJax = {
     
     <div class="sidebar-bili-row">
         <a class="sidebar-bili-link" href="https://space.bilibili.com/398617002" target="_blank" rel="noopener noreferrer" title="哔哩哔哩空间" aria-label="哔哩哔哩空间">
-            <span class="sidebar-bili-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="24" height="24" rx="5" fill="#FB7299"/>
-                    <path fill="#fff" d="M8.5 9.2h7v5.6h-7V9.2zm1.3 1.3v3h4.4v-3H9.8z" opacity=".95"/>
-                    <path fill="#fff" d="M9.2 7.3l.9 1.2h3.8l.9-1.2H12l-.4.6h-.8l-.4-.6H9.2z"/>
-                </svg>
-            </span>
-            <span class="sidebar-bili-text">哔哩哔哩</span>
+            <svg class="sidebar-bili-svg" viewBox="0 0 24 24" width="32" height="32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect width="24" height="24" rx="5" fill="#FB7299"/>
+                <path fill="#fff" d="M8.5 9.2h7v5.6h-7V9.2zm1.3 1.3v3h4.4v-3H9.8z" opacity=".95"/>
+                <path fill="#fff" d="M9.2 7.3l.9 1.2h3.8l.9-1.2H12l-.4.6h-.8l-.4-.6H9.2z"/>
+            </svg>
         </a>
     </div>
     
@@ -74,7 +72,7 @@ window.MathJax = {
         <nav class="sidebar-links" aria-label="常用链接">
             <a href="/archives/">归档</a>
             <a href="/tags/">全部标签</a>
-            <a href="/essay-archive/">随笔档案（按月）</a>
+            <a href="/essay-archive/">随笔档案</a>
             <a href="/comments/">评论</a>
         </nav>
     </section>
@@ -93,15 +91,15 @@ window.MathJax = {
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2022-03-18</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2022/03/18/CF1338E%20JYPnation/">CF1338E JYPnation</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             因为是竞赛图，所以缩点之后得到的一定是一条沿着拓扑序的有向链 $S_1,S_2,\cdots,S_k$，并且 $S_i\to S_j$ 之间有边当且仅当 $i&lt;j$。
 然后考虑如何利用题目给的特殊性质，首先有一个结论就是若一个 $n$ 阶竞赛图 $G$ 是强连通的，则 $\forall k\in[3,n]$，$G...
@@ -115,19 +113,19 @@ window.MathJax = {
     
         
 <article class="ak-card ak-card--banner">
-    
-    <a href="/2022/03/18/CF1446E%20Long%20Recovery/" class="ak-card-banner-wrap" aria-hidden="true" tabindex="-1">
-        <img class="ak-card-banner-img" src="https://cdn.luogu.com.cn/upload/image_hosting/0ea0u3st.png" alt="" loading="lazy" decoding="async" data-cover-watch="1" />
-    </a>
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2022-03-18</span>
         </div>
         <h3 class="ak-card-title ak-card-title--banner">
             <a href="/2022/03/18/CF1446E%20Long%20Recovery/">CF1446E Long Recovery</a>
         </h3>
+        
+        <a href="/2022/03/18/CF1446E%20Long%20Recovery/" class="ak-card-banner-wrap" aria-hidden="true" tabindex="-1">
+            <img class="ak-card-banner-img" src="https://cdn.luogu.com.cn/upload/image_hosting/0ea0u3st.png" alt="" loading="lazy" decoding="async" data-cover-watch="1" />
+        </a>
+        
         <div class="ak-card-excerpt">
             令 $P$ 为不同颜色相邻格子的数量，考虑更改一个格子 $c$ 的颜色后会发生什么。
 若与 $c$ 相邻的格子均为不同颜色，则 $P$ 将减去 $3$，否则 $P$ 将减去 $1$。
@@ -144,15 +142,15 @@ window.MathJax = {
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2022-03-18</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2022/03/18/CF1148H%20Holy%20Diver/">CF1148H Holy Diver</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             令 $M_{l,r}&#x3D;\text{mex}(a_l,a_{l+1},\cdots,a_{r})$。可以发现有 $M_{l,r}\ge M_{l+1,r}$ 和 $M_{l,r}\ge M_{l,r-1}$，即一个集合的 $\text{mex}$ 并不会比它的子集小。
 假设第 $r$ 行的第 $l$ 个数为 $...
@@ -166,15 +164,15 @@ window.MathJax = {
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2022-03-18</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2022/03/18/CF1305G%20Kuroni%20and%20Antihype/">CF1305G Kuroni and Antihype</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             显然最优方案下最后所有人都会加入传销组织，且每个人都是自愿加入或被唯一一个人拉入的。
 假设第 $i$ 个人是由第 $j$ 个人拉入的，那么考虑连一条边 $j\to i$，最后就可以得到一个森林，其中根节点为自愿加入的。答案为所有非根节点的父节点权值和。
@@ -189,15 +187,15 @@ window.MathJax = {
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2022-03-18</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2022/03/18/CF799F%20Beautiful%20fountains%20rows/">CF799F Beautiful fountains rows</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             这个正解比乱搞逊多了
 先考虑只枚举 $a$。
@@ -220,15 +218,15 @@ $a\le x\le y$
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2022-03-18</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2022/03/18/CF1060G%20Balls%20and%20Pockets/">CF1060G Balls and Pockets</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             令 $f(i)$ 表示 $i$ 的后继。
 首先可以发现，在 $[0,a_1)$ 中的数的状态不会改变，所以对于 $x&lt;a_1$ 的询问，直接输出 $x$ 即可。
@@ -243,15 +241,15 @@ $a\le x\le y$
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2022-03-18</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2022/03/18/---/">???</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             彼时彼刻，你不愿让我替你做选择，此时此刻，你又何必要替菲亚梅塔做选择呢？人的路总要自己去找，自己去选，自己去走。
 因为许多人的去路是由来路决定的。
@@ -268,15 +266,15 @@ $a\le x\le y$
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2022-03-07</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2022/03/07/CF1322F%20Assigning%20Fares/">CF1322F Assigning Fares</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             首先，如果存在一种分配方案，那么显然答案 $k$ 在 $[1,n]$ 中。
 而显然 $k$ 具有单调性，所以可以二分。
@@ -293,15 +291,15 @@ $a\le x\le y$
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2022-03-07</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2022/03/07/CF1305H%20Kuroni%20the%20Private%20Tutor/">CF1305H Kuroni the Private Tutor</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             假设如果已经知道得分分布为 $s_1\ge s_2\ge \cdots \ge s_m$，考虑如何判断是否存在满足条件的情况。
 考虑网络流：
@@ -318,15 +316,15 @@ $a\le x\le y$
     
         
 <article class="ak-card">
-    
     <div class="ak-card-body">
         <div class="ak-card-header">
-            <span style="color: var(--ak-blue);">POST</span>
+            <span class="ak-card-cat">POST</span>
             <span>2022-03-07</span>
         </div>
         <h3 class="ak-card-title">
             <a href="/2022/03/07/CF1276E%20Four%20Stones/">CF1276E Four Stones</a>
         </h3>
+        
         <div class="ak-card-excerpt">
             首先判断是否无解：
 如果初始四颗石头都在一个位置上需要直接特判掉。
@@ -396,6 +394,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let hexoRoot = (document.body.getAttribute('data-hexo-root') || '/').trim();
     if (!hexoRoot.startsWith('/')) hexoRoot = '/' + hexoRoot;
     if (!hexoRoot.endsWith('/')) hexoRoot += '/';
+
+    (function markLowFx() {
+        const u = navigator.userAgent || '';
+        const safari = /safari/i.test(u) && !/chrome|android|crios|fxios|edgios/i.test(u);
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (safari || reduced) document.documentElement.classList.add('prts-lowfx');
+    })();
+
+    const prtsLowFx = document.documentElement.classList.contains('prts-lowfx');
 
     // ================= 0. 侧栏本地搜索 =================
     const searchInput = document.getElementById('local-search-input');
@@ -598,12 +605,12 @@ document.addEventListener('DOMContentLoaded', () => {
         loadTrack(0, false);
     }
 
-    // ================= 3. 全屏背景飘浮粒子 =================
+    // ================= 3. 全屏背景飘浮粒子（Safari / 省电动效下降频） =================
     const bgCanvas = document.getElementById('global-bg-particles');
-    if (bgCanvas) {
+    if (bgCanvas && !prtsLowFx) {
         const bctx = bgCanvas.getContext('2d');
         const floats = [];
-        const N = 80;
+        const N = 48;
 
         function resizeBg() {
             bgCanvas.width = window.innerWidth;
@@ -616,33 +623,38 @@ document.addEventListener('DOMContentLoaded', () => {
             floats.push({
                 x: Math.random() * window.innerWidth,
                 y: Math.random() * window.innerHeight,
-                r: Math.random() * 1.6 + 0.35,
-                vx: (Math.random() - 0.5) * 0.28,
-                vy: (Math.random() - 0.5) * 0.28,
+                r: Math.random() * 1.4 + 0.3,
+                vx: (Math.random() - 0.5) * 0.22,
+                vy: (Math.random() - 0.5) * 0.22,
                 ph: Math.random() * Math.PI * 2,
-                a: Math.random() * 0.35 + 0.12
+                a: Math.random() * 0.28 + 0.1
             });
         }
 
-        function tickBg() {
+        let bgLast = 0;
+        const bgFrameMs = prtsLowFx ? 70 : 28;
+        function tickBg(now) {
+            requestAnimationFrame(tickBg);
+            if (document.hidden) return;
+            if (now - bgLast < bgFrameMs) return;
+            bgLast = now;
             bctx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
             const light = document.body.getAttribute('data-theme') === 'light';
-            const t = Date.now() / 1000;
+            const t = now / 1000;
             floats.forEach((p, i) => {
-                p.x += p.vx + Math.sin(t * 0.7 + p.ph + i) * 0.12;
-                p.y += p.vy + Math.cos(t * 0.55 + p.ph) * 0.1;
+                p.x += p.vx + Math.sin(t * 0.65 + p.ph + i) * 0.1;
+                p.y += p.vy + Math.cos(t * 0.5 + p.ph) * 0.08;
                 if (p.x < -20) p.x = bgCanvas.width + 20;
                 if (p.x > bgCanvas.width + 20) p.x = -20;
                 if (p.y < -20) p.y = bgCanvas.height + 20;
                 if (p.y > bgCanvas.height + 20) p.y = -20;
-                bctx.fillStyle = light ? 'rgba(0,100,200,' + p.a + ')' : 'rgba(0,195,255,' + p.a + ')';
+                bctx.fillStyle = light ? 'rgba(0,100,200,' + p.a + ')' : 'rgba(0,212,255,' + p.a + ')';
                 bctx.beginPath();
                 bctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
                 bctx.fill();
             });
-            requestAnimationFrame(tickBg);
         }
-        tickBg();
+        requestAnimationFrame(tickBg);
     }
 
     // ================= 4. 左下角龙泡泡 Logo 粒子 =================
@@ -664,14 +676,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const out = [];
             for (let y = 0; y < size; y += step) {
                 for (let x = 0; x < size; x += step) {
-                    const a = imageData[((y * size + x) * 4) + 3];
-                    if (a > threshold) out.push([x, y]);
+                    const i = ((y * size + x) * 4);
+                    const a = imageData[i + 3];
+                    if (a > threshold) {
+                        const r = imageData[i];
+                        const g = imageData[i + 1];
+                        const b = imageData[i + 2];
+                        out.push({ x, y, r, g, b });
+                    }
                 }
             }
             return out;
         }
 
-        function downsample(points, maxN) {
+        function downsamplePoints(points, maxN) {
             if (points.length <= maxN) return points;
             const step = Math.ceil(points.length / maxN);
             const res = [];
@@ -691,27 +709,31 @@ document.addEventListener('DOMContentLoaded', () => {
             const imageData = tempCtx.getImageData(0, 0, size, size).data;
 
             const scale = Math.min(1.35, (canvas.width / size) * 0.85);
-            const blockH = size * scale;
             const blockW = size * scale;
+            const blockH = size * scale;
             const offsetX = (canvas.width - blockW) / 2;
             const offsetY = Math.max(8, canvas.height - blockH - 6);
 
-            let pts = sampleLogoPoints(imageData, size, 210, 4);
+            const maxPts = prtsLowFx ? 420 : 780;
+            let pts = sampleLogoPoints(imageData, size, 210, prtsLowFx ? 5 : 4);
             if (pts.length < 40) pts = sampleLogoPoints(imageData, size, 165, 5);
-            pts = downsample(pts, 850);
+            pts = downsamplePoints(pts, maxPts);
 
             class Particle {
-                constructor(x, y) {
+                constructor(px, py, cr, cg, cb) {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
-                    this.baseX = x;
-                    this.baseY = y;
-                    this.density = (Math.random() * 30) + 1;
+                    this.baseX = px;
+                    this.baseY = py;
+                    this.cr = cr;
+                    this.cg = cg;
+                    this.cb = cb;
+                    this.density = (Math.random() * 26) + 1;
                 }
                 draw() {
-                    ctx.fillStyle = '#00c3ff';
+                    ctx.fillStyle = 'rgb(' + this.cr + ',' + this.cg + ',' + this.cb + ')';
                     ctx.beginPath();
-                    ctx.arc(this.x, this.y, 1.15, 0, Math.PI * 2);
+                    ctx.arc(this.x, this.y, prtsLowFx ? 1 : 1.1, 0, Math.PI * 2);
                     ctx.fill();
                 }
                 update() {
@@ -725,28 +747,37 @@ document.addEventListener('DOMContentLoaded', () => {
                         const distance = Math.sqrt(dx * dx + dy * dy);
                         if (distance < mouse.radius && distance > 0.01) {
                             const force = (mouse.radius - distance) / mouse.radius;
-                            this.x -= (dx / distance) * force * this.density * 0.8;
-                            this.y -= (dy / distance) * force * this.density * 0.8;
+                            this.x -= (dx / distance) * force * this.density * 0.75;
+                            this.y -= (dy / distance) * force * this.density * 0.75;
                         } else {
-                            this.x += (this.baseX - this.x) * 0.12;
-                            this.y += (this.baseY - this.y) * 0.12;
+                            this.x += (this.baseX - this.x) * 0.11;
+                            this.y += (this.baseY - this.y) * 0.11;
                         }
                     } else {
-                        this.x += (this.baseX - this.x) * 0.12;
-                        this.y += (this.baseY - this.y) * 0.12;
+                        this.x += (this.baseX - this.x) * 0.11;
+                        this.y += (this.baseY - this.y) * 0.11;
                     }
                 }
             }
 
-            particles = pts.map(([x, y]) => new Particle(x * scale + offsetX, y * scale + offsetY));
+            particles = pts.map(p => new Particle(
+                p.x * scale + offsetX,
+                p.y * scale + offsetY,
+                p.r, p.g, p.b
+            ));
 
-            function animate() {
+            let logoLast = 0;
+            const logoFrameMs = prtsLowFx ? 55 : 24;
+            function animateLogo(now) {
+                requestAnimationFrame(animateLogo);
+                if (document.hidden) return;
+                if (now - logoLast < logoFrameMs) return;
+                logoLast = now;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 particles.forEach(p => { p.update(); p.draw(); });
-                requestAnimationFrame(animate);
             }
-            animate();
-            console.log('PRTS: Logo particles:', particles.length);
+            requestAnimationFrame(animateLogo);
+            console.log('PRTS: Logo particles (color):', particles.length);
         };
         logoImg.onerror = function () {
             console.warn('PRTS: logo.png 加载失败，跳过侧栏形状粒子');
@@ -756,7 +787,57 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
     }
 
-    // ================= 5. 首页封面图：极端尺寸则隐藏横幅 =================
+    // ================= 5. 代码块：复制 + 横向滚动（兼容 figure.highlight） =================
+    function enhanceCodeBlocks(root) {
+        const scope = root || document;
+        scope.querySelectorAll('.post-content figure.highlight').forEach(fig => {
+            if (fig.closest('.code-block-wrap')) return;
+            const wrap = document.createElement('div');
+            wrap.className = 'code-block-wrap';
+            const bar = document.createElement('div');
+            bar.className = 'code-toolbar';
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'code-copy-btn';
+            btn.textContent = '复制';
+            btn.addEventListener('click', () => {
+                const t = (fig.innerText || '').replace(/\n+$/, '');
+                navigator.clipboard.writeText(t).then(() => {
+                    btn.textContent = '已复制';
+                    setTimeout(() => { btn.textContent = '复制'; }, 1400);
+                }).catch(() => { btn.textContent = '失败'; });
+            });
+            bar.appendChild(btn);
+            fig.parentNode.insertBefore(wrap, fig);
+            wrap.appendChild(bar);
+            wrap.appendChild(fig);
+        });
+        scope.querySelectorAll('.post-content > pre').forEach(pre => {
+            if (pre.closest('.code-block-wrap') || pre.closest('figure.highlight')) return;
+            const wrap = document.createElement('div');
+            wrap.className = 'code-block-wrap';
+            const bar = document.createElement('div');
+            bar.className = 'code-toolbar';
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'code-copy-btn';
+            btn.textContent = '复制';
+            btn.addEventListener('click', () => {
+                const t = (pre.innerText || '').replace(/\n+$/, '');
+                navigator.clipboard.writeText(t).then(() => {
+                    btn.textContent = '已复制';
+                    setTimeout(() => { btn.textContent = '复制'; }, 1400);
+                }).catch(() => { btn.textContent = '失败'; });
+            });
+            bar.appendChild(btn);
+            pre.parentNode.insertBefore(wrap, pre);
+            wrap.appendChild(bar);
+            wrap.appendChild(pre);
+        });
+    }
+    enhanceCodeBlocks(document);
+
+    // ================= 6. 首页封面图：极端尺寸则隐藏横幅 =================
     document.querySelectorAll('img[data-cover-watch]').forEach(img => {
         function check() {
             const w = img.naturalWidth;
