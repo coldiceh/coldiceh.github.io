@@ -164,7 +164,7 @@ h1, h2, h3, h4, h5, h6, .nav-en, .sidebar-subtitle, .mp-header, .ak-read-more {
 }
 .logo-corner {
   position: absolute;
-  right: 72px;
+  right: 28px;
   bottom: -28px;
   width: min(400px, 52vw);
   height: min(400px, 52vw);
