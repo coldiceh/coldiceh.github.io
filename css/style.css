@@ -374,6 +374,7 @@ h1, h2, h3, h4, h5, h6, .nav-en, .sidebar-subtitle, .mp-header, .ak-read-more {
 .ak-card-title a:hover { color: var(--ak-blue); }
 [data-theme='light'] .ak-card-title a { color: #0d1117; }
 .ak-card-excerpt { padding: 16px 20px 20px; color: var(--text-muted); line-height: 1.85; font-size: 14px; flex: 1; }
+.ak-card-excerpt--locked { font-style: italic; opacity: 0.92; }
 .ak-card-footer { display: flex; justify-content: flex-end; padding: 0 20px 20px 20px; }
 .ak-read-more { background: var(--ak-blue); color: #000; padding: 8px 22px; font-size: 12px; font-weight: bold; text-decoration: none; border-radius: 999px; transition: all 0.2s; }
 .ak-read-more:hover { transform: scale(1.05); background: #fff; color: var(--ak-blue); }
@@ -554,6 +555,25 @@ h1, h2, h3, h4, h5, h6, .nav-en, .sidebar-subtitle, .mp-header, .ak-read-more {
 .fab-btn.sub:hover { border-color: var(--ak-blue); color: var(--ak-blue); }
 
 .music-panel { position: absolute; bottom: 60px; right: 60px; width: 300px; background: var(--panel); border: 1px solid var(--ak-blue); border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); opacity: 0; pointer-events: none; transform: translateX(20px); transition: all 0.3s ease; }
+.mp-volume-row {
+  display: flex; align-items: center; gap: 10px; margin: 0 0 14px 0;
+}
+.mp-volume-label {
+  flex-shrink: 0; font-family: 'Orbitron', sans-serif; font-size: 10px; letter-spacing: 0.08em;
+  color: var(--text-muted); width: 28px;
+}
+.mp-volume-bar {
+  flex: 1; min-width: 0; -webkit-appearance: none; height: 4px; border-radius: 2px;
+  background: rgba(128,128,128,0.35); outline: none; cursor: pointer;
+}
+.mp-volume-bar::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--ak-blue); cursor: pointer; box-shadow: 0 0 8px rgba(0, 212, 255, 0.45);
+}
+.mp-volume-bar::-moz-range-thumb {
+  width: 12px; height: 12px; border-radius: 50%; border: none;
+  background: var(--ak-blue); cursor: pointer;
+}
 .music-panel.active { opacity: 1; pointer-events: auto; transform: translateX(0); }
 .mp-header { font-size: 12px; color: var(--ak-blue); border-bottom: 1px solid rgba(128,128,128,0.2); padding-bottom: 5px; margin-bottom: 15px; }
 .mp-title { font-size: 14px; font-weight: bold; margin-bottom: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); }

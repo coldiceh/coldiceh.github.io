@@ -33,7 +33,6 @@ window.MathJax = {
         <a href="/archives/" class="nav-item"><span class="nav-en">ARCHIVES</span><span class="nav-cn">归档</span></a>
         <a href="/tags/" class="nav-item"><span class="nav-en">TAGS</span><span class="nav-cn">标签</span></a>
         <a href="/essay-archive/" class="nav-item"><span class="nav-en">TIMELINE</span><span class="nav-cn">月档</span></a>
-        <a href="/comments/" class="nav-item"><span class="nav-en">COMMENTS</span><span class="nav-cn">评论</span></a>
         <a href="/about/" class="nav-item"><span class="nav-en">PROFILE</span><span class="nav-cn">自述</span></a>
     </nav>
 </header>
@@ -133,7 +132,6 @@ window.MathJax = {
             <a href="/archives/">归档</a>
             <a href="/tags/">全部标签</a>
             <a href="/essay-archive/">随笔档案</a>
-            <a href="/comments/">评论</a>
         </nav>
     </section>
 </div>
@@ -157,8 +155,10 @@ window.MathJax = {
         </h3>
         
         <div class="ak-card-excerpt">
+            
             CF533D Landmarkssolution只考虑最后剩下来的柱子，假设柱子$i$两边分别为柱子$j$和柱子$k$，需要满足$d_i\ge \frac{x_k+x_j}{2}$。考虑在不加仍何柱子的情况下，如何判断会不会塌。
 设$dp_i$表示考虑前$i$个柱子，在第$i$个柱子选做最后保留的柱子的情况下，前一个选...
+            
         </div>
         <div class="ak-card-footer">
             <a class="ak-read-more" href="/2021/06/22/%E6%9D%82%E9%A2%98%E9%80%89%E5%81%9A2/">READ MORE +</a>
@@ -183,8 +183,10 @@ window.MathJax = {
         </a>
         
         <div class="ak-card-excerpt">
+            
             一是否存在三个长度为$n$的$0\sim n-1$的排列$a,b,c$，使得$a_i+b_i&#x3D;c_i \pmod n$。如果是则请给出构造。
 显然$n$为偶数时，左边的和为$(n-1)n$，而右边的和为$\frac{(n-1)n}{2}$，在$\bmod n$意义下左边是$0$，右边是$\frac{n}{2}...
+            
         </div>
         <div class="ak-card-footer">
             <a class="ak-read-more" href="/2021/06/24/%E6%9E%84%E9%80%A0/">READ MORE +</a>
@@ -209,8 +211,10 @@ window.MathJax = {
         </a>
         
         <div class="ak-card-excerpt">
+            
             CF838D题意有$n$个位置排成一排，有$m$个人依次进场选位置，每个人一开始会选择一个方向，从左到右或从右向左，并选择一个位置，然后按他选择的方向入场并走到这个位置，从这个位置开始继续按他选择的方向走，直到遇到一个空位并坐下。如果一直找不到空位，他就会生气。求有多少种情况没有人生气。
 $1\leq m\leq n\...
+            
         </div>
         <div class="ak-card-footer">
             <a class="ak-read-more" href="/2021/07/01/%E7%BB%84%E5%90%88%E8%AE%A1%E6%95%B0/">READ MORE +</a>
@@ -231,9 +235,11 @@ $1\leq m\leq n\...
         </h3>
         
         <div class="ak-card-excerpt">
+            
             考虑将所有所有修改和询问离线下来，并且将队列编号看成时刻。这样就可以将操作一二的修改拆开，变成在$L_i$时刻加入数据结构，在$R_i+1$时刻弹出数据结构。
 考虑使用一棵普通的线段树维护，下标为操作的顺序（因为操作也是有顺序的），每个节点维护当前区间元素的个数（可以是负数），区间最大元素子段和，区间加入元素的个数。
 ...
+            
         </div>
         <div class="ak-card-footer">
             <a class="ak-read-more" href="/2021/07/01/%E3%80%8CJOISC%202021%20Day1%E3%80%8D%E9%A5%AE%E9%A3%9F%E5%8C%BA/">READ MORE +</a>
@@ -254,6 +260,7 @@ $1\leq m\leq n\...
         </h3>
         
         <div class="ak-card-excerpt">
+            
             猫树
 ETT
 KDT
@@ -274,6 +281,7 @@ CF724F
 [Code+#7]同余方程
 
 【U...
+            
         </div>
         <div class="ak-card-footer">
             <a class="ak-read-more" href="/2021/07/05/%E5%92%95/">READ MORE +</a>
@@ -294,8 +302,10 @@ CF724F
         </h3>
         
         <div class="ak-card-excerpt">
+            
             无关：$$ax\equiv b \pmod c\x\equiv x_0\pmod{c’}\c’&#x3D;\frac{c}{\gcd(a,c)}$$
 CRT对若干互质整数解线性同余方程组：$$\begin{cases} x&amp;\equiv a_1 \pmod {n_1} \ x&amp;\equiv a_2 \p...
+            
         </div>
         <div class="ak-card-footer">
             <a class="ak-read-more" href="/2021/07/07/CRT%E4%B8%8EexCRT/">READ MORE +</a>
@@ -316,11 +326,13 @@ CRT对若干互质整数解线性同余方程组：$$\begin{cases} x&amp;\equiv 
         </h3>
         
         <div class="ak-card-excerpt">
+            
             debris题意：多组数据
 给定素数$P$，求满足$1\leq n,m\leq P(P-1)$且$n^m\equiv m^n \pmod P$的数对$(n,m)$的个数。
 答案对素数$M$取模。
 $T\leq 100,P\leq 10^{12},M\le 10^9$。
 sol可以发现$n,m$两个数一定都是$P$的倍数...
+            
         </div>
         <div class="ak-card-footer">
             <a class="ak-read-more" href="/2021/07/08/3%E9%81%93%E6%95%B0%E8%AE%BA/">READ MORE +</a>
@@ -341,9 +353,11 @@ sol可以发现$n,m$两个数一定都是$P$的倍数...
         </h3>
         
         <div class="ak-card-excerpt">
+            
             组合数取模组合数对整数取模（即求$\binom n m\bmod P$）是一个非常重要的问题，有着广泛的应用。
 最简单的是利用杨辉三角递推，时间复杂度$O(n^2)$。
 如果转成下降幂定义的话，我们可以在$O(m)\sim O(m\log m)$的复杂度内解决。特别当$P$是大质数时，我们只需要预处理$1\sim n$...
+            
         </div>
         <div class="ak-card-footer">
             <a class="ak-read-more" href="/2021/07/09/Lucas%E4%B8%8EexLucas/">READ MORE +</a>
@@ -364,8 +378,10 @@ sol可以发现$n,m$两个数一定都是$P$的倍数...
         </h3>
         
         <div class="ak-card-excerpt">
+            
             二次剩余与勒让德符号对于素数$p$和整数$p\not\mid x$，若存在$a$使得$a^2\equiv x\pmod p$，我们称$x$在$\bmod p$意义下是一个二次剩余。
 定义勒让德符号：$$\left(\frac{a}{p}\right)\begin{cases}1, &amp; \mbox{if }a\m...
+            
         </div>
         <div class="ak-card-footer">
             <a class="ak-read-more" href="/2021/07/09/%E4%BA%8C%E6%AC%A1%E5%89%A9%E4%BD%99/">READ MORE +</a>
@@ -386,9 +402,11 @@ sol可以发现$n,m$两个数一定都是$P$的倍数...
         </h3>
         
         <div class="ak-card-excerpt">
+            
             同余方程题意求方程$a^2+b^2\equiv x\pmod p$在模$p$意义下的解的组数。
 数据组数$n\leq 10^5,p\leq 10^7$且$p$为奇数，没有平方因子
 sol显然可以把$p$先分解成$p&#x3D;p_1\cdot p_2\cdot p_3\cdot \ldots \cdot p_k$，最后...
+            
         </div>
         <div class="ak-card-footer">
             <a class="ak-read-more" href="/2021/07/09/%E5%8F%88%E6%98%AF%E4%B8%89%E9%81%93%E6%95%B0%E8%AE%BA/">READ MORE +</a>
@@ -444,6 +462,11 @@ sol显然可以把$p$先分解成$p&#x3D;p_1\cdot p_2\cdot p_3\cdot \ldots \cdot
         <span id="mpTimeCurrent">00:00</span>
         <input type="range" class="mp-progress-bar" id="mpProgressBar" value="0" min="0" max="100">
         <span id="mpTimeTotal">00:00</span>
+    </div>
+
+    <div class="mp-volume-row" title="音量">
+        <span class="mp-volume-label">VOL</span>
+        <input type="range" class="mp-volume-bar" id="mpVolumeBar" min="0" max="1" step="0.02" value="0.85" aria-label="音量">
     </div>
     
     <div class="mp-controls">
@@ -643,7 +666,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const MPK = { idx: 'prts-mp-idx', time: 'prts-mp-time', playing: 'prts-mp-playing' };
+        const MPV = 'prts-mp-volume';
         let persistMpTimer = 0;
+
+        const mpVolumeBar = document.getElementById('mpVolumeBar');
+        function applyVolume(v) {
+            let x = parseFloat(v);
+            if (Number.isNaN(x)) x = 0.85;
+            x = Math.max(0, Math.min(1, x));
+            audio.volume = x;
+            if (mpVolumeBar) mpVolumeBar.value = String(x);
+            try { localStorage.setItem(MPV, String(x)); } catch (e) { /* ignore */ }
+        }
+        try {
+            const sv = localStorage.getItem(MPV);
+            if (sv != null && sv !== '') applyVolume(sv);
+            else applyVolume(0.85);
+        } catch (e) {
+            applyVolume(0.85);
+        }
+        if (mpVolumeBar) {
+            mpVolumeBar.addEventListener('input', () => applyVolume(mpVolumeBar.value));
+        }
 
         function persistMp() {
             try {
@@ -726,6 +770,24 @@ document.addEventListener('DOMContentLoaded', () => {
         audio.addEventListener('play', persistMp);
         window.addEventListener('pagehide', persistMp);
 
+        function resumeIfUserLeftPlaying() {
+            try {
+                if (sessionStorage.getItem(MPK.playing) !== '1') return;
+                if (!audio.src) return;
+                if (audio.paused) {
+                    audio.play().then(() => {
+                        if (mpPlayPause) mpPlayPause.textContent = '⏸';
+                        btnMusic.classList.add('btn-playing');
+                    }).catch(() => {});
+                }
+            } catch (e) { /* ignore */ }
+        }
+        window.addEventListener('pageshow', () => { resumeIfUserLeftPlaying(); });
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) resumeIfUserLeftPlaying();
+        });
+        document.addEventListener('pointerdown', resumeIfUserLeftPlaying, { capture: true, passive: true });
+
         if (mpProgressBar) {
             mpProgressBar.addEventListener('mousedown', () => { isDragging = true; });
             mpProgressBar.addEventListener('mouseup', () => { isDragging = false; audio.currentTime = mpProgressBar.value; persistMp(); });
@@ -780,11 +842,11 @@ document.addEventListener('DOMContentLoaded', () => {
             floats.push({
                 x: Math.random() * window.innerWidth,
                 y: Math.random() * window.innerHeight,
-                r: Math.random() * 1.4 + 0.3,
+                r: Math.random() * 1.65 + 0.45,
                 vx: (Math.random() - 0.5) * 0.22,
                 vy: (Math.random() - 0.5) * 0.22,
                 ph: Math.random() * Math.PI * 2,
-                a: Math.random() * 0.28 + 0.1
+                a: Math.random() * 0.42 + 0.2
             });
         }
 
@@ -805,7 +867,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (p.x > bgCanvas.width + 20) p.x = -20;
                 if (p.y < -20) p.y = bgCanvas.height + 20;
                 if (p.y > bgCanvas.height + 20) p.y = -20;
-                bctx.fillStyle = light ? 'rgba(0,100,200,' + p.a + ')' : 'rgba(0,212,255,' + p.a + ')';
+                const alphaBoost = light ? 1.15 : 1.25;
+                bctx.fillStyle = light ? 'rgba(0,100,200,' + Math.min(1, p.a * alphaBoost) + ')' : 'rgba(0,212,255,' + Math.min(1, p.a * alphaBoost) + ')';
                 bctx.beginPath();
                 bctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
                 bctx.fill();
@@ -931,9 +994,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     this.density = (Math.random() * 6) + 14;
                 }
                 draw() {
-                    ctx.fillStyle = 'rgb(' + this.cr + ',' + this.cg + ',' + this.cb + ')';
+                    const k = 1.22;
+                    const rr = Math.min(255, Math.round(this.cr * k + 12));
+                    const gg = Math.min(255, Math.round(this.cg * k + 18));
+                    const bb = Math.min(255, Math.round(this.cb * k + 22));
+                    ctx.fillStyle = 'rgb(' + rr + ',' + gg + ',' + bb + ')';
                     ctx.beginPath();
-                    ctx.arc(this.x, this.y, prtsLowFx ? 0.9 : 1, 0, Math.PI * 2);
+                    ctx.arc(this.x, this.y, prtsLowFx ? 1.12 : 1.32, 0, Math.PI * 2);
                     ctx.fill();
                 }
                 updateSeg(ax, ay, bx, by, R) {
